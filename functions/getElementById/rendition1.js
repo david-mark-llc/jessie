@@ -1,7 +1,9 @@
-var Jessie = Jessie || {};
+(function() {
+	
+	if (JESSIE.isHostMethod(document, "getElementById")) { 
+	  JESSIE.getElementById = function(id) { 
+	    return document.getElementById(id); 
+	  }; 
+	} 
 
-if (document.getElementById) { 
-  Jessie.getElementById = function(id) { 
-    return document.getElementById(id); 
-  }; 
-} 
+})();
