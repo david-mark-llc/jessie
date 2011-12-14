@@ -2,10 +2,4 @@
 	
 	var document = global.document;
 
-	var htmlElement = (function() {
-		var htmlElement = null;
-		if(isHostObjectProperty(document, "documentElement")) {
-			htmlElement = document.documentElement;
-		}
-		return htmlElement;
-	})();
+	var htmlElement = isHostObjectProperty(document, "documentElement") ? document.documentElement : null;
