@@ -1,9 +1,5 @@
-(function() {
-	
-	if (JESSIE.isHostMethod(document, "getElementById")) { 
-	  JESSIE.getElement = function(id) { 
-	    return document.getElementById(id); 
-	  }; 
-	} 
-
-})();
+if (isHostMethod(document, "getElementById")) { 
+  var getElement = function(id) { 
+    return document.getElementById(id); 
+  }; 
+}

@@ -1,0 +1,4 @@
+
+	htmlElement = null;
+
+})(this);

@@ -1,7 +1,3 @@
-(function() {
-	
-	JESSIE.isHostObjectProperty = function(object, property) {
-		return !!(typeof(object[property]) == 'object' && object[property]);
-	};
-
-})();
+function isHostObjectProperty(object, property) {
+	return !!(typeof(object[property]) == 'object' && object[property]);
+};
