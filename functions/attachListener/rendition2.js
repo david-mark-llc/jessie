@@ -4,8 +4,10 @@ Works in IE 8-
 
 */
 
+var attachListener;
+
 if(html && isHostMethod(html, 'attachEvent')) {
-	var attachListener = function(el, eventType, fn) { 
+	attachListener = function(el, eventType, fn) { 
 		el.attachEvent('on'+eventType, fn); 
 	};
 }

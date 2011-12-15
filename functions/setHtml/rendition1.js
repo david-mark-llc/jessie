@@ -8,8 +8,10 @@ Degrades in IE 3 :)
 
 */
 
+var setHtml;
+
 if(html && isHostObjectProperty(html, 'innerHTML')) {
-	var setHtml = function(el, html) {
+	setHtml = function(el, html) {
 		el.innerHTML = html;	
 	};
 }

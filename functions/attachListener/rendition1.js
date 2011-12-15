@@ -4,8 +4,10 @@ Degrades in IE 8-
 
 */
 
+var attachListener;
+
 if(html && isHostMethod(html, 'addEventListener')) {
-	var attachListener = function(el, eventType, fn) { 
+	attachListener = function(el, eventType, fn) { 
 		el.addEventListener(eventType, fn, false); 
 	};
 }
