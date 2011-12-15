@@ -1,4 +1,4 @@
 
-	htmlElement = null;
+	globalDocument = html = null;
 
 })(this);
