@@ -8,7 +8,7 @@ Degrades in IE 3 :)
 
 */
 
-if(html && isHostObjectProperty(html, "innerHTML")) {
+if(html && isHostObjectProperty(html, 'innerHTML')) {
 	var setHtml = function(el, html) {
 		el.innerHTML = html;	
 	};
