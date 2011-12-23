@@ -6,7 +6,7 @@ See: https://groups.google.com/forum/#!search/david$20mark$20innerHTML/comp.lang
 
 var getHtml;
 
-if(html && typeof html.innerHTML == "string") {
+if(html && "string" == typeof html.innerHTML) {
 	getHtml = function(el) {
 		return el.innerHTML;	
 	};

@@ -10,7 +10,7 @@ Degrades in IE 3 :)
 
 var setHtml;
 
-if(html && typeof html.innerHTML == "string") {
+if(html && "string" == typeof html.innerHTML) {
 	setHtml = function(el, html) {
 		el.innerHTML = html;	
 	};
