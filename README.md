@@ -1,5 +1,12 @@
 # Jessie
 
+Lean, beautiful and smart
+
+## Find code and tips to help contribute
+
+David Mark has put many tips on CLJ so search for "David Mark Tip" and start to add renditions.
+
+You can also use David's MyLibrary code for reference.
 
 ## Developer guidelines
 
@@ -18,3 +25,5 @@ For now each rendition should be held in a file called rendition#.js. So for exa
 * rendition1.js
 * rendition2.js
 * rendition3.js
+
+Note: The number is not a version
