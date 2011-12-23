@@ -15,6 +15,6 @@ When type-checking put the type on the left hand side so that it fails early whe
 
 For now each rendition should be held in a file called rendition#.js. So for example inside the attachListener folder we have three renditions:
 
-rendition1.js
-rendition2.js
-rendition3.js
+* rendition1.js
+* rendition2.js
+* rendition3.js
