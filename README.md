@@ -12,7 +12,7 @@ You can also use David's MyLibrary code for reference.
 
 ### Type checking
 
-When type-checking put the type on the left hand side so that it fails early when making the mistake of writing only one "=" sign. It doesn't read as well but we have a good reason.
+When type-checking put the type on the left hand side. It doesn't read as well but we have a good reason. The reason is that typos that exclude the second "=" will fail immediately, rather than creating an assignment.
 
 	"string" == typeof whatever // good
 
