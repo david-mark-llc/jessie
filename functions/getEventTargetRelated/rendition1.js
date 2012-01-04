@@ -2,11 +2,11 @@
 	Degrades in IE8-
 */
 
-var getEventTarget;
+var getEventTargetRelated;
 
 if(html && isHostMethod(html, 'addEventListener')) {
-	getEventTarget = function(e) { 
-	  var target = e.target; 
+	getEventTargetRelated = function(e) { 
+	  var target = e.relatedTarget; 
 	  // Check if not an element (e.g. a text node) 
 	  if (1 != target.nodeType) { 
 	    // Set reference to parent node (which must be an element) 
