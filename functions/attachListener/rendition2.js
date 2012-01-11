@@ -2,6 +2,8 @@
 
 Works in IE 8-
 
+This can be included with a conditional comment
+
 */
 
 var attachListener;
