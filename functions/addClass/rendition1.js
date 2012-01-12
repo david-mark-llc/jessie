@@ -1,7 +1,6 @@
 var addClass;
 
-if (html) {
-  if (isStyleCapable) {
+if (html && "string" == typeof html.className ) {
     addClass = function(el, className) {
       var re;
       if (!el.className) {
@@ -12,5 +11,4 @@ if (html) {
         if (!re.test(el.className)) { el.className += ' ' + className; }
       }
     };
-  }
 }
