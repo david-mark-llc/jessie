@@ -1,10 +1,7 @@
 var bind;
 
 if(Function.prototype.bind){
-	bind = function(fn, context){
-		var prependArgs = Array.prototype.slice.call(arguments, 2);				
-		return fn.bind(context, prependArgs);
-	};
+    bind = function(fn, thisObject) {
+        return fn.bind.apply(fn, Array.prototype.slice.call(arguments, 1));
+    };
 }
-
-
