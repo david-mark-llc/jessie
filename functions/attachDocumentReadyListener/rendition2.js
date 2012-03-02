@@ -1,11 +1,12 @@
 // Degrades in IE 8- 
 // No frames or other alternate windows
 // Can use following to get IE8- to work when document is parsed.
-// <script type="text/javascript"> 
-//  if ('function' == typeof readyListener) { 
-//    window.setTimeout(readyListener, 1); 
-//  } 
-// </script> 
+//		<script type="text/javascript"> 
+//			if ('function' == typeof readyListener) { 
+//				window.setTimeout(readyListener, 1); 
+//			} 
+//		</script> 
+//	</body>
 
 var attachDocumentReadyListener, 
 	readyListener, 
