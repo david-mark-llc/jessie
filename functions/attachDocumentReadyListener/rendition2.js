@@ -1,18 +1,18 @@
 // Degrades in IE 8- 
 // No frames or other alternate windows
 // Can use following to get IE8- to work when document is parsed.
-//<script type="text/javascript"> 
+// <script type="text/javascript"> 
 //  if ('function' == typeof readyListener) { 
 //    window.setTimeout(readyListener, 1); 
 //  } 
-//</script> 
+// </script> 
 
 var attachDocumentReadyListener, 
 	readyListener, 
 	readyListenerAttached,
 	documentIsReady; 
 
-if (isHostMethod(global, "addEventListener") && isHostMethod(globalDocument, "addEventListener")) { 
+if (isHostMethod(global, "addEventListener") && globalDocument && isHostMethod(globalDocument, "addEventListener")) { 
 	attachDocumentReadyListener = function(fn) { 
 
 		// Remove this "scaffolding" on deployment 
@@ -26,8 +26,8 @@ if (isHostMethod(global, "addEventListener") && isHostMethod(globalDocument, "ad
 
 		// Run on first fired event 
 		readyListener = function() { 
-			if (!documentReady) { 
-				documentReady = true; 
+			if (!documentIsReady) { 
+				documentIsReady = true; 
 				fn(); 
 			} 
 		}; 
