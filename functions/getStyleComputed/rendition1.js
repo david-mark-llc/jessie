@@ -4,7 +4,7 @@
 
 var getStyleComputed;
 
-if (isHostObjectProperty(globalDocument, 'defaultView' && isHostMethod(globalDocument.defaultView, 'getComputedStyle') { 
+if (isHostObjectProperty(globalDocument, 'defaultView') && isHostMethod(globalDocument.defaultView, 'getComputedStyle')) { 
 	getStyleComputed = function(el, style) { 
 		return document.defaultView.getComputedStyle(el, null)[style]; 
 	}; 
