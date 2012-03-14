@@ -2,7 +2,7 @@
 
 var attachWindowListener;
 
-if(global && isHostmethod(global, "attachEvent")) {
+if(global && isHostmethod(global, 'attachEvent')) {
 	attachWindowListener = function(eventType, fn) {
 		// Remove this line on deployment -- for debugging only 
 		if (!(/^(load|scroll|resize|orientationchange)$/.test(eventType))) { 
