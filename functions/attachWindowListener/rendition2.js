@@ -9,6 +9,6 @@ if(global && isHostmethod(global, 'attachEvent')) {
 			throw new Error('Use attachListener with an element.'); 
 		} 
 		
-		global.attachEvent(eventType, fn);
+		global.attachEvent('on'+eventType, fn);
 	};
 };
