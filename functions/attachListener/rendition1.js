@@ -10,4 +10,4 @@ if(html && isHostMethod(html, 'addEventListener')) {
 	attachListener = function(el, eventType, fn) { 
 		el.addEventListener(eventType, fn, false); 
 	};
-}
+};
