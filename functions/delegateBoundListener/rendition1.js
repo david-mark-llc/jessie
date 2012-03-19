@@ -7,5 +7,8 @@ if(delegateListener && bind) {
 				fn.call(thisObject, e);
 			}
 		}, thisObject);
+		
+		attachListener(el, eventType, listener);
+		return listener;		
 	};
 };
