@@ -2,7 +2,7 @@
 
 var createXhr;
 
-if(isHostMethod(global, 'ActiveXObject')) {
+if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
 	try {
 		if(new global.ActiveXObject('Microsoft.XMLHTTP')) {
 			createXhr = function() {
