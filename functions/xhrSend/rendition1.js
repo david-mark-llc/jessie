@@ -1,5 +1,6 @@
 var xhrSend;
 
+// if you can't create one then you certainly can't send one
 if(createXhr) {
 	
 	/*
@@ -13,10 +14,12 @@ if(createXhr) {
 	 * options.fail
 	 * 
 	 */
-	xhrSend = function(url, options) {
+	xhrSend = function(xhr, url, options) {
 		options = options || {};
-		var xmlHttp = createXhr();
-		xmlHttp.open(options.method || "get", url);
+		var method = options.method || 'get',
+			data = options.data || null;
+				
+		xhr.open(method, url);
 		
 		var defaultHeaders = {
 			'Accept': 'text/javascript, application/json, text/html, application/xml, text/xml, */*',
@@ -24,41 +27,39 @@ if(createXhr) {
 		};
 		
 		for(var key in defaultHeaders) {
-			xmlHttp.setRequestHeader(key, defaultHeaders[key]);
+			xhr.setRequestHeader(key, defaultHeaders[key]);
 		}	
 		
 		if(options.headers) {
 			for(var key in options.headers) {
-				xmlHttp.setRequestHeader(key, options.headers[key]);
+				xhr.setRequestHeader(key, options.headers[key]);
 			}				
 		}
 
-		xmlHttp.onreadystatechange = handleReadyStateChange;
+		xhr.onreadystatechange = handleReadyStateChange;
 		
 		function isSuccessfulResponse(xmlHttp) {
 			var success = false;
 			var status = xmlHttp.status;
 			var between200and300 = (status >= 200 && status < 300);
 			var notModified = (status == 304);
-			
 			if(between200and300 || notModified || status == 00 && xmlHttp.responseText) {
 				success = true;
 			}			
-			
 			return success;
 		}
 		
 		function handleReadyStateChange() {
-			if(xmlHttp.readyState === 4) {
+			if(xhr.readyState === 4) {
 				// what constitutes a success
-				if(options.success && isSuccessfulResponse(xmlHttp)) {
-					options.success(xmlHttp);
+				if(options.success && isSuccessfulResponse(xhr)) {
+					options.success(xhr);
 				}
 				else if(options.fail) {
-					options.fail(xmlHttp);
+					options.fail(xhr);
 				}
 				if(options.complete) {
-					options.complete(xmlHttp);
+					options.complete(xhr);
 				}
 			}
 		};
@@ -66,18 +67,12 @@ if(createXhr) {
 		//if(isHostMethod(xmlHttp, "overrideMimeType")) {
 		//	xmlHttp.overrideMimeType(mimetype);
 		//}
-
 		//xmlHttp.abort();
 		//xmlHttp.getAllResponseHeaders();
 		//xmlHttp.getResponseHeader();
 		//xmlHttp.init
 		//xmlHttp.openRequest
 		//xmlHttp.sendAsBinary
-
-		var data = null;
-		if(options.method == "post" && options.data) {
-			data = options.data;
-		}
 
 		xmlHttp.send(data);
 
