@@ -6,7 +6,6 @@ if(html && 'undefined' != typeof html.parentNode) {
 		while(parent && parent != el) {
 			parent = parent.parentNode;
 		}
-		console.log(parent, el);
 		return parent == el;
 	};
 };
