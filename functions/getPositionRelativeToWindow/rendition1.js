@@ -1,6 +1,6 @@
-var getPositionRelativeToViewport;
+var getPositionRelativeToWindow;
 if(html && isHostMethod(html, 'getBoundingClientRect')) {
-	getPositionRelativeToViewport = function(el) {
+	getPositionRelativeToWindow = function(el) {
 		var rect = el.getBoundingClientRect();
 		return [rect.left, rect.top];
 	};

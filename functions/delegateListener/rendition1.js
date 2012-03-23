@@ -5,7 +5,7 @@ if(attachListener && getEventTarget) {
 		
 		var listener = function(e) {			
 			if(fnDelegate(getEventTarget(e))) {
-				fn.call(e);
+				fn.call(e, e);
 			}
 		};
 		
