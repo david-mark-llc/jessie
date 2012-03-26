@@ -7,6 +7,6 @@ if(delegateListener && isInQuery) {
 			return isInQuery(target, selector);
 		}
 
-		delegateListener(el, eventType, fn, fnDelegate);
+		return delegateListener(el, eventType, fn, fnDelegate);
 	}
 }
