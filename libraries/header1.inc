@@ -5,6 +5,6 @@
 		canCall = !!Function.prototype.call;
 
 	
-	if(isHostObjectProperty(globalDocument, 'documentElement') {
+	if(isHostObjectProperty(globalDocument, 'documentElement')) {
 		html = globalDocument.documentElement;
 	}

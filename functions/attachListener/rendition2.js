@@ -10,6 +10,14 @@ var attachListener;
 
 if(html && isHostMethod(html, 'attachEvent')) {
 	attachListener = function(el, eventType, fn) { 
-		el.attachEvent('on'+eventType, fn); 
+
+		var listener = function() {
+			var e = window.event;
+			fn.call(e, e);
+		};
+
+		el.attachEvent('on'+eventType, listener); 
+
+		return listener;
 	};
 }
