@@ -18,6 +18,12 @@ if(html && isHostMethod(html, 'attachEvent')) {
 
 		el.attachEvent('on'+eventType, listener); 
 
+		// Discard unneeded references
+        // Prevents circular references with host objects (e.g. the element)
+        // Prevents IE leaks related to such circular references
+        // No unload event cleanup required
+        el = null;
+
 		return listener;
 	};
 }
