@@ -1,3 +1,4 @@
+// WIP
 var getRoot,
 	getViewportSize;
 	
@@ -26,3 +27,10 @@ getViewportSize = function(win) {
 	var root = getRoot(win);
 	return [root.clientWidth, root.clientHeight];
 };
+
+
+
+
+
+
+
