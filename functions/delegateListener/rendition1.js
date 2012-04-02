@@ -9,8 +9,7 @@ if(attachListener && getEventTarget) {
 			}
 		};
 		
-		attachListener(el, eventType, listener);
+		return attachListener(el, eventType, listener);
 		
-		return listener;
 	};
 }

@@ -8,11 +8,26 @@ var attachListener;
 
 if(html && isHostMethod(html, 'addEventListener')) {
 	attachListener = function(el, eventType, fn) { 
-		el.addEventListener(eventType, fn, false); 
+
+		var listener = function(e) {
+			fn.call(e, e);
+		};
+
+		el.addEventListener(eventType, listener, false); 
+
+		return listener;
 	};
 } 
 else if(html && isHostMethod(html, 'attachEvent')) {
 	attachListener = function(el, eventType, fn) { 
-		el.attachEvent('on'+eventType, fn); 
+
+		var listener = function() {
+			var e = window.event;
+			fn.call(e, e);
+		};
+
+		el.attachEvent('on'+eventType, listener); 
+
+		return listener;
 	};
 }
