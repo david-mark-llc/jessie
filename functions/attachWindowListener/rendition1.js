@@ -12,6 +12,12 @@ if(global && isHostmethod(global, 'addEventListener')) {
 			throw new Error('Use attachListener with an element.'); 
 		} 
 		
-		global.addEventListener(eventType, fn, false);
+		var listener = function(e) {
+			fn.call(e, e);
+		};
+
+		global.addEventListener(eventType, listener, false);
+
+		return listener;
 	};
 };
