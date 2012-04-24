@@ -8,7 +8,6 @@ if(delegateListener && bind) {
 			}
 		}, thisObject);
 		
-		attachListener(el, eventType, listener);
-		return listener;		
+		return attachListener(el, eventType, listener);
 	};
 };
