@@ -27,3 +27,52 @@ For now each rendition should be held in a file called rendition#.js. So for exa
 * rendition3.js
 
 Note: The number is not a version
+
+## Builder
+
+Currently there is no builder meaning for now it's a cut and paste job which doesn't take a long time anyway. Please bear with us on this.
+
+## API documentation
+
+Currently the documentation is very poor and could change but here is what we have:
+
+### attach event listener
+
+	jessie.attachListener(el, "click", function(e) {
+		var target = jessie.getEventTarget(e);
+	});
+
+### remove event listener
+	
+	var listener = jessie.attachListener(el, "click", function(e) {});
+	jessie.detachListener(el, "click", listener);
+
+### attach window listener
+
+	jessie.attachWindowListener("resize", function(e) {});
+
+### detach window listener
+	
+	var listener = jessie.attachWindowListener("resize", function(e) {});
+	jessie.detachWindowListener("resize", listener);
+
+### add class to element
+
+	jessie.addClass(el, "className");
+
+### remove class from element
+
+	jessie.removeClass(el, "className");
+
+### check element has a class
+
+	jessie.hasClass(el, "className"); // returns boolean
+
+### ajax
+
+	jessie.ajax("/some/url/", {
+		method: "post",
+		data: "key=value",
+		success: function(responseText, xhr) {},
+		fail: function(xhr) {}
+	});
