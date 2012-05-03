@@ -1,7 +1,7 @@
 //So let's finish this off. If you need it to work in IE 9 and
 //virtually every other browser made since the turn of the century:-
 // Works for mouse or touch
-if ('number' == typeof window.pageXOffset) {
+if ('number' == typeof global.pageXOffset) {
 	getPointerPositionRelativeToViewport = function(e) {
 		return [e.pageX - window.pageXOffset, e.pageY -	window.pageYOffset]
 	};
@@ -14,9 +14,9 @@ if ('number' == typeof window.pageXOffset) {
 
 // Last test is to exclude IE quirks mode and IE 5
 
-if (document.documentElement 
-	&& 'number' == typeof document.documentElement.scrollLeft 
-	&& document.documentElement.clientWidth) {
+if (html
+	&& 'number' == typeof html.scrollLeft 
+	&& html.clientWidth) {
 		
 	getScrollPosition = function() {
 		return [document.documentElement.scrollLeft, document.documentElement.scrollTop];
