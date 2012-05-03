@@ -5,8 +5,8 @@ if(delegateListener && isInQuery) {
 		
 		var fnDelegate = function(target) {
 			return isInQuery(target, selector);
-		}
+		};
 
 		return delegateListener(el, eventType, fn, fnDelegate);
-	}
-}
+	};
+};

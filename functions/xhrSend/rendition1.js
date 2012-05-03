@@ -22,8 +22,8 @@ if(createXhr) {
 		xhr.open(method, url);
 		
 		var defaultHeaders = {
-			'Accept': 'text/javascript, application/json, text/html, application/xml, text/xml, */*',
-			'Content-Type': 'application/x-www-form-urlencoded'
+			//'Accept': 'text/javascript, application/json, text/html, application/xml, text/xml, */*',
+			//'Content-Type': 'application/x-www-form-urlencoded'
 		};
 		
 		for(var key in defaultHeaders) {
@@ -33,7 +33,7 @@ if(createXhr) {
 		if(options.headers) {
 			for(var key in options.headers) {
 				xhr.setRequestHeader(key, options.headers[key]);
-			}				
+			}
 		}
 
 		xhr.onreadystatechange = handleReadyStateChange;
@@ -51,9 +51,10 @@ if(createXhr) {
 		
 		function handleReadyStateChange() {
 			if(xhr.readyState === 4) {
-				// what constitutes a success
-				if(options.success && isSuccessfulResponse(xhr)) {
-					options.success(xhr);
+				if(isSuccessfulResponse(xhr)) {
+					if(options.success) {
+						options.success(xhr);
+					}
 				}
 				else if(options.fail) {
 					options.fail(xhr);
@@ -64,17 +65,6 @@ if(createXhr) {
 			}
 		};
 
-		//if(isHostMethod(xmlHttp, "overrideMimeType")) {
-		//	xmlHttp.overrideMimeType(mimetype);
-		//}
-		//xmlHttp.abort();
-		//xmlHttp.getAllResponseHeaders();
-		//xmlHttp.getResponseHeader();
-		//xmlHttp.init
-		//xmlHttp.openRequest
-		//xmlHttp.sendAsBinary
-
 		xmlHttp.send(data);
-
 	};
 };

@@ -1,6 +1,6 @@
 var addClass;
 
-if (html && "string" == typeof html.className ) {
+if (html && "string" === typeof html.className ) {
     addClass = function(el, className) {
       var re;
       if (!el.className) {
