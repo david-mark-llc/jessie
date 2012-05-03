@@ -51,8 +51,10 @@ if(createXhr) {
 		
 		function handleReadyStateChange() {
 			if(xhr.readyState === 4) {
-				if(options.success && isSuccessfulResponse(xhr)) {
-					options.success(xhr);
+				if(isSuccessfulResponse(xhr)) {
+					if(options.success) {
+						options.success(xhr);
+					}
 				}
 				else if(options.fail) {
 					options.fail(xhr);
