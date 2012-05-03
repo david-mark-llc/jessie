@@ -38,19 +38,19 @@ Currently the documentation is very poor and could change but here is what we ha
 
 ### bind a function
 	
-	jessie.bind(function() {}, this);
+	var boundFunction = jessie.bind(function() {}, this);
 
 ### for each
 	
 	var arr = [];
 	var context = this;
-	jessie.forEach(arr, function() {
+	jessie.forEach(arr, function(value, index, array) {
 
 	}, context);	
 
 ### attach event listener
 
-	jessie.attachListener(el, "click", function(e) {
+	var listener = jessie.attachListener(el, "click", function(e) {
 		jessie.cancelDefault(e);
 		var target = jessie.getEventTarget(e);
 	});
@@ -62,7 +62,7 @@ Currently the documentation is very poor and could change but here is what we ha
 
 ### attach window listener
 
-	jessie.attachWindowListener("resize", function(e) {});
+	var listener = jessie.attachWindowListener("resize", function(e) {});
 
 ### detach window listener
 	
