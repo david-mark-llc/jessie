@@ -1,5 +1,7 @@
+var cancelDefault;
+
 if(html && isHostMethod(html, 'attachEvent')) {
-	var cancelDefault = function(e) { 
+	cancelDefault = function(e) { 
 	  e.returnValue = false; 
 	} 
 }

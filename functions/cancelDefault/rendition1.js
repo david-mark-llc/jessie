@@ -1,5 +1,7 @@
+var cancelDefault;
+
 if(html && isHostMethod(html, 'addEventListener')) {
-	var cancelDefault = function(e) { 
+	cancelDefault = function(e) { 
 		e.preventDefault();
 	};
 }
