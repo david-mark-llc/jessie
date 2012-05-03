@@ -1,4 +1,4 @@
-var getAncestorByClassName;
+/*global getAncestorByClassName:true,html,getElementParent,hasClass */
 
 if(html && 'string' == typeof html.className && getElementParent && hasClass) {
 	getAncestorByClassName = function(el, className) {
@@ -8,4 +8,4 @@ if(html && 'string' == typeof html.className && getElementParent && hasClass) {
 		}
 		return el;
 	};
-};
+}

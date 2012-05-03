@@ -1,11 +1,12 @@
-// No "float" styles 
-// Requires camel-case style names 
-// Fades away in IE 8- and compatibility modes 
+/*global getStyleComputed:true,isHostObjectProperty,globalDocument,isHostMethod */
 
-var getStyleComputed;
+// No "float" styles
+// Requires camel-case style names
+// Fades away in IE 8- and compatibility modes
 
-if (isHostObjectProperty(globalDocument, 'defaultView') && isHostMethod(globalDocument.defaultView, 'getComputedStyle')) { 
-	getStyleComputed = function(el, style) { 
+if (isHostObjectProperty(globalDocument, 'defaultView') &&
+		isHostMethod(globalDocument.defaultView, 'getComputedStyle')) {
+	getStyleComputed = function(el, style) {
 		
 		if (style.indexOf('-') != -1) {
 			throw new Error('Camel-case style names, please.');
@@ -19,6 +20,6 @@ if (isHostObjectProperty(globalDocument, 'defaultView') && isHostMethod(globalDo
 			throw new Error('Element not in layout. Cannot compute styles.');
 		}
 		
-		return document.defaultView.getComputedStyle(el, null)[style]; 
-	}; 
+		return document.defaultView.getComputedStyle(el, null)[style];
+	};
 }

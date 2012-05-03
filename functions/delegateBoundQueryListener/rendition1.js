@@ -1,5 +1,4 @@
-var delegateBoundQueryListener;
-
+/*global delegateBoundQueryListener:true,delegateBoundListener,isInQuery */
 if(delegateBoundListener && isInQuery) {
 	delegateBoundQueryListener = function(el, eventType, selector, fn, thisObject) {
 		
@@ -9,4 +8,4 @@ if(delegateBoundListener && isInQuery) {
 
 		return delegateBoundListener(el, eventType, fn, fnDelegate, thisObject);
 	};
-};
+}

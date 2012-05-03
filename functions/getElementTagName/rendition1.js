@@ -1,5 +1,6 @@
-var getElementTagName;
+/*global getElementTagName:true */
+
 getElementTagName = function (el) {
 	var tagName = (el.tagName || el.nodeName).toLowerCase();
 	return tagName.indexOf('html:') > -1 ? tagName.substring(5) : tagName;
-}
+};

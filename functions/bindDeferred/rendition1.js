@@ -1,5 +1,4 @@
-var bindDeferred;
-
+/*global bindDeferred:true,canCall,bind,global */
 if(canCall) {
   bindDeferred = function(fn, context, delay) {
     var timeout;
@@ -11,7 +10,7 @@ if(canCall) {
         }
         var args = Array.prototype.slice(arguments, 0);
         timeout = global.setTimeout(function() {
-            fn.apply(this, args)
+            fn.apply(this, args);
         }, delay);
       };
   };

@@ -1,13 +1,12 @@
+/*global attachWindowListener:true,global,isHostMethod */
 // Works in IE8-
-
-var attachWindowListener;
 
 if(global && isHostMethod(global, 'attachEvent')) {
 	attachWindowListener = function(eventType, fn) {
-		// Remove this line on deployment -- for debugging only 
-		if (!(/^(load|scroll|resize|orientationchange)$/.test(eventType))) { 
-			throw new Error('Use attachListener with an element.'); 
-		} 
+		// Remove this line on deployment -- for debugging only
+		if (!(/^(load|scroll|resize|orientationchange)$/.test(eventType))) {
+			throw new Error('Use attachListener with an element.');
+		}
 		
 		var listener = function() {
 			var e = window.event;
@@ -18,4 +17,4 @@ if(global && isHostMethod(global, 'attachEvent')) {
 
 		return listener;
 	};
-};
+}

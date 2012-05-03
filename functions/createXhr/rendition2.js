@@ -1,6 +1,5 @@
-// IE 6 users that have updated their msxml dll files. 
-
-var createXhr;
+/*global createXhr:true,isHostMethod,global */
+// IE 6 users that have updated their msxml dll files.
 
 if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
 	try {
@@ -10,5 +9,5 @@ if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
 			};
 		}
 	}
-	catch(e) {};
-};
+	catch(e) {}
+}

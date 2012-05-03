@@ -1,5 +1,4 @@
-var addClass;
-
+/*global addClass:true,html*/
 if (html && "string" === typeof html.className ) {
     addClass = function(el, className) {
       var re;

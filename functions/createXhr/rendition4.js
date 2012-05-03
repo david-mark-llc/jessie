@@ -1,6 +1,6 @@
-// for legacy eg. IE 5 
+/*global createXhr:true,isHostMethod,global */
 
-var createXhr;
+// for legacy eg. IE 5
 
 if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
 	try {
@@ -10,5 +10,5 @@ if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
 			};
 		}
 	}
-	catch(e) {};
-};
+	catch(e) {}
+}

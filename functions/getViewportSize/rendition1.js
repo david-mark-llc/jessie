@@ -1,6 +1,6 @@
+/*global getViewportSize:true,globalDocument,global */
 // WIP
-var getRoot,
-	getViewportSize;
+var getRoot;
 	
 if('string' == typeof globalDocument.compatMode) {
 	getRoot = function(win) {
@@ -10,15 +10,14 @@ if('string' == typeof globalDocument.compatMode) {
 		
 		return (html && compatMode.toLowerCase().indexOf('css') != -1) ? html : doc.body;
 	};
-}
-else {
+} else {
 	getRoot = function(win) {
 		var doc = win.document,
 			html = doc.documentElement;
 		
 		return (!html || html.clientWidth === 0) ? doc.body : html;
 	};
-};
+}
 
 getViewportSize = function(win) {
 	if (!win) {

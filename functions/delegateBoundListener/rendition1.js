@@ -1,3 +1,4 @@
+/*global delegateBoundListener:true,bind,attachListener,getEventTarget */
 var delegateBoundListener;
 
 if(attachListener && bind) {
@@ -11,4 +12,4 @@ if(attachListener && bind) {
 		
 		return attachListener(el, eventType, listener);
 	};
-};
+}

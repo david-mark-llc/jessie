@@ -1,10 +1,5 @@
-/*
-
-Degrades in IE 8-
-
-*/
-
-var attachListener;
+/*global attachListener:true,html,isHostMethod,html */
+// Degrades in IE 8-
 
 if(html && isHostMethod(html, 'addEventListener')) {
 	attachListener = function(el, eventType, fn) {
@@ -17,4 +12,4 @@ if(html && isHostMethod(html, 'addEventListener')) {
 
 		return listener;
 	};
-};
+}

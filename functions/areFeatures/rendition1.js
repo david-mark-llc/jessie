@@ -1,5 +1,4 @@
-var areFeatures;
-
+/*global areFeatures:true */
 areFeatures = function() {
 	var i = arguments.length;
 	while (i--) {
