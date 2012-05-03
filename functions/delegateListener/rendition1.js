@@ -3,7 +3,7 @@ var delegateListener;
 if(attachListener && getEventTarget) {
 	delegateListener = function(el, eventType, fn, fnDelegate) {
 		
-		var listener = function(e) {			
+		var listener = function(e) {
 			if(fnDelegate(getEventTarget(e))) {
 				fn.call(e, e);
 			}
@@ -12,4 +12,4 @@ if(attachListener && getEventTarget) {
 		return attachListener(el, eventType, listener);
 		
 	};
-}
+};

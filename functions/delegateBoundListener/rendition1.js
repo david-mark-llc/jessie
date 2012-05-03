@@ -1,14 +1,14 @@
 var delegateBoundListener;
 
-if(delegateListener && bind) {
+if(attachListener && bind) {
 	delegateBoundListener = function(el, eventType, fn, fnDelegate, thisObject) {
 		var listener = bind(function(e) {
-			if(fnDelegate(getEventTarget(e))) {
-				fn.call(thisObject, e);
+			var sourceNode = fnDelegate(getEventTarget(e));
+			if(sourceNode) {
+				fn.call(thisObject, e, sourceNode);
 			}
 		}, thisObject);
 		
-		attachListener(el, eventType, listener);
-		return listener;		
+		return attachListener(el, eventType, listener);
 	};
 };
