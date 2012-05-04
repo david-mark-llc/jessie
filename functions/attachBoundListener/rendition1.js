@@ -1,4 +1,5 @@
 /*global attachBoundListener:true,bind,attachListener */
+
 if(bind && attachListener) {
 	attachBoundListener = function(el, eventType, fn, thisObject) {
 		var listener = bind(fn, thisObject);

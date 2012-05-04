@@ -1,4 +1,4 @@
-/*global attachListener:true,html,isHostMethod,html */
+/*global attachListener:true,html,isHostMethod */
 // Degrades in IE 8-
 
 if(html && isHostMethod(html, 'addEventListener')) {

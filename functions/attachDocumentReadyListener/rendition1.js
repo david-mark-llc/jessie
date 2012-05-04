@@ -1,4 +1,6 @@
 /*global attachDocumentReadyListener:true,isHostMethod,global */
+/*hostMethod:addEventListener */
+
 // Degrades in IE 8- 
 // No frames or other alternate windows 
 // Best used with asset-light documents 
