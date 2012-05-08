@@ -1,4 +1,4 @@
-/*global xhrSend:true,createXhr,xmlHttp */
+/*global xhrSend:true,createXhr */
 
 // if you can't create one then you certainly can't send one
 if(createXhr) {
@@ -67,6 +67,6 @@ if(createXhr) {
 			}
 		}
 
-		xmlHttp.send(data);
+		xhr.send(data);
 	};
 }
