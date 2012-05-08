@@ -8,6 +8,7 @@ import datetime
 
 # the variables that are declared in the header file
 HEADER_DECLARATIONS = ["global", "globalDocument", "html", "canCall", "isHostObjectProperty", "isHostMethod"]
+EXPORTS = ["isHostObjectProperty", "isHostMethod"]
 
 GLOBAL_DIRECTIVE = "\/\*global\s(.*)\s+?\*\/"
 
@@ -204,7 +205,7 @@ def main():
 
         output.write("\nglobal[\"%s\"] = {%s};" % (
             global_variable,
-            ",".join(["\"%s\": %s" % (f, f) for f in order])
+            ",".join(["\"%s\": %s" % (f, f) for f in order + EXPORTS])
         ))
 
         for line in footer:
