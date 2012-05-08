@@ -7,7 +7,7 @@ import datetime
 
 
 # the variables that are declared in the header file
-HEADER_DECLARATIONS = ["global", "globalDocument", "html", "canCall", "isHostObjectProperty"]
+HEADER_DECLARATIONS = ["global", "globalDocument", "html", "canCall", "isHostObjectProperty", "isHostMethod"]
 
 GLOBAL_DIRECTIVE = "\/\*global\s(.*)\s+?\*\/"
 
@@ -97,11 +97,12 @@ class Function(object):
     def comments(self):
         """Creates a JavaScript comment to be inserted into the built file"""
         return """
-/********************************************************
+/****************************************************************
  *
  * %s
  *
- ********************************************************/""" % self.name
+ ****************************************************************/
+ """ % self.name
 
     def __str__(self):
         return self.name
@@ -187,6 +188,7 @@ def main():
 
     now = datetime.datetime.now()
     output_filename = "../builds/jessie.%s.js" % now.strftime("%Y%m%d%H%M%S")
+    global_variable = "jessie"
 
     with open(output_filename, "w") as output:
         for line in header:
@@ -199,6 +201,11 @@ def main():
             f = all_functions[func_name]
             js = f.get_contents(required_functions[func_name])
             output.write(js)
+
+        output.write("\nglobal[\"%s\"] = {%s};" % (
+            global_variable,
+            ",".join(["\"%s\": %s" % (f, f) for f in order])
+        ))
 
         for line in footer:
             output.write(line)
