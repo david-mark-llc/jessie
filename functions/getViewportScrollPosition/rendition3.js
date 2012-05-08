@@ -1,6 +1,5 @@
 /*global getViewportScrollPosition:true,globalDocument */
 // need to use this with rendition2.js
-var getViewportScrollPosition;
 
 if(globalDocument &&
 	globalDocument.body &&
