@@ -4,4 +4,4 @@ if(attachWindowListener && bind) {
 		var listener = bind(fn, thisObject);
 		return attachWindowListener(eventType, listener);
 	};
-};
+}
