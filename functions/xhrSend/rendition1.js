@@ -65,6 +65,6 @@ if(createXhr) {
 			}
 		};
 
-		xmlHttp.send(data);
+		xhr.send(data);
 	};
 };
