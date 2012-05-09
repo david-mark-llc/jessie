@@ -1,10 +1,10 @@
-var xhrSend;
+/*global xhrSend:true,createXhr */
 
 // if you can't create one then you certainly can't send one
 if(createXhr) {
 	
 	/*
-	 * 
+	 *
 	 * options.method - defaults to "get"
 	 * options.timeout - defaults to 30 seconds
 	 * options.complete
@@ -16,9 +16,10 @@ if(createXhr) {
 	 */
 	xhrSend = function(xhr, url, options) {
 		options = options || {};
-		var method = options.method || 'get',
+		var key,
+			method = options.method || 'get',
 			data = options.data || null;
-				
+		
 		xhr.open(method, url);
 		
 		var defaultHeaders = {
@@ -26,12 +27,12 @@ if(createXhr) {
 			//'Content-Type': 'application/x-www-form-urlencoded'
 		};
 		
-		for(var key in defaultHeaders) {
+		for(key in defaultHeaders) {
 			xhr.setRequestHeader(key, defaultHeaders[key]);
-		}	
+		}
 		
 		if(options.headers) {
-			for(var key in options.headers) {
+			for(key in options.headers) {
 				xhr.setRequestHeader(key, options.headers[key]);
 			}
 		}
@@ -43,9 +44,10 @@ if(createXhr) {
 			var status = xmlHttp.status;
 			var between200and300 = (status >= 200 && status < 300);
 			var notModified = (status == 304);
+			// FIXME(shewitt): why is "status == 00" meant to do?
 			if(between200and300 || notModified || status == 00 && xmlHttp.responseText) {
 				success = true;
-			}			
+			}
 			return success;
 		}
 		
@@ -63,8 +65,8 @@ if(createXhr) {
 					options.complete(xhr);
 				}
 			}
-		};
+		}
 
 		xhr.send(data);
 	};
-};
+}

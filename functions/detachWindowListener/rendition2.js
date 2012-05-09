@@ -1,4 +1,4 @@
-var detachWindowListener;
+/*global detachWindowListener:true,global,isHostMethod */
 
 if(global && isHostMethod(global, 'detachEvent')) {
 	detachWindowListener = function(eventType, fn) {

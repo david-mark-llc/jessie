@@ -1,5 +1,4 @@
-var createXhr;
-	
+/*global createXhr:true,global,isHostMethod*/
 if(isHostMethod(global, "XMLHttpRequest")) {
 	try {
 		if(new global.XMLHttpRequest()) {
@@ -8,5 +7,5 @@ if(isHostMethod(global, "XMLHttpRequest")) {
 			};
 		}
 	}
-	catch(e) {};
-};
+	catch(e) {}
+}

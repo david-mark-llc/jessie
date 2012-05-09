@@ -1,11 +1,4 @@
-var areFeatures;
-
+/*global areFeatures:true,every,toArray */
 areFeatures = function() {
-	var i = arguments.length;
-	while (i--) {
-		if (!arguments[i]) {
-			return false;
-		}
-	}
-	return true;
+	return every(toArray(arguments), function(v){ return v; });
 };

@@ -1,21 +1,18 @@
+/*global getElementPositionStyles:true,html,getElement,isHostObjectProperty */
 // Taken from primer
-var getElementPositionStyles;
 
-if( html 
-	&& getElement
-	&& isHostObjectProperty(html, 'style') 
-	&& 'number' == typeof html.offsetLeft 
-	&& 'string' == typeof html.style.left ) {
+if(html && getElement && isHostObjectProperty(html, 'style') &&
+	'number' == typeof html.offsetLeft && 'string' == typeof html.style.left ) {
 	
-	getElementPositionStyles =  getElementPositionStyles = (function() {
-		var result, 
-			sides = ['left', 'top', 'right', 'bottom'], 
+	getElementPositionStyles = (function() {
+		var result,
+			sides = ['left', 'top', 'right', 'bottom'],
 			inlineStyles = {},
 			findPosition;
 			
 		findPosition = function(el, sides) {
-			var i, 
-				offsetLeft, 
+			var i,
+				offsetLeft,
 				offsetTop;
 				
 			offsetLeft = el.offsetLeft;
@@ -40,7 +37,7 @@ if( html
 			if (result[sides[0]] !== null && el.offsetLeft != offsetLeft) {
 				if (sides[0] == 'left') {
 					result[sides[0]] = offsetLeft - el.offsetLeft + offsetLeft;
-				} 
+				}
 				else {
 					result[sides[0]] = el.offsetLeft;
 				}
@@ -49,7 +46,7 @@ if( html
 			if (result[sides[1]] !== null && el.offsetTop != offsetTop) {
 				if (sides[1] == 'top') {
 					result[sides[1]] = offsetTop - el.offsetTop + offsetTop;
-				} 
+				}
 				else {
 					result[sides[1]] = el.offsetTop;
 				}
@@ -61,8 +58,8 @@ if( html
 		};
 
 		return function(el) {
-			var i, 
-				side, 
+			var i,
+				side,
 				otherSide;
 
 			result = {};
@@ -85,4 +82,4 @@ if( html
 		};
 		
 	})();
-};
+}

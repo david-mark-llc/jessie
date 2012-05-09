@@ -1,4 +1,4 @@
-var getInnerSize;
+/*global getInnerSize:true,html */
 
 if(html && typeof html.clientWidth == 'number') {
 	getInnerSize = function(el) {
