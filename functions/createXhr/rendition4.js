@@ -2,7 +2,7 @@
 
 // for legacy eg. IE 5
 
-if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
+if(isHostMethod(global, 'ActiveXObject')) {
 	try {
 		if(new global.ActiveXObject('Microsoft.XMLHTTP')) {
 			createXhr = function() {
