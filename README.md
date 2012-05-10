@@ -30,25 +30,37 @@ Note: The number is not a version
 
 ## Builder
 
-The builder has been created using Node so you must install that first. To run the builder:
+The builder has been created using Node so you must install that first. 
+
+To run the builder:
 
 	cd /bin
-	./jessie (with some options)
+	./jessie (options are below)
 
-A typical call with some options might look like
+Usage: jessie [options] <functions ...>
+
+Options:
+
+	-h, --help           output usage information
+	-V, --version        output the version number
+	-l, --list           Print a list of available functions
+	-o, --output [file]  The file to output to (outputs to stdout by default)
+	-a, --all            Include all Functions and Renditions
+	--all-renditions     Include all renditions of a function if not specified explicitly
+	-u, --uglify         Minify the output using UglifyJS
+	--mangle             Mangle the generated output via UglifyJS
+	--beautify           Output beautified JS
+	--root [path]        the folder that jessie functions are located in
+	--no-wrap            Don'nt wrap the built file with the header/footer file contents
+	--exports <list>     A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])
+	--header [path]      The header file
+	--footer [path]      The footer file
+	--namespace [name]   The name of the global variable to export
+
+
+Example usage:
 
 	./jessie -a --root ../functions/ --namepsace "jessie" --header ../libraries/header1.inc --footer ../libraries/footer1.inc -o ~/Desktop/jessie.js bind:1 attachListener:1:2 attachBoundListener:1 query:1 toArray:1
-
-This tells the builder the following information:
-
-* --root tells the builder where to find the functions (and their renditions)
-* --namepsace tells the builder what to call your library - you can call it whatever you like - it's your library!
-* --header tells the builder what header to include (it's the start of the anonymous function)
-* --footer tells the builder what footer to include (it's the end of the anonymous function)
-* -o tells the builder where to save the generated .js file to
-* bind:1 attachListener:1:2 query:1 toArray:1 tells the builder to include the functions bind (rendition 1), attachListener (rendition 1 and 2), attachBoundListener (rendition 1), query (rendition 1) and toArray (rendition 1)
-
-There are more options including minifying. Just run `./jessie` to see the full list of options.
 
 ## API documentation
 
