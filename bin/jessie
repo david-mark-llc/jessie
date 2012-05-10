@@ -32,7 +32,10 @@ var footer = fs.readFileSync(program.footer, "utf8");
 
 var HEADER_DECLARATIONS = [];
 
+// parse the header/footer using uglify
 var ast = jsp.parse(header + footer);
+
+// walk over the ast looking for `var` declarations to add to HEADER_DECLARATIONS
 var w = pro.ast_walker();
 ast = w.with_walkers({
 	"var": function (defs) {
