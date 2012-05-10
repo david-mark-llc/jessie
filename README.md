@@ -35,9 +35,7 @@ The builder has been created using Node so you must install that first.
 To run the builder:
 
 	cd /bin
-	./jessie (options are below)
-
-Usage: jessie [options] <functions ...>
+	./jessie
 
 Options:
 
@@ -58,7 +56,7 @@ Options:
 	--namespace [name]   The name of the global variable to export
 
 
-Example usage:
+Example:
 
 	./jessie -a --root ../functions/ --namepsace "jessie" --header ../libraries/header1.inc --footer ../libraries/footer1.inc -o ~/Desktop/jessie.js bind:1 attachListener:1:2 attachBoundListener:1 query:1 toArray:1
 
