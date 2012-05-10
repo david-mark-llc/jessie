@@ -21,11 +21,19 @@ program
 	.option('--beautify', 'Output beautified JS')
 	.option('--root [path]', 'the folder that jessie functions are located in', path.join(__dirname, '../functions/'))
 	.option('--no-wrap', 'Don\'nt wrap the built file with the header/footer file contents')
+	.option('--exports <list>', 'A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])', list, ['isHostMethod', 'isHostObjectProperty'])
 	.option('--header [path]', 'The header file', path.join(__dirname, '../libraries/header1.inc'))
 	.option('--footer [path]', 'The footer file', path.join(__dirname, '../libraries/footer1.inc'))
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
+var HEADER_DECLARATIONS = ["global", "globalDocument", "html", "canCall", "isHostObjectProperty", "isHostMethod"];
+
+for (var i = program.exports.length - 1; i >= 0; i--) {
+	if(HEADER_DECLARATIONS.indexOf(program.exports[i]) === -1) {
+		throw "Cannot find export: " + program.exports[i];
+	}
+};
 
 // look in the root directory and get an array of JessieFunctions
 // doing this all sync for simplicity at the moment!
@@ -72,8 +80,6 @@ program.args.forEach(function(v){
 });
 
 
-var HEADER_DECLARATIONS = ["global", "globalDocument", "html", "canCall", "isHostObjectProperty", "isHostMethod"];
-
 // make sure the requestedFunctions object contains all the Functions
 // and Renditions that are implied by the starting set of functions
 expandDependencies(HEADER_DECLARATIONS, functions, requestedFunctions);
@@ -104,8 +110,8 @@ order.forEach(function(f) {
 
 // output code to export the library to the global scope
 buffer.push("\n\nglobal[\"" + program.namespace + "\"] = {\n");
-order.forEach(function(f, i){
-	buffer.push("\t\"" + f + "\": " + f + (i === order.length-1 ? "" : ",") + "\n");
+program.exports.concat(order).forEach(function(f, i, l) {
+	buffer.push("\t\"" + f + "\": " + f + (i === l.length-1 ? "" : ",") + "\n");
 });
 buffer.push("};\n");
 
@@ -326,4 +332,8 @@ function range(start, end)
 	for (var i = start; i <= end; i++)
 		foo.push(i);
 	return foo;
+}
+
+function list(val) {
+  return val.split(',');
 }
