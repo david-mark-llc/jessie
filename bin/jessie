@@ -27,13 +27,31 @@ program
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
-var HEADER_DECLARATIONS = ["global", "globalDocument", "html", "canCall", "isHostObjectProperty", "isHostMethod"];
+var header = fs.readFileSync(program.header, "utf8");
+var footer = fs.readFileSync(program.footer, "utf8");
+
+var HEADER_DECLARATIONS = [];
+
+// parse the header/footer using uglify
+var ast = jsp.parse(header + footer);
+
+// walk over the ast looking for `var` declarations to add to HEADER_DECLARATIONS
+var w = pro.ast_walker();
+ast = w.with_walkers({
+	"var": function (defs) {
+		defs.forEach(function(def){
+			HEADER_DECLARATIONS.push(def[0]);
+		});
+	}
+}, function(){
+        return w.walk(ast);
+});
 
 for (var i = program.exports.length - 1; i >= 0; i--) {
 	if(HEADER_DECLARATIONS.indexOf(program.exports[i]) === -1) {
 		throw "Cannot find export: " + program.exports[i];
 	}
-};
+}
 
 // look in the root directory and get an array of JessieFunctions
 // doing this all sync for simplicity at the moment!
@@ -97,7 +115,7 @@ var buffer = [];
 
 if(!program.noWrap) {
 	// write the header
-	buffer.push(fs.readFileSync(program.header, "utf8"));
+	buffer.push(header);
 }
 
 // output the var declarations of the functions
@@ -117,7 +135,7 @@ buffer.push("};\n");
 
 // write the footer
 if(!program.noWrap) {
-	buffer.push(fs.readFileSync(program.footer, "utf8"));
+	buffer.push(footer);
 }
 
 if(program.uglify) {
