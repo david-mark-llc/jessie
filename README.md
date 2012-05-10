@@ -30,7 +30,25 @@ Note: The number is not a version
 
 ## Builder
 
-Currently there is no builder meaning for now it's a cut and paste job which doesn't take a long time anyway. Please bear with us on this.
+The builder has been created using Node so you must install that first. To run the builder:
+
+	cd /bin
+	./jessie (with some options)
+
+A typical call with some options might look like
+
+	./jessie -a --root ../functions/ --namepsace "jessie" --header ../libraries/header1.inc --footer ../libraries/footer1.inc -o ~/Desktop/jessie.js bind:1 attachListener:1:2 attachBoundListener:1 query:1 toArray:1
+
+This tells the builder the following information:
+
+* --root tells the builder where to find the functions (and their renditions)
+* --namepsace tells the builder what to call your library - you can call it whatever you like - it's your library!
+* --header tells the builder what header to include (it's the start of the anonymous function)
+* --footer tells the builder what footer to include (it's the end of the anonymous function)
+* -o tells the builder where to save the generated .js file to
+* bind:1 attachListener:1:2 query:1 toArray:1 tells the builder to include the functions bind (rendition 1), attachListener (rendition 1 and 2), attachBoundListener (rendition 1), query (rendition 1) and toArray (rendition 1)
+
+There are more options including minifying. Just run `./jessie` to see the full list of options.
 
 ## API documentation
 
