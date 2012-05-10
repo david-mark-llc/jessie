@@ -1,8 +1,8 @@
-// for legacy eg. IE 5 
+/*global createXhr:true,isHostMethod,global */
 
-var createXhr;
+// for legacy eg. IE 5
 
-if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
+if(isHostMethod(global, 'ActiveXObject')) {
 	try {
 		if(new global.ActiveXObject('Microsoft.XMLHTTP')) {
 			createXhr = function() {
@@ -10,5 +10,5 @@ if(!createXhr && isHostMethod(global, 'ActiveXObject')) {
 			};
 		}
 	}
-	catch(e) {};
-};
+	catch(e) {}
+}

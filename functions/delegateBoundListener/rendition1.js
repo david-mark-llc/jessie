@@ -1,4 +1,4 @@
-var delegateBoundListener;
+/*global delegateBoundListener:true,bind,attachListener,getEventTarget */
 
 if(attachListener && bind) {
 	delegateBoundListener = function(el, eventType, fn, fnDelegate, thisObject) {
@@ -11,4 +11,4 @@ if(attachListener && bind) {
 		
 		return attachListener(el, eventType, listener);
 	};
-};
+}
