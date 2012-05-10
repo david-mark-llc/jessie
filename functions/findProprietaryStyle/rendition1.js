@@ -1,6 +1,7 @@
-var findProprietaryStyle;
+/*global findProprietaryStyle:true,html */
+
 if(html){
-	findProprietaryStyle = function (style) {		
+	findProprietaryStyle = function (style) {
 		if ('string' != typeof html.style[style]) {
 			style = style.charAt(0).toUpperCase() + style.substring(1);
 			var prefixes = ['Moz', 'O', 'Khtml', 'Webkit', 'ms'];

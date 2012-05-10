@@ -1,4 +1,4 @@
-var bind;
+/*global bind:true,canCall */
 
 if(canCall) {
   bind = function(fn, context) {

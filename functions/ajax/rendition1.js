@@ -1,4 +1,4 @@
-var ajax;
+/*global ajax:true,createXhr,xhrSend */
 
 if(createXhr && xhrSend) {
 	ajax = function(url, options) {
@@ -6,4 +6,4 @@ if(createXhr && xhrSend) {
 		xhrSend(xhr, url, options);
 		return xhr;
 	};
-};
+}

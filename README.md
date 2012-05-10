@@ -30,7 +30,35 @@ Note: The number is not a version
 
 ## Builder
 
-Currently there is no builder meaning for now it's a cut and paste job which doesn't take a long time anyway. Please bear with us on this.
+The builder has been created using Node so you must install that first. 
+
+To run the builder:
+
+	cd /bin
+	./jessie
+
+Options:
+
+	-h, --help           output usage information
+	-V, --version        output the version number
+	-l, --list           Print a list of available functions
+	-o, --output [file]  The file to output to (outputs to stdout by default)
+	-a, --all            Include all Functions and Renditions
+	--all-renditions     Include all renditions of a function if not specified explicitly
+	-u, --uglify         Minify the output using UglifyJS
+	--mangle             Mangle the generated output via UglifyJS
+	--beautify           Output beautified JS
+	--root [path]        the folder that jessie functions are located in
+	--no-wrap            Don'nt wrap the built file with the header/footer file contents
+	--exports <list>     A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])
+	--header [path]      The header file
+	--footer [path]      The footer file
+	--namespace [name]   The name of the global variable to export
+
+
+Example:
+
+	./jessie -a --root ../functions/ --namepsace "jessie" --header ../libraries/header1.inc --footer ../libraries/footer1.inc -o ~/Desktop/jessie.js bind:1 attachListener:1:2 attachBoundListener:1 query:1 toArray:1
 
 ## API documentation
 
@@ -96,6 +124,14 @@ Currently the documentation is very poor and could change but here is what we ha
 ### get descendants by tag name
 
 	var descendants = jessie.getDescendantsByTagName(el, "span");
+
+### get ancestors by tag name
+
+	var ancestors = jessie.getAncestorsByTagName(el, "span");
+
+### get ancestors by class name
+
+	var ancestors = jessie.getAncestorsByClassNameName(el, "className");
 
 ### get elements by selector
 

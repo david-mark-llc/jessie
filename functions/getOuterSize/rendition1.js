@@ -1,4 +1,4 @@
-var getOuterSize;
+/*global getOuterSize:true,html */
 
 if(html && typeof html.offsetWidth == 'number') {
 	getOuterSize = function(el) {

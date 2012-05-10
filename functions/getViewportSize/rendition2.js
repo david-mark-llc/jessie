@@ -1,15 +1,16 @@
+/*global getViewportSize:true,globalDocument,html */
 // WIP
 
 
-// Since document.clientHeight is reliable where (rarely) supported, and since 
-// browsers that support this property don't return the viewport dimensions from 
-// document.body.clientHeight or document.documentElement.clientHeight, this 
-// should be the very first condition: 
+// Since document.clientHeight is reliable where (rarely) supported, and since
+// browsers that support this property don't return the viewport dimensions from
+// document.body.clientHeight or document.documentElement.clientHeight, this
+// should be the very first condition:
 // Safari 2
 if(typeof globalDocument.clientWidth == 'number') {
 	getViewportSize = function() {
 		return [document.clientWidth, document.clientHeight];
-	}
+	};
 }
 
 // Is document.documentElement.clientHeight reliable?
@@ -24,7 +25,7 @@ if(html && html.clientHeight === 0) {
 }
 else {
 	isDocumentElementUnreliable = (function() {
-		// force documentElement to be bigger than viewport		
+		// force documentElement to be bigger than viewport
 		var result = false;
 		// create div
 		var div = globalDocument.createElement('div');
@@ -32,8 +33,8 @@ else {
 		div.style.height = "2500px";
 		// prepend the big div to the document body
 		globalDocument.body.insertBefore(div, globalDocument.body.firstChild);
-		// check to see if documentElement.clientHeight is that high 
-		// (or "almost" that high, to account for documentElement having 
+		// check to see if documentElement.clientHeight is that high
+		// (or "almost" that high, to account for documentElement having
 		// a border). If it is, then documentElement.clientHeight
 		// is unreliable
 		result = html.clientHeight > 2400;

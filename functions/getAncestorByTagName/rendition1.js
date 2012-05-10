@@ -1,4 +1,4 @@
-var getAncestorByTagName;
+/*global getAncestorByTagName:true,getElementParent,getElementTagName */
 
 if(getElementParent && getElementTagName){
 	getAncestorByTagName = function(el, tagName) {

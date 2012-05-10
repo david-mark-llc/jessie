@@ -1,5 +1,6 @@
-var getViewportScrollPosition;
-if( globalDocument && 
+/*global getViewportScrollPosition:true,globalDocument */
+
+if( globalDocument &&
 	'number' == typeof globalDocument.scrollLeft &&
 	'number' == typeof globalDocument.scrollTop &&
 	'string' == typeof globalDocument.compatMode &&
@@ -7,6 +8,6 @@ if( globalDocument &&
 	
 	getViewportScrollPosition = function() {
 		return [document.scrollLeft, document.scrollTop];
-	};	
+	};
 
-};
+}

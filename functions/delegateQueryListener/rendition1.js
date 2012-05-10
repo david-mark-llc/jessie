@@ -1,4 +1,4 @@
-var delegateQueryListener;
+/*global delegateQueryListener:true,delegateListener,isInQuery */
 
 if(delegateListener && isInQuery) {
 	delegateQueryListener = function(el, eventType, selector, fn) {
@@ -9,4 +9,4 @@ if(delegateListener && isInQuery) {
 
 		return delegateListener(el, eventType, fn, fnDelegate);
 	};
-};
+}
