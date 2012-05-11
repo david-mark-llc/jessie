@@ -18,7 +18,7 @@ Most of the jessie functions are dynamic. This means the calling application sho
 		// write an application that relies on (and uses) attachListener and ajax
 	}
 
-Peter Michaux has an excellent article based on this concept found: [here](hhttp://peter.michaux.ca/articles/cross-browser-widgets).
+Peter Michaux has an excellent article based on this concept found: [here](http://peter.michaux.ca/articles/cross-browser-widgets).
 
 ## Builder
 
