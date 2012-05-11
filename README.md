@@ -6,9 +6,9 @@ Lean, beautiful and smart
 
 Jessie has a flat API. It is just a list of functions. Each function has many renditions. Each rendition is based on feature detection and testing. Let's take one example:
 
-'jessie.attachListener' is a function and it currently has two renditions. One rendition uses W3C compliant 'el.addEventListener' and the uses Microsofts implementation 'el.attachEvent'.
+`jessie.attachListener` is a function and it currently has two renditions. One rendition uses W3C compliant `el.addEventListener` and the uses Microsofts implementation `el.attachEvent`.
 
-Now some functions depend on other functions and properties. For example 'jessie.attachBoundListener' depends on 'jessie.attachListener' and 'jessie.bind'.
+Now some functions depend on other functions and properties. For example `jessie.attachBoundListener` depends on `jessie.attachListener` and `jessie.bind`.
 
 ## Dynamic API
 
