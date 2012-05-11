@@ -95,6 +95,9 @@ if(program.all) {
 		// by separating them with colons
 		v = v.split(":");
 		requestedFunctions[v[0]] = v.splice(1);
+		if(!functions[v[0]]) {
+			throw new Error("Could not find function: " + v[0]);
+		}
 		if(requestedFunctions[v[0]].length === 0) {
 			if(functions[v[0]].renditions.length > 1 && !program.allRenditions) {
 				throw new Error(v[0]+" was specified but there are multiple renditions available!");
@@ -254,6 +257,9 @@ function expandDependencies(glob, functions, required){
 	while((dep = deps.pop())) {
 		functions[dep].getDependencies(required[dep]).each(function(d){
 			if(!required[d] && !deps.has(d) && glob.indexOf(d) == -1) {
+				if(!functions[d]) {
+					throw new Error("Could not find function: " + d);
+				}
 				if(functions[d].renditions.length > 1) {
 					if(program.allRenditions) {
 						required[d] = range(1, functions[d].renditions.length);
