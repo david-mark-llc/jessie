@@ -30,7 +30,7 @@ program
 var header = fs.readFileSync(program.header, "utf8");
 var footer = fs.readFileSync(program.footer, "utf8");
 
-var HEADER_DECLARATIONS = [];
+var HEADER_DECLARATIONS = ["global"];
 
 // parse the header/footer using uglify
 var ast = jsp.parse(header + footer);
@@ -75,28 +75,34 @@ if(program.list) {
 	process.exit(0);
 }
 
-// if no args are used, output the help
-if(program.args.length === 0) {
-	process.stdout.write(program.helpInformation());
-	program.emit('--help');
-	process.exit(0);
-}
-
-// parse the args to get a map of functions that we need to output
 var requestedFunctions = {};
-program.args.forEach(function(v){
-	// each argument can specify the renditions that are required
-	// by separating them with colons
-	v = v.split(":");
-	requestedFunctions[v[0]] = v.splice(1);
-	if(requestedFunctions[v[0]].length === 0) {
-		if(functions[v[0]].renditions.length > 1 && !program.allRenditions) {
-			throw new Error(v[0]+" was specified but there are multiple renditions available!");
-		}
-		requestedFunctions[v[0]] = range(1, functions[v[0]].renditions.length);
-	}
-});
 
+if(program.all) {
+	Object.keys(functions).forEach(function(f){
+		requestedFunctions[f] = range(1, functions[f].renditions.length);
+	});
+} else {
+// if no args are used, output the help
+	if(program.args.length === 0) {
+		process.stdout.write(program.helpInformation());
+		program.emit('--help');
+		process.exit(0);
+	}
+
+	// parse the args to get a map of functions that we need to output
+	program.args.forEach(function(v){
+		// each argument can specify the renditions that are required
+		// by separating them with colons
+		v = v.split(":");
+		requestedFunctions[v[0]] = v.splice(1);
+		if(requestedFunctions[v[0]].length === 0) {
+			if(functions[v[0]].renditions.length > 1 && !program.allRenditions) {
+				throw new Error(v[0]+" was specified but there are multiple renditions available!");
+			}
+			requestedFunctions[v[0]] = range(1, functions[v[0]].renditions.length);
+		}
+	});
+}
 
 // make sure the requestedFunctions object contains all the Functions
 // and Renditions that are implied by the starting set of functions
