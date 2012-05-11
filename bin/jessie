@@ -95,6 +95,9 @@ if(program.all) {
 		// by separating them with colons
 		v = v.split(":");
 		requestedFunctions[v[0]] = v.splice(1);
+		if(!functions[v[0]]) {
+			throw new Error("Could not find function: " + v[0]);
+		}
 		if(requestedFunctions[v[0]].length === 0) {
 			if(functions[v[0]].renditions.length > 1 && !program.allRenditions) {
 				throw new Error(v[0]+" was specified but there are multiple renditions available!");
