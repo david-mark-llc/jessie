@@ -254,6 +254,9 @@ function expandDependencies(glob, functions, required){
 	while((dep = deps.pop())) {
 		functions[dep].getDependencies(required[dep]).each(function(d){
 			if(!required[d] && !deps.has(d) && glob.indexOf(d) == -1) {
+				if(!functions[d]) {
+					throw new Error("Could not find function: " + d);
+				}
 				if(functions[d].renditions.length > 1) {
 					if(program.allRenditions) {
 						required[d] = range(1, functions[d].renditions.length);
