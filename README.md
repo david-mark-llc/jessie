@@ -185,7 +185,7 @@ David Mark has put many tips on CLJ so search for "David Mark Tip" and start to 
 
 * [Attaching and detaching event listeners](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/b94b12547ed572f8?hl=en&noredirect=true)
 * [The load problem and related matters](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/6d5575fd79d1169d?hl=en&noredirect=true)
-* [How to Create an XHR (Ajax) Object](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/4323efb65cebb31e/a4f28c7fbe305bca?hl=en&lnk=gst&q=ow+to+Create+an+XHR+(Ajax)+O)
+* [How to Create an XHR object](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/4323efb65cebb31e/a4f28c7fbe305bca?hl=en&lnk=gst&q=ow+to+Create+an+XHR+(Ajax)+O)
 * [Properties and attributes](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/838804e32224601f/502a23cab0057bcd?hl=en&lnk=gst&q=tip+of+the+day+david)
 * [Adding and removing host objects](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/d1f64857442e3b10/3d3d3d0174a46bcb?hl=en&lnk=gst&q=tip+of+the+day+david)
 * [How to measure element dimensions](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/24fd33cc9f206ea0/8c8397bebd0a0188?hl=en&lnk=gst&q=tip+of+the+day+david)
