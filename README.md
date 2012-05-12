@@ -4,11 +4,11 @@ Lean, beautiful and smart
 
 ## About Jessie's design
 
-Jessie has a flat API. It is just a list of functions. Each function has many renditions. Each rendition is based on feature detection and testing. Let's take one example:
+Jessie has a flat API. It is simply a collection of functions. Each function has many renditions. Each rendition is based on feature detection and testing. Let's take one example:
 
-`jessie.attachListener` is a function and it currently has two renditions. One rendition uses W3C compliant `el.addEventListener` and the uses Microsofts implementation `el.attachEvent`.
+`jessie.attachListener` is a function and it currently has two renditions. One rendition uses W3C compliant `el.addEventListener` and the other uses Microsofts implementation `el.attachEvent`.
 
-Now some functions depend on other functions and properties. For example `jessie.attachBoundListener` depends on `jessie.attachListener` and `jessie.bind`.
+Some functions depend on other functions and properties. For example `jessie.attachBoundListener` depends on `jessie.attachListener` and `jessie.bind`.
 
 ## Dynamic API
 
@@ -22,11 +22,11 @@ Peter Michaux has an excellent article based on this concept found: [here](http:
 
 ## Builder
 
-The builder has been created using Node so you must install that first. 
+The builder has been created using Node so you must install that first.
 
 ### About the builder
 
-If you have read the above you should understand how Jessie is designed and therefor understand the requirments of the builder; it takes a list of functions with specified renditions and ensures you specify the right dependencies for your chosen custom build. After that it will make sure the functions are put together in the right order.
+If you have read the above you should understand how Jessie is designed and therefore understand how the builder needs to work; it takes a list of functions with specified renditions and ensures you specify the right dependencies for your custom build.
 
 ### Using the builder
 
@@ -59,7 +59,7 @@ Example:
 
 ## API documentation
 
-Currently the documentation is very poor and could change but here is what we have:
+Currently the documentation is very basic and the API could change for the better but for now this is what we have:
 
 ### bind a function
 	
