@@ -4,8 +4,9 @@ if(attachListener && getEventTarget) {
 	delegateListener = function(el, eventType, fn, fnDelegate) {
 		
 		var listener = function(e) {
-			if(fnDelegate(getEventTarget(e))) {
-				fn.call(e, e);
+			var sourceNode = fnDelegate(getEventTarget(e));
+			if(sourceNode) {
+				fn.call(e, e, sourceNode);
 			}
 		};
 		
