@@ -1,11 +1,14 @@
-/*global delegateTagNameListener:true,delegateListener,getElementTagName,isInQuery */
+/*global delegateTagNameListener:true,delegateListener,getElementTagName */
 
 if(delegateListener && getElementTagName) {
 	delegateTagNameListener = function(el, eventType, tagName, fn) {
 		
 		var fnDelegate = function(target) {
-			//FIXME(shewitt): selector not defined here!
-			return isInQuery(target, selector);
+			var sourceNode;
+			if(getElementTagName(target) === tagName) {
+				sourceNode = target;
+			}
+			return sourceNode;
 		};
 
 		return delegateListener(el, eventType, fn, fnDelegate);
