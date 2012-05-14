@@ -53,9 +53,13 @@ Options:
 	--footer [path]      The footer file
 	--namespace [name]   The name of the global variable to export
 
-Example:
+Example on Linux
 
 	./jessie -o ~/Desktop/jessie.js bind:1 attachListener:1:2 attachBoundListener:1 query:1 toArray:1
+
+Example on Windows:
+
+	node jessie getEventTarget:1 attachListener:1:2 delegateTagNameListener:1 > ../../jessie.js
 
 ## API documentation
 
