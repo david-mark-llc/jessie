@@ -45,7 +45,7 @@ if(createXhr) {
 			var between200and300 = (status >= 200 && status < 300);
 			var notModified = (status == 304);
 			// FIXME(shewitt): why is "status == 00" meant to do?
-			if(between200and300 || notModified || status == 00 && xmlHttp.responseText) {
+			if(between200and300 || notModified || status === 0 && xmlHttp.responseText) {
 				success = true;
 			}
 			return success;
