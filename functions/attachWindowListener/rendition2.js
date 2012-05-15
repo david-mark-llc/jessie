@@ -1,6 +1,8 @@
 /*global attachWindowListener:true,global,isHostMethod */
 // Works in IE8-
 
+var attachWindowListener;
+
 if(global && isHostMethod(global, 'attachEvent')) {
 	attachWindowListener = function(eventType, fn) {
 		// Remove this line on deployment -- for debugging only

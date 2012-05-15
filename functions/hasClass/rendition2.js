@@ -1,7 +1,9 @@
-/*global hasClass:true,html,isHostObjectProperty,isHostMethod */
+/*global hasClass:true,html */
 
-if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "contains") ) {
+var hasClass;
+
+if(html && 'string' == typeof html.className) {
 	hasClass = function(el, className) {
-		return el.classList.contains(className);
+		return (new RegExp('(^|\\s)' + className + '(\\s|$)')).test(el.className);
 	};
 }

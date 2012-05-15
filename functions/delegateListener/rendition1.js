@@ -1,5 +1,7 @@
 /*global delegateListener:true,attachListener,getEventTarget */
 
+var delegateListener;
+
 if(attachListener && getEventTarget) {
 	delegateListener = function(el, eventType, fn, fnDelegate) {
 		

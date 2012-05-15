@@ -1,5 +1,7 @@
 /*global inherit:true */
 
+var inherit;
+
 inherit = (function() {
 	var Fn = function() {};
 	return function(fnSub, fnSuper) {

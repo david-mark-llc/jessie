@@ -1,6 +1,8 @@
 /*global attachListener:true,html,isHostMethod */
 // Degrades in IE 8-
 
+var attachListener;
+
 if(html && isHostMethod(html, 'addEventListener')) {
 	attachListener = function(el, eventType, fn) {
 

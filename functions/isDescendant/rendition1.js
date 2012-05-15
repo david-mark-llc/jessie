@@ -1,5 +1,7 @@
 /*global isDescendant:true,html */
 
+var isDescendant;
+
 if(html && 'undefined' != typeof html.parentNode) {
 	isDescendant = function(el, elDescendant) {
 		// TODO: this could be refactored to save space

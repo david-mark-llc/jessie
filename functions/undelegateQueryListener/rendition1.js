@@ -4,6 +4,8 @@
 // expects a delegate listener which was returned
 // when it was attached
 
+var undelegateQueryListener;
+
 if(undelegateListener) {
 	undelegateQueryListener = function(el, eventType, listener) {
 		undelegateListener(el, eventType, listener);

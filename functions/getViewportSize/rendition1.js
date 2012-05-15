@@ -1,6 +1,8 @@
 /*global getViewportSize:true,globalDocument,global */
 // WIP
 var getRoot;
+
+var getViewportSize;
 	
 if('string' == typeof globalDocument.compatMode) {
 	getRoot = function(win) {

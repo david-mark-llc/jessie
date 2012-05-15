@@ -5,6 +5,8 @@ See: https://groups.google.com/forum/#!starred/comp.lang.javascript/uUsSVH7Vcvg
 If you will be using a forked rendition to support IE 8-
 */
 
+var getEventTarget;
+
 getEventTarget = function(e) {
 	var target = e.target;
 	if (target) {
