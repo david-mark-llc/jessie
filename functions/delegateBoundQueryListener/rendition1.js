@@ -1,5 +1,7 @@
 /*global delegateBoundQueryListener:true,query,delegateBoundListener,isDescendant,isInQuery */
 
+var delegateBoundQueryListener;
+
 if(delegateBoundListener && query && isDescendant) {
 	delegateBoundQueryListener = function(el, eventType, selector, fn, thisObject) {
 

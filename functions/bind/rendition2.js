@@ -1,6 +1,8 @@
 /*global bind:true,canCall */
 
-if(canCall) {
+var bind;
+
+if(canCall && Array.prototype.slice) {
   bind = function(fn, context) {
     var prependArgs = Array.prototype.slice.call(arguments, 2);
 

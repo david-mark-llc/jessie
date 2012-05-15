@@ -1,5 +1,8 @@
 /*global getEventTargetRelated:true */
 //	If you will be using a forked rendition to support IE 8-
+
+var getEventTargetRelated;
+
 getEventTargetRelated = function(e) {
 	if (e.relatedTarget) {
 		return (e.relatedTarget.nodeType == 3)?e.relatedTarget.parentNode:e.relatedTarget;

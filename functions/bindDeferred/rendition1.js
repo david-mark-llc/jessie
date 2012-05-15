@@ -1,4 +1,7 @@
 /*global bindDeferred:true,canCall,bind,global */
+
+var bindDeferred;
+
 if(canCall) {
   bindDeferred = function(fn, context, delay) {
     var timeout;

@@ -1,5 +1,7 @@
 /*global isInQuery:true,query */
 
+var isInQuery;
+
 if(query) {
 	isInQuery = function(el, selector) {
 		var isInQuery = false,

@@ -1,5 +1,7 @@
 /*global findProprietaryStyle:true,html */
 
+var findProprietaryStyle;
+
 if(html){
 	findProprietaryStyle = function (style) {
 		if ('string' != typeof html.style[style]) {

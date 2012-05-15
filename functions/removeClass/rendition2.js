@@ -1,4 +1,7 @@
 /*global removeClass:true,html */
+
+var removeClass;
+
 if(html && "string" == typeof html.className) {
 	removeClass = function(el, className) {
 		var re, m;

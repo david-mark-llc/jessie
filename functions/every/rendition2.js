@@ -1,6 +1,8 @@
 /*global every:true,forEach */
 
-if(!every && forEach) {
+var every;
+
+if(canCall && forEach) {
 	every = function(arr, iterator, context) {
 		var result = true;
 		// TODO: this is slightly inefficient, as it doesn't break out of the

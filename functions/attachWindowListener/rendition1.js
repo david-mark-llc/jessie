@@ -4,6 +4,8 @@
 // window objects
 // No frames
 
+var attachWindowListener;
+
 if(global && isHostMethod(global, 'addEventListener')) {
 	attachWindowListener = function(eventType, fn) {
 		// Remove this line on deployment -- for debugging only

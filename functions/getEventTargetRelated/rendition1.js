@@ -2,6 +2,8 @@
 
 //	Degrades in IE8-
 
+var getEventTargetRelated;
+
 if(html && isHostMethod(html, 'addEventListener')) {
 	getEventTargetRelated = function(e) {
 		var target = e.relatedTarget;

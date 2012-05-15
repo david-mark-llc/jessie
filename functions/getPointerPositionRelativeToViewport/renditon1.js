@@ -1,6 +1,9 @@
 //So let's finish this off. If you need it to work in IE 9 and
 //virtually every other browser made since the turn of the century:-
 // Works for mouse or touch
+
+var getPointerPositionRelativeToViewport;
+
 if ('number' == typeof global.pageXOffset) {
 	getPointerPositionRelativeToViewport = function(e) {
 		return [e.pageX - window.pageXOffset, e.pageY -	window.pageYOffset]

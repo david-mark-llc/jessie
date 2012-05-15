@@ -1,19 +1,21 @@
 /*global xhrSend:true,createXhr */
 
+var xhrSend;
+
 // if you can't create one then you certainly can't send one
 if(createXhr) {
 	
 	/*
-	 *
-	 * options.method - defaults to "get"
-	 * options.timeout - defaults to 30 seconds
-	 * options.complete
-	 * options.success
-	 * options.headers
-	 * options.data
-	 * options.fail
-	 * 
-	 */
+	*
+	* options.method - defaults to "get"
+	* options.timeout - defaults to 30 seconds
+	* options.complete
+	* options.success
+	* options.headers
+	* options.data
+	* options.fail
+	* 
+	*/
 	xhrSend = function(xhr, url, options) {
 		options = options || {};
 		var key,
