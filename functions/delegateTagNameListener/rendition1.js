@@ -1,5 +1,7 @@
 /*global delegateTagNameListener:true,delegateListener,getElementTagName */
 
+var delegateTagNameListener;
+
 if(delegateListener && getElementTagName) {
 	delegateTagNameListener = function(el, eventType, tagName, fn) {
 		

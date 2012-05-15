@@ -1,6 +1,8 @@
 /*global getElementPositionStyles:true,html,getElement,isHostObjectProperty */
 // Taken from primer
 
+var getElementPositionStyles;
+
 if(html && getElement && isHostObjectProperty(html, 'style') &&
 	'number' == typeof html.offsetLeft && 'string' == typeof html.style.left ) {
 	

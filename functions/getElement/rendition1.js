@@ -9,6 +9,8 @@ crewy markup like this:
 <input id="test">
 */
 
+var getElement;
+
 if (isHostMethod(document, 'getElementById')) {
 	getElement = function(id) {
 		return document.getElementById(id);

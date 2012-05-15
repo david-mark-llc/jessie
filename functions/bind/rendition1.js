@@ -1,16 +1,9 @@
-/*global bind:true,canCall */
+/*global bind:true */
 
-if(canCall) {
-  bind = function(fn, context) {
-    var prependArgs = Array.prototype.slice.call(arguments, 2);
+var bind;
 
-    if (prependArgs.length) {
-      return function() {
-        fn.apply(context, Array.prototype.concat.apply(prependArgs, arguments));
-      };
-    }
-    return function() {
-      fn.apply(context, arguments);
+if(Function.prototype.bind){
+    bind = function(fn, thisObject) {
+        return fn.bind.apply(fn, Array.prototype.slice.call(arguments, 1));
     };
-  };
 }

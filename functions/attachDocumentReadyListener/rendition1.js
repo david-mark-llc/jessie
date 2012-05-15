@@ -5,6 +5,8 @@
 // No frames or other alternate windows 
 // Best used with asset-light documents 
 
+var attachDocumentReadyListener;
+
 var readyListenerAttached;
 
 if(isHostMethod(global, "addEventListener")) {

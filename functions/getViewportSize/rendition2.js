@@ -1,6 +1,6 @@
 /*global getViewportSize:true,globalDocument,html */
 // WIP
-
+var getViewportSize;
 
 // Since document.clientHeight is reliable where (rarely) supported, and since
 // browsers that support this property don't return the viewport dimensions from

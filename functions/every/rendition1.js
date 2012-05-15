@@ -1,7 +1,9 @@
 /*global every:true,forEach */
+
+var every;
+
 if(Array.prototype.every) {
-	every = function(obj, iterator, context) {
-		if(obj == null) return true;
-		return obj.every(iterator, context);
+	every = function(arr, iterator, context) {
+		return arr.every(iterator, context);
 	};
 }

@@ -1,5 +1,7 @@
 /*global getAncestorByClassName:true,html,getElementParent,hasClass */
 
+var getAncestorByClassName;
+
 if(html && 'string' == typeof html.className && getElementParent && hasClass) {
 	getAncestorByClassName = function(el, className) {
 		el = getElementParent(el);

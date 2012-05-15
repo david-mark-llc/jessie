@@ -9,6 +9,8 @@
 //		</script>
 //	</body>
 
+var attachDocumentReadyListener;
+
 var readyListener,
 	readyListenerAttached,
 	documentIsReady;

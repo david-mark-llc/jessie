@@ -1,6 +1,8 @@
 /*global getEventTarget:true,html,isHostMethod */
 // Degrades in IE8-
 
+var getEventTarget;
+
 if(html && isHostMethod(html, 'addEventListener')) {
 	getEventTarget = function(e) {
 		var target = e.target;
