@@ -211,14 +211,14 @@ function Rendition(func, file) {
 		// remove the /*global / declarations
 		var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
 		
-		if(conditional) {
+		//if(conditional) {
 			// indent the contents by 1 tab
-			contents[1] = contents[0].replace(/^/gm, "\t");
+		//	contents[1] = contents[0].replace(/^/gm, "\t");
 
 			// wrap it in an if statement
-			contents[0] = "if(!" + this.func.name + "){";
-			contents.push("}\n");
-		}
+			//contents[0] = "if(!" + this.func.name + "){";
+			//contents.push("}\n");
+		//}
 		return contents.join("\n");
 	}.bind(this);
 }

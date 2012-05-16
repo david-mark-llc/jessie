@@ -18,6 +18,8 @@ Most of the jessie functions are dynamic. This means the calling application sho
 		// write an application that relies on (and uses) attachListener and ajax
 	}
 
+A side effect of this design is that you have two choices of what to do when a particular function is not supported in a particular browser - either degrade gracefully or simply create another rendition that allows that function to work in another set of browsers. There will be no change to the application code meaning Jessie can grow or shrink as your project requirements change. 
+
 Peter Michaux has an excellent article based on this concept found: [here](http://peter.michaux.ca/articles/cross-browser-widgets).
 
 ## Builder
@@ -41,7 +43,6 @@ Options:
 	-V, --version        output the version number
 	-l, --list           Print a list of available functions
 	-o, --output [file]  The file to output to (outputs to stdout by default)
-	-a, --all            Include all Functions and Renditions
 	--all-renditions     Include all renditions of a function if not specified explicitly
 	-u, --uglify         Minify the output using UglifyJS
 	--mangle             Mangle the generated output via UglifyJS
