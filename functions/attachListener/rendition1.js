@@ -1,4 +1,4 @@
-/*global attachListener:true,html,isHostMethod */
+/*global html,isHostMethod */
 // Degrades in IE 8-
 
 var attachListener;

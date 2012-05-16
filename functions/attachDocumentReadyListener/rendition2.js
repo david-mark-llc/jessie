@@ -1,4 +1,4 @@
-/*global attachDocumentReadyListener:true,isHostMethod,global,globalDocument */
+/*global isHostMethod,global,globalDocument */
 // Degrades in IE 8-
 // No frames or other alternate windows
 // Can use following to get IE8- to work when document is parsed.

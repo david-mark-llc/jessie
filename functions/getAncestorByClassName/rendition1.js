@@ -1,4 +1,4 @@
-/*global getAncestorByClassName:true,html,getElementParent,hasClass */
+/*global html,getElementParent,hasClass */
 
 var getAncestorByClassName;
 

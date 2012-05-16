@@ -1,4 +1,4 @@
-/*global attachDocumentReadyListener:true,global,isHostMethod */
+/*global global,isHostMethod */
 // Works in IE8-
 
 var attachDocumentReadyListener;

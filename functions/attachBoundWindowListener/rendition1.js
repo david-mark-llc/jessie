@@ -1,4 +1,4 @@
-/*global attachBoundWindowListener:true,bind,attachWindowListener */
+/*global bind,attachWindowListener */
 
 var attachBoundWindowListener;
 

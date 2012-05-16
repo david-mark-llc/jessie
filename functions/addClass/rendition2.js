@@ -1,4 +1,4 @@
-/*global addClass:true,html*/
+/*global html*/
 
 var addClass;
 

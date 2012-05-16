@@ -1,4 +1,4 @@
-/*global isDescendant:true,html */
+/*global html */
 
 var isDescendant;
 

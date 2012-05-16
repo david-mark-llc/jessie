@@ -1,5 +1,3 @@
-/*global toArray:true */
-
 var toArray;
 
 toArray = function(a) {

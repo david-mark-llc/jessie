@@ -1,4 +1,3 @@
-/*global forEach:true */
 //Uses native forEach
 
 var forEach;

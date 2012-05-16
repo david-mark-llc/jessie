@@ -1,4 +1,4 @@
-/*global createXhr:true,global,isHostMethod*/
+/*global global,isHostMethod*/
 
 var createXhr;
 

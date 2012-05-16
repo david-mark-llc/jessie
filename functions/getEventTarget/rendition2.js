@@ -1,4 +1,3 @@
-/*global getEventTarget:true */
 /*
 See: https://groups.google.com/forum/#!starred/comp.lang.javascript/uUsSVH7Vcvg
 

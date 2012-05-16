@@ -1,4 +1,4 @@
-/*global bind:true,canCall */
+/*global canCall */
 
 var bind;
 

@@ -1,4 +1,4 @@
-/*global hasClass:true,html */
+/*global html */
 
 var hasClass;
 

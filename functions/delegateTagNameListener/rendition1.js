@@ -1,4 +1,4 @@
-/*global delegateTagNameListener:true,delegateListener,getElementTagName */
+/*global delegateListener,getElementTagName */
 
 var delegateTagNameListener;
 

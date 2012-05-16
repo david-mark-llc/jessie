@@ -1,4 +1,4 @@
-/*global xhrSend:true,createXhr */
+/*global createXhr */
 
 var xhrSend;
 
