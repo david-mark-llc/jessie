@@ -1,4 +1,4 @@
-/*global getDescendantsByTagName:true,globalDocument,toArray,isHostMethod */
+/*global globalDocument,toArray,isHostMethod */
 
 var getDescendantsByTagName;
 

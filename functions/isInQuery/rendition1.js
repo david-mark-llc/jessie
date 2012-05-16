@@ -1,4 +1,4 @@
-/*global isInQuery:true,query */
+/*global query */
 
 var isInQuery;
 

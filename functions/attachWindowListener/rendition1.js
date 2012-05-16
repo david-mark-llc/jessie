@@ -1,4 +1,4 @@
-/*global attachWindowListener:true,global,isHostMethod */
+/*global global,isHostMethod */
 // Degrades in IE 8-
 // Also degrades in some older browsers that lack this method on
 // window objects

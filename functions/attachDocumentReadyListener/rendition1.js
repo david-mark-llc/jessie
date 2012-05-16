@@ -1,5 +1,4 @@
-/*global attachDocumentReadyListener:true,isHostMethod,global */
-/*hostMethod:addEventListener */
+/*global isHostMethod,global */
 
 // Degrades in IE 8- 
 // No frames or other alternate windows 

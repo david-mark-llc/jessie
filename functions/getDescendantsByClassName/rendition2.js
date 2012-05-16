@@ -1,4 +1,4 @@
-/*global getDescendantsByClassName:true,getDescendantsByTagName,hasClass */
+/*global getDescendantsByTagName,hasClass */
 
 var getDescendantsByClassName;
 

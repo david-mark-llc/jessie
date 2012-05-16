@@ -1,4 +1,4 @@
-/*global delegateQueryListener:true,query,isDescendant,delegateListener,isInQuery */
+/*global query,isDescendant,delegateListener,isInQuery */
 
 var delegateQueryListener;
 

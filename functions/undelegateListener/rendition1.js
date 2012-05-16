@@ -1,9 +1,9 @@
-/*global undelegateListener:true,detachListener */
+/*global detachListener */
 
 var undelegateListener;
 
 if(detachListener) {
 	undelegateListener = function(el, eventType, delegateListener) {
-		detachListener(el, eventType, delegateListener);
+		return detachListener(el, eventType, delegateListener);
 	};
 }

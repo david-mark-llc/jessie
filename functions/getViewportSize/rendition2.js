@@ -1,4 +1,4 @@
-/*global getViewportSize:true,globalDocument,html */
+/*global globalDocument,html */
 // WIP
 var getViewportSize;
 
