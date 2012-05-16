@@ -208,7 +208,6 @@ function Rendition(func, file) {
 					var match, re = /\/\*global\s(\S*)\s*\*\//g;
 					while((match = re.exec(this.contents))) {
 						match[1].split(",").forEach(function(d){
-							console.log(d);
 							this._dependencies.add(d);
 						}.bind(this));
 
