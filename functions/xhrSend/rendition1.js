@@ -14,7 +14,7 @@ if(createXhr) {
 	* options.headers
 	* options.data
 	* options.fail
-	* 
+	*
 	*/
 	xhrSend = function(xhr, url, options) {
 		options = options || {};

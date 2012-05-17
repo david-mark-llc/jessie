@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /*jslint node:true, strict:false */
 
+// imports
 var program = require('commander'),
 	Table = require('cli-table'),
 	Set = require('simplesets').Set,
@@ -14,7 +15,7 @@ program
 	.usage('[options] <functions ...>')
 	.option('-l, --list', 'Print a list of available functions')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
-	.option('-a, --all', 'Include all Functions and Renditions')
+	//.option('-a, --all', 'Include all Functions and Renditions')
 	//.option('--all-renditions', 'Include all renditions of a function if not specified explicitly')
 	.option('-u, --uglify', 'Minify the output using UglifyJS')
 	.option('--mangle', 'Mangle the generated output via UglifyJS')
@@ -27,9 +28,13 @@ program
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
+// return contents of header include file
 var header = fs.readFileSync(program.header, "utf8");
+// return contents of footer include file
 var footer = fs.readFileSync(program.footer, "utf8");
 
+// cant grab this from uglifyjs (ast) parser as it's in the closure arguments
+// so we specify this here
 var HEADER_DECLARATIONS = ["global"];
 
 // parse the header/footer using uglify
@@ -74,48 +79,43 @@ if(program.list) {
 	process.exit(0);
 }
 
+// will store the jessie functions and which id
+// e.g. "attachListener": 1
 var requestedFunctions = {};
 
-if(program.all) {
-	Object.keys(functions).forEach(function(f){
-		requestedFunctions[f] = range(1, functions[f].renditions.length);
-	});
-} else {
 // if no args are used, output the help
-	if(program.args.length === 0) {
-		process.stdout.write(program.helpInformation());
-		program.emit('--help');
-		process.exit(0);
+if(program.args.length === 0) {
+	process.stdout.write(program.helpInformation());
+	program.emit('--help');
+	process.exit(0);
+}
+
+// parse the args to get a map of functions that we need to output
+program.args.forEach(function(arg){
+	// each argument can specify the renditions that are required
+	// by separating them with colons
+	arg = arg.split(":");
+
+	// first part is the function name
+	var functionName = arg[0];
+
+	// second part is the renditionId (1 or 2 or 3 etc)
+	var renditionId = arg[1];
+
+	if(!renditionId) {
+		throw new Error("You must specify a particular rendition e.g. "+functionName+":1");
 	}
 
-	// parse the args to get a map of functions that we need to output
-	program.args.forEach(function(v){
-		// each argument can specify the renditions that are required
-		// by separating them with colons
-		v = v.split(":");
+	if(arg.length > 2) {
+		throw new Error("Only one rendition allowed");
+	}
 
-		// first part is the function name
-		var functionName = v[0];
-
-		//var renditionNumbersArray = v.splice(1);
-
-		var renditionId = v[1];
-
-		if(!renditionId) {
-			throw new Error("You must specify a particular rendition e.g. "+functionName+":1");
-		}
-
-		if(v.length > 2) {
-			throw new Error("Only one rendition allowed");
-		}
-
-		requestedFunctions[functionName] = parseInt(renditionId, 10);
-		
-		if(!functions[functionName]) {
-			throw new Error("Could not find function: " + functionName);
-		}
-	});
-}
+	requestedFunctions[functionName] = parseInt(renditionId, 10);
+	
+	if(!functions[functionName]) {
+		throw new Error("Could not find function: " + functionName);
+	}
+});
 
 // make sure the requestedFunctions object contains all the Functions
 // and Renditions that are implied by the starting set of functions

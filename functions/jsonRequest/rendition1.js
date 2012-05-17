@@ -1,5 +1,7 @@
 /*global ajax,parseJson */
 
+var jsonRequest;
+
 if(ajax && parseJson) {
 	jsonRequest = function(url, options) {
 
@@ -13,4 +15,4 @@ if(ajax && parseJson) {
 		return ajax(url, options);
 		
 	};
-};
+}

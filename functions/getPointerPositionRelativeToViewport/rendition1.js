@@ -35,7 +35,7 @@ if (html && 'number' == typeof html.scrollLeft && html.clientWidth) {
 		// NOTE: the HTML border "issue" is irrelevant as same offset for
 		//element positions
 
-		return [e.clientX, e.clientY]
+		return [e.clientX, e.clientY];
 	};
 }
 

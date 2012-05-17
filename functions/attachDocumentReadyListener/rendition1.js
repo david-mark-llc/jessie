@@ -1,8 +1,8 @@
 /*global isHostMethod,global */
 
-// Degrades in IE 8- 
-// No frames or other alternate windows 
-// Best used with asset-light documents 
+// Degrades in IE 8-
+// No frames or other alternate windows
+// Best used with asset-light documents
 
 var attachDocumentReadyListener;
 
@@ -20,4 +20,4 @@ if(isHostMethod(global, "addEventListener")) {
 		// Production function starts (and ends) here
 		window.addEventListener('load', fn, false);
 	};
-};
+}
