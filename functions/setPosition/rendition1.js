@@ -1,3 +1,5 @@
+/*global html,isHostObjectProperty */
+
 var setPosition;
 if(html && isHostObjectProperty(html, "style")){
   setPosition = (function(el) {  

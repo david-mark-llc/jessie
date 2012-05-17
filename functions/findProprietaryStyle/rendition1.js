@@ -1,4 +1,4 @@
-/*global findProprietaryStyle:true,html */
+/*global html,isHostObjectProperty */
 
 var findProprietaryStyle;
 if(html && isHostObjectProperty(html, "style")){

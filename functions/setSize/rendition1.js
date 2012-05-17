@@ -1,3 +1,5 @@
+/*global html,isHostObjectProperty */
+
 var setSize;
 if(html && isHostObjectProperty(html, "style")){
   setSize = (function() {
