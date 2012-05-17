@@ -138,14 +138,10 @@ if(!program.noWrap) {
 	buffer.push(header);
 }
 
-// output the var declarations of the functions
-//buffer.push("var " + order.join(", ") + ";\n\n");
-
 // output the actual function contents
-
 order.forEach(function(functionName) {
 	var renditionId = requestedFunctions[functionName];
-	buffer.push(functions[functionName].getContents(renditionId));
+	buffer.push("\n\n"+functions[functionName].getContents(renditionId) + "\n\n");
 });
 
 // output code to export the library to the global scope
@@ -364,8 +360,9 @@ function topologicalSort(graph) {
 function range(start, end)
 {
 	var foo = [];
-	for (var i = start; i <= end; i++)
+	for (var i = start; i <= end; i++) {
 		foo.push(i);
+	}
 	return foo;
 }
 
