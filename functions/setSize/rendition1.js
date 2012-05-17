@@ -1,5 +1,5 @@
 var setSize;
-if(html){
+if(html && isHostObjectProperty(html, "style")){
   setSize = (function() {
     var px = (typeof html.style.top == 'number') ? 0 : 'px';
     return function(el, h, w) {
