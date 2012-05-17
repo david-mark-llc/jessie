@@ -1,4 +1,4 @@
-/*global setScrollPosition:true,isHostMethod,global */
+/*global isHostMethod,global */
 
 var setScrollPosition;
 

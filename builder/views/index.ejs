@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jessie</title>
+	</head>
+	<body>
+		<div id="container">
+			<h1>Jessie:</h1>
+				
+			<form method="get" action="buildresponse/">
+
+				<% for(var i = 0; i < functions.length; i++) { %>
+					<div class="function">
+						<h2><%=functions[i].name%></h2>
+						<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
+							<div>
+								<input type="radio" name="<%=functions[i].name%>" value="">
+								<label><%=functions[i].renditions[j].file%></label>
+							</div>
+						<% } %>
+					</div>
+				<% } %>
+				<input type="submit" value="Download" >
+			</form>
+		</div>
+	</body>
+</html>

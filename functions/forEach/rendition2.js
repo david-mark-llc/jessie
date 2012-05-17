@@ -1,4 +1,4 @@
-/*global forEach:true,canCall */
+/*global canCall */
 //For browsers without native
 
 var forEach;

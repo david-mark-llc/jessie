@@ -1,4 +1,4 @@
-/*global ajax:true,createXhr,xhrSend */
+/*global createXhr,xhrSend */
 
 var ajax;
 

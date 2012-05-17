@@ -1,4 +1,4 @@
-/*global getOuterSize:true,html */
+/*global html */
 
 var getOuterSize;
 

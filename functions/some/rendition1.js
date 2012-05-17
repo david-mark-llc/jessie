@@ -1,5 +1,3 @@
-/*global some:true */
-
 var some;
 
 if(Array.prototype.some) {

@@ -1,4 +1,4 @@
-/*global getOwnerDocument:true,html,isHostObjectProperty*/
+/*global html,isHostObjectProperty*/
 
 var getOwnerDocument;
 

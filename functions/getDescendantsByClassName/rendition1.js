@@ -1,4 +1,4 @@
-/*global getDescendantsByClassName:true,globalDocument,isHostMethod,toArray */
+/*global globalDocument,isHostMethod,toArray */
 
 var getDescendantsByClassName;
 

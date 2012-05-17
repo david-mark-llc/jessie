@@ -1,4 +1,3 @@
-/*global getEventTargetRelated:true */
 //	If you will be using a forked rendition to support IE 8-
 
 var getEventTargetRelated;

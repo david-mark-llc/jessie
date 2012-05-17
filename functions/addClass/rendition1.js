@@ -1,4 +1,4 @@
-/*global addClass:true,html,isHostObjectProperty,isHostMethod */
+/*global html,isHostObjectProperty,isHostMethod */
 
 var addClass;
 

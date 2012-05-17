@@ -1,4 +1,4 @@
-/*global getViewportSize:true,globalDocument,global */
+/*global globalDocument,global */
 // WIP
 var getRoot;
 
@@ -28,10 +28,3 @@ getViewportSize = function(win) {
 	var root = getRoot(win);
 	return [root.clientWidth, root.clientHeight];
 };
-
-
-
-
-
-
-
