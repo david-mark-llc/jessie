@@ -1,5 +1,3 @@
-/*global getElementTagName:true */
-
 var getElementTagName;
 
 getElementTagName = function (el) {

@@ -1,4 +1,4 @@
-/*global getElementPositionStyles:true,html,getElement,isHostObjectProperty */
+/*global html,getElement,isHostObjectProperty */
 // Taken from primer
 
 var getElementPositionStyles;

@@ -1,9 +1,9 @@
-/*global getElement:true,isHostMethod */
+/*global isHostMethod */
 /*
 See: https://groups.google.com/forum/#!starred/comp.lang.javascript/fVp-DWAIGnc
 
 That's the most basic rendition: single document and no allowance for
-crewy markup like this:
+screwy markup like this:
 
 <input name="test">
 <input id="test">

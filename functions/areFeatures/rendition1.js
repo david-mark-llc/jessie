@@ -1,4 +1,4 @@
-/*global areFeatures:true,every,toArray */
+/*global every,toArray */
 
 var areFeatures;
 

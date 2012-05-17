@@ -1,5 +1,3 @@
-/*global getElementParent:true */
-
 var getElementParent;
 
 getElementParent = function(el) {

@@ -1,4 +1,4 @@
-/*global getStyleComputed:true,isHostObjectProperty,globalDocument,isHostMethod */
+/*global isHostObjectProperty,globalDocument,isHostMethod */
 
 // No "float" styles
 // Requires camel-case style names

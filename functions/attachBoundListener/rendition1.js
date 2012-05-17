@@ -1,4 +1,4 @@
-/*global attachBoundListener:true,bind,attachListener */
+/*global bind,attachListener */
 
 var attachBoundListener;
 

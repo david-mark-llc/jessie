@@ -1,3 +1,5 @@
+/*global global,html*/
+
 //So let's finish this off. If you need it to work in IE 9 and
 //virtually every other browser made since the turn of the century:-
 // Works for mouse or touch
@@ -6,9 +8,9 @@ var getPointerPositionRelativeToViewport;
 
 if ('number' == typeof global.pageXOffset) {
 	getPointerPositionRelativeToViewport = function(e) {
-		return [e.pageX - window.pageXOffset, e.pageY -	window.pageYOffset]
+		return [e.pageX - window.pageXOffset, e.pageY -	window.pageYOffset];
 	};
-};
+}
 
 //Now, what if you need IE 6-8 to join in the fun?
 
@@ -17,11 +19,9 @@ if ('number' == typeof global.pageXOffset) {
 
 // Last test is to exclude IE quirks mode and IE 5
 
-if (html
-	&& 'number' == typeof html.scrollLeft 
-	&& html.clientWidth) {
+if (html && 'number' == typeof html.scrollLeft && html.clientWidth) {
 		
-	getScrollPosition = function() {
+	var getScrollPosition = function() {
 		return [document.documentElement.scrollLeft, document.documentElement.scrollTop];
 	};
 
@@ -35,7 +35,7 @@ if (html
 		// NOTE: the HTML border "issue" is irrelevant as same offset for
 		//element positions
 
-		return [e.clientX, e.clientY]
+		return [e.clientX, e.clientY];
 	};
 }
 

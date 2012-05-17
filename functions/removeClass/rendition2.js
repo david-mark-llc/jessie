@@ -1,4 +1,4 @@
-/*global removeClass:true,html */
+/*global html */
 
 var removeClass;
 

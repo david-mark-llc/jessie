@@ -1,4 +1,4 @@
-/*global parseJson:true,global,isHostMethod */
+/*global global,isHostMethod */
 
 var parseJson;
 

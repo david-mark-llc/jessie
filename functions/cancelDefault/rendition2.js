@@ -1,4 +1,4 @@
-/*global cancelDefault:true,isHostMethod,html */
+/*global isHostMethod,html */
 
 var cancelDefault;
 

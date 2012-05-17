@@ -1,4 +1,4 @@
-/*global bindDeferred:true,canCall,bind,global */
+/*global canCall,bind,global */
 
 var bindDeferred;
 

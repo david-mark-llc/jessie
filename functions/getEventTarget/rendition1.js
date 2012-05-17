@@ -1,4 +1,4 @@
-/*global getEventTarget:true,html,isHostMethod */
+/*global html,isHostMethod */
 // Degrades in IE8-
 
 var getEventTarget;

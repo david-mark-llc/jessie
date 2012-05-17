@@ -1,4 +1,4 @@
-/*global detachWindowListener:true,global,isHostMethod */
+/*global global,isHostMethod */
 
 var detachWindowListener;
 

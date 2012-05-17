@@ -1,4 +1,4 @@
-/*global findProprietaryStyle:true,html */
+/*global html */
 
 var findProprietaryStyle;
 

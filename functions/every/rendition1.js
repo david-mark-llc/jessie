@@ -1,5 +1,3 @@
-/*global every:true,forEach */
-
 var every;
 
 if(Array.prototype.every) {

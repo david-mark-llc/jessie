@@ -1,4 +1,4 @@
-/*global createXhr:true,isHostMethod,global */
+/*global isHostMethod,global */
 
 // for legacy eg. IE 5
 

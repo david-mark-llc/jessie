@@ -1,4 +1,4 @@
-/*global getViewportScrollPosition:true,globalDocument */
+/*global globalDocument */
 
 var getViewportScrollPosition;
 

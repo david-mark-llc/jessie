@@ -1,5 +1,3 @@
-/*global inherit:true */
-
 var inherit;
 
 inherit = (function() {

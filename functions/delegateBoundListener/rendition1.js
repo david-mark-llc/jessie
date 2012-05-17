@@ -1,4 +1,4 @@
-/*global delegateBoundListener:true,bind,attachListener,getEventTarget */
+/*global bind,attachListener,getEventTarget */
 
 var delegateBoundListener;
 

@@ -1,4 +1,4 @@
-/*global toArray:true */
+/*global canCall */
 
 var toArray;
 

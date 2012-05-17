@@ -1,4 +1,4 @@
-/*global attachWindowListener:true,global,isHostMethod */
+/*global global,isHostMethod */
 // Works in IE8-
 
 var attachWindowListener;

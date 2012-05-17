@@ -1,4 +1,4 @@
-/*global query:true,globalDocument,isHostMethod,toArray */
+/*global globalDocument,isHostMethod,toArray */
 
 var query;
 

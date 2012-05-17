@@ -1,4 +1,4 @@
-/*global every:true,forEach */
+/*global canCall,forEach */
 
 var every;
 

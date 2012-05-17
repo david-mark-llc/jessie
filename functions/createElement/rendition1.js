@@ -1,4 +1,4 @@
-/*global createElement:true,globalDocument,isHostMethod*/
+/*global globalDocument,isHostMethod*/
 
 var createElement;
 
