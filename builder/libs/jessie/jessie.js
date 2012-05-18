@@ -10,8 +10,9 @@ var Set = require('simplesets').Set;
 var jessie = {};
 
 /*
+* @constructor
 * @functionRoot {String} Path to function folder
-* @fs {Object} File system package object for looking at file system
+* @JessieFunction {Function} Jessie Function Constructor reference
 */
 jessie.FunctionSet = function(functionRoot, JessieFunction) {
 	this.JessieFunction = JessieFunction;
@@ -19,15 +20,18 @@ jessie.FunctionSet = function(functionRoot, JessieFunction) {
 	this.functions = [];
 };
 jessie.FunctionSet.prototype.create = function() {
-	var root = this.functionRoot;
-	var functions = this.functions;
-	var JessieFunction = this.JessieFunction;
-	fs.readdirSync(root).filter(function(f){
-		return fs.statSync(path.join(root, f)).isDirectory();
-	}).forEach(function(f){
-		var jessieFn = new JessieFunction(path.join(root, f), jessie.Rendition);
-		functions.push(jessieFn);
-	});
+	// find fileNames based on directory inside root
+	var fileNames = fs.readdirSync(this.functionRoot).filter(function(fileName){
+		return fs.statSync(path.join(this.functionRoot, fileName)).isDirectory();
+	}.bind(this));
+
+	// create and store a new jessie function in the functions array
+	fileNames.forEach(function(fileName) {
+		var jessieFn = new this.JessieFunction(path.join(this.functionRoot, fileName), jessie.Rendition);
+		this.functions.push(jessieFn);
+	}.bind(this));
+
+	// sort the functions array by function name
 	this.functions.sort(this.sortByName);
 };
 jessie.FunctionSet.prototype.sortByName = function(a, b) {
@@ -44,6 +48,11 @@ jessie.FunctionSet.prototype.getFunctions = function() {
 	return this.functions;
 };
 
+/*
+* @constructor
+* @folder {String} Path to function folder
+* @JessieRendition {Function} Jessie Rendition Constructor reference
+*/
 jessie.Function = function(folder, JessieRendition) {
 	this.folder = folder;
 	this.JessieRendition = JessieRendition;
@@ -81,8 +90,6 @@ jessie.Rendition = function(func, file) {
 	this.file = file;
 	this.name = path.basename(file);
 	this.id = this.name.substring(this.name.length-4, this.name.length-3);
-	
-
 
 	Object.defineProperties(this, {
 		contents: {
@@ -115,7 +122,6 @@ jessie.Rendition = function(func, file) {
 						match[1].split(",").forEach(function(d){
 							this._dependencies.add(d);
 						}.bind(this));
-
 					}
 				}
 				return this._dependencies;
@@ -132,13 +138,13 @@ jessie.Rendition = function(func, file) {
 };
 
 /*
-*	@param functions {Array[{}]} An array of jessie.Function objects
+* @param functions {Array[{}]} An array of jessie.Function objects
 */
 jessie.Builder = function(functions) {
 	this.functions = functions;
 };
 /*
-*	@param requestedFunctions {Array[{functionName: "", renditionId: 1}]} An array of requested function objects
+* @param requestedFunctions {Array[{functionName: "", renditionId: 1}]} An array of requested function objects
 * @return The javascript contents for Jessie
 */
 jessie.Builder.prototype.getContents = function(requestedFunctions) {
