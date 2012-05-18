@@ -15,6 +15,8 @@ app.set('view options', {layout:false});
 app.use(express.static(__dirname + '/public'));
 app.listen(1337);
 
+console.log("do work son")
+
 // create functionSet
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();

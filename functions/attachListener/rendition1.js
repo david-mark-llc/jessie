@@ -1,6 +1,8 @@
 /*global html,isHostMethod */
-// Degrades in IE 8-
-
+/*
+Description:
+Relies on W3C compliant addEventListener which degrades in IE8-
+*/
 var attachListener;
 
 if(html && isHostMethod(html, 'addEventListener')) {

@@ -76,6 +76,8 @@ jessie.Rendition = function(func, file) {
 	this.name = path.basename(file);
 	this.id = this.name.substring(this.name.length-4, this.name.length-3);
 	
+
+
 	Object.defineProperties(this, {
 		contents: {
 			get: function(){
@@ -85,6 +87,19 @@ jessie.Rendition = function(func, file) {
 				return this._contents;
 			}.bind(this)
 		},
+
+		description: {
+			get: function() {
+				var description = "";
+				var re = /^\s*Description:\s*([^*]+)\*\/$/gm;
+				var matches = re.exec(this.contents);
+				if(matches && matches.length > 1) {
+					description = matches[1].trim();
+				}
+				return description;
+			}
+		},
+
 		dependencies: {
 			get: function(){
 				if(!this._dependencies) {
@@ -107,6 +122,7 @@ jessie.Rendition = function(func, file) {
 		var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
 		return contents.join("\n");
 	}.bind(this);
+
 };
 
 /*

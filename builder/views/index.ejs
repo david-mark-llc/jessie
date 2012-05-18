@@ -18,10 +18,10 @@
 							<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
 								<div class="rendition">
 									<input id="<%=functions[i].name+functions[i].renditions[j].id%>" type="radio" name="<%=functions[i].name%>" value="">
-									<label for="<%=functions[i].name+functions[i].renditions[j].id%>"><%=functions[i].renditions[j].name%></label>
-
+									<label for="<%=functions[i].name+functions[i].renditions[j].id%>"><%=functions[i].renditions[j].name%> : <%=functions[i].renditions[j].description%></label>
+									<!--
 									<pre><code><%=functions[i].renditions[j].getContents()%></code></pre>
-
+									-->
 								</div>
 							<% } %>
 						</div>

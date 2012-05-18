@@ -1,5 +1,8 @@
 /*global html,isHostMethod */
-// Works in IE 8-
+/*
+Description:
+Relies on Microsoft's attachEvent implementation for IE8-
+*/
 
 var attachListener;
 

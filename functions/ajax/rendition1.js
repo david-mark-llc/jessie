@@ -1,5 +1,10 @@
 /*global createXhr,xhrSend */
 
+/*
+Description:
+Relies on createXhr and xhrSend being defined.
+*/
+
 var ajax;
 
 if(createXhr && xhrSend) {
