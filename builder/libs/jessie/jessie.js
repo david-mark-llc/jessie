@@ -25,11 +25,7 @@ jessie.FunctionSet.prototype.create = function() {
 	fs.readdirSync(root).filter(function(f){
 		return fs.statSync(path.join(root, f)).isDirectory();
 	}).forEach(function(f){
-
 		var jessieFn = new JessieFunction(path.join(root, f), jessie.Rendition);
-
-		//console.log(jessieFn);
-
 		functions.push(jessieFn);
 	});
 	this.functions.sort(this.sortByName);
@@ -52,11 +48,8 @@ jessie.Function = function(folder, JessieRendition) {
 	this.folder = folder;
 	this.JessieRendition = JessieRendition;
 	this.name = path.basename(folder);
-	this.renditions = fs.readdirSync(folder).sort().filter(function(f){
-		return f.indexOf(".js") === f.length - 3;
-	}).map(function(f){
-		return new JessieRendition(this, path.join(folder, f));
-	}.bind(this));
+
+	this.renditions = this.createRenditions();
 	
 	this.getDependencies = function(renditionId){
 		var dependencies = new Set();
@@ -68,6 +61,19 @@ jessie.Function = function(folder, JessieRendition) {
 		var contents = this.renditions[renditionId-1].getContents();
 		return contents;
 	};
+};
+jessie.Function.prototype.createRenditions = function() {
+	var functionInstance = this;
+	var files = fs.readdirSync(this.folder).sort();
+	// makes sure only reading .js files
+	files = files.filter(function(file) {
+		return file.indexOf(".js") === file.length - 3;
+	}.bind(this));
+	files = files.map(function(file) {
+		var filePath = path.join(this.folder, file);
+		return new this.JessieRendition(functionInstance, filePath);
+	}.bind(this));
+	return files;
 };
 
 jessie.Rendition = function(func, file) {
