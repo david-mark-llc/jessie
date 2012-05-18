@@ -1,11 +1,14 @@
 /*jslint node:true, strict:false */
 var path = require('path');
 var fs = require('fs');
-var app = require('express').createServer();
+var express = require('express');
+var app = express.createServer();
 var Set = require('simplesets').Set;
+//var program = require('../bin/jessie');
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('view options', {layout:false});
+app.use(express.static(__dirname + '/public'));
 app.listen(1337);
 
 var JessieFunction = function(folder) {
@@ -77,10 +80,26 @@ fs.readdirSync('../functions/').filter(function(f){
 	functions.push(new JessieFunction(path.join('../functions/', f)));
 });
 
+functions = functions.sort(nameSorter);
+
+function nameSorter(a, b) {
+	var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+	if(nameA < nameB) {
+		return -1;
+	}
+	if(nameA > nameB) {
+		return 1;
+	}
+	return 0;
+}
+
 app.get('/', function(req, res){
 	res.render('index.ejs', { functions: functions });
 });
 
 app.get('/buildresponse', function(req, res){
+
+	var requestJessieFunctions = req.query;
+
 	res.render('builderresponse.ejs', { functions: functions });
 });

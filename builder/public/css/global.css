@@ -1,0 +1,48 @@
+body, h1, h2 {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: arial;
+}
+
+#container {
+
+}
+
+h1 {
+	color: #444;
+	padding: 10px;
+	font-size: 20px;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #b0d7f4;
+}
+
+#builder {
+
+}
+
+#builder .function {
+	border-bottom: 1px solid #b0d7f4;
+	padding: 10px;
+	background-color: #d1ebff;
+}
+
+#builder .function h2 {
+	font-size: 16px;
+	color: #1c91ea;
+	margin-bottom: 10px;
+}
+
+#builder .actions {
+	padding: 10px;
+	background-color: #f5f5f5;
+}
+
+#builder .actions input {
+	margin: 0 auto;
+	display: block;
+	width: 200px;
+	padding: 10px 20px;
+}
