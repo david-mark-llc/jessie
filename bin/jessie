@@ -263,12 +263,9 @@ function expandDependencies(glob, functions, required){
 					throw new Error("Could not find function: " + d);
 				}
 				if(functions[d].renditions.length > 1) {
-					if(program.allRenditions) {
-						required[d] = range(1, functions[d].renditions.length);
-					} else {
-						throw new Error(d+" is an implied dependency, but requires the rendition to be specified!");
-					}
+					throw new Error(d+" is an implied dependency, but requires the rendition to be specified!");
 				} else {
+					// choose dependency rendition automatic - not sure if right thing right now!
 					required[d] = [1];
 				}
 				deps.add(d);
@@ -358,8 +355,7 @@ function topologicalSort(graph) {
 	return processed;
 }
 
-function range(start, end)
-{
+function range(start, end) {
 	var foo = [];
 	for (var i = start; i <= end; i++) {
 		foo.push(i);
