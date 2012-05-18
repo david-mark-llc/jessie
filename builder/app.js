@@ -23,5 +23,5 @@ app.get('/', function(req, res){
 
 app.get('/buildresponse', function(req, res){
 	var requestJessieFunctions = req.query;
-	res.render('builderresponse.ejs', { functions: functionSet.getFunctions() });
+	res.render('builderresponse.ejs', { functions: functionSet.getFunctions(), query: requestJessieFunctions });
 });
