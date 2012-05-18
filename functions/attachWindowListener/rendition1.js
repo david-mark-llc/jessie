@@ -1,8 +1,10 @@
 /*global global,isHostMethod */
-// Degrades in IE 8-
-// Also degrades in some older browsers that lack this method on
-// window objects
-// No frames
+
+/*
+Description:
+Relies on window.addEventListener which degrades in IE8- and 
+older browsers that lack this method. No frames.
+*/
 
 var attachWindowListener;
 

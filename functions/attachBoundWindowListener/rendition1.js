@@ -1,5 +1,9 @@
 /*global bind,attachWindowListener */
 
+/*
+Description:
+Relies on bind and attachWindowListener
+*/
 var attachBoundWindowListener;
 
 if(attachWindowListener && bind) {

@@ -1,5 +1,9 @@
 /*global bind,attachListener */
 
+/*
+Description:
+Relies on bind and attachListener
+*/
 var attachBoundListener;
 
 if(bind && attachListener) {

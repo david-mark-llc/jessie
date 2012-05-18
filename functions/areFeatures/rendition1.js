@@ -1,7 +1,13 @@
 /*global every,toArray */
 
+/*
+Description:
+Relies on every and toArray
+*/
 var areFeatures;
 
-areFeatures = function() {
-	return every(toArray(arguments), function(v){ return v; });
-};
+if(every && toArray) {
+	areFeatures = function() {
+		return every(toArray(arguments), function(v){ return v; });
+	};
+}
