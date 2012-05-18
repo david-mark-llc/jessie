@@ -16,9 +16,12 @@
 						<div class="function">
 							<h2><%=functions[i].name%></h2>
 							<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
-								<div>
-									<input type="radio" name="<%=functions[i].name%>" value="">
-									<label><%=functions[i].renditions[j].file%></label>
+								<div class="rendition">
+									<input id="<%=functions[i].name+functions[i].renditions[j].id%>" type="radio" name="<%=functions[i].name%>" value="">
+									<label for="<%=functions[i].name+functions[i].renditions[j].id%>"><%=functions[i].renditions[j].name%></label>
+
+									<pre><code><%=functions[i].renditions[j].getContents()%></code></pre>
+
 								</div>
 							<% } %>
 						</div>
