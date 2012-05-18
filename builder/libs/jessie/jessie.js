@@ -10,7 +10,7 @@ var Set = require('simplesets').Set;
 var jessie = {};
 
 /*
-*	@functionRoot {String} Path to function folder
+* @functionRoot {String} Path to function folder
 * @fs {Object} File system package object for looking at file system
 */
 jessie.FunctionSet = function(functionRoot, JessieFunction) {
