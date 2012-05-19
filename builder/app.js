@@ -1,15 +1,21 @@
-/*jslint node:true, strict:false */
-
 // dependencies
 var express = require('express');
-var app = express.createServer();
+var querystring = require('querystring');
 var jessie = require('./libs/jessie/jessie.js').jessie;
 
 // setup express
+var app = express.createServer();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('view options', {layout:false});
-app.use(express.static(__dirname + '/public'));
+
+app.configure(function(){
+	app.use(express.static(__dirname + '/public'));
+    app.use(express.methodOverride());
+    app.use(express.bodyParser());
+    //app.use(app.router);
+});
+
 app.listen(1337);
 
 // create functionSet
@@ -31,12 +37,13 @@ var mockRequestedFunctions = [{
 
 builder.getContents(mockRequestedFunctions);
 
-// routes
+// form
 app.get('/', function(req, res){
 	res.render('index.ejs', { functions: functionSet.getFunctions() });
 });
 
-app.get('/buildresponse', function(req, res){
-	var requestJessieFunctions = req.query;
-	res.render('builderresponse.ejs', { functions: functionSet.getFunctions(), query: requestJessieFunctions });
+// response
+app.get('/build/', function(req, res){
+	var qs = querystring.stringify(req.query);
+	res.render('builderresponse.ejs', { query: qs });
 });

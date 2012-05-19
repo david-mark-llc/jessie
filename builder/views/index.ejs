@@ -10,14 +10,14 @@
 			
 			<div id="builder">
 
-				<form method="get" action="buildresponse/">
+				<form method="get" action="/build/">
 
 					<% for(var i = 0; i < functions.length; i++) { %>
 						<div class="function">
 							<h2><%=functions[i].name%></h2>
 							<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
 								<div class="rendition">
-									<input id="<%=functions[i].name+functions[i].renditions[j].id%>" type="radio" name="<%=functions[i].name%>" value="">
+									<input id="<%=functions[i].name+functions[i].renditions[j].id%>" type="radio" name="<%=functions[i].name%>" value="<%=functions[i].renditions[j].id%>">
 									<label for="<%=functions[i].name+functions[i].renditions[j].id%>"><%=functions[i].renditions[j].id%> : <%=functions[i].renditions[j].description%></label>
 									<!--
 									<pre><code><%=functions[i].renditions[j].getContents()%></code></pre>
