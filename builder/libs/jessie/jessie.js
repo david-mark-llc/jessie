@@ -143,12 +143,49 @@ jessie.Rendition = function(func, file) {
 jessie.Builder = function(functions) {
 	this.functions = functions;
 };
+
+jessie.Builder.prototype.setGlobalVariables = function() {
+
+};
+
+jessie.Builder.prototype.setHeader = function() {
+
+};
+
+jessie.Builder.prototype.setFooter = function() {
+
+};
+
+jessie.Builder.prototype.createExportDeclaration = function() {
+
+};
+
 /*
 * @param requestedFunctions {Array[{functionName: "", renditionId: 1}]} An array of requested function objects
 * @return The javascript contents for Jessie
 */
 jessie.Builder.prototype.getContents = function(requestedFunctions) {
+	var output = '';
+	requestedFunctions.forEach(function(func) {
+		var rendition = this.getRendition(func.functionName, func.renditionId);
+		var dependencies = rendition.dependencies;
+		output += "\n\n" + rendition.getContents(func.functionName, func.renditionId) + "\n\n";
+	}.bind(this));
+	return output;
+};
+
+jessie.Builder.prototype.requestedFunctionsContainsDependency = function(dependencyFunctionName, rendtionId) {
 
 };
 
-exports.jessie = jessie;
+jessie.Builder.prototype.getRendition = function(functionName, renditionId) {
+	var rendition;
+	this.functions.forEach(function(func) {
+		if(func.name === functionName) {
+			rendition = func.renditions[renditionId-1];
+		}
+	}.bind(this));
+	return rendition;
+};
+
+module.exports.jessie = jessie;

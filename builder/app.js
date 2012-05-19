@@ -16,6 +16,21 @@ app.listen(1337);
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();
 
+var builder = new jessie.Builder(functionSet.getFunctions());
+
+var mockRequestedFunctions = [{
+	functionName: "addClass",
+	renditionId: 1
+},{
+	functionName: "attachListener",
+	renditionId: 1
+},{
+	functionName: "attachBoundListener",
+	renditionId: 1
+}];
+
+builder.getContents(mockRequestedFunctions);
+
 // routes
 app.get('/', function(req, res){
 	res.render('index.ejs', { functions: functionSet.getFunctions() });

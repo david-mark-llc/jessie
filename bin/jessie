@@ -10,13 +10,16 @@ var program = require('commander'),
 	jsp = require("uglify-js").parser,
 	pro = require("uglify-js").uglify;
 
+var jessie = require('../builder/libs/jessie/jessie.js').jessie;
+
+var JessieFunction = jessie.Function;
+var JessieRendition = jessie.Rendition;
+
 program
 	.version('0.0.1')
 	.usage('[options] <functions ...>')
 	.option('-l, --list', 'Print a list of available functions')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
-	//.option('-a, --all', 'Include all Functions and Renditions')
-	//.option('--all-renditions', 'Include all renditions of a function if not specified explicitly')
 	.option('-u, --uglify', 'Minify the output using UglifyJS')
 	.option('--mangle', 'Mangle the generated output via UglifyJS')
 	.option('--beautify', 'Output beautified JS')
@@ -64,7 +67,7 @@ var functions = {};
 fs.readdirSync(program.root).filter(function(f){
 	return fs.statSync(path.join(program.root, f)).isDirectory();
 }).forEach(function(f){
-	f = new JessieFunction(path.join(program.root, f));
+	f = new JessieFunction(path.join(program.root, f), JessieRendition);
 	functions[f.name] = f;
 });
 
@@ -138,10 +141,13 @@ if(!program.noWrap) {
 	buffer.push(header);
 }
 
+
+
 // output the actual function contents
 order.forEach(function(functionName) {
 	var renditionId = requestedFunctions[functionName];
-	buffer.push("\n\n"+functions[functionName].getContents(renditionId) + "\n\n");
+	
+	buffer.push("\n\n"+functions[functionName].getContentsForRendition(renditionId) + "\n\n");
 });
 
 // output code to export the library to the global scope
@@ -183,75 +189,6 @@ if(program.output) {
 
 
 // fin.
-
-
-function Rendition(func, file) {
-	this.func = func;
-	this.file = file;
-	
-	Object.defineProperties(this, {
-		contents: {
-			get: function(){
-				if(!this._contents) {
-					this._contents = fs.readFileSync(this.file, 'utf8');
-				}
-				return this._contents;
-			}.bind(this)
-		},
-		dependencies: {
-			get: function(){
-				if(!this._dependencies) {
-					this._dependencies = new Set();
-					var match, re = /\/\*global\s(\S*)\s*\*\//g;
-					while((match = re.exec(this.contents))) {
-						match[1].split(",").forEach(function(d){
-							this._dependencies.add(d);
-						}.bind(this));
-
-					}
-				}
-				return this._dependencies;
-			}.bind(this)
-		}
-	});
-
-	this.getContents = function() {
-		// remove the /*global / declarations
-		var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
-		return contents.join("\n");
-	}.bind(this);
-}
-
-
-function JessieFunction(folder){
-	this.folder = folder;
-	this.name = path.basename(folder);
-
-	this.renditions = fs.readdirSync(folder).sort().filter(function(f){
-		return f.indexOf(".js") === f.length - 3;
-	}).map(function(f){
-
-		return new Rendition(this, path.join(folder, f));
-	}.bind(this));
-	
-	this.getDependencies = function(renditionId){
-		var dependencies = new Set();
-			dependencies = dependencies.union(this.renditions[renditionId-1].dependencies);
-
-		return dependencies;
-	}.bind(this);
-
-	/*
-	 * @param renditionsIds {array} The array of rendition ids as strings
-	 * @returns The contents of the rendition
-	 */
-	this.getContents = function(renditionId) {
-		var contents = this.renditions[renditionId-1].getContents();
-
-		return contents;
-	};
-}
-
 
 function expandDependencies(glob, functions, required){
 	var dep, deps = new Set(Object.keys(required));
