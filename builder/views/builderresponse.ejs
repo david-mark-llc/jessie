@@ -8,7 +8,11 @@
 		<div id="container">
 			<div id="builder">
 				<h1>Graham your the man, do work son</h1>
-				<p><%=query%></p>
+				<% if (errors) { %>
+					<% for(var i = 0; i < errors.length; i++) { %>
+						<p><%=errors[i].functionName%> depends on <%=errors[i].dependency%>. Please choose a rendition</p>
+					<% } %>
+				<% } %>
 			</div>
 		</div>
 	</body>

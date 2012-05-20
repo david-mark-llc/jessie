@@ -359,7 +359,7 @@ jessie.Builder.prototype.expandDependencies = function() {
 					this.headerContainsDependency(dependency)) {
 				}
 				else {
-					errors.push(dependency);
+					errors.push({functionName: func.name, dependency: dependency});
 				}
 			}
 		}.bind(this));

@@ -36,11 +36,6 @@ var mockRequestedFunctions = [{
 	renditionId: 2
 }];
 
-var builder = new jessie.Builder(functionSet, mockRequestedFunctions, {
-	headerPath: '../libraries/header1.inc',
-	footerPath: '../libraries/footer1.inc'
-});
-
 // form
 app.get('/', function(req, res){
 	res.render('index.ejs', { functions: functionSet.getFunctions() });
@@ -49,6 +44,27 @@ app.get('/', function(req, res){
 // response
 app.get('/build/', function(req, res){
 	var qs = querystring.stringify(req.query);
-	buildResponse = builder.build();
-	res.send(new Buffer(buildResponse.output));
+	var requestedFunctions = [];
+	for(var key in req.query) {
+		if(key === 'download') continue;
+		requestedFunctions.push({
+			functionName: key,
+			renditionId: parseInt(req.query[key], 10)
+		});
+	}
+
+	var builder = new jessie.Builder(functionSet, requestedFunctions, {
+		headerPath: '../libraries/header1.inc',
+		footerPath: '../libraries/footer1.inc'
+	});
+	var buildResponse = builder.build();
+
+	if(buildResponse.errors) {
+		res.render('builderresponse.ejs', {errors: buildResponse.errors });
+	}
+	else {
+		res.contentType('text/plain');
+		res.send(buildResponse.output);
+	}
+
 });
