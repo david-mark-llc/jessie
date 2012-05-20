@@ -199,10 +199,33 @@ jessie.Builder.prototype.build = function() {
 	}
 	else {
 		builderResponse.success = true;
+		var order = sortDependencies(this.functions, this.requestedFunctions);
+
+		var jsContents = '';
+
+		jsContents += this.header;
+		order.forEach(function(functionName, i){
+			var func = this.functionSet.getFunctionByName(functionName);
+			var requestedFunc = this.getRequestedFunctionByName(functionName);
+			jsContents += ("\n\n"+func.getContentsForRendition(requestedFunc.renditionId) + "\n\n");
+		}.bind(this));
+
+		jsContents += this.footer;
+		builderResponse.output = jsContents;
 	}
-	var order = sortDependencies(this.functions, this.requestedFunctions);
-	console.log(order);
+
 	return builderResponse;
+};
+
+jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
+	var requestedFunc;
+	for(var i = 0; i < this.requestedFunctions.length; i++) {
+		if(this.requestedFunctions[i].functionName === functionName) {
+			requestedFunc = this.requestedFunctions[i];
+			break;
+		}
+	}
+	return requestedFunc;
 };
 
 function sortDependencies(functions, required) {
@@ -359,17 +382,9 @@ jessie.Builder.prototype.headerContainsDependency = function(dependency) {
 	return this.headerDeclarations.indexOf(dependency) >= 0;
 };
 
-/*
-* @param requestedFunctions {Array[{functionName: "", renditionId: 1}]} An array of requested function objects
-* @return The javascript contents for Jessie
-*/
-jessie.Builder.prototype.getContents = function(requestedFunctions) {
-	var dependencyErrors = this.expandDependencies(this.headerDeclarations, this.functions, requestedFunctions);
-	
-	return;
-
+jessie.Builder.prototype.getContents = function() {
 	var output = '';
-	requestedFunctions.forEach(function(func) {
+	this.requestedFunctions.forEach(function(func) {
 		var rendition = this.getRendition(func.functionName, func.renditionId);
 		//var dependencies = rendition.dependencies;
 		//console.log(dependencies);

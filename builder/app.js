@@ -40,8 +40,6 @@ var builder = new jessie.Builder(functionSet, mockRequestedFunctions, {
 	headerPath: '../libraries/header1.inc',
 	footerPath: '../libraries/footer1.inc'
 });
-var buildResponse = builder.build();
-console.log(buildResponse);
 
 // form
 app.get('/', function(req, res){
@@ -51,5 +49,6 @@ app.get('/', function(req, res){
 // response
 app.get('/build/', function(req, res){
 	var qs = querystring.stringify(req.query);
-	res.render('builderresponse.ejs', { query: qs });
+	buildResponse = builder.build();
+	res.send(new Buffer(buildResponse.output));
 });
