@@ -22,20 +22,26 @@ app.listen(1337);
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();
 
-var builder = new jessie.Builder(functionSet.getFunctions());
-
 var mockRequestedFunctions = [{
 	functionName: "addClass",
 	renditionId: 1
 },{
-	functionName: "attachListener",
-	renditionId: 1
-},{
 	functionName: "attachBoundListener",
 	renditionId: 1
+},{
+	functionName: "bind",
+	renditionId: 1
+},{
+	functionName: "attachListener",
+	renditionId: 2
 }];
 
-builder.getContents(mockRequestedFunctions);
+var builder = new jessie.Builder(functionSet, mockRequestedFunctions, {
+	headerPath: '../libraries/header1.inc',
+	footerPath: '../libraries/footer1.inc'
+});
+var buildResponse = builder.build();
+console.log(buildResponse);
 
 // form
 app.get('/', function(req, res){
