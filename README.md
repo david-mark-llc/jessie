@@ -55,11 +55,11 @@ Options:
 
 Example on Linux
 
-	./jessie -o ~/Desktop/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
+	node jessie -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
 
 Example on Windows:
 
-	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > ../../jessie.js
+	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
 
 ## API documentation
 
