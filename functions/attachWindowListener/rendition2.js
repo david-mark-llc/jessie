@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on window.attachEvent which works in IE8-
+Relies on `window.attachEvent` which works in IE8-
 */
 
 var attachWindowListener;

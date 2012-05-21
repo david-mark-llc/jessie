@@ -2,8 +2,7 @@
 
 /*
 Description:
-Relies on window.addEventListener which degrades in IE8- and 
-older browsers that lack this method. No frames.
+Relies on `window.addEventListener` which degrades in IE8- and older browsers that lack this method. No frames.
 */
 
 var attachWindowListener;

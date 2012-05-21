@@ -1,13 +1,17 @@
+
 // dependencies
 var express = require('express');
 var querystring = require('querystring');
+var md = require('node-markdown').Markdown;
 var jessie = require('./libs/jessie/jessie.js').jessie;
+
+
 
 // setup express
 var app = express.createServer();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.set('view options', {layout:false});
+app.set('view options', {layout:false, md: require("node-markdown").Markdown });
 app.configure(function(){
 	app.use(express.static(__dirname + '/public'));
     app.use(express.methodOverride());

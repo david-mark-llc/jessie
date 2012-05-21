@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on every and toArray
+Relies on `jessie.every` and `jessie.toArray`
 */
 var areFeatures;
 

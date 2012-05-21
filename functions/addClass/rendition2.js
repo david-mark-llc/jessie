@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on the el.className property (class attribute) which has fantastic support
+Relies on the `el.className` property (class attribute) which has fantastic support
 */
 
 var addClass;

@@ -2,7 +2,10 @@
 
 /*
 Description:
-Relies on window.addEventListener which degrades in IE8- and best used with asset-light documents.
+Relies on `window.addEventListener` which degrades in IE8-
+
+Best used with asset-light documents.
+
 Note: No frames or other alternate windows
 */
 

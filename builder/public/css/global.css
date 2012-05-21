@@ -30,23 +30,50 @@ h1 {
 	border-bottom: 1px solid #B0D7F4;
 }
 
-
-
 #builder .function {
 	border-bottom: 1px solid #b0d7f4;
-	padding: 10px;
+	padding: 10px 10px 0px 10px;
 	background-color: #d1ebff;
 }
 
 #builder .function h2 {
 	font-size: 16px;
 	color: #1c91ea;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 #builder .function .rendition {
-
+	overflow: hidden;
+	margin-bottom: 20px;
 }
+
+#builder .function .rendition > p {
+	float: left;
+	font-size: 12px;
+	margin-top: 3px;
+	margin-right: 4px;
+}
+
+#builder .function .rendition input {
+	float: left;
+	margin-right: 10px;
+}
+
+#builder .function .rendition label {
+	float: left;
+	width: 70%;
+}
+
+#builder .function .rendition label p {
+	font-size: 12px;
+	margin-top: 3px;
+	margin-bottom: 10px;
+}
+
+#builder .function .rendition label p code {
+	color: #1C91EA;
+}
+
 
 #builder .function .rendition pre {
 	width: 80%;

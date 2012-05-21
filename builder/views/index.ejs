@@ -6,14 +6,15 @@
 	</head>
 	<body>
 		<div id="container">
+<!--
+			<%- md("\n\n\`woop` yeah baby #123 #12312312") -%>
+-->
 			<h1>Jessie - Build your own Jessie</h1>
 			
 			<div id="builder"> 
 				<% if (error) { %>
-					<div class="errors">
-						
+					<div class="errors">						
 						<p>You must specify at least one function to build.</p>
-					
 					</div>
 				<% } %>
 				<form method="get" action="build/">
@@ -23,8 +24,12 @@
 							<h2><%=functions[i].name%></h2>
 							<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
 								<div class="rendition">
+									<p><%=functions[i].renditions[j].id%></p>
 									<input id="<%=functions[i].name+functions[i].renditions[j].id%>" type="radio" name="<%=functions[i].name%>" value="<%=functions[i].renditions[j].id%>">
-									<label for="<%=functions[i].name+functions[i].renditions[j].id%>"><%=functions[i].renditions[j].id%> : <%=functions[i].renditions[j].description%></label>
+									<label for="<%=functions[i].name+functions[i].renditions[j].id%>">
+								
+										<%- md(functions[i].renditions[j].description) -%>
+									</label>
 									<!--
 									<pre><code><%=functions[i].renditions[j].getContents()%></code></pre>
 									-->

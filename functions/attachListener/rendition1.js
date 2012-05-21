@@ -1,7 +1,7 @@
 /*global html,isHostMethod */
 /*
 Description:
-Relies on W3C compliant addEventListener which degrades in IE8-
+Relies on W3C `el.addEventListener` which degrades in IE8-
 */
 var attachListener;
 

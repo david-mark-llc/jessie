@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on createXhr and xhrSend being defined.
+Relies on `jessie.createXhr` and `jessie.xhrSend`
 */
 
 var ajax;

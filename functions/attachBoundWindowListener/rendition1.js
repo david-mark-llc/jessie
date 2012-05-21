@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on bind and attachWindowListener
+Relies on `jessie.bind` and `jessie.attachWindowListener`
 */
 var attachBoundWindowListener;
 

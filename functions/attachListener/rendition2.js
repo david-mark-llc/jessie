@@ -1,7 +1,7 @@
 /*global html,isHostMethod */
 /*
 Description:
-Relies on Microsoft's attachEvent implementation for IE8-
+Relies on Microsoft's `el.attachEvent` implementation for IE8-
 */
 
 var attachListener;

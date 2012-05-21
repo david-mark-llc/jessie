@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on bind and attachListener
+Relies on `jessie.bind` and `jessie.attachListener`
 */
 var attachBoundListener;
 

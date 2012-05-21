@@ -1,5 +1,10 @@
 /*global detachListener */
 
+/*
+Description:
+Relies on jessie.detachListener
+*/
+
 var undelegateListener;
 
 if(detachListener) {
