@@ -1,5 +1,10 @@
 /*global canCall,bind,global */
 
+/*
+Description:
+Relies on Function.prototype.apply.
+*/
+
 var bindDeferred;
 
 if(canCall) {

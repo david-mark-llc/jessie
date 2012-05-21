@@ -1,5 +1,9 @@
 /*global canCall */
 
+/*
+Description:
+Relies on Function.prototype.apply and Array.prototype.slice which provides greater browser coverage
+*/
 var bind;
 
 if(canCall && Array.prototype.slice) {

@@ -1,5 +1,10 @@
 /*global query,delegateBoundListener,isDescendant,isInQuery */
 
+/*
+Description:
+Relies on delegateBoundListener, query, isInQuery and isDecendant
+*/
+
 var delegateBoundQueryListener;
 
 if(delegateBoundListener && query && isDescendant) {
