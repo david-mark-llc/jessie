@@ -8,8 +8,14 @@
 		<div id="container">
 			<h1>Jessie - Build your own Jessie</h1>
 			
-			<div id="builder">
-
+			<div id="builder"> 
+				<% if (error) { %>
+					<div class="errors">
+						
+						<p>You must specify at least one function to build.</p>
+					
+					</div>
+				<% } %>
 				<form method="get" action="build/">
 
 					<% for(var i = 0; i < functions.length; i++) { %>

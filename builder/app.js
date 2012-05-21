@@ -21,7 +21,7 @@ app.listen(1337);
 // create functionSet
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();
-
+/*
 var mockRequestedFunctions = [{
 	functionName: "addClass",
 	renditionId: 1
@@ -34,11 +34,11 @@ var mockRequestedFunctions = [{
 },{
 	functionName: "attachListener",
 	renditionId: 2
-}];
+}];*/
 
 // form
 app.get('/', function(req, res){
-	res.render('index.ejs', { functions: functionSet.getFunctions() });
+	res.render('index.ejs', { functions: functionSet.getFunctions(), error: req.query.error });
 });
 
 // response

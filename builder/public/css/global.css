@@ -1,4 +1,4 @@
-body, h1, h2 {
+body, h1, h2, p {
 	margin: 0;
 	padding: 0;
 }
@@ -22,6 +22,15 @@ h1 {
 #builder {
 
 }
+
+#builder .errors {
+	padding: 10px;
+	color: red;
+	background-color: #ffe0e0;
+	border-bottom: 1px solid #B0D7F4;
+}
+
+
 
 #builder .function {
 	border-bottom: 1px solid #b0d7f4;
