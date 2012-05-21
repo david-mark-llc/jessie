@@ -23,7 +23,14 @@
 							<p>You must specify at least one function to build.</p>
 						</div>
 					<% } %>
-				
+
+					<div class="options">
+						<h2>Options</h2>
+						<div class="option">
+							<label for="">Namespace (defaults to 'jessie')</label>
+							<input type="text" >
+						</div>
+					</div>				
 
 					<% for(var i = 0; i < functions.length; i++) { %>
 						<div class="function">

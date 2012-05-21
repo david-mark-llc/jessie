@@ -126,13 +126,13 @@ Currently the documentation is very basic and the API could change for the bette
 
 	var descendants = jessie.getDescendantsByTagName(el, "span");
 
-### get ancestors by tag name
+### get ancestor by tag name
 
-	var ancestors = jessie.getAncestorsByTagName(el, "span");
+	var ancestor = jessie.getAncestorByTagName(el, "span");
 
-### get ancestors by class name
+### get ancestor by class name
 
-	var ancestors = jessie.getAncestorsByClassNameName(el, "className");
+	var ancestor = jessie.getAncestorByClassNameName(el, "className");
 
 ### get elements by selector
 

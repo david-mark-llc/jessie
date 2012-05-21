@@ -1,5 +1,10 @@
 /*global createXhr */
 
+/*
+Description:
+Relies on `jessie.createXhr`
+*/
+
 var xhrSend;
 
 // if you can't create one then you certainly can't send one

@@ -4,6 +4,11 @@
 // expects a delegate listener which was returned
 // when it was attached
 
+/*
+Description:
+Relies on `jessie.undelegateListener`
+*/
+
 var undelegateQueryListener;
 
 if(undelegateListener) {
