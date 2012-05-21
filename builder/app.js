@@ -53,17 +53,23 @@ app.get('/build/', function(req, res){
 		});
 	}
 
+	if(requestedFunctions.length === 0) {
+		res.redirect('/?error=true');
+	}
+
 	var builder = new jessie.Builder(functionSet, requestedFunctions, {
 		headerPath: '../libraries/header1.inc',
 		footerPath: '../libraries/footer1.inc'
 	});
+
 	var buildResponse = builder.build();
 
 	if(buildResponse.errors) {
-		res.render('builderresponse.ejs', {errors: buildResponse.errors });
+		res.render('builderresponse.ejs', {errors: buildResponse.errors, query: qs });
 	}
 	else {
-		res.contentType('text/plain');
+		res.header('Content-Disposition', 'attachment; filename="jessie.js');
+		res.contentType('text/javascript');
 		res.send(buildResponse.output);
 	}
 

@@ -49,6 +49,9 @@ h1 {
 
 #builder .actions {
 	padding: 10px;
+	top: 0;
+	right: 0;
+	position: fixed;
 	background-color: #f5f5f5;
 }
 
@@ -56,5 +59,13 @@ h1 {
 	margin: 0 auto;
 	display: block;
 	width: 200px;
-	padding: 10px 20px;
+}
+
+#builder .errors {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#builder .errors .functionName {
+
 }
