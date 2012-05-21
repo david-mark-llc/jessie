@@ -1,5 +1,10 @@
 /*global delegateListener,getElementTagName */
 
+/*
+Description:
+Relies on delegateListener amd getElementTagName
+*/
+
 var delegateTagNameListener;
 
 if(delegateListener && getElementTagName) {

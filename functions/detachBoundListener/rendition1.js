@@ -1,4 +1,10 @@
 /*global detachListener */
+
+/*
+Description:
+Relies on detachListener
+*/
+
 // could have simply used detachListener
 // but this reinforces  that this function
 // expects a bound listener

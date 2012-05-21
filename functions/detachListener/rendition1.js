@@ -1,5 +1,9 @@
 /*global html,isHostMethod */
-// Degrades in IE 8-
+
+/*
+Description:
+Relies on el.removeEventListener and degrades in IE8-
+*/
 
 var detachListener;
 

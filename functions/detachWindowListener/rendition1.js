@@ -1,5 +1,10 @@
 /*global global,isHostMethod */
 
+/*
+Description:
+Relies on window.removeEventListener and degrades in IE8-
+*/
+
 var detachWindowListener;
 
 if(global && isHostMethod(global, 'removeEventListener')) {

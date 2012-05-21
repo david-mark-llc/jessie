@@ -1,5 +1,10 @@
 /*global attachListener,getEventTarget */
 
+/*
+Description:
+Relies on attachListener and getEventTarget
+*/
+
 var delegateListener;
 
 if(attachListener && getEventTarget) {

@@ -1,5 +1,9 @@
 /*global canCall */
-//For browsers without native
+
+/*
+Description:
+Relies on Function.prototype.call for browsers without native forEach
+*/
 
 var forEach;
 

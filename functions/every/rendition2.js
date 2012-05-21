@@ -1,5 +1,10 @@
 /*global canCall,forEach */
 
+/*
+Description:
+Relies on Function.prototype.call and forEach which will have greater support
+*/
+
 var every;
 
 if(canCall && forEach) {
