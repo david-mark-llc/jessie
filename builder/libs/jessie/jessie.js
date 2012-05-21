@@ -210,6 +210,8 @@ jessie.Builder.prototype.build = function() {
 			jsContents += ("\n\n"+func.getContentsForRendition(requestedFunc.renditionId) + "\n\n");
 		}.bind(this));
 
+		jsContents += this.createExportDeclaration(order);
+
 		jsContents += this.footer;
 		builderResponse.output = jsContents;
 	}
@@ -335,8 +337,17 @@ function topologicalSort(graph) {
 }
 
 
-jessie.Builder.prototype.createExportDeclaration = function() {
-
+jessie.Builder.prototype.createExportDeclaration = function(order) {
+	var out = '\n\nglobal[\"' + 'jessie' + '\"] = {\n';
+	order.forEach(function(functionName, i){
+		out += '\t';
+		out += '"'+ functionName +'": ';
+		out += functionName;
+		out += (i === order.length-1 ? "" : ",");
+		out += '\n';
+	}.bind(this));
+	out += '};\n';
+	return out;
 };
 
 // this function needs a look
