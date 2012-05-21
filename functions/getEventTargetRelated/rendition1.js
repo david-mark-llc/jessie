@@ -1,6 +1,9 @@
 /*global html,isHostMethod */
 
-//	Degrades in IE8-
+/*
+Description:
+Relies on W3C event model which degrades in IE8-
+*/
 
 var getEventTargetRelated;
 

@@ -1,4 +1,7 @@
-//	If you will be using a forked rendition to support IE 8-
+/*
+Description:
+Rendition for both W3C and MS event model which supports IE- as well.
+*/
 
 var getEventTargetRelated;
 
