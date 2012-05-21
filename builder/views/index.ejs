@@ -6,18 +6,24 @@
 	</head>
 	<body>
 		<div id="container">
-<!--
-			<%- md("\n\n\`woop` yeah baby #123 #12312312") -%>
--->
-			<h1>Jessie - Build your own Jessie</h1>
+
+			
 			
 			<div id="builder"> 
-				<% if (error) { %>
-					<div class="errors">						
-						<p>You must specify at least one function to build.</p>
-					</div>
-				<% } %>
 				<form method="get" action="build/">
+					<div class="header">
+						<h1>Build your own jessie</h1>
+						<div class="actions">
+							<input type="submit" value="Download Your Jessie now" name="download">
+						</div>
+					</div>
+
+					<% if (error) { %>
+						<div class="errors">						
+							<p>You must specify at least one function to build.</p>
+						</div>
+					<% } %>
+				
 
 					<% for(var i = 0; i < functions.length; i++) { %>
 						<div class="function">
@@ -37,9 +43,7 @@
 							<% } %>
 						</div>
 					<% } %>
-					<div class="actions">
-						<input type="submit" value="Download Your Jessie now" name="download">
-					</div>
+					
 				</form>
 			</div>
 		</div>

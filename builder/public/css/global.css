@@ -13,14 +13,27 @@ body {
 
 h1 {
 	color: #444;
-	padding: 10px;
 	font-size: 20px;
-	background-color: #f5f5f5;
-	border-bottom: 1px solid #b0d7f4;
 }
 
 #builder {
+	position: relative;
+	padding-top: 45px;
+}
 
+#builder .header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #b0d7f4;
+	padding: 10px;
+}
+
+#builder .header h1 {
+	float: left;
 }
 
 #builder .errors {
@@ -84,10 +97,7 @@ h1 {
 }
 
 #builder .actions {
-	padding: 10px;
-	top: 0;
-	right: 0;
-	position: fixed;
+	float:right;
 	background-color: #f5f5f5;
 }
 
