@@ -8,33 +8,16 @@ var app = express.createServer();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('view options', {layout:false});
-
 app.configure(function(){
 	app.use(express.static(__dirname + '/public'));
     app.use(express.methodOverride());
     app.use(express.bodyParser());
-    //app.use(app.router);
 });
-
 app.listen(1337);
 
 // create functionSet
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();
-/*
-var mockRequestedFunctions = [{
-	functionName: "addClass",
-	renditionId: 1
-},{
-	functionName: "attachBoundListener",
-	renditionId: 1
-},{
-	functionName: "bind",
-	renditionId: 1
-},{
-	functionName: "attachListener",
-	renditionId: 2
-}];*/
 
 // form
 app.get('/', function(req, res){
