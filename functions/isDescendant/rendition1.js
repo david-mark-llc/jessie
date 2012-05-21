@@ -1,5 +1,10 @@
 /*global html */
 
+/*
+Description:
+Relies on el.parentNode which has very good support
+*/
+
 var isDescendant;
 
 if(html && 'undefined' != typeof html.parentNode) {

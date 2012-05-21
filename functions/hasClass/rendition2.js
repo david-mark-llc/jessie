@@ -1,5 +1,10 @@
 /*global html */
 
+/*
+Description:
+Relies on the el.className property (class attribute) which has very good support
+*/
+
 var hasClass;
 
 if(html && 'string' == typeof html.className) {

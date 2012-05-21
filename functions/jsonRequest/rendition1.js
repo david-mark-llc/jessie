@@ -1,5 +1,10 @@
 /*global ajax,parseJson */
 
+/*
+Description:
+Relies on jessie.ajax and jessie.parseJson
+*/
+
 var jsonRequest;
 
 if(ajax && parseJson) {

@@ -1,5 +1,10 @@
 /*global html */
 
+/*
+Description:
+Relies on the el.className property (class attribute) which has fantastic support
+*/
+
 var removeClass;
 
 if(html && "string" == typeof html.className) {
