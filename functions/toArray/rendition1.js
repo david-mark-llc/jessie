@@ -1,3 +1,8 @@
+/*
+Description:
+Excellent browser support
+*/
+
 var toArray;
 
 toArray = function(a) {

@@ -1,6 +1,11 @@
 /*global forEach */
 var some;
 
+/*
+Description:
+Relies on jessie.forEach and supports older browsers
+*/
+
 if(forEach) {
 	some = function(obj, iterator, context) {
 		var result = false;
