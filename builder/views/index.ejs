@@ -6,21 +6,27 @@
 		<meta name="author" content="Adam Silver">
 		<title>Jessie - Build your own Jessie</title>
 		<link rel='stylesheet' type="text/css" href='css/global.css'>
+		<!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" /><![endif]-->	
 	</head>
 	<body>
 		<div id="container">
 			<div id="builder"> 
-				<form method="get" action="build/">
+				<form method="get" action="/">
 					<div class="header">
 						<h1>Build your own jessie</h1>
 						<div class="actions">
-							<input type="submit" value="Download Your Jessie now" name="download">
+							<input type="submit" value="Download" name="download">
 						</div>
 					</div>
 
-					<% if (error) { %>
-						<div class="errors">						
-							<p>You must specify at least one function to build.</p>
+					<% if (errors) { %>
+						<div class="errors">
+							<div class="errorsInner">
+								<h2>You have errors:</h2>
+								<% for(var i = 0; i < errors.length; i++) { %>
+									<p><%=errors[i]%></p>
+								<% } %>
+							</div>
 						</div>
 					<% } %>
 
@@ -31,7 +37,6 @@
 							<input id="namespace" name="namespace" type="text" >
 						</div>-->
 					</div>				
-
 
 					<table>
 						<thead>
@@ -64,7 +69,7 @@
 												<%}%>
 											>
 										</td>
-										<td>To do</td>
+										<td><%- md(functions[i].renditions[j].support) -%></td>
 										<td><%- md(functions[i].renditions[j].description) -%></td>						
 									</tr>
 								<% } %>		

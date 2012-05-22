@@ -5,6 +5,11 @@ Description:
 Relies on the `el.className` property (class attribute) which has fantastic support
 */
 
+/*
+Support:
+IE6+, Chrome, FireFox
+*/
+
 var addClass;
 
 if (html && "string" === typeof html.className ) {

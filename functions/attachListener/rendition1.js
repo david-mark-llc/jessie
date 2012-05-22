@@ -3,6 +3,12 @@
 Description:
 Relies on W3C `el.addEventListener` which degrades in IE8-
 */
+
+/*
+Support:
+IE8+, Chrome, FireFox
+*/
+
 var attachListener;
 
 if(html && isHostMethod(html, 'addEventListener')) {
