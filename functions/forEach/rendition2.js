@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on Function.prototype.call for browsers without native forEach
+Relies on `Function.prototype.call` for browsers without native forEach
 */
 
 var forEach;

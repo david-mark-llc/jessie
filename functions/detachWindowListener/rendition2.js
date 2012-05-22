@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on window.detachEvent and works in IE8-
+Relies on MS `window.detachEvent` for IE8-
 */
 
 var detachWindowListener;

@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on Function.prototype.apply and Array.prototype.slice which provides greater browser coverage
+Relies on `Function.prototype.apply` and `Array.prototype.slice`
 */
 var bind;
 

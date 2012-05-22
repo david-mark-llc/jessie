@@ -1,6 +1,6 @@
 /*
 Description:
-Rendition for both W3C and MS event model which supports IE- as well.
+Relies on W3C and MS event model.
 */
 
 var getEventTargetRelated;

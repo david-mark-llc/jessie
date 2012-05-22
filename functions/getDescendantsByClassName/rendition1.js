@@ -2,7 +2,7 @@
 
 /*
 Description:
-For newer browsers and relies on document.getElementsByClassName
+Relies on `document.getElementsByClassName`
 */
 
 var getDescendantsByClassName;

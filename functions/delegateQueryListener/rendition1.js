@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on delegateListener, query and isDescendant
+Relies on `jessie.delegateListener`, `jessie.query` and `jessie.isDescendant`
 */
 
 var delegateQueryListener;

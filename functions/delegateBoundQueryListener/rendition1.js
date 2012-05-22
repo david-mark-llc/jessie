@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on delegateBoundListener, query, isInQuery and isDecendant
+Relies on `jessie.delegateBoundListener`, `jessie.query`, `jessie.isInQuery` and `jessie.isDecendant`
 */
 
 var delegateBoundQueryListener;

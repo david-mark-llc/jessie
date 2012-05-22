@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on W3C e.target which degrades in IE8-
+Relies on W3C `e.target` which degrades in IE8-
 */
 
 var getEventTarget;

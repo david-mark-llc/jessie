@@ -3,7 +3,7 @@ var some;
 
 /*
 Description:
-Relies on jessie.forEach and supports older browsers
+Relies on `jessie.forEach`
 */
 
 if(forEach) {

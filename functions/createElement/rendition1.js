@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on document.createElement
+Relies on `document.createElement`
 */
 
 var createElement;

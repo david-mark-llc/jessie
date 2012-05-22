@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on jessie.getElementParent and jessie.getElementTagName
+Relies on `jessie.getElementParent` and `jessie.getElementTagName`
 */
 
 var getAncestorByTagName;

@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on document.querySelectorAll and jessie.toArray and is for newer browsers
+Relies on `document.querySelectorAll` and `jessie.toArray`
 */
 
 var query;

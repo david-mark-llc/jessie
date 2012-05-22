@@ -1,6 +1,6 @@
 /*
 Description:
-Excellent browser support
+Relies on `for`
 */
 
 var toArray;

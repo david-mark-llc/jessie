@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on Function.prototype.apply.
+Relies on `Function.prototype.apply`
 */
 
 var bindDeferred;

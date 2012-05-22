@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on el.innerHTML which degrades in IE3
+Relies on `el.innerHTML` which degrades in IE3
 */
 
 /*

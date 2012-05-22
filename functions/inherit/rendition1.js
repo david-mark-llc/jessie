@@ -2,7 +2,7 @@ var inherit;
 
 /*
 Description:
-Very good support
+Needs documenting
 */
 
 inherit = (function() {

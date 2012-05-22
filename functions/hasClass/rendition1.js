@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on the classList api which is only supported in newer browsers.
+Relies on the `el.classList.contains`
 */
 
 var hasClass;

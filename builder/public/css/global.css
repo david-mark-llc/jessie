@@ -85,6 +85,9 @@ h1 {
 
 #builder .function .rendition label p code {
 	color: #1C91EA;
+	background-color: #bfdaef;
+	padding: 3px 2px 2px 2px;
+	display: inline-block;
 }
 
 

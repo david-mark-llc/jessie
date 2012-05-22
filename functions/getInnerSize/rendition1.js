@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on el.clientWidth/Height and is well supported
+Relies on `el.clientWidth/Height`
 */
 
 var getInnerSize;

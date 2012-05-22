@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on jessie.query
+Relies on `jessie.query`
 */
 
 var isInQuery;

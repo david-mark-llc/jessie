@@ -1,6 +1,6 @@
 /*
 Description:
-For both W3C e.target and MS e.srcElement so well supported.
+For both W3C `e.target` and MS `e.srcElement`
 */
 
 /*

@@ -2,7 +2,7 @@
 
 /*
 Description:
-For browsers without window.JSON.parse
+For browsers without `window.JSON.parse`
 */
 
 var parseJson;

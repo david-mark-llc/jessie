@@ -1,6 +1,6 @@
 /*
 Description:
-Relies on Array.prototype.some for newer browsers
+Relies on `Array.prototype.some` for newer browsers
 */
 
 var some;

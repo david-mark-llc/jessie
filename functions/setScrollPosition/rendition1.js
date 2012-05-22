@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on window.scrollTo
+Relies on `window.scrollTo`
 */
 
 var setScrollPosition;

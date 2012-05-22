@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on attachListener, bind and getEventTarget
+Relies on `jessie.attachListener`, `jessie.bind` and `jessie.getEventTarget`
 */
 
 var delegateBoundListener;

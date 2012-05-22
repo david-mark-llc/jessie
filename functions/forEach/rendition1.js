@@ -1,6 +1,6 @@
 /*
 Description:
-Uses Array.prototype.forEach for newer browsers
+Uses `Array.prototype.forEach`
 */
 
 var forEach;

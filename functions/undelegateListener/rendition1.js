@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on jessie.detachListener
+Relies on `jessie.detachListener`
 */
 
 var undelegateListener;

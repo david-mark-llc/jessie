@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on el.offsetWidth/Height and is well supported
+Relies on `el.offsetWidth/Height`
 */
 
 var getOuterSize;

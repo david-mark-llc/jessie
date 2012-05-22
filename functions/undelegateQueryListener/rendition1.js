@@ -1,12 +1,15 @@
 /*global undelegateListener */
-// could have simply used detachListener
-// but this reinforces  that this function
-// expects a delegate listener which was returned
-// when it was attached
 
 /*
 Description:
 Relies on `jessie.undelegateListener`
+*/
+
+/*
+could have simply used detachListener
+but this reinforces  that this function
+expects a delegate listener which was returned
+when it was attached
 */
 
 var undelegateQueryListener;

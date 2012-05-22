@@ -2,7 +2,7 @@ var getElementParent;
 
 /*
 Description:
-Great support
+Relies on `el.parentNode`
 */
 
 getElementParent = function(el) {

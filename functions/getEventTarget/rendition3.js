@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on MS event model i.e. e.srcElement
+Relies on MS `e.srcElement`
 */
 
 var getEventTarget;

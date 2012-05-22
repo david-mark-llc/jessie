@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on delegateListener amd getElementTagName
+Relies on `jessie.delegateListener` amd `jessie.getElementTagName`
 */
 
 var delegateTagNameListener;

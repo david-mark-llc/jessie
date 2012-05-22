@@ -2,7 +2,7 @@
 
 /*
 Description:
-Basic rendition relies on valid markup particularly in forms with names and ids
+Basic rendition which relies on valid markup i.e. forms with unique names and ids
 */
 
 /*

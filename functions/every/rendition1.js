@@ -2,7 +2,7 @@ var every;
 
 /*
 Description:
-Relies on Array.prototype.every which is a newer feature
+Relies on `Array.prototype.every`
 */
 
 if(Array.prototype.every) {

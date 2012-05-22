@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on Array.prototype.slice for newer browsers
+Relies on `Array.prototype.slice`
 */
 
 var toArray;

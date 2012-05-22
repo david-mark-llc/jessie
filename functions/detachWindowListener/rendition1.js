@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on window.removeEventListener and degrades in IE8-
+Relies on W3C `window.removeEventListener` and degrades in IE8-
 */
 
 var detachWindowListener;

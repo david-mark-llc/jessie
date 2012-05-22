@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on window.XMLHttpRequest which is for newer browsers
+Relies on W3C `window.XMLHttpRequest`
 */
 
 var createXhr;

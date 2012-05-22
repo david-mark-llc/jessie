@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on jessie.ajax and jessie.parseJson
+Relies on `jessie.ajax` and `jessie.parseJson`
 */
 
 var jsonRequest;

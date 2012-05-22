@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on detachListener
+Relies on `jessie.detachListener`
 */
 
 // could have simply used detachListener

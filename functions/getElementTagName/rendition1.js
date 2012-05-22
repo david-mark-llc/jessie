@@ -2,7 +2,7 @@ var getElementTagName;
 
 /*
 Description:
-Great support
+Relies on `el.tagName` or `el.nodeName`
 */
 
 getElementTagName = function (el) {

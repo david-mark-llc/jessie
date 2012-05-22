@@ -2,7 +2,7 @@
 
 /*
 Description:
-For older browsers relying on jessie.getDescendantsByTagName and jessie.hasClass
+Relies on `jessie.getDescendantsByTagName` and `jessie.hasClass`
 */
 
 var getDescendantsByClassName;

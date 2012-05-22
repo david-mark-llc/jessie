@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on className property, jessie.getElementParent, jessie.hasClass
+Relies on `el.className` property, `jessie.getElementParent` and `jessie.hasClass`
 */
 
 var getAncestorByClassName;

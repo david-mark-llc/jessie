@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on el.parentNode which has very good support
+Relies on `el.parentNode` which has very good support
 */
 
 var isDescendant;

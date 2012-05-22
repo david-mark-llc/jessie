@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on el.ownerDocument
+Relies on `el.ownerDocument`
 */
 
 var getOwnerDocument;

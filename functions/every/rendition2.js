@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on Function.prototype.call and forEach which will have greater support
+Relies on `Function.prototype.call` and `jessie.forEach`
 */
 
 var every;

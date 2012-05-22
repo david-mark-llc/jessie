@@ -2,7 +2,8 @@
 
 /*
 Description:
-Relies on window.JSON.parse which is for newer browsers.
+Relies on `window.JSON.parse`.
+
 Note: could also use JSON2 lib to 'polyfill'
 */
 

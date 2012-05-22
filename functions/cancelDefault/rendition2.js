@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on MS event model e.returnValue
+Relies on MS event model `e.returnValue`
 */
 
 var cancelDefault;

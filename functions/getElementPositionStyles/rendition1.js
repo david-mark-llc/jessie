@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on jessie.getElement, el.style and el.offsetLeft and provides great browser support
+Relies on `jessie.getElement`, `el.style` and `el.offsetLeft`
 */
 
 // Taken from primer

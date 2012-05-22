@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on Function.prototype.bind which is a newer feature
+Relies on `unction.prototype.bind`
 */
 var bind;
 

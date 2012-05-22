@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on MS event model which works in IE8-
+Relies on MS `e.srcElement`, `e.fromElement` and `e.toElement` which works in IE8-
 */
 
 var getEventTargetRelated;
