@@ -10,7 +10,7 @@
 	<body>
 		<div id="container">
 			<div id="builder"> 
-				<form method="get" action="build/">
+				<form method="get" action="/">
 					<div class="header">
 						<h1>Build your own jessie</h1>
 						<div class="actions">
@@ -18,9 +18,15 @@
 						</div>
 					</div>
 
-					<% if (error) { %>
-						<div class="errors">						
-							<p>You must specify at least one function to build.</p>
+					<% if (errors) { %>
+						<div class="errors">
+							<p>You have errors:</p>
+
+							<% for(var i = 0; i < errors.length; i++) { %>
+								<p>
+									<%=errors[i]%>
+								</p>
+							<% } %>
 						</div>
 					<% } %>
 

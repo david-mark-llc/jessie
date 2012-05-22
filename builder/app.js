@@ -22,41 +22,70 @@ app.listen(1337);
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();
 
+var excludedQuerystringKeys = ['download'];
+
 // form
 app.get('/', function(req, res){
-	res.render('index.ejs', { functions: functionSet.getFunctions(), query: req.query, error: req.query.error });
-});
+	var query = req.query;
+	var builder;
 
-// response
-app.get('/build/', function(req, res){
-	var qs = querystring.stringify(req.query);
-	var requestedFunctions = [];
-	for(var key in req.query) {
-		if(key === 'download') continue;
-		requestedFunctions.push({
-			functionName: key,
-			renditionId: parseInt(req.query[key], 10)
+
+	// Trying to download
+	if(query['download']) {
+
+		var requestedFunctions = [];
+		for(var key in req.query) {
+			if(excludedQuerystringKeys.indexOf(key) > -1) {
+				continue;
+			}
+			requestedFunctions.push({
+				functionName: key,
+				renditionId: parseInt(req.query[key], 10)
+			});
+		}
+
+		builder = new jessie.Builder(functionSet, requestedFunctions, {
+			headerPath: '../libraries/header1.inc',
+			footerPath: '../libraries/footer1.inc'
 		});
-	}
 
-	if(requestedFunctions.length === 0) {
-		res.redirect('/?error=true');
-	}
+		var errors = [];
 
-	var builder = new jessie.Builder(functionSet, requestedFunctions, {
-		headerPath: '../libraries/header1.inc',
-		footerPath: '../libraries/footer1.inc'
-	});
+		if(requestedFunctions.length === 0) {
+			errors.push('Please select at least one rendition.');
+			res.render('index.ejs', {
+				functions: functionSet.getFunctions(),
+				errors: errors,
+				query: query
+			});
+		}
+		else {
+			var buildResponse = builder.build();
+			if(buildResponse.errors) {
 
-	var buildResponse = builder.build();
+				for(var i = 0; i < buildResponse.errors.length; i++) {
+					errors.push( (i+1) + '. ' + buildResponse.errors[i].functionName + ' depends on ' + buildResponse.errors[i].dependency);
+				}
 
-	if(buildResponse.errors) {
-		res.render('builderresponse.ejs', {errors: buildResponse.errors, query: qs });
+				res.render('index.ejs', {
+					functions: functionSet.getFunctions(),
+					errors: errors,
+					query: query
+				});
+			}
+			else {
+				res.header('Content-Disposition', 'attachment; filename="jessie.js');
+				res.contentType('text/javascript');
+				res.send(buildResponse.output);
+			}
+		}
 	}
 	else {
-		res.header('Content-Disposition', 'attachment; filename="jessie.js');
-		res.contentType('text/javascript');
-		res.send(buildResponse.output);
+		res.render('index.ejs', {
+			functions: functionSet.getFunctions(),
+			query: req.query,
+			errors: errors
+		});
 	}
-
+	
 });

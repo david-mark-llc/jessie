@@ -52,6 +52,7 @@ h1 {
 }
 
 #builder table {
+	table-layout: fixed;
 	width: 97%;
 	margin: 0 auto;
 	border: 1px solid #ccc;
@@ -74,19 +75,19 @@ h1 {
 }
 
 #builder table thead th.function {
-
+	width: 200px;
 }
 
 #builder table thead th.rendition {
-	width: 60px;
+	width: 70px;
 }
 
 #builder table thead th.selection {
-	width: 60px;
+	width: 70px;
 }
 
 #builder table thead th.support {
-	width: 150px;
+	width: 100px;
 }
 
 #builder table tbody {
