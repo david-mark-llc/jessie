@@ -25,7 +25,7 @@ functionSet.create();
 
 // form
 app.get('/', function(req, res){
-	res.render('index.ejs', { functions: functionSet.getFunctions(), error: req.query.error });
+	res.render('index.ejs', { functions: functionSet.getFunctions(), query: req.query, error: req.query.error });
 });
 
 // response

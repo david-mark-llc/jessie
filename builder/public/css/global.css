@@ -74,16 +74,31 @@ h1 {
 
 #builder .function .rendition label {
 	float: left;
+	border: 1px solid #1C91EA;
+	border-radius: 3px;
+	padding: 3px 7px;
+	font-size: 12px;
+	margin-right: 10px;
+	background-color: #fff;
+}
+
+#builder .function .rendition label:hover {
+	background-color: #1C91EA;
+	color: #fff;
+}
+
+#builder .function .rendition .description {
+	float: left;
 	width: 70%;
 }
 
-#builder .function .rendition label p {
+#builder .function .rendition .description p {
 	font-size: 12px;
 	margin-top: 3px;
 	margin-bottom: 10px;
 }
 
-#builder .function .rendition label p code {
+#builder .function .rendition .description p code {
 	color: #1C91EA;
 	background-color: #bfdaef;
 	padding: 3px 2px 2px 2px;

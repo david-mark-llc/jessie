@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-GB">
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Language" content="en-gb">
+		<meta name="author" content="Adam Silver">
 		<title>Jessie - Build your own Jessie</title>
 		<link rel='stylesheet' type="text/css" href='css/global.css'>
 	</head>
 	<body>
 		<div id="container">
-
-			
-			
 			<div id="builder"> 
 				<form method="get" action="build/">
 					<div class="header">
@@ -27,8 +27,8 @@
 					<div class="options">
 						<h2>Options</h2>
 						<div class="option">
-							<label for="">Namespace (defaults to 'jessie')</label>
-							<input type="text" >
+							<label for="namepsace">Namespace (defaults to 'jessie')</label>
+							<input id="namespace" name="namespace" type="text" >
 						</div>
 					</div>				
 
@@ -37,15 +37,25 @@
 							<h2><%=functions[i].name%></h2>
 							<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
 								<div class="rendition">
-									<p><%=functions[i].renditions[j].id%></p>
-									<input id="<%=functions[i].name+functions[i].renditions[j].id%>" type="radio" name="<%=functions[i].name%>" value="<%=functions[i].renditions[j].id%>">
-									<label for="<%=functions[i].name+functions[i].renditions[j].id%>">
-								
-										<%- md(functions[i].renditions[j].description) -%>
+									<input 
+										id="<%=functions[i].name+functions[i].renditions[j].id%>" 
+										type="radio" 
+										name="<%=functions[i].name%>" 
+										value="<%=functions[i].renditions[j].id%>"
+
+										<%if(query[functions[i].name] == functions[i].renditions[j].id){%>
+											checked
+										<%}%>
+
+									>
+									<label for="<%=functions[i].name+functions[i].renditions[j].id%>">		
+										<%=functions[i].renditions[j].id%>
 									</label>
-									<!--
-									<pre><code><%=functions[i].renditions[j].getContents()%></code></pre>
-									-->
+
+									<div class="description">
+										<%- md(functions[i].renditions[j].description) -%>
+									</div>
+
 								</div>
 							<% } %>
 						</div>
