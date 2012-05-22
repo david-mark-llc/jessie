@@ -125,6 +125,18 @@ jessie.Rendition = function(func, file) {
 			}
 		},
 
+		support: {
+			get: function() {
+				var support = "";
+				var re = /^\s*Support:\s*([^*]+)\*\/$/gm;
+				var matches = re.exec(this.contents);
+				if(matches && matches.length > 1) {
+					support = matches[1].trim();
+				}
+				return support;
+			}
+		},
+
 		dependencies: {
 			get: function(){
 				if(!this._dependencies) {

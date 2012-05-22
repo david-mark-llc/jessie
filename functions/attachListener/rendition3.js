@@ -1,17 +1,30 @@
-/*global html,isHostMethod */
+/*global html,isHostMethod*/
+
 /*
 Description:
-Relies on Microsoft's `el.attachEvent` implementation for IE8-
+Both W3C and MS implementation therefore providing the greatest browser support
 */
 
 /*
 Support:
-IE6, IE7
+IE6+, Chrome, Firefox, Opera
 */
 
 var attachListener;
 
-if(html && isHostMethod(html, 'attachEvent')) {
+if(html && isHostMethod(html, 'addEventListener')) {
+	attachListener = function(el, eventType, fn) {
+
+		var listener = function(e) {
+			fn.call(e, e);
+		};
+
+		el.addEventListener(eventType, listener, false);
+
+		return listener;
+	};
+}
+else if(html && isHostMethod(html, 'attachEvent')) {
 	attachListener = function(el, eventType, fn) {
 
 		var listener = function() {

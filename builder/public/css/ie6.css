@@ -1,0 +1,19 @@
+#container,
+#builder .header {
+	height: 1%;
+}
+
+#builder {
+	padding-top: 0;
+}
+
+#builder .header {
+	margin-bottom: 20px;
+}
+
+#builder .header .actions {
+}
+
+#builder .header .actions input {
+	display: inline;
+}
