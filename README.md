@@ -61,6 +61,13 @@ If you have read the above you should understand how Jessie is designed and ther
 
 #### Using the builder
 
+There are two ways in which you can use the builder:
+
+1. Through the CLI
+2. Through the web UI
+
+##### Command line
+
 Options:
 
 	-h, --help           output usage information
@@ -79,13 +86,20 @@ Options:
 
 Example on Linux
 
-	cd /bin
+	cd bin
 	node jessie -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
 
 Example on Windows:
 
-	cd /bin
+	cd bin
 	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
+
+##### Web UI
+
+	cd builder
+	node app.js
+
+Now visit 127.0.0.1:1337 and you will be presented with a list of available functions (and renditions). Choose one rendition for every function you require and press "Download" and save the file.
 
 ### API documentation
 
