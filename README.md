@@ -99,7 +99,7 @@ Example on Windows:
 	cd builder
 	node app.js
 
-Now visit 127.0.0.1:1337 and you will be presented with a list of available functions (and renditions). Choose one rendition for every function you require and press "Download" and save the file.
+Now visit 127.0.0.1:1337 in your browser and you will be presented with a list of available functions (and renditions). Choose one rendition for every function you require and press "Download" and save the file.
 
 ### API documentation
 
