@@ -18,7 +18,7 @@ h1 {
 
 #builder {
 	position: relative;
-	padding-top: 45px;
+	padding-top: 65px;
 }
 
 #builder .header {
@@ -37,81 +37,76 @@ h1 {
 }
 
 #builder .errors {
-	padding: 10px;
+	width: 97%;
+	margin: 0 auto 20px auto;
+	display: block;
 	color: red;
-	background-color: #ffe0e0;
-	border-bottom: 1px solid #B0D7F4;
 }
 
-#builder .function {
-	border-bottom: 1px solid #b0d7f4;
-	padding: 10px 10px 0px 10px;
-	background-color: #d1ebff;
-}
-
-#builder .function h2 {
-	font-size: 16px;
-	color: #1c91ea;
-	margin-bottom: 15px;
-}
-
-#builder .function .rendition {
-	overflow: hidden;
-	margin-bottom: 10px;
-}
-
-#builder .function .rendition > p {
-	float: left;
+#builder .errors p {
 	font-size: 12px;
-	margin-top: 3px;
-	margin-right: 4px;
 }
 
-#builder .function .rendition input {
-	float: left;
-	margin-right: 10px;
+#builder .options {
+	display: none;
 }
 
-#builder .function .rendition label {
-	float: left;
-	border: 1px solid #1C91EA;
-	border-radius: 3px;
-	padding: 3px 7px;
+#builder table {
+	width: 97%;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+#builder table thead {
+
+}
+
+#builder table thead th {
+	text-align: left;
 	font-size: 12px;
-	margin-right: 10px;
-	background-color: #fff;
-}
-
-#builder .function .rendition label:hover {
-	background-color: #1C91EA;
+	vertical-align: top;
+	border: 1px solid #ccc;
+	padding: 5px;
+	background-color: #40a8f7;
 	color: #fff;
 }
 
-#builder .function .rendition .description {
-	float: left;
-	width: 70%;
+#builder table thead th.function {
+
 }
 
-#builder .function .rendition .description p {
+#builder table thead th.rendition {
+	width: 60px;
+}
+
+#builder table thead th.selection {
+	width: 60px;
+}
+
+#builder table thead th.support {
+	width: 150px;
+}
+
+#builder table tbody {
+
+}
+
+#builder table tbody tr {
+	
+}
+
+#builder table tbody:nth-child(even) tr td {
+	background-color: #d1ebff;
+}
+
+#builder table tbody tr td {
+	border: 1px solid #ccc;
 	font-size: 12px;
-	margin-top: 3px;
-	margin-bottom: 10px;
-}
-
-#builder .function .rendition .description p code {
-	color: #1C91EA;
-	background-color: #bfdaef;
-	padding: 3px 2px 2px 2px;
-	display: inline-block;
-}
-
-
-#builder .function .rendition pre {
-	width: 80%;
-	background-color: #f5f5f5;
-	max-height: 250px;
-	overflow: auto;
-	padding: 10px;
+	padding: 5px;
+	vertical-align: top;
+	background-color: #e3f1fc;
 }
 
 #builder .actions {
@@ -123,13 +118,4 @@ h1 {
 	margin: 0 auto;
 	display: block;
 	width: 200px;
-}
-
-#builder .errors {
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-#builder .errors .functionName {
-
 }

@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on the `el.classListadd`
+Relies on the `el.classList.add`
 */
 
 var addClass;
