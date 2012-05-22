@@ -256,7 +256,7 @@ This names the function and will ultimately be called using `jessie.theNameOfThe
 		};
 	}
 
-This is sometimes a one line detection or more involved. The principle is you detect a particular feature and assign that implementation to the function name variable.
+This part varies - sometimes it's one line for detection and sometimes it's more involved. The principle is you detect a particular feature and assign that implementation to the function name variable when the feature detection has passed.
 
 ### Find code and tips to help contribute
 
