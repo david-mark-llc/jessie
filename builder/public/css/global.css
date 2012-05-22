@@ -28,7 +28,7 @@ h1 {
 	right: 0;
 	overflow: hidden;
 	background-color: #f5f5f5;
-	border-bottom: 1px solid #b0d7f4;
+	border-bottom: 1px solid #ccc;
 	padding: 10px;
 }
 
@@ -40,11 +40,26 @@ h1 {
 	width: 97%;
 	margin: 0 auto 20px auto;
 	display: block;
-	color: red;
+	
+	
+}
+
+#builder .errors .errorsInner {
+	padding: 10px;
+	background-color: #e54444;
+	border: 1px solid #930000;
+}
+
+#builder .errors h2 {
+	font-size: 12px;
+	color: #fff;
+	margin-bottom: 5px;
 }
 
 #builder .errors p {
 	font-size: 12px;
+	color: #fff;
+	margin-bottom: 5px;
 }
 
 #builder .options {
@@ -55,7 +70,6 @@ h1 {
 	table-layout: fixed;
 	width: 97%;
 	margin: 0 auto;
-	border: 1px solid #ccc;
 	border-collapse: collapse;
 	margin-bottom: 20px;
 }
@@ -68,8 +82,8 @@ h1 {
 	text-align: left;
 	font-size: 12px;
 	vertical-align: top;
-	border: 1px solid #ccc;
-	padding: 5px;
+	border: 1px solid #0489e8;
+	padding: 7px;
 	background-color: #40a8f7;
 	color: #fff;
 }
@@ -103,9 +117,9 @@ h1 {
 }
 
 #builder table tbody tr td {
-	border: 1px solid #ccc;
+	border: 1px solid #0489e8;
 	font-size: 12px;
-	padding: 5px;
+	padding: 7px;
 	vertical-align: top;
 	background-color: #e3f1fc;
 }

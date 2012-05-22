@@ -20,13 +20,12 @@
 
 					<% if (errors) { %>
 						<div class="errors">
-							<p>You have errors:</p>
-
-							<% for(var i = 0; i < errors.length; i++) { %>
-								<p>
-									<%=errors[i]%>
-								</p>
-							<% } %>
+							<div class="errorsInner">
+								<h2>You have errors:</h2>
+								<% for(var i = 0; i < errors.length; i++) { %>
+									<p><%=errors[i]%></p>
+								<% } %>
+							</div>
 						</div>
 					<% } %>
 
@@ -37,7 +36,6 @@
 							<input id="namespace" name="namespace" type="text" >
 						</div>-->
 					</div>				
-
 
 					<table>
 						<thead>
