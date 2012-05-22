@@ -2,7 +2,6 @@
 // dependencies
 var express = require('express');
 var querystring = require('querystring');
-var md = require('node-markdown').Markdown;
 var jessie = require('./libs/jessie/jessie.js').jessie;
 
 

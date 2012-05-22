@@ -7,7 +7,9 @@
 	<body>
 		<div id="container">
 			<div id="builder">
-				<h1>Graham your the man, do work son</h1>
+				<div class="header">
+					<h1>Build your own jessie</h1>
+				</div>
 				<% if (errors) { %>
 					<div class="errors">
 						<p>You have errors because some of the functions you have chosen have dependencies. Go back and choose a rendition for that dependency:</p>
@@ -20,7 +22,8 @@
 							</p>
 						<% } %>
 					</div>
-					<p>Go <a href="/?<%=query%>">back</a></p>
+					<!--p>Go <a href="/?<%=query%>">back</a></p>-->
+					<p>Please go back (press back browser back button) and make sure you choose a rendition for the above.</p>
 				<% } %>
 			</div>
 		</div>
