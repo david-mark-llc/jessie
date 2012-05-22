@@ -1,5 +1,10 @@
 /*global html,getElementParent,hasClass */
 
+/*
+Description:
+Relies on `el.className` property, `jessie.getElementParent` and `jessie.hasClass`
+*/
+
 var getAncestorByClassName;
 
 if(html && 'string' == typeof html.className && getElementParent && hasClass) {

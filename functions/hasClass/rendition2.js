@@ -1,5 +1,10 @@
 /*global html */
 
+/*
+Description:
+Relies on the `el.className` property
+*/
+
 var hasClass;
 
 if(html && 'string' == typeof html.className) {

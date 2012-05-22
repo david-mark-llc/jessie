@@ -1,5 +1,10 @@
 /*global attachListener,getEventTarget */
 
+/*
+Description:
+Relies on `jessie.attachListener` and `jessie.getEventTarget`
+*/
+
 var delegateListener;
 
 if(attachListener && getEventTarget) {

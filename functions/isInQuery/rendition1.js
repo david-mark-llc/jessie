@@ -1,5 +1,10 @@
 /*global query */
 
+/*
+Description:
+Relies on `jessie.query`
+*/
+
 var isInQuery;
 
 if(query) {

@@ -1,5 +1,10 @@
 /*global getDescendantsByTagName,hasClass */
 
+/*
+Description:
+Relies on `jessie.getDescendantsByTagName` and `jessie.hasClass`
+*/
+
 var getDescendantsByClassName;
 
 if(getDescendantsByTagName && hasClass) {

@@ -1,8 +1,13 @@
 /*global isHostMethod,global */
 
-// Degrades in IE 8-
-// No frames or other alternate windows
-// Best used with asset-light documents
+/*
+Description:
+Relies on `window.addEventListener` which degrades in IE8-
+
+Best used with asset-light documents.
+
+Note: No frames or other alternate windows
+*/
 
 var attachDocumentReadyListener;
 

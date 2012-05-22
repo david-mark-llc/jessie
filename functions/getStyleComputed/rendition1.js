@@ -1,8 +1,11 @@
 /*global isHostObjectProperty,globalDocument,isHostMethod */
 
-// No "float" styles
-// Requires camel-case style names
-// Fades away in IE 8- and compatibility modes
+/*
+Description:
+Relies on `document.defaultView.getComputedStyle` which derades in IE8-
+and compatibility modes. No float styles with this one and camel-case
+names.
+*/
 
 var getStyleComputed;
 
