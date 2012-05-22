@@ -1,5 +1,10 @@
 /*global globalDocument */
 
+/*
+Description:
+Needs documenting
+*/
+
 var getViewportScrollPosition;
 
 if( globalDocument &&

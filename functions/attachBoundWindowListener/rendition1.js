@@ -1,5 +1,9 @@
 /*global bind,attachWindowListener */
 
+/*
+Description:
+Relies on `jessie.bind` and `jessie.attachWindowListener`
+*/
 var attachBoundWindowListener;
 
 if(attachWindowListener && bind) {

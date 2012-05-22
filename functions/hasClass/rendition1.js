@@ -1,5 +1,10 @@
 /*global html,isHostObjectProperty,isHostMethod */
 
+/*
+Description:
+Relies on the `el.classList.contains`
+*/
+
 var hasClass;
 
 if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "contains") ) {

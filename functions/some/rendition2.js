@@ -1,6 +1,11 @@
 /*global forEach */
 var some;
 
+/*
+Description:
+Relies on `jessie.forEach`
+*/
+
 if(forEach) {
 	some = function(obj, iterator, context) {
 		var result = false;

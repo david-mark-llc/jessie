@@ -1,27 +1,79 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-GB">
 	<head>
-		<title>Jessie</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Language" content="en-gb">
+		<meta name="author" content="Adam Silver">
+		<title>Jessie - Build your own Jessie</title>
+		<link rel='stylesheet' type="text/css" href='css/global.css'>
 	</head>
 	<body>
 		<div id="container">
-			<h1>Jessie:</h1>
-				
-			<form method="get" action="buildresponse/">
-
-				<% for(var i = 0; i < functions.length; i++) { %>
-					<div class="function">
-						<h2><%=functions[i].name%></h2>
-						<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
-							<div>
-								<input type="radio" name="<%=functions[i].name%>" value="">
-								<label><%=functions[i].renditions[j].file%></label>
-							</div>
-						<% } %>
+			<div id="builder"> 
+				<form method="get" action="build/">
+					<div class="header">
+						<h1>Build your own jessie</h1>
+						<div class="actions">
+							<input type="submit" value="Download Your Jessie now" name="download">
+						</div>
 					</div>
-				<% } %>
-				<input type="submit" value="Download" >
-			</form>
+
+					<% if (error) { %>
+						<div class="errors">						
+							<p>You must specify at least one function to build.</p>
+						</div>
+					<% } %>
+
+					<div class="options">
+						<h2>Options</h2>
+						<!--<div class="option">
+							<label for="namepsace">Namespace (defaults to 'jessie')</label>
+							<input id="namespace" name="namespace" type="text" >
+						</div>-->
+					</div>				
+
+
+					<table>
+						<thead>
+							<tr>
+								<th class="function">Function</th>
+								<th class="rendition">Rendition</th>
+								<th class="selection">Selection</th>								
+								<th class="support">Support</th>
+								<th class="description">Description</th>					
+							</tr>
+						</thead>
+						
+						<% for(var i = 0; i < functions.length; i++) { %>
+							<tbody>
+								<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
+									<tr>
+										<%if(j==0) {%>
+											<td rowspan="<%=functions[i].renditions.length%>"><%=functions[i].name%></td>
+										<%}%>
+										<td><%=functions[i].renditions[j].id%></td>
+										<td>
+											<input 
+												id="<%=functions[i].name+functions[i].renditions[j].id%>" 
+												type="radio" 
+												name="<%=functions[i].name%>" 
+												value="<%=functions[i].renditions[j].id%>"
+
+												<%if(query[functions[i].name] == functions[i].renditions[j].id){%>
+													checked
+												<%}%>
+											>
+										</td>
+										<td>To do</td>
+										<td><%- md(functions[i].renditions[j].description) -%></td>						
+									</tr>
+								<% } %>		
+							</tbody>				
+						<% } %>
+						
+					</table>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

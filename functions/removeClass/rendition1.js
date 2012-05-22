@@ -1,5 +1,10 @@
 /*global isHostObjectProperty,isHostMethod,html */
 
+/*
+Description:
+Relies on the `el.classList.remove`
+*/
+
 var removeClass;
 
 if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "remove") ) {
@@ -7,4 +12,3 @@ if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classLi
 			return el.classList.remove(className);
     };
 }
-

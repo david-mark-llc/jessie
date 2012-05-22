@@ -1,5 +1,10 @@
 /*global globalDocument,isHostMethod,toArray */
 
+/*
+Description:
+Relies on `document.getElementsByClassName`
+*/
+
 var getDescendantsByClassName;
 
 if(globalDocument && isHostMethod(globalDocument, "getElementsByClassName") && toArray) {

@@ -55,11 +55,11 @@ Options:
 
 Example on Linux
 
-	./jessie -o ~/Desktop/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
+	node jessie -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
 
 Example on Windows:
 
-	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > ../../jessie.js
+	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
 
 ## API documentation
 
@@ -126,13 +126,13 @@ Currently the documentation is very basic and the API could change for the bette
 
 	var descendants = jessie.getDescendantsByTagName(el, "span");
 
-### get ancestors by tag name
+### get ancestor by tag name
 
-	var ancestors = jessie.getAncestorsByTagName(el, "span");
+	var ancestor = jessie.getAncestorByTagName(el, "span");
 
-### get ancestors by class name
+### get ancestor by class name
 
-	var ancestors = jessie.getAncestorsByClassNameName(el, "className");
+	var ancestor = jessie.getAncestorByClassNameName(el, "className");
 
 ### get elements by selector
 

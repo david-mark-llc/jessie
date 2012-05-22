@@ -1,5 +1,10 @@
 /*global global,isHostMethod*/
 
+/*
+Description:
+Relies on W3C `window.XMLHttpRequest`
+*/
+
 var createXhr;
 
 if(isHostMethod(global, "XMLHttpRequest")) {

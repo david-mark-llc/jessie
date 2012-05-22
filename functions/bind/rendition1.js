@@ -1,4 +1,9 @@
 /*global canCall */
+
+/*
+Description:
+Relies on `unction.prototype.bind`
+*/
 var bind;
 
 if(canCall && Function.prototype.bind){

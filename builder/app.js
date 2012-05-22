@@ -1,86 +1,62 @@
-/*jslint node:true, strict:false */
-var path = require('path');
-var fs = require('fs');
-var app = require('express').createServer();
-var Set = require('simplesets').Set;
+
+// dependencies
+var express = require('express');
+var querystring = require('querystring');
+var jessie = require('./libs/jessie/jessie.js').jessie;
+
+
+
+// setup express
+var app = express.createServer();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.set('view options', {layout:false});
+app.set('view options', {layout:false, md: require("node-markdown").Markdown });
+app.configure(function(){
+	app.use(express.static(__dirname + '/public'));
+    app.use(express.methodOverride());
+    app.use(express.bodyParser());
+});
 app.listen(1337);
 
-var JessieFunction = function(folder) {
-	this.folder = folder;
-	this.name = path.basename(folder);
-	
-	this.renditions = fs.readdirSync(folder).sort().filter(function(f){
-		return f.indexOf(".js") === f.length - 3;
-	}).map(function(f){
-		return new Rendition(this, path.join(folder, f));
-	}.bind(this));
-	
-	this.getDependencies = function(renditionId){
-		var dependencies = new Set();
-		dependencies = dependencies.union(this.renditions[renditionId-1].dependencies);
-		return dependencies;
-	}.bind(this);
+// create functionSet
+var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
+functionSet.create();
 
-	this.getContentsForRendition = function(renditionId) {
-		var contents = this.renditions[renditionId-1].getContents();
+// form
+app.get('/', function(req, res){
+	res.render('index.ejs', { functions: functionSet.getFunctions(), query: req.query, error: req.query.error });
+});
 
-		return contents;
-	};
-};
+// response
+app.get('/build/', function(req, res){
+	var qs = querystring.stringify(req.query);
+	var requestedFunctions = [];
+	for(var key in req.query) {
+		if(key === 'download') continue;
+		requestedFunctions.push({
+			functionName: key,
+			renditionId: parseInt(req.query[key], 10)
+		});
+	}
 
-var Rendition = function(func, file) {
-	this.func = func;
-	this.file = file;
-	
-	Object.defineProperties(this, {
-		contents: {
-			get: function(){
-				if(!this._contents) {
-					this._contents = fs.readFileSync(this.file, 'utf8');
-				}
-				return this._contents;
-			}.bind(this)
-		},
-		dependencies: {
-			get: function(){
-				if(!this._dependencies) {
-					this._dependencies = new Set();
-					var match, re = /\/\*global\s(\S*)\s*\*\//g;
-					while((match = re.exec(this.contents))) {
-						match[1].split(",").forEach(function(d){
-							this._dependencies.add(d);
-						}.bind(this));
+	if(requestedFunctions.length === 0) {
+		res.redirect('/?error=true');
+	}
 
-					}
-				}
-				return this._dependencies;
-			}.bind(this)
-		}
+	var builder = new jessie.Builder(functionSet, requestedFunctions, {
+		headerPath: '../libraries/header1.inc',
+		footerPath: '../libraries/footer1.inc'
 	});
 
-	this.getContents = function() {
-		// remove the /*global / declarations
-		var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
-		return contents.join("\n");
-	}.bind(this);
-};
+	var buildResponse = builder.build();
 
+	if(buildResponse.errors) {
+		res.render('builderresponse.ejs', {errors: buildResponse.errors, query: qs });
+	}
+	else {
+		res.header('Content-Disposition', 'attachment; filename="jessie.js');
+		res.contentType('text/javascript');
+		res.send(buildResponse.output);
+	}
 
-// populate functions with an array of JessieFunction objects
-var functions = [];
-fs.readdirSync('../functions/').filter(function(f){
-	return fs.statSync(path.join('../functions/', f)).isDirectory();
-}).forEach(function(f){
-	functions.push(new JessieFunction(path.join('../functions/', f)));
-});
-
-app.get('/', function(req, res){
-	res.render('index.ejs', { functions: functions });
-});
-
-app.get('/buildresponse', function(req, res){
-	res.render('builderresponse.ejs', { functions: functions });
 });

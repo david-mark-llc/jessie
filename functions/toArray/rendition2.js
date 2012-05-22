@@ -1,5 +1,10 @@
 /*global canCall */
 
+/*
+Description:
+Relies on `Array.prototype.slice`
+*/
+
 var toArray;
 
 if(canCall && Array.prototype.slice) {

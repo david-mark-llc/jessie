@@ -1,4 +1,7 @@
-//Uses native forEach
+/*
+Description:
+Uses `Array.prototype.forEach`
+*/
 
 var forEach;
 

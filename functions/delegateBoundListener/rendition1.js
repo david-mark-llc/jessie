@@ -1,8 +1,13 @@
 /*global bind,attachListener,getEventTarget */
 
+/*
+Description:
+Relies on `jessie.attachListener`, `jessie.bind` and `jessie.getEventTarget`
+*/
+
 var delegateBoundListener;
 
-if(attachListener && bind) {
+if(attachListener && bind && getEventTarget) {
 	delegateBoundListener = function(el, eventType, fn, fnDelegate, thisObject) {
 		var listener = bind(function(e) {
 			var sourceNode = fnDelegate(getEventTarget(e));

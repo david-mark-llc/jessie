@@ -1,0 +1,121 @@
+body, h1, h2, p {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: arial;
+}
+
+#container {
+
+}
+
+h1 {
+	color: #444;
+	font-size: 20px;
+}
+
+#builder {
+	position: relative;
+	padding-top: 65px;
+}
+
+#builder .header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #b0d7f4;
+	padding: 10px;
+}
+
+#builder .header h1 {
+	float: left;
+}
+
+#builder .errors {
+	width: 97%;
+	margin: 0 auto 20px auto;
+	display: block;
+	color: red;
+}
+
+#builder .errors p {
+	font-size: 12px;
+}
+
+#builder .options {
+	display: none;
+}
+
+#builder table {
+	width: 97%;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+#builder table thead {
+
+}
+
+#builder table thead th {
+	text-align: left;
+	font-size: 12px;
+	vertical-align: top;
+	border: 1px solid #ccc;
+	padding: 5px;
+	background-color: #40a8f7;
+	color: #fff;
+}
+
+#builder table thead th.function {
+
+}
+
+#builder table thead th.rendition {
+	width: 60px;
+}
+
+#builder table thead th.selection {
+	width: 60px;
+}
+
+#builder table thead th.support {
+	width: 150px;
+}
+
+#builder table tbody {
+
+}
+
+#builder table tbody tr {
+	
+}
+
+#builder table tbody:nth-child(even) tr td {
+	background-color: #d1ebff;
+}
+
+#builder table tbody tr td {
+	border: 1px solid #ccc;
+	font-size: 12px;
+	padding: 5px;
+	vertical-align: top;
+	background-color: #e3f1fc;
+}
+
+#builder .actions {
+	float:right;
+	background-color: #f5f5f5;
+}
+
+#builder .actions input {
+	margin: 0 auto;
+	display: block;
+	width: 200px;
+}

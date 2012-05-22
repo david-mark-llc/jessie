@@ -1,3 +1,8 @@
+/*
+Description:
+Relies on `for`
+*/
+
 var toArray;
 
 toArray = function(a) {

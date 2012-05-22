@@ -1,4 +1,10 @@
 /*global isHostMethod */
+
+/*
+Description:
+Basic rendition which relies on valid markup i.e. forms with unique names and ids
+*/
+
 /*
 See: https://groups.google.com/forum/#!starred/comp.lang.javascript/fVp-DWAIGnc
 
