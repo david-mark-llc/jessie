@@ -6,7 +6,7 @@ Lean, beautiful and smart
 
 ### General information
 
-Jessie has a flat API. It is simply a collection of functions where `jessie` is the default namespace* to attach those functions to so that they are not on the global (`window`) object.
+Jessie has a flat API. It is simply a collection of functions where `jessie` is the default namespace* to attach those functions to so that they are not on the global `window` object.
 
 	jessie.attachListener
 	jessie.getDescendantsByClassName
@@ -49,7 +49,7 @@ A side effect of this design is that you have two choices of what to do when a p
 1. Degrade gracefully 
 2. Simply create another rendition that allows that function to work in another set of browsers. There will be no change to the application code meaning Jessie can grow or shrink as your project requirements change. 
 
-Peter Michaux has an excellent article based on this concept found: [here](http://peter.michaux.ca/articles/cross-browser-widgets).
+Peter Michaux has an excellent article based on this concept found [here](http://peter.michaux.ca/articles/cross-browser-widgets).
 
 ### Builder
 
@@ -195,7 +195,7 @@ To begin working on Jessie there are a few simple things you have to be aware of
 
 ### Functions
 
-You will most likely be contributing to a function. All functions can be found in their own folder under "functions". Each function has a number of renditions.
+You will most likely be contributing to a function. All functions can be found in their own folder under "functions" in the repo. Each function has a number of renditions.
 
 ### Type checking
 
@@ -213,7 +213,50 @@ For now each rendition should be held in a file called rendition#.js. So for exa
 * rendition2.js
 * rendition3.js
 
-Note: The number is not a version
+Note: The number is not a version - it is an ID to represent a particular rendition. Each rendition is suitable depending on context. More on this above under "User guides > Renditions".
+
+### Rendition structure
+
+There are coding conventions used for each rendition and it should look something like this:
+
+	/*global html,isHostMethod*/
+	/*
+	Description:
+	The description of the rendition
+	*/
+
+	var theNameOfTheFunction;
+
+	if(/* some feature detection*/) {
+		theNameOfTheFunction = function(param1, param2) {
+			/* some implementation based on the feature detection */
+		};
+	}
+
+So let's break this down slightly:
+
+	/*global html,isHostMethod*/
+
+This tells the builder and jslint what the dependencies are for the rendition.
+
+	/*
+	Description:
+	The description of the rendition
+	*/
+
+This is exposed in the builder web UI giving a description of what features this rendition relies on and to what context it is best suited.
+
+	var theNameOfTheFunction;
+
+This names the function and will ultimately be called using `jessie.theNameOfTheFunction`. It is `undefined` by default and gets assigned a function in the event the feature detection was positive. This is why the API is dynamic and puts the developer in control as mentioned above.
+
+	if(/* some feature detection*/) {
+		theNameOfTheFunction = function(param1, param2) {
+			/* some implementation based on the feature detection */
+		};
+	}
+
+This is sometimes a one line detection or more involved. The principle is you detect a particular feature and assign that implementation to the function name variable.
 
 ### Find code and tips to help contribute
 
