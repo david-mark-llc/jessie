@@ -5,6 +5,11 @@ Description:
 Both W3C and MS implementation therefore providing the greatest browser support
 */
 
+/*
+Support:
+IE6+, Chrome, Firefox, Opera
+*/
+
 var attachListener;
 
 if(html && isHostMethod(html, 'addEventListener')) {
