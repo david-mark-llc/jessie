@@ -116,7 +116,7 @@ Jessie has a flat API. It is simply a collection of functions where `jessie` is 
 	jessie.parseJson
 	jessie.forEach
 
-* You can replace `jessie` with any name you want using the builder making it your library.
+*You can replace `jessie` with any name you want using the builder making it your library.
 
 Additionally you can use the builder to choose which functions you want in your custom build for your library.
 
