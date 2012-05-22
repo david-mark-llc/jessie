@@ -2,108 +2,6 @@
 
 Lean, beautiful and smart
 
-## API documentation
-
-Currently the documentation is very basic and the API could change for the better but for now this is what we have:
-
-### bind a function
-	
-	var boundFunction = jessie.bind(function() {}, this);
-
-### for each
-	
-	var arr = [];
-	var context = this;
-	jessie.forEach(arr, function(value, index, array) {
-
-	}, context);	
-
-### attach event listener
-
-	var listener = jessie.attachListener(el, "click", function(e) {
-		jessie.cancelDefault(e);
-		var target = jessie.getEventTarget(e);
-	});
-
-### remove event listener
-	
-	var listener = jessie.attachListener(el, "click", function(e) {});
-	jessie.detachListener(el, "click", listener);
-
-### attach window listener
-
-	var listener = jessie.attachWindowListener("resize", function(e) {});
-
-### detach window listener
-	
-	var listener = jessie.attachWindowListener("resize", function(e) {});
-	jessie.detachWindowListener("resize", listener);
-
-### add class to element
-
-	jessie.addClass(el, "className");
-
-### remove class from element
-
-	jessie.removeClass(el, "className");
-
-### check element has a class
-
-	jessie.hasClass(el, "className"); // returns boolean
-
-### get element (by id)
-
-	var el = jessie.getElement("id"); // returns element node
-
-### get element parent
-	
-	var parentEl = jessie.getElementParent(el);
-
-### get descendants by class name
-
-	var descendants = jessie.getDescendantsByClassName(el, "className");
-
-### get descendants by tag name
-
-	var descendants = jessie.getDescendantsByTagName(el, "span");
-
-### get ancestor by tag name
-
-	var ancestor = jessie.getAncestorByTagName(el, "span");
-
-### get ancestor by class name
-
-	var ancestor = jessie.getAncestorByClassNameName(el, "className");
-
-### get elements by selector
-
-	var elements = jessie.query("ul li a.className");
-
-### check if an element is a descendant (child of) another element
-
-	var isDescendant = jessie.isDescendant(parentEl, descendantEl);
-
-### get (inner) html
-
-	var html = jessie.getHtml(el);
-
-### set (inner) html
-
-	jessie.setHtml(el, "<p>injected</p>");
-
-### create element
-	
-	jessie.createElement("div");
-
-### ajax
-
-	jessie.ajax("/some/url/", {
-		method: "post",
-		data: "key=value",
-		success: function(responseText, xhr) {},
-		fail: function(xhr) {}
-	});
-
 ## User guides
 
 ### General information
@@ -126,7 +24,7 @@ Each function has one or more renditions. Each rendition is based on feature det
 
 Let's take a look at an example function with particular renditions:
 
-`jessie.attachListener` is function to add event listeners to dom nodes. It (currently) has three renditions
+`jessie.attachListener` is function to add event listeners to dom nodes. It (currently) has three renditions:
 
 1. W3C compliant `el.addEventListener` 
 2. Microsofts implementation `el.attachEvent`
@@ -163,11 +61,6 @@ If you have read the above you should understand how Jessie is designed and ther
 
 #### Using the builder
 
-To run the builder:
-
-	cd /bin
-	./jessie
-
 Options:
 
 	-h, --help           output usage information
@@ -186,11 +79,115 @@ Options:
 
 Example on Linux
 
+	cd /bin
 	node jessie -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
 
 Example on Windows:
 
+	cd /bin
 	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
+
+### API documentation
+
+Currently the documentation is very basic and the API could change for the better but for now this is what we have:
+
+#### bind a function
+	
+	var boundFunction = jessie.bind(function() {}, this);
+
+#### for each
+	
+	var arr = [];
+	var context = this;
+	jessie.forEach(arr, function(value, index, array) {
+
+	}, context);	
+
+#### attach event listener
+
+	var listener = jessie.attachListener(el, "click", function(e) {
+		jessie.cancelDefault(e);
+		var target = jessie.getEventTarget(e);
+	});
+
+#### remove event listener
+	
+	var listener = jessie.attachListener(el, "click", function(e) {});
+	jessie.detachListener(el, "click", listener);
+
+#### attach window listener
+
+	var listener = jessie.attachWindowListener("resize", function(e) {});
+
+#### detach window listener
+	
+	var listener = jessie.attachWindowListener("resize", function(e) {});
+	jessie.detachWindowListener("resize", listener);
+
+#### add class to element
+
+	jessie.addClass(el, "className");
+
+#### remove class from element
+
+	jessie.removeClass(el, "className");
+
+#### check element has a class
+
+	jessie.hasClass(el, "className"); // returns boolean
+
+#### get element (by id)
+
+	var el = jessie.getElement("id"); // returns element node
+
+#### get element parent
+	
+	var parentEl = jessie.getElementParent(el);
+
+#### get descendants by class name
+
+	var descendants = jessie.getDescendantsByClassName(el, "className");
+
+#### get descendants by tag name
+
+	var descendants = jessie.getDescendantsByTagName(el, "span");
+
+#### get ancestor by tag name
+
+	var ancestor = jessie.getAncestorByTagName(el, "span");
+
+#### get ancestor by class name
+
+	var ancestor = jessie.getAncestorByClassNameName(el, "className");
+
+#### get elements by selector
+
+	var elements = jessie.query("ul li a.className");
+
+#### check if an element is a descendant (child of) another element
+
+	var isDescendant = jessie.isDescendant(parentEl, descendantEl);
+
+#### get (inner) html
+
+	var html = jessie.getHtml(el);
+
+#### set (inner) html
+
+	jessie.setHtml(el, "<p>injected</p>");
+
+#### create element
+	
+	jessie.createElement("div");
+
+#### ajax
+
+	jessie.ajax("/some/url/", {
+		method: "post",
+		data: "key=value",
+		success: function(responseText, xhr) {},
+		fail: function(xhr) {}
+	});
 
 ## Developer guides
 
