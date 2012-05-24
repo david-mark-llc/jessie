@@ -36,6 +36,10 @@ jessie.ConstructorFn = function(folder, PrototypeMethod) {
 	});
 };
 
+jessie.ConstructorFn.prototype.getDependencies = function() {
+	return [];
+};
+
 jessie.ConstructorFn.prototype.createPrototypeMethods = function() {
 	var fileNames = fs.readdirSync(this.prototypeFolderRoot);
 	fileNames.forEach(function(fileName) {
@@ -111,6 +115,10 @@ jessie.ConstructorFnSet.prototype.getConstructorFnByName = function(name) {
 		}
 	}
 	return constructorFn;
+};
+
+jessie.ConstructorFnSet.prototype.getConstructorFns = function() {
+	return this.constructorFns;
 };
 
 /*
@@ -263,11 +271,17 @@ jessie.Rendition = function(func, file) {
 
 };
 
-jessie.Builder = function(functionSet, requestedFunctions, options) {
+jessie.Builder = function(functionSet, requestedFunctions, constructorFnSet, requestedConstructors, options) {
+	// function stuff
 	this.functionSet = functionSet;
 	this.functions = this.functionSet.getFunctions();
 	this.requestedFunctions = requestedFunctions;
-	//this.requestedConstructors = requestedConstructors;
+
+	// constructor stuff
+	this.constructorFnSet = constructorFnSet;
+	this.constructorFns = this.constructorFnSet.getConstructorFns();
+	this.requestedConstructors = requestedConstructors;
+
 	this.options = this.options || {};
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
@@ -306,16 +320,54 @@ jessie.Builder.prototype.build = function() {
 	};
 
 	var errors = this.expandDependencies();
+	var missingContructorDependencies = this.getMissingConstructorDependencies();
+
 	if(errors.length > 0) {
 		builderResponse.success = false;
 		builderResponse.errors = errors;
 	}
+	else if(missingContructorDependencies.length > 0) {
+		builderResponse.success = false;
+		builderResponse.errors = missingContructorDependencies;
+	}
 	else {
 		builderResponse.success = true;
 		var order = sortDependencies(this.functions, this.requestedFunctions);
-		var jsContents = '';
 
+		var jsContents = '';
 		jsContents += this.header;
+
+		/*
+
+		going to have think about this but thinking aloud:
+		check whether the "functionName" variable e.g. 'addClass'
+		is a prototype method name or just a normal function
+		
+		order might be:
+
+				[
+					'bind',
+					'attachListener',
+					'attachBoundListener',
+					'addClass', // this is a function name
+					'Element',
+					'addClass' // this one is a protoype method name
+					'Element#addClass' // or this instead?
+				]
+
+		OR
+
+		we know that constructors come after functions
+		and we know prototypeMethods come after constructor
+		(in any order)
+
+		so loop through all requested constructors and output them
+		lets hope constructors dont depend on other constructors
+		or MUCH worse have functions depend on constructors which I
+		highly doubt is a reality.
+
+		*/
+
 		order.forEach(function(functionName, i){
 			var func = this.functionSet.getFunctionByName(functionName);
 			var requestedFunc = this.getRequestedFunctionByName(functionName);
@@ -342,7 +394,7 @@ jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
 	return requestedFunc;
 };
 
-function sortDependencies(functions, required) {
+function sortDependencies(functions, required, constructorFns, requestedConstructorFns) {
 	var graph = [], initialOrder = Object.keys(required);
 
 
@@ -490,11 +542,6 @@ jessie.Builder.prototype.expandDependencies = function() {
 	return errors;
 };
 
-var requestedConstructors = [{
-	constructorName: "Element",
-	methods: ["addClass", "removeClass", "attachListener"]
-}];
-
 jessie.Builder.prototype.getMissingConstructorDependencies = function() {
 	var missing = [],
 		constructorFn,
@@ -503,50 +550,52 @@ jessie.Builder.prototype.getMissingConstructorDependencies = function() {
 		dependencies,
 		i = 0;
 
-	for( ; i < this.requestedConstructors.length; i++) {
-		requestedConstructor = this.requestedConstructors[i];
-		constructorFn = this.constructorSet.getConstructorFnByName(requestedConstructor.name);
-		dependencies = constructorFn.getDependencies();
-		// this handles constructor dependencies
-		dependencies.forEach(function(dependency) {
-			if(dependency) {
-				// does the constructor dependency appear in the requested functions
-				// or in the header declarations
-				if(	this.requestedFunctionsContainDependency(dependency) ||
-					this.headerContainsDependency(dependency)) {
-				}
-				// no it doesn't
-				else {
-					missing.push({functionName: constructorFn.name, dependency: dependency});
-				}
-			}
-		}.bind(this));
-
-		// now check constructors' prototypMethods for dependencies
-		var prototypeMethods = constructorFn.getPrototypeMethods();
-		i = 0;
-		for(; i < prototypeMethods.length; i++) {
-			prototypeMethod = prototypeMethods[i];
-			dependencies = prototypeMethod.getDependencies();
+	if(this.requestedConstructors) {
+		for( ; i < this.requestedConstructors.length; i++) {
+			requestedConstructor = this.requestedConstructors[i];
+			constructorFn = this.constructorFnSet.getConstructorFnByName(requestedConstructor.constructorName);
+			dependencies = constructorFn.getDependencies();
+			// this handles constructor dependencies
 			dependencies.forEach(function(dependency) {
 				if(dependency) {
-					// does the requestedFunctions contain the dependency
-					// does the header contain the dependency
-					// is the dependency the constructor name itself
+					// does the constructor dependency appear in the requested functions
+					// or in the header declarations
 					if(	this.requestedFunctionsContainDependency(dependency) ||
-						this.headerContainsDependency(dependency) ||
-						dependency === constructorFn.name) {
+						this.headerContainsDependency(dependency)) {
 					}
 					// no it doesn't
 					else {
-						missing.push({
-							functionName: constructorFn.name+"#"+prototypeMethod.name,
-							dependency: dependency
-						});
+						missing.push({functionName: constructorFn.constructorName, dependency: dependency});
 					}
 				}
+			}.bind(this));
 
-			});
+			// now check constructors' prototypMethods for dependencies
+			var prototypeMethods = constructorFn.getPrototypeMethods();
+			i = 0;
+			for(; i < prototypeMethods.length; i++) {
+				prototypeMethod = prototypeMethods[i];
+				dependencies = prototypeMethod.getDependencies();
+				dependencies.each(function(dependency) {
+					if(dependency) {
+						// does the requestedFunctions contain the dependency
+						// does the header contain the dependency
+						// is the dependency the constructor name itself
+						if(	this.requestedFunctionsContainDependency(dependency) ||
+							this.headerContainsDependency(dependency) ||
+							dependency === constructorFn.name) {
+						}
+						// no it doesn't
+						else {
+							missing.push({
+								functionName: constructorFn.name+"#"+prototypeMethod.name,
+								dependency: dependency
+							});
+						}
+					}
+
+				}.bind(this));
+			}
 		}
 	}
 

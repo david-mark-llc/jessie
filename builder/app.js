@@ -18,14 +18,50 @@ app.configure(function(){
 });
 app.listen(1337);
 
-// create functionSet
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();
 
 var constructorFnSet = new jessie.ConstructorFnSet('../constructors/', jessie.ConstructorFn);
 constructorFnSet.create();
 
-//console.log(constructorFnSet.getConstructorFnByName('Element').getPrototypeMethods()[3].getDependencies());
+/*
+var requestedFunctions = [{
+	functionName: "detachListener",
+	renditionId: 1 
+}, {
+	functionName: "addClass",
+	renditionId: 1
+},{
+	functionName: "removeClass",
+	renditionId: 1
+},{
+	functionName: "hasClass",
+	renditionId: 1
+},{
+	functionName: "attachBoundListener",
+	renditionId: 1
+},{
+	functionName: "bind",
+	renditionId: 1
+},{
+	functionName: "attachListener",
+	renditionId: 1
+}];
+
+var requestedConstructors = [{
+	constructorName: "Element",
+	methods: ["addClass", "removeClass", "attachListener"]
+}];
+
+
+builder = new jessie.Builder(functionSet, requestedFunctions, constructorFnSet, requestedConstructors, {
+	headerPath: '../libraries/header1.inc',
+	footerPath: '../libraries/footer1.inc'
+});
+
+builder.build();
+*/
+
 
 var excludedQuerystringKeys = ['download'];
 
@@ -49,7 +85,7 @@ app.get('/', function(req, res){
 			});
 		}
 
-		builder = new jessie.Builder(functionSet, requestedFunctions, {
+		builder = new jessie.Builder(functionSet, requestedFunctions, constructorFnSet, null, {
 			headerPath: '../libraries/header1.inc',
 			footerPath: '../libraries/footer1.inc'
 		});
