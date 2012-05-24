@@ -11,6 +11,108 @@ var pro = require("uglify-js").uglify;
 // jessie
 var jessie = {};
 
+// a constructor takes a path to the folder root and a ref to jessie.PrototypeMethod
+// it grabs it's own content from the constructor.js file
+// it creates a list of all instances of PrototypeMethod objects
+jessie.ConstructorFn = function(folder, PrototypeMethod) {
+	this.folder = folder;
+	this.PrototypeMethod = PrototypeMethod;
+	this.prototypeFolderRoot = folder + '/prototype';
+	this.file = this.folder + '/constructor.js';
+	this.name = path.basename(folder);
+	this.prototypeMethods = [];
+
+	this.createPrototypeMethods();
+
+	Object.defineProperties(this, {
+		contents: {
+			get: function(){
+				if(!this._contents) {
+					this._contents = fs.readFileSync(this.file, 'utf8');
+				}
+				return this._contents;
+			}.bind(this)
+		}
+	});
+};
+
+jessie.ConstructorFn.prototype.createPrototypeMethods = function() {
+	var fileNames = fs.readdirSync(this.prototypeFolderRoot);
+	fileNames.forEach(function(fileName) {
+		var file = path.join(this.prototypeFolderRoot, fileName);
+		var constructorFnInstance = this;
+		var jessiePrototypeMethod = new this.PrototypeMethod(constructorFnInstance, file);
+
+		this.prototypeMethods.push(jessiePrototypeMethod);
+	}.bind(this));
+};
+
+jessie.ConstructorFn.prototype.getPrototypeMethods = function() {
+	return this.prototypeMethods;
+};
+
+jessie.PrototypeMethod = function(constructorFn, file) {
+	this.constructorFn = constructorFn;
+	this.file = file;
+	this.name = path.basename(file);
+	Object.defineProperties(this, {
+		contents: {
+			get: function(){
+				if(!this._contents) {
+					this._contents = fs.readFileSync(this.file, 'utf8');
+				}
+				return this._contents;
+			}.bind(this)
+		},
+		dependencies: {
+			get: function(){
+				if(!this._dependencies) {
+					this._dependencies = new Set();
+					var match, re = /\/\*global\s(\S*)\s*\*\//g;
+					while((match = re.exec(this.contents))) {
+						match[1].split(",").forEach(function(d){
+							this._dependencies.add(d);
+						}.bind(this));
+					}
+				}
+				return this._dependencies;
+			}.bind(this)
+		}
+	});
+};
+
+jessie.PrototypeMethod.prototype.getDependencies = function() {
+	return this.dependencies;
+};
+
+jessie.ConstructorFnSet = function(constructorRoot, JessieConstructorFn) {
+	this.constructorRoot = constructorRoot;
+	this.JessieConstructorFn = JessieConstructorFn;
+	this.constructorFns = [];
+};
+
+jessie.ConstructorFnSet.prototype.create = function() {
+	var fileNames = fs.readdirSync(this.constructorRoot).filter(function(fileName){
+		return fs.statSync(path.join(this.constructorRoot, fileName)).isDirectory();
+	}.bind(this));
+
+	fileNames.forEach(function(fileName) {
+		var constructorFn = new this.JessieConstructorFn(path.join(this.constructorRoot, fileName), jessie.PrototypeMethod);
+		this.constructorFns.push(constructorFn);
+	}.bind(this));
+};
+
+jessie.ConstructorFnSet.prototype.getConstructorFnByName = function(name) {
+	var constructorFn;
+	for(var i = 0; i < this.constructorFns.length; i++) {
+		if(this.constructorFns[i].name === name) {
+			constructorFn = this.constructorFns[i];
+			break;
+		}
+	}
+	return constructorFn;
+};
+
 /*
 * @constructor
 * @functionRoot {String} Path to function folder
@@ -161,13 +263,11 @@ jessie.Rendition = function(func, file) {
 
 };
 
-/*
-* @param functions {Array[{}]} An array of jessie.Function objects
-*/
 jessie.Builder = function(functionSet, requestedFunctions, options) {
 	this.functionSet = functionSet;
 	this.functions = this.functionSet.getFunctions();
 	this.requestedFunctions = requestedFunctions;
+	//this.requestedConstructors = requestedConstructors;
 	this.options = this.options || {};
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
@@ -199,6 +299,7 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 	});
 };
 
+
 jessie.Builder.prototype.build = function() {
 	var builderResponse = {
 		success: false
@@ -212,7 +313,6 @@ jessie.Builder.prototype.build = function() {
 	else {
 		builderResponse.success = true;
 		var order = sortDependencies(this.functions, this.requestedFunctions);
-
 		var jsContents = '';
 
 		jsContents += this.header;
@@ -388,6 +488,69 @@ jessie.Builder.prototype.expandDependencies = function() {
 		}.bind(this));
 	}
 	return errors;
+};
+
+var requestedConstructors = [{
+	constructorName: "Element",
+	methods: ["addClass", "removeClass", "attachListener"]
+}];
+
+jessie.Builder.prototype.getMissingConstructorDependencies = function() {
+	var missing = [],
+		constructorFn,
+		requestedConstructor,
+		prototypeMethod,
+		dependencies,
+		i = 0;
+
+	for( ; i < this.requestedConstructors.length; i++) {
+		requestedConstructor = this.requestedConstructors[i];
+		constructorFn = this.constructorSet.getConstructorFnByName(requestedConstructor.name);
+		dependencies = constructorFn.getDependencies();
+		// this handles constructor dependencies
+		dependencies.forEach(function(dependency) {
+			if(dependency) {
+				// does the constructor dependency appear in the requested functions
+				// or in the header declarations
+				if(	this.requestedFunctionsContainDependency(dependency) ||
+					this.headerContainsDependency(dependency)) {
+				}
+				// no it doesn't
+				else {
+					missing.push({functionName: constructorFn.name, dependency: dependency});
+				}
+			}
+		}.bind(this));
+
+		// now check constructors' prototypMethods for dependencies
+		var prototypeMethods = constructorFn.getPrototypeMethods();
+		i = 0;
+		for(; i < prototypeMethods.length; i++) {
+			prototypeMethod = prototypeMethods[i];
+			dependencies = prototypeMethod.getDependencies();
+			dependencies.forEach(function(dependency) {
+				if(dependency) {
+					// does the requestedFunctions contain the dependency
+					// does the header contain the dependency
+					// is the dependency the constructor name itself
+					if(	this.requestedFunctionsContainDependency(dependency) ||
+						this.headerContainsDependency(dependency) ||
+						dependency === constructorFn.name) {
+					}
+					// no it doesn't
+					else {
+						missing.push({
+							functionName: constructorFn.name+"#"+prototypeMethod.name,
+							dependency: dependency
+						});
+					}
+				}
+
+			});
+		}
+	}
+
+	return missing;
 };
 
 jessie.Builder.prototype.requestedFunctionsContainDependency = function(dependency) {

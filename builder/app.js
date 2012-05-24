@@ -22,6 +22,11 @@ app.listen(1337);
 var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
 functionSet.create();
 
+var constructorFnSet = new jessie.ConstructorFnSet('../constructors/', jessie.ConstructorFn);
+constructorFnSet.create();
+
+//console.log(constructorFnSet.getConstructorFnByName('Element').getPrototypeMethods()[3].getDependencies());
+
 var excludedQuerystringKeys = ['download'];
 
 // form
