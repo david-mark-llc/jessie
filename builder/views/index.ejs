@@ -9,6 +9,9 @@
 		<!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" /><![endif]-->	
 	</head>
 	<body>
+
+
+
 		<div id="container">
 			<div id="builder"> 
 				<form method="get" action="/">
@@ -38,45 +41,80 @@
 						</div>-->
 					</div>				
 
-					<table>
-						<thead>
-							<tr>
-								<th class="function">Function</th>
-								<th class="rendition">Rendition</th>
-								<th class="selection">Selection</th>								
-								<th class="support">Support</th>
-								<th class="description">Description</th>					
-							</tr>
-						</thead>
-						
-						<% for(var i = 0; i < functions.length; i++) { %>
-							<tbody>
-								<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
-									<tr>
-										<%if(j==0) {%>
-											<td rowspan="<%=functions[i].renditions.length%>"><%=functions[i].name%></td>
-										<%}%>
-										<td><%=functions[i].renditions[j].id%></td>
-										<td>
-											<input 
-												id="<%=functions[i].name+functions[i].renditions[j].id%>" 
-												type="radio" 
-												name="<%=functions[i].name%>" 
-												value="<%=functions[i].renditions[j].id%>"
+					<div id="functions">
+						<h2>Functions</h2>
 
-												<%if(query[functions[i].name] == functions[i].renditions[j].id){%>
-													checked
-												<%}%>
-											>
+						<table id="functions">
+							<thead>
+								<tr>
+									<th class="function">Function</th>
+									<th class="rendition">Rendition</th>
+									<th class="selection">Selection</th>								
+									<th class="support">Support</th>
+									<th class="description">Description</th>					
+								</tr>
+							</thead>
+							
+							<% for(var i = 0; i < functions.length; i++) { %>
+								<tbody>
+									<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
+										<tr>
+											<%if(j==0) {%>
+												<td rowspan="<%=functions[i].renditions.length%>"><%=functions[i].name%></td>
+											<%}%>
+											<td><%=functions[i].renditions[j].id%></td>
+											<td>
+												<input 
+													id="<%=functions[i].name+functions[i].renditions[j].id%>" 
+													type="radio" 
+													name="<%=functions[i].name%>" 
+													value="<%=functions[i].renditions[j].id%>"
+
+													<%if(query[functions[i].name] == functions[i].renditions[j].id){%>
+														checked
+													<%}%>
+												>
+											</td>
+											<td><%- md(functions[i].renditions[j].support) -%></td>
+											<td><%- md(functions[i].renditions[j].description) -%></td>						
+										</tr>
+									<% } %>		
+								</tbody>				
+							<% } %>
+							
+						</table>
+					</div>
+					<div id="constructors">
+						<h2>Constructors</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Methods</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i = 0; i < constructorFns.length; i++) { %>
+									<tr>
+										<td>
+											<input type="checkbox" name="<%=constructorFns[i].name%>" />
+											<label><%=constructorFns[i].name%></label>											
 										</td>
-										<td><%- md(functions[i].renditions[j].support) -%></td>
-										<td><%- md(functions[i].renditions[j].description) -%></td>						
+										<td>											
+											<% for(var j = 0; j < constructorFns[i].prototypeMethods.length; j++) { %>
+												<div class="method">
+													<input type="checkbox" name="<%=constructorFns[i].name%>#<%=constructorFns[i].prototypeMethods[j].name%>" />
+													<label><%=constructorFns[i].prototypeMethods[j].name%></label>
+													
+												</div>
+											<% } %>
+										</td>
 									</tr>
-								<% } %>		
-							</tbody>				
-						<% } %>
-						
-					</table>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+
 				</form>
 			</div>
 		</div>

@@ -65,6 +65,12 @@ var builderResponse = builder.build();
 
 var excludedQuerystringKeys = ['download'];
 
+// add constructor names to exluded keys for building up functions
+constructorFnSet.getConstructorFns().forEach(function(constructorFn) {
+	excludedQuerystringKeys.push(constructorFn.name);
+});
+
+
 // form
 app.get('/', function(req, res){
 	var query = req.query;
@@ -79,6 +85,11 @@ app.get('/', function(req, res){
 			if(excludedQuerystringKeys.indexOf(key) > -1) {
 				continue;
 			}
+			// if its a prototype method key such as 'Element#addClass'
+			if(key.indexOf("#") > -1) {
+				continue;
+			}
+
 			requestedFunctions.push({
 				functionName: key,
 				renditionId: parseInt(req.query[key], 10)
@@ -93,9 +104,10 @@ app.get('/', function(req, res){
 		var errors = [];
 
 		if(requestedFunctions.length === 0) {
-			errors.push('Please select at least one rendition.');
+			errors.push('Please select at least one function.');
 			res.render('index.ejs', {
 				functions: functionSet.getFunctions(),
+				constructorFns: constructorFnSet.getConstructorFns(),
 				errors: errors,
 				query: query
 			});
@@ -110,6 +122,7 @@ app.get('/', function(req, res){
 
 				res.render('index.ejs', {
 					functions: functionSet.getFunctions(),
+					constructorFns: constructorFnSet.getConstructorFns(),
 					errors: errors,
 					query: query
 				});
@@ -124,6 +137,7 @@ app.get('/', function(req, res){
 	else {
 		res.render('index.ejs', {
 			functions: functionSet.getFunctions(),
+			constructorFns: constructorFnSet.getConstructorFns(),
 			query: req.query,
 			errors: errors
 		});

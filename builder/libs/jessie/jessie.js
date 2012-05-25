@@ -453,6 +453,7 @@ function sortDependencies(functions, required, constructorFns, requestedConstruc
 
 	required = requiredHash;
 
+
 	initialOrder.forEach(function(f, i){
 		graph[i] = {
 			edges: functions[f].getDependencies(required[f]).array().map(function(d){
@@ -573,17 +574,19 @@ jessie.Builder.prototype.expandDependencies = function() {
 		// find the function
 		func = this.functionSet.getFunctionByName(this.requestedFunctions[i].functionName);
 		// get the dependecies for the requested rendition
-		var dependencies = func.getDependencies(this.requestedFunctions[i].renditionId);
-		dependencies.each(function(dependency) {
-			if(	dependency) {
-				if(	this.requestedFunctionsContainDependency(dependency) ||
-					this.headerContainsDependency(dependency)) {
+		if(func) {
+			var dependencies = func.getDependencies(this.requestedFunctions[i].renditionId);
+			dependencies.each(function(dependency) {
+				if(	dependency) {
+					if(	this.requestedFunctionsContainDependency(dependency) ||
+						this.headerContainsDependency(dependency)) {
+					}
+					else {
+						errors.push({functionName: func.name, dependency: dependency});
+					}
 				}
-				else {
-					errors.push({functionName: func.name, dependency: dependency});
-				}
-			}
-		}.bind(this));
+			}.bind(this));
+		}
 	}
 	return errors;
 };
@@ -671,8 +674,6 @@ jessie.Builder.prototype.getContents = function() {
 	var output = '';
 	this.requestedFunctions.forEach(function(func) {
 		var rendition = this.getRendition(func.functionName, func.renditionId);
-		//var dependencies = rendition.dependencies;
-		//console.log(dependencies);
 		output += "\n\n" + rendition.getContents(func.functionName, func.renditionId) + "\n\n";
 	}.bind(this));
 	return output;
