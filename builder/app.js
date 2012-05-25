@@ -71,7 +71,74 @@ constructorFnSet.getConstructorFns().forEach(function(constructorFn) {
 });
 
 
-// form
+function getRequestedFunctions(query) {
+	var requestedFunctions = [];
+	for(var key in query) {
+		if(excludedQuerystringKeys.indexOf(key) > -1) {
+			continue;
+		}
+		// if its a prototype method key such as 'Element#addClass'
+		if(key.indexOf("#") > -1) {
+			continue;
+		}
+
+		requestedFunctions.push({
+			functionName: key,
+			renditionId: parseInt(query[key], 10)
+		});
+	}
+	return requestedFunctions;
+}
+
+
+function getRequestedConstructorIndexByName(requestedConstructorFns, name) {
+	var index;
+	for(var i = 0; i < requestedConstructorFns.length; i++) {
+		if(requestedConstructorFns[i].constructorName === name) {
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
+
+function getRequestedConstructors(query) {
+	var requestedConstructorFns = [];
+	for(var key in query) {
+
+		// firstly check if the key is a constructor name
+		if(constructorFnSet.getConstructorFnByName(key)) {
+			requestedConstructorFns.push({
+				constructorName: key,
+				methods: []
+			});
+			continue;
+		}
+
+		// secondly check that it is a method in the format ConstructorName#methodName
+		if(key.indexOf("#") > -1) {
+			var keyParts = key.split("#");
+			var constructorName = keyParts[0];
+			var methodName = keyParts[1];
+
+
+			var index = getRequestedConstructorIndexByName(requestedConstructorFns, constructorName);
+
+			if(typeof index == 'number') {
+				requestedConstructorFns[index].methods.push(methodName);
+			}
+			else {
+				requestedConstructorFns.push({
+					constructorName: constructorName,
+					methods: [methodName]
+				});
+			}
+		}
+
+	}
+	return requestedConstructorFns;
+}
+
 app.get('/', function(req, res){
 	var query = req.query;
 	var builder;
@@ -80,23 +147,11 @@ app.get('/', function(req, res){
 	// Trying to download
 	if(query['download']) {
 
-		var requestedFunctions = [];
-		for(var key in req.query) {
-			if(excludedQuerystringKeys.indexOf(key) > -1) {
-				continue;
-			}
-			// if its a prototype method key such as 'Element#addClass'
-			if(key.indexOf("#") > -1) {
-				continue;
-			}
+		var requestedFunctions = getRequestedFunctions(query);
+		
+		var requestedConstructorFns = getRequestedConstructors(query);
 
-			requestedFunctions.push({
-				functionName: key,
-				renditionId: parseInt(req.query[key], 10)
-			});
-		}
-
-		builder = new jessie.Builder(functionSet, requestedFunctions, null, null, {
+		builder = new jessie.Builder(functionSet, requestedFunctions, constructorFnSet, requestedConstructorFns, {
 			headerPath: '../libraries/header1.inc',
 			footerPath: '../libraries/footer1.inc'
 		});

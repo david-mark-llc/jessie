@@ -97,13 +97,28 @@
 								<% for(var i = 0; i < constructorFns.length; i++) { %>
 									<tr>
 										<td>
-											<input type="checkbox" name="<%=constructorFns[i].name%>" />
+											<input 
+												type="checkbox" 
+												name="<%=constructorFns[i].name%>" 
+
+												<%if(query[constructorFns[i].name] == 'on'){%>
+													checked
+												<%}%>
+											/>
 											<label><%=constructorFns[i].name%></label>											
 										</td>
 										<td>											
 											<% for(var j = 0; j < constructorFns[i].prototypeMethods.length; j++) { %>
 												<div class="method">
-													<input type="checkbox" name="<%=constructorFns[i].name%>#<%=constructorFns[i].prototypeMethods[j].name%>" />
+													<input 
+														type="checkbox" 
+														name="<%=constructorFns[i].name%>#<%=constructorFns[i].prototypeMethods[j].name%>" 
+
+														<%if(query[constructorFns[i].name+'#'+constructorFns[i].prototypeMethods[j].name] == 'on'){%>
+															checked
+														<%}%>
+
+													/>
 													<label><%=constructorFns[i].prototypeMethods[j].name%></label>
 													
 												</div>
