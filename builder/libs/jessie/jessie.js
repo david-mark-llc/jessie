@@ -55,10 +55,18 @@ jessie.ConstructorFn.prototype.getPrototypeMethods = function() {
 	return this.prototypeMethods;
 };
 
+jessie.ConstructorFn.prototype.getContents = function() {
+	// remove the /*global / declarations
+	var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
+	return contents.join("\n");
+};
+
 jessie.PrototypeMethod = function(constructorFn, file) {
 	this.constructorFn = constructorFn;
 	this.file = file;
 	this.name = path.basename(file);
+	this.name = this.name.substr(0, this.name.length-3);
+
 	Object.defineProperties(this, {
 		contents: {
 			get: function(){
@@ -87,6 +95,11 @@ jessie.PrototypeMethod = function(constructorFn, file) {
 
 jessie.PrototypeMethod.prototype.getDependencies = function() {
 	return this.dependencies;
+};
+
+jessie.PrototypeMethod.prototype.getContents = function() {
+	var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
+	return contents.join("\n");
 };
 
 jessie.ConstructorFnSet = function(constructorRoot, JessieConstructorFn) {
@@ -279,7 +292,11 @@ jessie.Builder = function(functionSet, requestedFunctions, constructorFnSet, req
 
 	// constructor stuff
 	this.constructorFnSet = constructorFnSet;
-	this.constructorFns = this.constructorFnSet.getConstructorFns();
+	this.constructorFns = [];
+	if(this.constructorFnSet) {
+		this.constructorFns = this.constructorFnSet.getConstructorFns();
+	}
+	
 	this.requestedConstructors = requestedConstructors;
 
 	this.options = this.options || {};
@@ -373,6 +390,21 @@ jessie.Builder.prototype.build = function() {
 			var requestedFunc = this.getRequestedFunctionByName(functionName);
 			jsContents += ("\n\n"+func.getContentsForRendition(requestedFunc.renditionId) + "\n\n");
 		}.bind(this));
+
+
+		var constructorFn;
+		if(this.requestedConstructorFns) {
+			this.requestedConstructorFns.forEach(function(requestedConstructorFn, i) {
+				constructorFn = this.constructorfnSet.getConstructorFnByName(requestedConstructorFn.constructorName);
+				if(constructorFn) {
+					jsContents += ("\n\n"+constructorFn.getContents() + "\n\n");
+					constructorFn.getPrototypeMethods().forEach(function(prototypeMethod) {
+						jsContents += ("\n\n"+prototypeMethod.getContents() + "\n\n");
+					}.bind(this));
+				}
+			}.bind(this));
+		}
+
 
 		jsContents += this.createExportDeclaration(order);
 
@@ -502,14 +534,28 @@ function topologicalSort(graph) {
 
 
 jessie.Builder.prototype.createExportDeclaration = function(order) {
+	var hasRequestedConstructors = (this.requestedConstructorFn && this.requestedConstructorFn.length > 0);
+
+
 	var out = '\n\nglobal[\"' + 'jessie' + '\"] = {\n';
 	order.forEach(function(functionName, i){
 		out += '\t';
 		out += '"'+ functionName +'": ';
 		out += functionName;
-		out += (i === order.length-1 ? "" : ",");
+		out += ( (i === order.length-1 && !hasRequestedConstructors ) ? "" : ",");
 		out += '\n';
 	}.bind(this));
+
+	if(this.requestedConstructorFn) {
+		this.requestedConstructors.forEach(function(requestedConstructorFn, i) {
+			out += '\t';
+			out += '"'+ requestedConstructorFn.constructorName +'": ';
+			out += requestedConstructorFn.constructorName;
+			out += (i === this.requestedConstructorFn.length-1 ? "" : ",");
+			out += '\n';
+		}.bind(this));
+	}
+	
 	out += '};\n';
 	return out;
 };
@@ -553,48 +599,52 @@ jessie.Builder.prototype.getMissingConstructorDependencies = function() {
 	if(this.requestedConstructors) {
 		for( ; i < this.requestedConstructors.length; i++) {
 			requestedConstructor = this.requestedConstructors[i];
-			constructorFn = this.constructorFnSet.getConstructorFnByName(requestedConstructor.constructorName);
-			dependencies = constructorFn.getDependencies();
-			// this handles constructor dependencies
-			dependencies.forEach(function(dependency) {
-				if(dependency) {
-					// does the constructor dependency appear in the requested functions
-					// or in the header declarations
-					if(	this.requestedFunctionsContainDependency(dependency) ||
-						this.headerContainsDependency(dependency)) {
-					}
-					// no it doesn't
-					else {
-						missing.push({functionName: constructorFn.constructorName, dependency: dependency});
-					}
-				}
-			}.bind(this));
 
-			// now check constructors' prototypMethods for dependencies
-			var prototypeMethods = constructorFn.getPrototypeMethods();
-			i = 0;
-			for(; i < prototypeMethods.length; i++) {
-				prototypeMethod = prototypeMethods[i];
-				dependencies = prototypeMethod.getDependencies();
-				dependencies.each(function(dependency) {
+			constructorFn = this.constructorFnSet.getConstructorFnByName(requestedConstructor.constructorName);
+
+			if(constructorFn) {
+				dependencies = constructorFn.getDependencies();
+				// this handles constructor dependencies
+				dependencies.forEach(function(dependency) {
 					if(dependency) {
-						// does the requestedFunctions contain the dependency
-						// does the header contain the dependency
-						// is the dependency the constructor name itself
+						// does the constructor dependency appear in the requested functions
+						// or in the header declarations
 						if(	this.requestedFunctionsContainDependency(dependency) ||
-							this.headerContainsDependency(dependency) ||
-							dependency === constructorFn.name) {
+							this.headerContainsDependency(dependency)) {
 						}
 						// no it doesn't
 						else {
-							missing.push({
-								functionName: constructorFn.name+"#"+prototypeMethod.name,
-								dependency: dependency
-							});
+							missing.push({functionName: constructorFn.constructorName, dependency: dependency});
 						}
 					}
-
 				}.bind(this));
+
+				// now check constructors' prototypMethods for dependencies
+				var prototypeMethods = constructorFn.getPrototypeMethods();
+				i = 0;
+				for(; i < prototypeMethods.length; i++) {
+					prototypeMethod = prototypeMethods[i];
+					dependencies = prototypeMethod.getDependencies();
+					dependencies.each(function(dependency) {
+						if(dependency) {
+							// does the requestedFunctions contain the dependency
+							// does the header contain the dependency
+							// is the dependency the constructor name itself
+							if(	this.requestedFunctionsContainDependency(dependency) ||
+								this.headerContainsDependency(dependency) ||
+								dependency === constructorFn.name) {
+							}
+							// no it doesn't
+							else {
+								missing.push({
+									functionName: constructorFn.name+"#"+prototypeMethod.name,
+									dependency: dependency
+								});
+							}
+						}
+
+					}.bind(this));
+				}
 			}
 		}
 	}

@@ -23,14 +23,13 @@ functionSet.create();
 
 var constructorFnSet = new jessie.ConstructorFnSet('../constructors/', jessie.ConstructorFn);
 constructorFnSet.create();
-
 /*
 var requestedFunctions = [{
 	functionName: "detachListener",
 	renditionId: 1 
 }, {
 	functionName: "addClass",
-	renditionId: 1
+	renditionId: 2
 },{
 	functionName: "removeClass",
 	renditionId: 1
@@ -49,7 +48,7 @@ var requestedFunctions = [{
 }];
 
 var requestedConstructors = [{
-	constructorName: "Element",
+	constructorName: "Element1",
 	methods: ["addClass", "removeClass", "attachListener"]
 }];
 
@@ -59,7 +58,8 @@ builder = new jessie.Builder(functionSet, requestedFunctions, constructorFnSet, 
 	footerPath: '../libraries/footer1.inc'
 });
 
-builder.build();
+var builderResponse = builder.build();
+
 */
 
 
@@ -85,7 +85,7 @@ app.get('/', function(req, res){
 			});
 		}
 
-		builder = new jessie.Builder(functionSet, requestedFunctions, constructorFnSet, null, {
+		builder = new jessie.Builder(functionSet, requestedFunctions, null, null, {
 			headerPath: '../libraries/header1.inc',
 			footerPath: '../libraries/footer1.inc'
 		});
