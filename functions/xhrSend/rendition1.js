@@ -22,37 +22,21 @@ if(createXhr) {
 	*
 	*/
 	xhrSend = function(xhr, url, options) {
+		
 		options = options || {};
+		
 		var key,
 			method = options.method || 'get',
+			headers = options.headers || {},
 			data = options.data || null;
-		
-		xhr.open(method, url);
-		
-		var defaultHeaders = {
-			//'Accept': 'text/javascript, application/json, text/html, application/xml, text/xml, */*',
-			//'Content-Type': 'application/x-www-form-urlencoded'
-		};
-		
-		for(key in defaultHeaders) {
-			xhr.setRequestHeader(key, defaultHeaders[key]);
-		}
-		
-		if(options.headers) {
-			for(key in options.headers) {
-				xhr.setRequestHeader(key, options.headers[key]);
-			}
-		}
-
-		xhr.onreadystatechange = handleReadyStateChange;
-		
+			
 		function isSuccessfulResponse(xmlHttp) {
-			var success = false;
-			var status = xmlHttp.status;
-			var between200and300 = (status >= 200 && status < 300);
-			var notModified = (status == 304);
-			// FIXME(shewitt): why is "status == 00" meant to do?
-			if(between200and300 || notModified || status === 0 && xmlHttp.responseText) {
+			var success = false,
+				status = xmlHttp.status,
+				between200and300 = (status >= 200 && status < 300),
+				notModified = (status === 304);
+			
+			if(between200and300 || notModified || (status === 0 && xmlHttp.responseText)) {
 				success = true;
 			}
 			return success;
@@ -73,6 +57,20 @@ if(createXhr) {
 				}
 			}
 		}
+		
+		if( method === 'post' && typeof headers['Content-Type'] === 'undefined' ){
+			headers[ 'Content-Type' ] = 'application/x-www-form-urlencoded';
+		}
+		
+		xhr.open(method, url);
+		
+		if(options.headers) {
+			for(key in options.headers) {
+				xhr.setRequestHeader(key, options.headers[key]);
+			}
+		}
+
+		xhr.onreadystatechange = handleReadyStateChange;
 
 		xhr.send(data);
 	};
