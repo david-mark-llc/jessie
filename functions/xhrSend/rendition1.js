@@ -64,10 +64,8 @@ if(createXhr) {
 		
 		xhr.open(method, url);
 		
-		if(headers) {
-			for(key in headers) {
-				xhr.setRequestHeader(key, headers[key]);
-			}
+		for(key in headers) {
+			xhr.setRequestHeader(key, headers[key]);
 		}
 
 		xhr.onreadystatechange = handleReadyStateChange;
