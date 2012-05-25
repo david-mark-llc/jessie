@@ -1,4 +1,9 @@
-/*global delegateQueryListener:true,query,isDescendant,delegateListener,isInQuery */
+/*global query,isDescendant,delegateListener,isInQuery */
+
+/*
+Description:
+Relies on `jessie.delegateListener`, `jessie.query` and `jessie.isDescendant`
+*/
 
 var delegateQueryListener;
 

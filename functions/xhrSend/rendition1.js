@@ -1,4 +1,9 @@
-/*global xhrSend:true,createXhr */
+/*global createXhr */
+
+/*
+Description:
+Relies on `jessie.createXhr`
+*/
 
 var xhrSend;
 
@@ -14,7 +19,7 @@ if(createXhr) {
 	* options.headers
 	* options.data
 	* options.fail
-	* 
+	*
 	*/
 	xhrSend = function(xhr, url, options) {
 		options = options || {};

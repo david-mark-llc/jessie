@@ -1,0 +1,141 @@
+body, h1, h2, p {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: arial;
+}
+
+#container {
+
+}
+
+h1 {
+	color: #444;
+	font-size: 20px;
+}
+
+#builder {
+	position: relative;
+	padding-top: 65px;
+}
+
+#builder .header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #ccc;
+	padding: 10px;
+}
+
+#builder .header h1 {
+	float: left;
+}
+
+#builder .errors {
+	width: 97%;
+	margin: 0 auto 20px auto;
+	display: block;
+	
+	
+}
+
+#builder .errors .errorsInner {
+	padding: 10px;
+	background-color: #e54444;
+	border: 1px solid #930000;
+}
+
+#builder .errors h2 {
+	font-size: 12px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+
+#builder .errors p {
+	font-size: 12px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+
+#builder .options {
+	display: none;
+}
+
+#builder table {
+	table-layout: fixed;
+	width: 97%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+#builder table thead {
+
+}
+
+#builder table thead th {
+	text-align: left;
+	font-size: 12px;
+	vertical-align: top;
+	border: 1px solid #0489e8;
+	padding: 7px;
+	background-color: #40a8f7;
+	color: #fff;
+}
+
+#builder table thead th.function {
+	width: 200px;
+}
+
+#builder table thead th.rendition {
+	width: 70px;
+}
+
+#builder table thead th.selection {
+	width: 70px;
+}
+
+#builder table thead th.support {
+	width: 100px;
+}
+
+#builder table tbody {
+
+}
+
+#builder table tbody tr {
+	
+}
+
+#builder table tbody:nth-child(even) tr td {
+	background-color: #d1ebff;
+}
+
+#builder table tbody tr td {
+	border: 1px solid #0489e8;
+	font-size: 12px;
+	padding: 7px;
+	vertical-align: top;
+	background-color: #e3f1fc;
+}
+
+#builder table tbody tr td code {
+	background-color: #fff;
+	display: inline-block;
+	padding: 3px 2px 2px;
+}
+
+#builder .actions {
+	float:right;
+	background-color: #f5f5f5;
+}
+
+#builder .actions input {
+	margin: 0 auto;
+	display: block;
+}

@@ -1,4 +1,9 @@
-/*global every:true,forEach */
+/*global canCall,forEach */
+
+/*
+Description:
+Relies on `Function.prototype.call` and `jessie.forEach`
+*/
 
 var every;
 

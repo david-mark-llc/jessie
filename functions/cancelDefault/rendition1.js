@@ -1,4 +1,9 @@
-/*global cancelDefault:true,html,isHostMethod */
+/*global html,isHostMethod */
+
+/*
+Description:
+Relies on W3C compliant `e.preventDefault()`
+*/
 
 var cancelDefault;
 

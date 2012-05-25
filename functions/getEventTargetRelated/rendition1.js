@@ -1,6 +1,9 @@
-/*global getEventTargetRelated:true,html,isHostMethod */
+/*global html,isHostMethod */
 
-//	Degrades in IE8-
+/*
+Description:
+Relies on W3C `e.relatedTarget` which degrades in IE8-
+*/
 
 var getEventTargetRelated;
 

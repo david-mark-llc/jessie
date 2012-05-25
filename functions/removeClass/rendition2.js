@@ -1,4 +1,9 @@
-/*global removeClass:true,html */
+/*global html */
+
+/*
+Description:
+Relies on the `el.className` property
+*/
 
 var removeClass;
 

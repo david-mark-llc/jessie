@@ -1,4 +1,9 @@
-/*global getOuterSize:true,html */
+/*global html */
+
+/*
+Description:
+Relies on `el.offsetWidth/Height`
+*/
 
 var getOuterSize;
 

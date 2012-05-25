@@ -1,4 +1,14 @@
-/*global addClass:true,html,isHostObjectProperty,isHostMethod */
+/*global html,isHostObjectProperty,isHostMethod */
+
+/*
+Description:
+Relies on the `el.classList.add`
+*/
+
+/*
+Support:
+Chrome
+*/
 
 var addClass;
 

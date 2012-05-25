@@ -1,5 +1,9 @@
-/*global detachListener:true,html,isHostMethod */
-// Works in IE 8- 
+/*global html,isHostMethod */
+
+/*
+Description:
+Relies on MS `el.detachEvent` and works in IE8-
+*/
 
 var detachListener;
 

@@ -1,4 +1,9 @@
-/*global getOwnerDocument:true,html,isHostObjectProperty*/
+/*global html,isHostObjectProperty*/
+
+/*
+Description:
+Relies on `el.ownerDocument`
+*/
 
 var getOwnerDocument;
 

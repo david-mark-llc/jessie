@@ -1,6 +1,10 @@
-/*global createXhr:true,isHostMethod,global */
+/*global isHostMethod,global */
 
-// for legacy eg. IE 5
+/*
+Description:
+For legacy eg. IE5
+*/
+
 
 var createXhr;
 

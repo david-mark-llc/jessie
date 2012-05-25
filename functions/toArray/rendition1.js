@@ -1,4 +1,7 @@
-/*global toArray:true */
+/*
+Description:
+Relies on `for`
+*/
 
 var toArray;
 

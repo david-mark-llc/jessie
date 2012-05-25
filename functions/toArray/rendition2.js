@@ -1,4 +1,9 @@
-/*global toArray:true */
+/*global canCall */
+
+/*
+Description:
+Relies on `Array.prototype.slice`
+*/
 
 var toArray;
 

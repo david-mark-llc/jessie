@@ -1,4 +1,9 @@
-/*global query:true,globalDocument,isHostMethod,toArray */
+/*global globalDocument,isHostMethod,toArray */
+
+/*
+Description:
+Relies on `document.querySelectorAll` and `jessie.toArray`
+*/
 
 var query;
 

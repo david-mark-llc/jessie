@@ -1,5 +1,7 @@
-/*global getEventTargetRelated:true */
-//	If you will be using a forked rendition to support IE 8-
+/*
+Description:
+Relies on W3C and MS event model.
+*/
 
 var getEventTargetRelated;
 

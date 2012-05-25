@@ -1,5 +1,9 @@
-/*global attachBoundListener:true,bind,attachListener */
+/*global bind,attachListener */
 
+/*
+Description:
+Relies on `jessie.bind` and `jessie.attachListener`
+*/
 var attachBoundListener;
 
 if(bind && attachListener) {

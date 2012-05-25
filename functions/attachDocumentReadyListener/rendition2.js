@@ -1,13 +1,26 @@
-/*global attachDocumentReadyListener:true,isHostMethod,global,globalDocument */
-// Degrades in IE 8-
-// No frames or other alternate windows
-// Can use following to get IE8- to work when document is parsed.
-//		<script type="text/javascript">
-//			if ('function' == typeof readyListener) {
-//				window.setTimeout(readyListener, 1);
-//			}
-//		</script>
-//	</body>
+/*global isHostMethod,global,globalDocument */
+
+/*
+Description:
+Relies on `window.addEventListener` and `document.addEventListener` which degrades in IE8-.
+
+Note: No frames or other alternate windows.
+
+Uses `DOMContentLoaded` as bonus so better for asset-heavy documents
+
+Can use following to get IE8- to work when document is parsed:
+
+		<script type="text/javascript">
+			if ('function' == typeof readyListener) {
+				window.setTimeout(readyListener, 1);
+			}
+		</script>
+	</body>
+
+*/
+/*
+
+*/
 
 var attachDocumentReadyListener;
 

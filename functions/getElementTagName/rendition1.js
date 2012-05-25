@@ -1,6 +1,9 @@
-/*global getElementTagName:true */
-
 var getElementTagName;
+
+/*
+Description:
+Relies on `el.tagName` or `el.nodeName`
+*/
 
 getElementTagName = function (el) {
 	var tagName = (el.tagName || el.nodeName).toLowerCase();

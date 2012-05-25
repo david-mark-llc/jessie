@@ -1,6 +1,8 @@
-/*global attachDocumentReadyListener:true,global,isHostMethod */
-// Works in IE8-
-
+/*global global,isHostMethod */
+/*
+Description:
+Relies on `window.attachEvent` so works in IE8
+*/
 var attachDocumentReadyListener;
 
 var readyListenerAttached;

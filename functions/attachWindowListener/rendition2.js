@@ -1,5 +1,9 @@
-/*global attachWindowListener:true,global,isHostMethod */
-// Works in IE8-
+/*global global,isHostMethod */
+
+/*
+Description:
+Relies on `window.attachEvent` which works in IE8-
+*/
 
 var attachWindowListener;
 

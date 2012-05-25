@@ -1,4 +1,9 @@
-/*global parseJson:true,global,isHostMethod */
+/*global global,isHostMethod */
+
+/*
+Description:
+For browsers without `window.JSON.parse`
+*/
 
 var parseJson;
 

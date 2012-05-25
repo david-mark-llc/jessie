@@ -1,4 +1,9 @@
-/*global getDescendantsByClassName:true,getDescendantsByTagName,hasClass */
+/*global getDescendantsByTagName,hasClass */
+
+/*
+Description:
+Relies on `jessie.getDescendantsByTagName` and `jessie.hasClass`
+*/
 
 var getDescendantsByClassName;
 

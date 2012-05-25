@@ -1,4 +1,9 @@
-/*global isDescendant:true,html */
+/*global html */
+
+/*
+Description:
+Relies on `el.parentNode` which has very good support
+*/
 
 var isDescendant;
 

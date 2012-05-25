@@ -1,4 +1,9 @@
-/*global delegateTagNameListener:true,delegateListener,getElementTagName */
+/*global delegateListener,getElementTagName */
+
+/*
+Description:
+Relies on `jessie.delegateListener` amd `jessie.getElementTagName`
+*/
 
 var delegateTagNameListener;
 

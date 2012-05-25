@@ -1,5 +1,9 @@
-/*global createXhr:true,isHostMethod,global */
-// for fully patched Win2k SP4 and up
+/*global isHostMethod,global */
+
+/*
+Description:
+For fully patched Win2k SP4 and up
+*/
 
 var createXhr;
 

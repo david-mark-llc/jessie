@@ -1,6 +1,9 @@
-/*global inherit:true */
-
 var inherit;
+
+/*
+Description:
+Needs documenting
+*/
 
 inherit = (function() {
 	var Fn = function() {};

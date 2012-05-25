@@ -1,4 +1,9 @@
-/*global getDescendantsByClassName:true,globalDocument,isHostMethod,toArray */
+/*global globalDocument,isHostMethod,toArray */
+
+/*
+Description:
+Relies on `document.getElementsByClassName`
+*/
 
 var getDescendantsByClassName;
 

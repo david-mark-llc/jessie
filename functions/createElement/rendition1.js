@@ -1,4 +1,9 @@
-/*global createElement:true,globalDocument,isHostMethod*/
+/*global globalDocument,isHostMethod*/
+
+/*
+Description:
+Relies on `document.createElement`
+*/
 
 var createElement;
 

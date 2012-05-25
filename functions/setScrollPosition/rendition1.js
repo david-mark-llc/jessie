@@ -1,4 +1,9 @@
-/*global setScrollPosition:true,isHostMethod,global */
+/*global isHostMethod,global */
+
+/*
+Description:
+Relies on `window.scrollTo`
+*/
 
 var setScrollPosition;
 

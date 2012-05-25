@@ -1,5 +1,9 @@
-/*global getEventTarget:true,html,isHostMethod */
-// Degrades in IE8-
+/*global html,isHostMethod */
+
+/*
+Description:
+Relies on W3C `e.target` which degrades in IE8-
+*/
 
 var getEventTarget;
 

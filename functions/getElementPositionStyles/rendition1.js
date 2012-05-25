@@ -1,4 +1,10 @@
-/*global getElementPositionStyles:true,html,getElement,isHostObjectProperty */
+/*global html,getElement,isHostObjectProperty */
+
+/*
+Description:
+Relies on `jessie.getElement`, `el.style` and `el.offsetLeft`
+*/
+
 // Taken from primer
 
 var getElementPositionStyles;

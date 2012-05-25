@@ -1,4 +1,9 @@
-/*global getViewportScrollPosition:true,global */
+/*global global*/
+
+/*
+Description:
+Relies on `window.page(X/Y)Offset
+*/
 
 var getViewportScrollPosition;
 

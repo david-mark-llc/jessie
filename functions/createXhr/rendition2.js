@@ -1,5 +1,9 @@
-/*global createXhr:true,isHostMethod,global */
-// IE 6 users that have updated their msxml dll files.
+/*global isHostMethod,global */
+
+/*
+Description:
+For IE6 users that have updated their msxml dll files
+*/
 
 var createXhr;
 

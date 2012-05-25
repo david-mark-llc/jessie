@@ -1,4 +1,9 @@
-/*global getViewportScrollPosition:true,globalDocument */
+/*global globalDocument */
+
+/*
+Description:
+Needs documenting
+*/
 
 var getViewportScrollPosition;
 

@@ -1,4 +1,9 @@
-/*global getInnerSize:true,html */
+/*global html */
+
+/*
+Description:
+Relies on `el.clientWidth/Height`
+*/
 
 var getInnerSize;
 

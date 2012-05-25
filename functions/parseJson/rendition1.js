@@ -1,4 +1,11 @@
-/*global parseJson:true,global,isHostMethod */
+/*global global,isHostMethod */
+
+/*
+Description:
+Relies on `window.JSON.parse`.
+
+Note: could also use JSON2 lib to 'polyfill'
+*/
 
 var parseJson;
 

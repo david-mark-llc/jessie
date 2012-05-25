@@ -1,4 +1,9 @@
-/*global getAncestorByTagName:true,getElementParent,getElementTagName */
+/*global getElementParent,getElementTagName */
+
+/*
+Description:
+Relies on `jessie.getElementParent` and `jessie.getElementTagName`
+*/
 
 var getAncestorByTagName;
 

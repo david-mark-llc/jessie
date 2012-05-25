@@ -1,4 +1,9 @@
-/*global hasClass:true,html,isHostObjectProperty,isHostMethod */
+/*global html,isHostObjectProperty,isHostMethod */
+
+/*
+Description:
+Relies on the `el.classList.contains`
+*/
 
 var hasClass;
 

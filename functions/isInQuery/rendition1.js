@@ -1,4 +1,9 @@
-/*global isInQuery:true,query */
+/*global query */
+
+/*
+Description:
+Relies on `jessie.query`
+*/
 
 var isInQuery;
 
@@ -8,6 +13,7 @@ if(query) {
 			queryElements = query(selector),
 			i;
 
+		// could use Array.prototype.indexOf in another rendition
 		for(i = 0; i < queryElements.length; i++) {
 			if(queryElements[i] === el) {
 				isInQuery = true;

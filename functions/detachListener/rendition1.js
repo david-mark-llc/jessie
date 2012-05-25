@@ -1,5 +1,9 @@
-/*global detachListener:true,html,isHostMethod */
-// Degrades in IE 8-
+/*global html,isHostMethod */
+
+/*
+Description:
+Relies on W3C `jessie.el.removeEventListener` and degrades in IE8-
+*/
 
 var detachListener;
 

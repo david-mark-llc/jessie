@@ -1,4 +1,9 @@
-/*global detachWindowListener:true,global,isHostMethod */
+/*global global,isHostMethod */
+
+/*
+Description:
+Relies on MS `window.detachEvent` for IE8-
+*/
 
 var detachWindowListener;
 

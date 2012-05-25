@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /*jslint node:true, strict:false */
 
+// imports
 var program = require('commander'),
 	Table = require('cli-table'),
 	Set = require('simplesets').Set,
@@ -9,13 +10,16 @@ var program = require('commander'),
 	jsp = require("uglify-js").parser,
 	pro = require("uglify-js").uglify;
 
+var jessie = require('../builder/libs/jessie/jessie.js').jessie;
+
+var JessieFunction = jessie.Function;
+var JessieRendition = jessie.Rendition;
+
 program
 	.version('0.0.1')
 	.usage('[options] <functions ...>')
 	.option('-l, --list', 'Print a list of available functions')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
-	.option('-a, --all', 'Include all Functions and Renditions')
-	.option('--all-renditions', 'Include all renditions of a function if not specified explicitly')
 	.option('-u, --uglify', 'Minify the output using UglifyJS')
 	.option('--mangle', 'Mangle the generated output via UglifyJS')
 	.option('--beautify', 'Output beautified JS')
@@ -27,9 +31,13 @@ program
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
+// return contents of header include file
 var header = fs.readFileSync(program.header, "utf8");
+// return contents of footer include file
 var footer = fs.readFileSync(program.footer, "utf8");
 
+// cant grab this from uglifyjs (ast) parser as it's in the closure arguments
+// so we specify this here
 var HEADER_DECLARATIONS = ["global"];
 
 // parse the header/footer using uglify
@@ -59,10 +67,9 @@ var functions = {};
 fs.readdirSync(program.root).filter(function(f){
 	return fs.statSync(path.join(program.root, f)).isDirectory();
 }).forEach(function(f){
-	f = new JessieFunction(path.join(program.root, f));
+	f = new JessieFunction(path.join(program.root, f), JessieRendition);
 	functions[f.name] = f;
 });
-
 
 // The list option just outputs a list of all functions in Jessie, then quits
 if(program.list) {
@@ -75,37 +82,43 @@ if(program.list) {
 	process.exit(0);
 }
 
+// will store the jessie functions and which id
+// e.g. "attachListener": 1
 var requestedFunctions = {};
 
-if(program.all) {
-	Object.keys(functions).forEach(function(f){
-		requestedFunctions[f] = range(1, functions[f].renditions.length);
-	});
-} else {
 // if no args are used, output the help
-	if(program.args.length === 0) {
-		process.stdout.write(program.helpInformation());
-		program.emit('--help');
-		process.exit(0);
+if(program.args.length === 0) {
+	process.stdout.write(program.helpInformation());
+	program.emit('--help');
+	process.exit(0);
+}
+
+// parse the args to get a map of functions that we need to output
+program.args.forEach(function(arg){
+	// each argument can specify the renditions that are required
+	// by separating them with colons
+	arg = arg.split(":");
+
+	// first part is the function name
+	var functionName = arg[0];
+
+	// second part is the renditionId (1 or 2 or 3 etc)
+	var renditionId = arg[1];
+
+	if(!renditionId) {
+		throw new Error("You must specify a particular rendition e.g. "+functionName+":1");
 	}
 
-	// parse the args to get a map of functions that we need to output
-	program.args.forEach(function(v){
-		// each argument can specify the renditions that are required
-		// by separating them with colons
-		v = v.split(":");
-		requestedFunctions[v[0]] = v.splice(1);
-		if(!functions[v[0]]) {
-			throw new Error("Could not find function: " + v[0]);
-		}
-		if(requestedFunctions[v[0]].length === 0) {
-			if(functions[v[0]].renditions.length > 1 && !program.allRenditions) {
-				throw new Error(v[0]+" was specified but there are multiple renditions available!");
-			}
-			requestedFunctions[v[0]] = range(1, functions[v[0]].renditions.length);
-		}
-	});
-}
+	if(arg.length > 2) {
+		throw new Error("Only one rendition allowed");
+	}
+
+	requestedFunctions[functionName] = parseInt(renditionId, 10);
+	
+	if(!functions[functionName]) {
+		throw new Error("Could not find function: " + functionName);
+	}
+});
 
 // make sure the requestedFunctions object contains all the Functions
 // and Renditions that are implied by the starting set of functions
@@ -116,8 +129,9 @@ var order = sortDependencies(functions, requestedFunctions);
 
 // output some info to stderr
 process.stderr.write("The following functions will be included:\n");
-order.forEach(function(f, i){
-	process.stderr.write("   " + (i+1) + ":\t" + f + ": (" + requestedFunctions[f].join(", ") + ")\n");
+order.forEach(function(functionName, i){
+	var renditionId = requestedFunctions[functionName];
+	process.stderr.write("   " + (i+1) + ":\t" + functionName + " (renditionId=" + renditionId + ")\n");
 });
 
 var buffer = [];
@@ -127,12 +141,13 @@ if(!program.noWrap) {
 	buffer.push(header);
 }
 
-// output the var declarations of the functions
-buffer.push("var " + order.join(", ") + ";\n\n");
+
 
 // output the actual function contents
-order.forEach(function(f) {
-	buffer.push(functions[f].getContents(requestedFunctions[f]));
+order.forEach(function(functionName) {
+	var renditionId = requestedFunctions[functionName];
+	
+	buffer.push("\n\n"+functions[functionName].getContentsForRendition(renditionId) + "\n\n");
 });
 
 // output code to export the library to the global scope
@@ -172,101 +187,22 @@ if(program.output) {
 	}
 }
 
+
 // fin.
-
-
-function Rendition(func, file) {
-	this.func = func;
-	this.file = file;
-	
-	Object.defineProperties(this, {
-		contents: {
-			get: function(){
-				if(!this._contents) {
-					this._contents = fs.readFileSync(this.file, 'utf8');
-				}
-				return this._contents;
-			}.bind(this)
-		},
-		dependencies: {
-			get: function(){
-				if(!this._dependencies) {
-					this._dependencies = new Set();
-					var match, re = /\/\*global\s(\S*)\s*\*\//g;
-					while((match = re.exec(this.contents))) {
-						match[1].split(",").forEach(function(d){
-							d = d.split(":")[0];
-							if(d !== this.func.name) {
-								this._dependencies.add(d);
-							}
-						}.bind(this));
-					}
-				}
-				return this._dependencies;
-			}.bind(this)
-		}
-	});
-
-	this.getContents = function(conditional) {
-		// remove the /*global / declarations
-		var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
-		
-		if(conditional) {
-			// indent the contents by 1 tab
-			contents[1] = contents[0].replace(/^/gm, "\t");
-
-			// wrap it in an if statement
-			contents[0] = "if(!" + this.func.name + "){";
-			contents.push("}\n");
-		}
-		return contents.join("\n");
-	}.bind(this);
-}
-
-
-function JessieFunction(folder){
-	this.folder = folder;
-	this.name = path.basename(folder);
-	this.renditions = fs.readdirSync(folder).filter(function(f){
-		return f.indexOf(".js") === f.length - 3;
-	}).map(function(f){
-		return new Rendition(this, path.join(folder, f));
-	}.bind(this));
-	
-	this.getDependencies = function(renditions){
-		if(renditions.length === 0) {
-			renditions = range(1, this.renditions.length);
-		}
-		var dependencies = new Set();
-		renditions.forEach(function(r){
-			dependencies = dependencies.union(this.renditions[r-1].dependencies);
-		}.bind(this));
-		return dependencies;
-	}.bind(this);
-
-	this.getContents = function(renditions) {
-		return renditions.map(function(r, i){
-			return this.renditions[r - 1].getContents(i > 0);
-		}.bind(this)).join("\n");
-	};
-}
-
 
 function expandDependencies(glob, functions, required){
 	var dep, deps = new Set(Object.keys(required));
 	while((dep = deps.pop())) {
 		functions[dep].getDependencies(required[dep]).each(function(d){
-			if(!required[d] && !deps.has(d) && glob.indexOf(d) == -1) {
+			if(d && !required[d] && !deps.has(d) && glob.indexOf(d) == -1) {
+
 				if(!functions[d]) {
 					throw new Error("Could not find function: " + d);
 				}
 				if(functions[d].renditions.length > 1) {
-					if(program.allRenditions) {
-						required[d] = range(1, functions[d].renditions.length);
-					} else {
-						throw new Error(d+" is an implied dependency, but requires the rendition to be specified!");
-					}
+					throw new Error(d+" is an implied dependency, but requires the rendition to be specified!");
 				} else {
+					// choose dependency rendition automatic - not sure if right thing right now!
 					required[d] = [1];
 				}
 				deps.add(d);
@@ -356,11 +292,11 @@ function topologicalSort(graph) {
 	return processed;
 }
 
-function range(start, end)
-{
+function range(start, end) {
 	var foo = [];
-	for (var i = start; i <= end; i++)
+	for (var i = start; i <= end; i++) {
 		foo.push(i);
+	}
 	return foo;
 }
 

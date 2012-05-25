@@ -1,8 +1,18 @@
-/*global addClass:true,html*/
+/*global html*/
+
+/*
+Description:
+Relies on the `el.className` property (class attribute) which has fantastic support
+*/
+
+/*
+Support:
+IE6+, Chrome, FireFox
+*/
 
 var addClass;
 
-if (!addClass && html && "string" === typeof html.className ) {
+if (html && "string" === typeof html.className ) {
     addClass = function(el, className) {
       var re;
       if (!el.className) {

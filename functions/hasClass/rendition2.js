@@ -1,4 +1,9 @@
-/*global hasClass:true,html */
+/*global html */
+
+/*
+Description:
+Relies on the `el.className` property
+*/
 
 var hasClass;
 
