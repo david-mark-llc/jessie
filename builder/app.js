@@ -1,3 +1,4 @@
+/*jslint node:true, strict:false*/
 
 // dependencies
 var express = require('express');
@@ -5,6 +6,8 @@ var querystring = require('querystring');
 var jessie = require('./libs/jessie/jessie.js').jessie;
 
 
+var JessieFunction = require('./libs/jessie/Function.js');
+var JessieRendition = require('./libs/jessie/Rendition.js');
 
 // setup express
 var app = express.createServer();
@@ -18,49 +21,11 @@ app.configure(function(){
 });
 app.listen(1337);
 
-var functionSet = new jessie.FunctionSet('../functions/', jessie.Function);
+var functionSet = new jessie.FunctionSet('../functions/', JessieFunction, JessieRendition);
 functionSet.create();
 
 var constructorFnSet = new jessie.ConstructorFnSet('../constructors/', jessie.ConstructorFn);
 constructorFnSet.create();
-/*
-var requestedFunctions = [{
-	functionName: "detachListener",
-	renditionId: 1 
-}, {
-	functionName: "addClass",
-	renditionId: 2
-},{
-	functionName: "removeClass",
-	renditionId: 1
-},{
-	functionName: "hasClass",
-	renditionId: 1
-},{
-	functionName: "attachBoundListener",
-	renditionId: 1
-},{
-	functionName: "bind",
-	renditionId: 1
-},{
-	functionName: "attachListener",
-	renditionId: 1
-}];
-
-var requestedConstructors = [{
-	constructorName: "Element1",
-	methods: ["addClass", "removeClass", "attachListener"]
-}];
-
-
-builder = new jessie.Builder(functionSet, requestedFunctions, constructorFnSet, requestedConstructors, {
-	headerPath: '../libraries/header1.inc',
-	footerPath: '../libraries/footer1.inc'
-});
-
-var builderResponse = builder.build();
-
-*/
 
 
 var excludedQuerystringKeys = ['download'];
