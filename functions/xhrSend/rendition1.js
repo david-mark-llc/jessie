@@ -64,9 +64,9 @@ if(createXhr) {
 		
 		xhr.open(method, url);
 		
-		if(options.headers) {
-			for(key in options.headers) {
-				xhr.setRequestHeader(key, options.headers[key]);
+		if(headers) {
+			for(key in headers) {
+				xhr.setRequestHeader(key, headers[key]);
 			}
 		}
 
