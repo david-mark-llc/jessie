@@ -3,11 +3,17 @@
 // dependencies
 var express = require('express');
 var querystring = require('querystring');
-var jessie = require('./libs/jessie/jessie.js').jessie;
-
 
 var JessieFunction = require('./libs/jessie/Function.js');
 var JessieRendition = require('./libs/jessie/Rendition.js');
+
+var JessieConstructorFn = require('./libs/jessie/ConstructorFn.js');
+var JessiePrototypeMethod = require('./libs/jessie/PrototypeMethod.js');
+
+var JessieConstructorFnSet = require('./libs/jessie/ConstructorFnSet.js');
+var JessieFunctionSet = require('./libs/jessie/FunctionSet.js');
+
+var JessieBuilder = require('./libs/jessie/Builder.js');
 
 // setup express
 var app = express.createServer();
@@ -21,10 +27,10 @@ app.configure(function(){
 });
 app.listen(1337);
 
-var functionSet = new jessie.FunctionSet('../functions/', JessieFunction, JessieRendition);
+var functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition);
 functionSet.create();
 
-var constructorFnSet = new jessie.ConstructorFnSet('../constructors/', jessie.ConstructorFn);
+var constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod);
 constructorFnSet.create();
 
 
@@ -116,7 +122,7 @@ app.get('/', function(req, res){
 		
 		var requestedConstructorFns = getRequestedConstructors(query);
 
-		builder = new jessie.Builder(functionSet, requestedFunctions, constructorFnSet, requestedConstructorFns, {
+		builder = new JessieBuilder(functionSet, requestedFunctions, constructorFnSet, requestedConstructorFns, {
 			headerPath: '../libraries/header1.inc',
 			footerPath: '../libraries/footer1.inc'
 		});
