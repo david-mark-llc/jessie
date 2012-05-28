@@ -3,8 +3,6 @@
 
 // dependencies
 var fs = require('fs');
-var path = require('path');
-var Set = require('simplesets').Set;
 var uglifyParser = require("uglify-js").parser;
 var pro = require("uglify-js").uglify;
 
@@ -12,162 +10,30 @@ var pro = require("uglify-js").uglify;
 var jessie = {};
 
 /*
-* @constructor
-* @functionRoot {String} Path to function folder
-* @JessieFunction {Function} Jessie Function Constructor reference
-*/
-jessie.FunctionSet = function(functionRoot, JessieFunction) {
-	this.JessieFunction = JessieFunction;
-	this.functionRoot = functionRoot;
-	this.functions = [];
-};
-jessie.FunctionSet.prototype.create = function() {
-	// find fileNames based on directory inside root
-	var fileNames = fs.readdirSync(this.functionRoot).filter(function(fileName){
-		return fs.statSync(path.join(this.functionRoot, fileName)).isDirectory();
-	}.bind(this));
-
-	// create and store a new jessie function in the functions array
-	fileNames.forEach(function(fileName) {
-		var jessieFn = new this.JessieFunction(path.join(this.functionRoot, fileName), jessie.Rendition);
-		this.functions.push(jessieFn);
-	}.bind(this));
-
-	// sort the functions array by function name
-	this.functions.sort(this.sortByName);
-};
-jessie.FunctionSet.prototype.sortByName = function(a, b) {
-	var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
-	if(nameA < nameB) {
-		return -1;
-	}
-	if(nameA > nameB) {
-		return 1;
-	}
-	return 0;
-};
-jessie.FunctionSet.prototype.getFunctions = function() {
-	return this.functions;
-};
-jessie.FunctionSet.prototype.getFunctionByName = function(name) {
-	var func = null;
-	for(var i = 0; i < this.functions.length; i++) {
-		if(this.functions[i].name == name) {
-			func = this.functions[i];
-			break;
-		}
-	}
-	return func;
-};
-
-/*
-* @constructor
-* @folder {String} Path to function folder
-* @JessieRendition {Function} Jessie Rendition Constructor reference
-*/
-jessie.Function = function(folder, JessieRendition) {
-	this.folder = folder;
-	this.JessieRendition = JessieRendition;
-	this.name = path.basename(folder);
-
-	this.renditions = this.createRenditions();
-	
-	this.getDependencies = function(renditionId){
-		var dependencies = new Set();
-		dependencies = dependencies.union(this.renditions[renditionId-1].dependencies);
-		return dependencies;
-	}.bind(this);
-
-	this.getContentsForRendition = function(renditionId) {
-		var contents = this.renditions[renditionId-1].getContents();
-		return contents;
-	};
-};
-jessie.Function.prototype.createRenditions = function() {
-	var functionInstance = this;
-	var files = fs.readdirSync(this.folder).sort();
-	// makes sure only reading .js files
-	files = files.filter(function(file) {
-		return file.indexOf(".js") === file.length - 3;
-	}.bind(this));
-	files = files.map(function(file) {
-		var filePath = path.join(this.folder, file);
-		return new this.JessieRendition(functionInstance, filePath);
-	}.bind(this));
-	return files;
-};
-
-jessie.Rendition = function(func, file) {
-	this.func = func;
-	this.file = file;
-	this.name = path.basename(file);
-	this.id = this.name.substring(this.name.length-4, this.name.length-3);
-
-	Object.defineProperties(this, {
-		contents: {
-			get: function(){
-				if(!this._contents) {
-					this._contents = fs.readFileSync(this.file, 'utf8');
-				}
-				return this._contents;
-			}.bind(this)
-		},
-
-		description: {
-			get: function() {
-				var description = "";
-				var re = /^\s*Description:\s*([^*]+)\*\/$/gm;
-				var matches = re.exec(this.contents);
-				if(matches && matches.length > 1) {
-					description = matches[1].trim();
-				}
-				return description;
-			}
-		},
-
-		support: {
-			get: function() {
-				var support = "";
-				var re = /^\s*Support:\s*([^*]+)\*\/$/gm;
-				var matches = re.exec(this.contents);
-				if(matches && matches.length > 1) {
-					support = matches[1].trim();
-				}
-				return support;
-			}
-		},
-
-		dependencies: {
-			get: function(){
-				if(!this._dependencies) {
-					this._dependencies = new Set();
-					var match, re = /\/\*global\s(\S*)\s*\*\//g;
-					while((match = re.exec(this.contents))) {
-						match[1].split(",").forEach(function(d){
-							this._dependencies.add(d);
-						}.bind(this));
-					}
-				}
-				return this._dependencies;
-			}.bind(this)
-		}
-	});
-
-	this.getContents = function() {
-		// remove the /*global / declarations
-		var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
-		return contents.join("\n");
-	}.bind(this);
-
-};
-
-/*
-* @param functions {Array[{}]} An array of jessie.Function objects
-*/
-jessie.Builder = function(functionSet, requestedFunctions, options) {
+ * Responsible for building the contents for jessie.js
+ * @constructor
+ * @param functionSet {Object} Instance of jessie.FunctionSet
+ * @param constructorFnSet {Object} Instance of jessie.ConstructorFnSet
+ * @param requestedFunctions {Array} List of requested function objects in
+ * format { functionName: 'addClass', renditionId: 2 }
+ * @param requestedConstructorFns {Array} List of requested constructor
+ * function objects in format { constructorName: 'Element', methods: ['addClass', 'attachListener'] }
+ * @param options {Object} List of options for the builder
+ * @param options.headerPath {String} Path to header file. Defaults to '../libraries/header1.inc'
+ * @param options.footerPath {String} Path to footer file. Defaults to '../libraries/footer1.inc'
+ * asdas
+ */
+jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
+	// function stuff
 	this.functionSet = functionSet;
 	this.functions = this.functionSet.getFunctions();
 	this.requestedFunctions = requestedFunctions;
+
+	// constructor stuff
+	this.constructorFnSet = constructorFnSet;
+	this.constructorFns = this.constructorFnSet.getConstructorFns();
+	this.requestedConstructorFns = requestedConstructorFns;
+
 	this.options = this.options || {};
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
@@ -199,12 +65,23 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 	});
 };
 
+
 jessie.Builder.prototype.build = function() {
 	var builderResponse = {
 		success: false
 	};
 
-	var errors = this.expandDependencies();
+	var errors = [];
+
+	if(this.requestedFunctions.length === 0) {
+		errors.push('Please choose at least one function');
+	}
+
+	var missingFunctionDependencies = this.getMissingFunctionDependencies();
+	var missingContructorDependencies = this.getMissingConstructorDependencies();
+
+	errors = errors.concat(missingFunctionDependencies, missingContructorDependencies);
+
 	if(errors.length > 0) {
 		builderResponse.success = false;
 		builderResponse.errors = errors;
@@ -214,13 +91,62 @@ jessie.Builder.prototype.build = function() {
 		var order = sortDependencies(this.functions, this.requestedFunctions);
 
 		var jsContents = '';
-
 		jsContents += this.header;
+
+		/*
+
+		going to have think about this but thinking aloud:
+		check whether the "functionName" variable e.g. 'addClass'
+		is a prototype method name or just a normal function
+		
+		order might be:
+
+				[
+					'bind',
+					'attachListener',
+					'attachBoundListener',
+					'addClass', // this is a function name
+					'Element',
+					'addClass' // this one is a protoype method name
+					'Element#addClass' // or this instead?
+				]
+
+		OR
+
+		we know that constructors come after functions
+		and we know prototypeMethods come after constructor
+		(in any order)
+
+		so loop through all requested constructors and output them
+		lets hope constructors dont depend on other constructors
+		or MUCH worse have functions depend on constructors which I
+		highly doubt is a reality.
+
+		*/
+
 		order.forEach(function(functionName, i){
 			var func = this.functionSet.getFunctionByName(functionName);
 			var requestedFunc = this.getRequestedFunctionByName(functionName);
 			jsContents += ("\n\n"+func.getContentsForRendition(requestedFunc.renditionId) + "\n\n");
 		}.bind(this));
+
+
+		var constructorFn;
+		if(this.requestedConstructorFns) {
+			this.requestedConstructorFns.forEach(function(requestedConstructorFn, i) {
+				constructorFn = this.constructorFnSet.getConstructorFnByName(requestedConstructorFn.constructorName);
+				if(constructorFn) {
+					jsContents += ("\n\n"+constructorFn.getContents() + "\n\n");
+
+					var requestedMethods = requestedConstructorFn.methods;
+					requestedMethods.forEach(function(requestedMethod) {
+						var method = constructorFn.getPrototypeMethodByName(requestedMethod);
+						jsContents += ("\n\n"+method.getContents() + "\n\n");
+					});
+				}
+			}.bind(this));
+		}
+
 
 		jsContents += this.createExportDeclaration(order);
 
@@ -242,7 +168,7 @@ jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
 	return requestedFunc;
 };
 
-function sortDependencies(functions, required) {
+function sortDependencies(functions, required, constructorFns, requestedConstructorFns) {
 	var graph = [], initialOrder = Object.keys(required);
 
 
@@ -268,6 +194,7 @@ function sortDependencies(functions, required) {
 	}
 
 	required = requiredHash;
+
 
 	initialOrder.forEach(function(f, i){
 		graph[i] = {
@@ -350,14 +277,28 @@ function topologicalSort(graph) {
 
 
 jessie.Builder.prototype.createExportDeclaration = function(order) {
+	var hasRequestedConstructors = (this.requestedConstructorFn && this.requestedConstructorFn.length > 0);
+
+
 	var out = '\n\nglobal[\"' + 'jessie' + '\"] = {\n';
 	order.forEach(function(functionName, i){
 		out += '\t';
 		out += '"'+ functionName +'": ';
 		out += functionName;
-		out += (i === order.length-1 ? "" : ",");
+		out += ( (i === order.length-1 && !hasRequestedConstructors ) ? "" : ",");
 		out += '\n';
 	}.bind(this));
+
+	if(this.requestedConstructorFns) {
+		this.requestedConstructorFns.forEach(function(requestedConstructorFn, i) {
+			out += '\t';
+			out += '"'+ requestedConstructorFn.constructorName +'": ';
+			out += requestedConstructorFn.constructorName;
+			out += (i === this.requestedConstructorFns.length-1 ? "" : ",");
+			out += '\n';
+		}.bind(this));
+	}
+	
 	out += '};\n';
 	return out;
 };
@@ -365,7 +306,7 @@ jessie.Builder.prototype.createExportDeclaration = function(order) {
 // this function needs a look
 // all it should do is return any errors around dependencies that
 // havent been specified rather than throwing etc
-jessie.Builder.prototype.expandDependencies = function() {
+jessie.Builder.prototype.getMissingFunctionDependencies = function() {
 	var errors = [];
 
 	var func;
@@ -375,19 +316,87 @@ jessie.Builder.prototype.expandDependencies = function() {
 		// find the function
 		func = this.functionSet.getFunctionByName(this.requestedFunctions[i].functionName);
 		// get the dependecies for the requested rendition
-		var dependencies = func.getDependencies(this.requestedFunctions[i].renditionId);
-		dependencies.each(function(dependency) {
-			if(	dependency) {
-				if(	this.requestedFunctionsContainDependency(dependency) ||
-					this.headerContainsDependency(dependency)) {
+		if(func) {
+			var dependencies = func.getDependencies(this.requestedFunctions[i].renditionId);
+			dependencies.each(function(dependency) {
+				if(	dependency) {
+					if(	this.requestedFunctionsContainDependency(dependency) ||
+						this.headerContainsDependency(dependency)) {
+					}
+					else {
+						errors.push({itemName: func.name, dependency: dependency});
+					}
 				}
-				else {
-					errors.push({functionName: func.name, dependency: dependency});
-				}
-			}
-		}.bind(this));
+			}.bind(this));
+		}
 	}
 	return errors;
+};
+
+jessie.Builder.prototype.getMissingConstructorDependencies = function() {
+	var missing = [],
+		constructorFn,
+		requestedConstructor,
+		prototypeMethod,
+		dependencies,
+		i = 0;
+
+	if(this.requestedConstructorFns) {
+		for( ; i < this.requestedConstructorFns.length; i++) {
+			requestedConstructor = this.requestedConstructorFns[i];
+
+			constructorFn = this.constructorFnSet.getConstructorFnByName(requestedConstructor.constructorName);
+
+			if(constructorFn) {
+				dependencies = constructorFn.getDependencies();
+				// this handles constructor dependencies
+				dependencies.forEach(function(dependency) {
+					if(dependency) {
+						// does the constructor dependency appear in the requested functions
+						// or in the header declarations
+						if(	this.requestedFunctionsContainDependency(dependency) ||
+							this.headerContainsDependency(dependency)) {
+						}
+						// no it doesn't
+						else {
+							missing.push({itemName: constructorFn.constructorName, dependency: dependency});
+						}
+					}
+				}.bind(this));
+
+				// now check constructors' prototypMethods for dependencies
+
+				i = 0;
+				for(; i < requestedConstructor.methods.length; i++) {
+					prototypeMethod = constructorFn.getPrototypeMethodByName(requestedConstructor.methods[i]);
+					if(prototypeMethod) {
+						dependencies = prototypeMethod.getDependencies();
+						dependencies.each(function(dependency) {
+							if(dependency) {
+								// does the requestedFunctions contain the dependency
+								// does the header contain the dependency
+								// is the dependency the constructor name itself
+								if(	this.requestedFunctionsContainDependency(dependency) ||
+									this.headerContainsDependency(dependency) ||
+									dependency === constructorFn.name) {
+								}
+								// no it doesn't
+								else {
+									missing.push({
+										itemName: constructorFn.name+"#"+prototypeMethod.name,
+										dependency: dependency
+									});
+								}
+							}
+
+						}.bind(this));
+					}
+				}
+			}
+		}
+	}
+
+	return missing;
 };
 
 jessie.Builder.prototype.requestedFunctionsContainDependency = function(dependency) {
@@ -409,8 +418,6 @@ jessie.Builder.prototype.getContents = function() {
 	var output = '';
 	this.requestedFunctions.forEach(function(func) {
 		var rendition = this.getRendition(func.functionName, func.renditionId);
-		//var dependencies = rendition.dependencies;
-		//console.log(dependencies);
 		output += "\n\n" + rendition.getContents(func.functionName, func.renditionId) + "\n\n";
 	}.bind(this));
 	return output;
@@ -426,4 +433,4 @@ jessie.Builder.prototype.getRendition = function(functionName, renditionId) {
 	return rendition;
 };
 
-module.exports.jessie = jessie;
+module.exports = jessie.Builder;

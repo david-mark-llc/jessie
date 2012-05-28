@@ -5,6 +5,11 @@ Description:
 For IE6 users that have updated their msxml dll files
 */
 
+/*
+Support:
+IE6
+*/
+
 var createXhr;
 
 if(isHostMethod(global, 'ActiveXObject')) {

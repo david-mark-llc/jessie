@@ -10,10 +10,8 @@ var program = require('commander'),
 	jsp = require("uglify-js").parser,
 	pro = require("uglify-js").uglify;
 
-var jessie = require('../builder/libs/jessie/jessie.js').jessie;
-
-var JessieFunction = jessie.Function;
-var JessieRendition = jessie.Rendition;
+var JessieFunction = require('../builder/libs/jessie/Function.js');
+var JessieRendition = require('../builder/libs/jessie/Rendition.js');
 
 program
 	.version('0.0.1')

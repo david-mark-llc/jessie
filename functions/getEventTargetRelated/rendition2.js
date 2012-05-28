@@ -3,6 +3,11 @@ Description:
 Relies on W3C and MS event model.
 */
 
+/*
+Support:
+IE6 - IE8
+*/
+
 var getEventTargetRelated;
 
 getEventTargetRelated = function(e) {

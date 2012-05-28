@@ -5,6 +5,11 @@ Description:
 For fully patched Win2k SP4 and up
 */
 
+/*
+Support:
+IE6
+*/
+
 var createXhr;
 
 if(isHostMethod(global, 'ActiveXObject')) {
