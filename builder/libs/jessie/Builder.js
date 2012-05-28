@@ -9,7 +9,21 @@ var pro = require("uglify-js").uglify;
 // jessie
 var jessie = {};
 
-jessie.Builder = function(functionSet, requestedFunctions, constructorFnSet, requestedConstructorFns, options) {
+/*
+ * Responsible for building the contents for jessie.js
+ * @constructor
+ * @param functionSet {Object} Instance of jessie.FunctionSet
+ * @param constructorFnSet {Object} Instance of jessie.ConstructorFnSet
+ * @param requestedFunctions {Array} List of requested function objects in
+ * format { functionName: 'addClass', renditionId: 2 }
+ * @param requestedConstructorFns {Array} List of requested constructor
+ * function objects in format { constructorName: 'Element', methods: ['addClass', 'attachListener'] }
+ * @param options {Object} List of options for the builder
+ * @param options.headerPath {String} Path to header file. Defaults to '../libraries/header1.inc'
+ * @param options.footerPath {String} Path to footer file. Defaults to '../libraries/footer1.inc'
+ * asdas
+ */
+jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
 	// function stuff
 	this.functionSet = functionSet;
 	this.functions = this.functionSet.getFunctions();
@@ -17,11 +31,7 @@ jessie.Builder = function(functionSet, requestedFunctions, constructorFnSet, req
 
 	// constructor stuff
 	this.constructorFnSet = constructorFnSet;
-	this.constructorFns = [];
-	if(this.constructorFnSet) {
-		this.constructorFns = this.constructorFnSet.getConstructorFns();
-	}
-	
+	this.constructorFns = this.constructorFnSet.getConstructorFns();
 	this.requestedConstructorFns = requestedConstructorFns;
 
 	this.options = this.options || {};
@@ -61,10 +71,16 @@ jessie.Builder.prototype.build = function() {
 		success: false
 	};
 
+	var errors = [];
+
+	if(this.requestedFunctions.length === 0) {
+		errors.push('Please choose at least one function');
+	}
+
 	var missingFunctionDependencies = this.getMissingFunctionDependencies();
 	var missingContructorDependencies = this.getMissingConstructorDependencies();
 
-	var errors = missingFunctionDependencies.concat(missingContructorDependencies);
+	errors = errors.concat(missingFunctionDependencies, missingContructorDependencies);
 
 	if(errors.length > 0) {
 		builderResponse.success = false;
@@ -308,7 +324,7 @@ jessie.Builder.prototype.getMissingFunctionDependencies = function() {
 						this.headerContainsDependency(dependency)) {
 					}
 					else {
-						errors.push({functionName: func.name, dependency: dependency});
+						errors.push({itemName: func.name, dependency: dependency});
 					}
 				}
 			}.bind(this));
@@ -343,7 +359,7 @@ jessie.Builder.prototype.getMissingConstructorDependencies = function() {
 						}
 						// no it doesn't
 						else {
-							missing.push({functionName: constructorFn.constructorName, dependency: dependency});
+							missing.push({itemName: constructorFn.constructorName, dependency: dependency});
 						}
 					}
 				}.bind(this));
@@ -367,7 +383,7 @@ jessie.Builder.prototype.getMissingConstructorDependencies = function() {
 								// no it doesn't
 								else {
 									missing.push({
-										functionName: constructorFn.name+"#"+prototypeMethod.name,
+										itemName: constructorFn.name+"#"+prototypeMethod.name,
 										dependency: dependency
 									});
 								}

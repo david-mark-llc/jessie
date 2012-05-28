@@ -110,9 +110,30 @@ function getRequestedConstructors(query) {
 	return requestedConstructorFns;
 }
 
+function getErrorsInViewFriendlyFormat(errors) {
+	var errorItem,
+		errorMessage,
+		errorMessages = [],
+		i = 0,
+		l = errors.length;
+
+	for(; i < l; i++) {
+		errorItem = errors[i];
+		if(errorItem.itemName) {
+			errorMessage = (i+1) + '. ' + errorItem.itemName + ' depends on ' + errorItem.dependency;
+		}
+		else {
+			errorMessage = (i+1) + '. ' + errorItem;
+		}
+		errorMessages.push(errorMessage);
+	}
+
+	return errorMessages;
+}
+
 app.get('/', function(req, res){
-	var query = req.query;
-	var builder;
+	var query = req.query,
+		builder;
 
 
 	// Trying to download
@@ -122,15 +143,14 @@ app.get('/', function(req, res){
 		
 		var requestedConstructorFns = getRequestedConstructors(query);
 
-		builder = new JessieBuilder(functionSet, requestedFunctions, constructorFnSet, requestedConstructorFns, {
+		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, {
 			headerPath: '../libraries/header1.inc',
 			footerPath: '../libraries/footer1.inc'
 		});
 
-		var errors = [];
-
-		if(requestedFunctions.length === 0) {
-			errors.push('Please select at least one function.');
+		var buildResponse = builder.build();
+		if(buildResponse.errors) {
+			var errors = getErrorsInViewFriendlyFormat(buildResponse.errors);
 			res.render('index.ejs', {
 				functions: functionSet.getFunctions(),
 				constructorFns: constructorFnSet.getConstructorFns(),
@@ -139,25 +159,9 @@ app.get('/', function(req, res){
 			});
 		}
 		else {
-			var buildResponse = builder.build();
-			if(buildResponse.errors) {
-
-				for(var i = 0; i < buildResponse.errors.length; i++) {
-					errors.push( (i+1) + '. ' + buildResponse.errors[i].functionName + ' depends on ' + buildResponse.errors[i].dependency);
-				}
-
-				res.render('index.ejs', {
-					functions: functionSet.getFunctions(),
-					constructorFns: constructorFnSet.getConstructorFns(),
-					errors: errors,
-					query: query
-				});
-			}
-			else {
-				res.header('Content-Disposition', 'attachment; filename="jessie.js');
-				res.contentType('text/javascript');
-				res.send(buildResponse.output);
-			}
+			res.header('Content-Disposition', 'attachment; filename="jessie.js');
+			res.contentType('text/javascript');
+			res.send(buildResponse.output);
 		}
 	}
 	else {
