@@ -61,16 +61,14 @@ jessie.Builder.prototype.build = function() {
 		success: false
 	};
 
-	var errors = this.expandDependencies();
+	var missingFunctionDependencies = this.getMissingFunctionDependencies();
 	var missingContructorDependencies = this.getMissingConstructorDependencies();
+
+	var errors = missingFunctionDependencies.concat(missingContructorDependencies);
 
 	if(errors.length > 0) {
 		builderResponse.success = false;
 		builderResponse.errors = errors;
-	}
-	else if(missingContructorDependencies.length > 0) {
-		builderResponse.success = false;
-		builderResponse.errors = missingContructorDependencies;
 	}
 	else {
 		builderResponse.success = true;
@@ -292,7 +290,7 @@ jessie.Builder.prototype.createExportDeclaration = function(order) {
 // this function needs a look
 // all it should do is return any errors around dependencies that
 // havent been specified rather than throwing etc
-jessie.Builder.prototype.expandDependencies = function() {
+jessie.Builder.prototype.getMissingFunctionDependencies = function() {
 	var errors = [];
 
 	var func;
