@@ -90,7 +90,7 @@ h1 {
 	table-layout: fixed;
 	width: 100%;
 	border-collapse: collapse;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 #builder table thead {
@@ -107,19 +107,19 @@ h1 {
 	color: #fff;
 }
 
-#builder table thead th.function {
+#builder table .function {
 	width: 200px;
 }
 
-#builder table thead th.rendition {
+#builder table .rendition {
 	width: 70px;
 }
 
-#builder table thead th.selection {
+#builder table .selection {
 	width: 70px;
 }
 
-#builder table thead th.support {
+#builder table .support {
 	width: 100px;
 }
 
