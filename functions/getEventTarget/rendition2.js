@@ -8,6 +8,11 @@ See: https://groups.google.com/forum/#!starred/comp.lang.javascript/uUsSVH7Vcvg
 If you will be using a forked rendition to support IE 8-
 */
 
+/*
+Support:
+IE6 - IE8
+*/
+
 var getEventTarget;
 
 getEventTarget = function(e) {

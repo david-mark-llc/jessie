@@ -5,6 +5,10 @@ Description:
 For legacy eg. IE5
 */
 
+/*
+Support:
+IE5.x
+*/
 
 var createXhr;
 

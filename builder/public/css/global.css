@@ -66,10 +66,29 @@ h1 {
 	display: none;
 }
 
-#builder table {
-	table-layout: fixed;
+#functions {
 	width: 97%;
 	margin: 0 auto;
+}
+
+#functions h2 {
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+#constructors {
+	width: 97%;
+	margin: 0 auto;
+}
+
+#constructors h2 {
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+#builder table {
+	table-layout: fixed;
+	width: 100%;
 	border-collapse: collapse;
 	margin-bottom: 20px;
 }

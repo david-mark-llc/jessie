@@ -5,6 +5,11 @@ Description:
 Relies on W3C `window.XMLHttpRequest`
 */
 
+/*
+Support:
+IE7+, Chrome, Firefox, Safari
+*/
+
 var createXhr;
 
 if(isHostMethod(global, "XMLHttpRequest")) {
