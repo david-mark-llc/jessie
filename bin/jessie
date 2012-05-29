@@ -22,7 +22,6 @@ program
 	.option('--mangle', 'Mangle the generated output via UglifyJS')
 	.option('--beautify', 'Output beautified JS')
 	.option('--root [path]', 'the folder that jessie functions are located in', path.join(__dirname, '../functions/'))
-	.option('--no-wrap', 'Don\'nt wrap the built file with the header/footer file contents')
 	.option('--exports <list>', 'A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])', list, ['isHostMethod', 'isHostObjectProperty'])
 	.option('--header [path]', 'The header file', path.join(__dirname, '../libraries/header1.inc'))
 	.option('--footer [path]', 'The footer file', path.join(__dirname, '../libraries/footer1.inc'))
@@ -134,12 +133,8 @@ order.forEach(function(functionName, i){
 
 var buffer = [];
 
-if(!program.noWrap) {
-	// write the header
-	buffer.push(header);
-}
 
-
+buffer.push(header);
 
 // output the actual function contents
 order.forEach(function(functionName) {
@@ -155,10 +150,8 @@ program.exports.concat(order).forEach(function(f, i, l) {
 });
 buffer.push("};\n");
 
-// write the footer
-if(!program.noWrap) {
-	buffer.push(footer);
-}
+buffer.push(footer);
+
 
 if(program.uglify) {
 	var ast = jsp.parse(buffer.join("")); // parse code and get the initial AST

@@ -10,6 +10,11 @@ See: https://groups.google.com/forum/#!search/david$20mark$20innerHTML/comp.lang
 NOTE: Don't use this rendition with anything but DIV's
 */
 
+/*
+Support:
+IE3
+*/
+
 var setHtml;
 
 if(html && "string" == typeof html.innerHTML) {

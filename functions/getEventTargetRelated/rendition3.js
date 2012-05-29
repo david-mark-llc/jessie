@@ -5,6 +5,11 @@ Description:
 Relies on MS `e.srcElement`, `e.fromElement` and `e.toElement` which works in IE8-
 */
 
+/*
+Support:
+IE4, NN4
+*/
+
 var getEventTargetRelated;
 
 if(html && isHostMethod(html, 'attachEvent')) {

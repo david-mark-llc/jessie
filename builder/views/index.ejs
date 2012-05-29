@@ -44,26 +44,28 @@
 					<div id="functions">
 						<h2>Functions</h2>
 
-						<table id="functions">
+						<table>
 							<thead>
 								<tr>
 									<th class="function">Function</th>
 									<th class="rendition">Rendition</th>
-									<th class="selection">Selection</th>								
-									<th class="support">Support</th>
+									<th class="selection">Selection</th>							
+									<th class="support">Degrades in</th>
 									<th class="description">Description</th>					
 								</tr>
 							</thead>
+						</table>
 							
-							<% for(var i = 0; i < functions.length; i++) { %>
+						<% for(var i = 0; i < functions.length; i++) { %>
+							<table>
 								<tbody>
 									<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
 										<tr>
 											<%if(j==0) {%>
-												<td rowspan="<%=functions[i].renditions.length%>"><%=functions[i].name%></td>
+												<td class="function" rowspan="<%=functions[i].renditions.length%>"><%=functions[i].name%></td>
 											<%}%>
-											<td><%=functions[i].renditions[j].id%></td>
-											<td>
+											<td class="rendition"><%=functions[i].renditions[j].id%></td>
+											<td class="selection">
 												<input 
 													id="<%=functions[i].name+functions[i].renditions[j].id%>" 
 													type="radio" 
@@ -75,14 +77,13 @@
 													<%}%>
 												>
 											</td>
-											<td><%- md(functions[i].renditions[j].support) -%></td>
-											<td><%- md(functions[i].renditions[j].description) -%></td>						
+											<td class="support"><%- md(functions[i].renditions[j].support) -%></td>
+											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>						
 										</tr>
 									<% } %>		
-								</tbody>				
-							<% } %>
-							
-						</table>
+								</tbody>		
+							</table>
+						<% } %>
 					</div>
 					<div id="constructors">
 						<h2>Constructors</h2>

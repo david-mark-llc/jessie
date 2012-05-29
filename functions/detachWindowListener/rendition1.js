@@ -2,7 +2,12 @@
 
 /*
 Description:
-Relies on W3C `window.removeEventListener` and degrades in IE8-
+Relies on W3C `window.removeEventListener`
+*/
+
+/*
+Support:
+IE8, Opera 7.6
 */
 
 var detachWindowListener;

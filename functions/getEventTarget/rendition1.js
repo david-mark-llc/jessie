@@ -2,7 +2,12 @@
 
 /*
 Description:
-Relies on W3C `e.target` which degrades in IE8-
+Relies on W3C `e.target`
+*/
+
+/*
+Support:
+IE8, Opera 7.6
 */
 
 var getEventTarget;
