@@ -78,7 +78,6 @@ Options:
 	--mangle             Mangle the generated output via UglifyJS
 	--beautify           Output beautified JS
 	--root [path]        the folder that jessie functions are located in
-	--no-wrap            Don'nt wrap the built file with the header/footer file contents
 	--exports <list>     A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])
 	--header [path]      The header file
 	--footer [path]      The footer file
