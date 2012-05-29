@@ -5,7 +5,7 @@ Relies on W3C and MS event model.
 
 /*
 Support:
-IE6 - IE8
+IE9+,Opera 8+,Chrome, FF, Safari
 */
 
 var getEventTargetRelated;

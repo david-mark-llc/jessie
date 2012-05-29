@@ -2,7 +2,12 @@
 
 /*
 Description:
-Relies on MS `window.detachEvent` for IE8 and below
+Relies on MS `window.detachEvent`
+*/
+
+/*
+Support:
+IE9+,Opera 8+,Chrome, FF, Safari
 */
 
 var detachWindowListener;

@@ -1,7 +1,12 @@
 /*global global,isHostMethod */
 /*
 Description:
-Relies on `window.attachEvent` so works in IE8 and below
+Relies on `window.attachEvent`
+*/
+
+/*
+Support:
+IE9+,Opera 8+,Chrome, FF, Safari
 */
 var attachDocumentReadyListener;
 

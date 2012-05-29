@@ -2,12 +2,12 @@
 
 /*
 Description:
-Relies on MS `el.detachEvent` and works in IE8-
+Relies on MS `el.detachEvent`
 */
 
 /*
 Support:
-IE6 - IE8
+IE9+,Opera 8+,Chrome, FF, Safari
 */
 
 var detachListener;

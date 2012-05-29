@@ -2,7 +2,12 @@
 
 /*
 Description:
-Relies on W3C `jessie.el.removeEventListener` and degrades in IE8-
+Relies on W3C `jessie.el.removeEventListener`
+*/
+
+/*
+Support:
+IE8, Opera 7.6
 */
 
 var detachListener;
