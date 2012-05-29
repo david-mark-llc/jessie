@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on `window.addEventListener` and `document.addEventListener` which degrades in IE8-.
+Relies on `window.addEventListener` and `document.addEventListener`
 
 Note: No frames or other alternate windows.
 
@@ -19,7 +19,8 @@ Can use following to get IE8- to work when document is parsed:
 
 */
 /*
-
+Support:
+IE8, Opera 7.6
 */
 
 var attachDocumentReadyListener;

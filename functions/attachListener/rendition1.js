@@ -1,12 +1,12 @@
 /*global html,isHostMethod */
 /*
 Description:
-Relies on W3C `el.addEventListener` which degrades in IE8 and below
+Relies on W3C `el.addEventListener`
 */
 
 /*
 Support:
-IE9+, Chrome, FireFox
+IE8, Opera 7.6
 */
 
 var attachListener;

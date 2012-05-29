@@ -2,7 +2,12 @@
 
 /*
 Description:
-Relies on `window.attachEvent` which works in IE8-
+Relies on `window.attachEvent`
+*/
+
+/*
+Support:
+IE9+,Opera 8+,Chrome, FF, Safari
 */
 
 var attachWindowListener;
