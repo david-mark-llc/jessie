@@ -7,7 +7,7 @@ Both W3C and MS implementation therefore providing the greatest browser support
 
 /*
 Support:
-IE4?
+IE4, NN4
 */
 
 var attachListener;

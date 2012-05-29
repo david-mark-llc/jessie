@@ -7,7 +7,7 @@ Relies on MS `e.srcElement`
 
 /*
 Support:
-IE4?
+IE4, NN4
 */
 
 var getEventTarget;
