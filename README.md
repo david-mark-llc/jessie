@@ -6,7 +6,7 @@ Lean, beautiful and smart
 
 ### General information
 
-Jessie has a flat API. It is simply a collection of functions where `jessie` is the default namespace* to attach those functions to so that they are not on the global `window` object.
+Jessie has a flat API. It is simply a collection of functions where `jessie` is the default namespace* to attach those functions to so that they are not on the global object.
 
 	jessie.attachListener
 	jessie.getDescendantsByClassName
@@ -14,7 +14,7 @@ Jessie has a flat API. It is simply a collection of functions where `jessie` is 
 	jessie.parseJson
 	jessie.forEach
 
-*You can replace `jessie` with any name you want using the builder making it your library.
+*You can replace `jessie` with any name you want giving you that extra personal touch for your custom build.
 
 Additionally you can use the builder to choose which functions you want in your custom build for your library.
 
