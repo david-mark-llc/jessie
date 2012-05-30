@@ -24,6 +24,8 @@ var jessie = {};
  * asdas
  */
 jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
+	this.defaultExports = ['isHostMethod', 'isHostObjectProperty'];
+
 	// function stuff
 	this.functionSet = functionSet;
 	this.functions = this.functionSet.getFunctions();
@@ -277,10 +279,12 @@ function topologicalSort(graph) {
 
 
 jessie.Builder.prototype.createExportDeclaration = function(order) {
-	var hasRequestedConstructors = (this.requestedConstructorFn && this.requestedConstructorFn.length > 0);
-
+	var hasRequestedConstructors = (this.requestedConstructorFns && this.requestedConstructorFns.length > 0);
 
 	var out = '\n\nglobal[\"' + 'jessie' + '\"] = {\n';
+
+	order = this.defaultExports.concat(order);
+
 	order.forEach(function(functionName, i){
 		out += '\t';
 		out += '"'+ functionName +'": ';
