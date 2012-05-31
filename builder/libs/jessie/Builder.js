@@ -36,13 +36,20 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 	this.constructorFns = this.constructorFnSet.getConstructorFns();
 	this.requestedConstructorFns = requestedConstructorFns;
 
-	this.options = this.options || {};
-	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
-	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
+	this.setupOptions(options);
+
 	this.headerDeclarations = ['global'];
 	this.setupHeader();
 	this.setupFooter();
 	this.setupHeaderDeclarations();
+};
+
+jessie.Builder.prototype.setupOptions = function(options) {
+	this.options = options || {};
+	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
+	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
+	this.options.namespace = this.options.namespace || 'jessie';
+	this.options.minify = this.options.minify || false;
 };
 
 jessie.Builder.prototype.setupHeader = function() {
@@ -154,9 +161,18 @@ jessie.Builder.prototype.build = function() {
 
 		jsContents += this.footer;
 		builderResponse.output = jsContents;
+
+		if(this.options.minify) {
+			builderResponse.output = this.minify(builderResponse.output);
+		}
 	}
 
 	return builderResponse;
+};
+
+jessie.Builder.prototype.minify = function(output) {
+	var ast = uglifyParser.parse(output);
+	return pro.gen_code(ast);
 };
 
 jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
@@ -281,7 +297,7 @@ function topologicalSort(graph) {
 jessie.Builder.prototype.createExportDeclaration = function(order) {
 	var hasRequestedConstructors = (this.requestedConstructorFns && this.requestedConstructorFns.length > 0);
 
-	var out = '\n\nglobal[\"' + 'jessie' + '\"] = {\n';
+	var out = '\n\nglobal[\"' + this.options.namespace + '\"] = {\n';
 
 	order = this.defaultExports.concat(order);
 

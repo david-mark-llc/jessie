@@ -21,7 +21,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('view options', {layout:false, md: require("node-markdown").Markdown });
 app.configure(function(){
-	app.use(express.static(__dirname + '/public'));
+	app.use(express['static'](__dirname + '/public'));
     app.use(express.methodOverride());
     app.use(express.bodyParser());
 });
@@ -34,7 +34,7 @@ var constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieCons
 constructorFnSet.create();
 
 
-var excludedQuerystringKeys = ['download'];
+var excludedQuerystringKeys = ['download', 'namespace', 'minify'];
 
 // add constructor names to exluded keys for building up functions
 constructorFnSet.getConstructorFns().forEach(function(constructorFn) {
@@ -143,10 +143,22 @@ app.get('/', function(req, res){
 		
 		var requestedConstructorFns = getRequestedConstructors(query);
 
-		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, {
-			headerPath: '../libraries/header1.inc',
-			footerPath: '../libraries/footer1.inc'
-		});
+		var builderOptions = {};
+		builderOptions.headerPath = '../libraries/header1.inc';
+		builderOptions.footerPath = '../libraries/footer1.inc';
+
+		var namespace = query['namespace'].trim();
+
+		if(namespace && namespace.length > 0) {
+			builderOptions.namespace = namespace;
+		}
+
+		var minify = query['minify'];
+		if(minify == 'on') {
+			builderOptions.minify = minify;
+		}
+
+		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, builderOptions);
 
 		var buildResponse = builder.build();
 		if(buildResponse.errors) {
