@@ -23,7 +23,7 @@ program
 	.usage('[options] <functions ...>')
 	.option('-l, --list', 'Print a list of available functions')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
-	.option('-u, --uglify', 'Minify the output using UglifyJS')
+	.option('--minify', 'Minify the output using UglifyJS')
 	.option('--mangle', 'Mangle the generated output via UglifyJS')
 	.option('--beautify', 'Output beautified JS')
 	.option('--root [path]', 'the folder that jessie functions are located in', path.join(__dirname, '../functions/'))
@@ -51,10 +51,19 @@ if(program.args.length === 0) {
 
 setupRequestedFunctions();
 
-var builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, {
-	headerPath: '../libraries/header1.inc',
-	footerPath: '../libraries/footer1.inc'
-});
+var buildOptions = {};
+buildOptions.headerPath = '../libraries/header1.inc';
+buildOptions.footerPath = '../libraries/footer1.inc';
+
+if(program.minify) {
+	buildOptions.minify = true;
+}
+
+if(program.namespace) {
+	buildOptions.namespace = program.namespace.trim();
+}
+
+var builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, buildOptions);
 
 var response = builder.build();
 if(response.success) {

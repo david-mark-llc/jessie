@@ -1,13 +1,9 @@
-
 /*jslint node:true, strict:false*/
 
-// dependencies
-var fs = require('fs');
-var uglifyParser = require("uglify-js").parser;
-var pro = require("uglify-js").uglify;
-
-// jessie
-var jessie = {};
+var fs = require('fs'),
+	uglifyParser = require("uglify-js").parser,
+	pro = require("uglify-js").uglify,
+	jessie = {};
 
 /*
  * Responsible for building the contents for jessie.js
@@ -161,6 +157,7 @@ jessie.Builder.prototype.build = function() {
 
 		jsContents += this.footer;
 		builderResponse.output = jsContents;
+
 
 		if(this.options.minify) {
 			builderResponse.output = this.minify(builderResponse.output);
