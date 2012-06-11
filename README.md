@@ -83,13 +83,13 @@ Options:
 
 Example on Linux
 
-	cd bin
-	node jessie -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
+	cd builder
+	node command.js -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
 
 Example on Windows:
 
-	cd bin
-	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
+	cd builder
+	node command.js getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
 
 ##### Web UI
 
