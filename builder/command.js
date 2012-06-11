@@ -89,8 +89,13 @@ requestedFunctions.forEach(function(requestedFunction, i) {
 	process.stderr.write("\n");
 });
 
-process.stderr.write("\nFile written to: '" + program.output + "'. \n\nEnjoy and happy cross-browser scripting!");
+if(program.output) {
+	process.stderr.write("\n");
+	process.stderr.write("File written to: " + program.output + ".");
+	process.stderr.write("\n");
+}
 
+process.stderr.write("\nEnjoy and happy cross-browser scripting!");
 process.stderr.write("\n\n========================================================\n\n");
 
 function list(val) {
