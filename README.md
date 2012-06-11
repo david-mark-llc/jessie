@@ -72,13 +72,8 @@ Options:
 
     -h, --help           output usage information
     -V, --version        output the version number
-    -l, --list           Print a list of available functions
     -o, --output [file]  The file to output to (outputs to stdout by default)
     --minify             Minify the output using UglifyJS
-    --root [path]        the folder that jessie functions are located in
-    --exports <list>     A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])
-    --header [path]      The header file
-    --footer [path]      The footer file
     --namespace [name]   The name of the global variable to export
 
 Example on Linux
