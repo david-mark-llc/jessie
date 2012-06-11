@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /*jslint node:true, strict:false */
 
-// imports
 var program = require('commander'),
 	Table = require('cli-table'),
 	Set = require('simplesets').Set,
