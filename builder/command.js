@@ -36,8 +36,6 @@ program
 	.option('-l, --list', 'Print a list of available functions')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
 	.option('--minify', 'Minify the output using UglifyJS')
-	.option('--mangle', 'Mangle the generated output via UglifyJS')
-	.option('--beautify', 'Output beautified JS')
 	.option('--root [path]', 'the folder that jessie functions are located in', path.join(__dirname, '../functions/'))
 	.option('--exports <list>', 'A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])', list, ['isHostMethod', 'isHostObjectProperty'])
 	.option('--header [path]', 'The header file', path.join(__dirname, '../libraries/header1.inc'))

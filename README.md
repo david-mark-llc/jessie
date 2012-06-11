@@ -70,18 +70,16 @@ There are two ways in which you can use the builder:
 
 Options:
 
-	-h, --help           output usage information
-	-V, --version        output the version number
-	-l, --list           Print a list of available functions
-	-o, --output [file]  The file to output to (outputs to stdout by default)
-	-u, --uglify         Minify the output using UglifyJS
-	--mangle             Mangle the generated output via UglifyJS
-	--beautify           Output beautified JS
-	--root [path]        the folder that jessie functions are located in
-	--exports <list>     A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])
-	--header [path]      The header file
-	--footer [path]      The footer file
-	--namespace [name]   The name of the global variable to export
+    -h, --help           output usage information
+    -V, --version        output the version number
+    -l, --list           Print a list of available functions
+    -o, --output [file]  The file to output to (outputs to stdout by default)
+    --minify             Minify the output using UglifyJS
+    --root [path]        the folder that jessie functions are located in
+    --exports <list>     A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])
+    --header [path]      The header file
+    --footer [path]      The footer file
+    --namespace [name]   The name of the global variable to export
 
 Example on Linux
 
