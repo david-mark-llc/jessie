@@ -8,15 +8,27 @@ var program = require('commander'),
 	fs = require('fs'),
 	path = require('path'),
 	jsp = require("uglify-js").parser,
-	pro = require("uglify-js").uglify;
-
-var JessieFunction = require('../builder/libs/jessie/Function.js');
-var JessieRendition = require('../builder/libs/jessie/Rendition.js');
-var JessieConstructorFn = require('../builder/libs/jessie/ConstructorFn.js');
-var JessiePrototypeMethod = require('../builder/libs/jessie/PrototypeMethod.js');
-var JessieFunctionSet = require('../builder/libs/jessie/FunctionSet.js');
-var JessieConstructorFnSet = require('../builder/libs/jessie/ConstructorFnSet.js');
-var JessieBuilder = require('../builder/libs/jessie/Builder.js');
+	pro = require("uglify-js").uglify,
+	JessieFunction = require('../builder/libs/jessie/Function.js'),
+	JessieRendition = require('../builder/libs/jessie/Rendition.js'),
+	JessieConstructorFn = require('../builder/libs/jessie/ConstructorFn.js'),
+	JessiePrototypeMethod = require('../builder/libs/jessie/PrototypeMethod.js'),
+	JessieFunctionSet = require('../builder/libs/jessie/FunctionSet.js'),
+	JessieConstructorFnSet = require('../builder/libs/jessie/ConstructorFnSet.js'),
+	JessieBuilder = require('../builder/libs/jessie/Builder.js'),
+	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
+	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
+	requestedFunctions = [],
+	requestedConstructorFns = [],
+	buildOptions = {
+		headerPath: '../libraries/header1.inc',
+		footerPath: '../libraries/footer1.inc'
+	},
+	builder = null,
+	response = null,
+	output = null,
+	firstError,
+	message;
 
 program
 	.version('0.0.1')
@@ -33,14 +45,8 @@ program
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
-var functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition);
 functionSet.create();
-
-var constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod);
 constructorFnSet.create();
-
-var requestedFunctions = [];
-var requestedConstructorFns = [];
 
 // if no args are used, output the help
 if(program.args.length === 0) {
@@ -51,10 +57,6 @@ if(program.args.length === 0) {
 
 setupRequestedFunctions();
 
-var buildOptions = {};
-buildOptions.headerPath = '../libraries/header1.inc';
-buildOptions.footerPath = '../libraries/footer1.inc';
-
 if(program.minify) {
 	buildOptions.minify = true;
 }
@@ -63,12 +65,12 @@ if(program.namespace) {
 	buildOptions.namespace = program.namespace.trim();
 }
 
-var builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, buildOptions);
+builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, buildOptions);
+response = builder.build();
 
-var response = builder.build();
 if(response.success) {
 	if(program.output) {
-		var output = fs.createWriteStream(program.output);
+		output = fs.createWriteStream(program.output);
 		output.once('open', function(){
 			output.write(response.output);
 		});
@@ -77,8 +79,8 @@ if(response.success) {
 	}
 }
 else {
-	var firstError = response.errors[0];
-	var message = "" + firstError.itemName + ": " + firstError.message;
+	firstError = response.errors[0];
+	message = "" + firstError.itemName + ": depends on " + firstError.dependency;
 	throw new Error(message);
 }
 
