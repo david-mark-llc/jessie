@@ -6,7 +6,7 @@ For legacy eg. IE5
 */
 
 /*
-Support:
+Degrades:
 IE5.x
 */
 

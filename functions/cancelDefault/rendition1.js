@@ -6,7 +6,7 @@ Relies on W3C compliant `e.preventDefault()`
 */
 
 /*
-Support:
+Degrades:
 IE8, Opera 7.6
 */
 

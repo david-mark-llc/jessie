@@ -8,7 +8,7 @@ names.
 */
 
 /*
-Support:
+Degrades:
 IE8
 */
 

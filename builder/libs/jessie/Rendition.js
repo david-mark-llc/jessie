@@ -34,10 +34,10 @@ jessie.Rendition = function(func, file) {
 			}
 		},
 
-		support: {
+		degrades: {
 			get: function() {
 				var support = "";
-				var re = /^\s*Support:\s*([^*]+)\*\/$/gm;
+				var re = /^\s*Degrades:\s*([^*]+)\*\/$/gm;
 				var matches = re.exec(this.contents);
 				if(matches && matches.length > 1) {
 					support = matches[1].trim();

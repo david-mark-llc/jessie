@@ -5,7 +5,7 @@ Relies on Microsoft's `el.attachEvent`
 */
 
 /*
-Support:
+Degrades:
 IE9+,Opera 8+,Chrome, FF, Safari
 */
 

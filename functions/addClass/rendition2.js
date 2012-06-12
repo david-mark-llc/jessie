@@ -6,7 +6,8 @@ Relies on the `el.className` property (class attribute)
 */
 
 /*
-Support:
+Degrades:
+Unknown
 */
 
 var addClass;

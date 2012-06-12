@@ -6,7 +6,7 @@ Relies on MS `e.srcElement`
 */
 
 /*
-Support:
+Degrades:
 IE4, NN4
 */
 

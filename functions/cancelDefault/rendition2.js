@@ -6,7 +6,7 @@ Relies on MS event model `e.returnValue`
 */
 
 /*
-Support:
+Degrades:
 IE9+,Opera 8+,Chrome, FF, Safari
 */
 

@@ -81,7 +81,7 @@
 									<th class="function">Function</th>
 									<th class="rendition">Rendition</th>
 									<th class="selection">Selection</th>							
-									<th class="support">Degrades in</th>
+									<th class="degrades">Degrades in</th>
 									<th class="description">Description</th>					
 								</tr>
 							</thead>
@@ -108,7 +108,7 @@
 													<%}%>
 												>
 											</td>
-											<td class="support"><%- md(functions[i].renditions[j].support) -%></td>
+											<td class="degrades"><%- md(functions[i].renditions[j].degrades) -%></td>
 											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>						
 										</tr>
 									<% } %>		

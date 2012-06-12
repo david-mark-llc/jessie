@@ -6,7 +6,7 @@ For fully patched Win2k SP4 and up
 */
 
 /*
-Support:
+Degrades:
 IE6
 */
 

@@ -5,7 +5,7 @@ Relies on `window.attachEvent`
 */
 
 /*
-Support:
+Degrades:
 IE9+,Opera 8+,Chrome, FF, Safari
 */
 var attachDocumentReadyListener;

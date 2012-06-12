@@ -16,7 +16,7 @@ screwy markup like this:
 */
 
 /*
-Support:
+Degrades:
 IE4, NN4
 */
 
