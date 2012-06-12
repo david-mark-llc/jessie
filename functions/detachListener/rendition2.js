@@ -6,7 +6,7 @@ Relies on MS `el.detachEvent`
 */
 
 /*
-Support:
+Degrades:
 IE9+,Opera 8+,Chrome, FF, Safari
 */
 

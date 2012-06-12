@@ -6,7 +6,7 @@ For IE6 users that have updated their msxml dll files
 */
 
 /*
-Support:
+Degrades:
 IE6
 */
 

@@ -19,7 +19,7 @@ Can use following to get IE8- to work when document is parsed:
 
 */
 /*
-Support:
+Degrades:
 IE8, Opera 7.6
 */
 

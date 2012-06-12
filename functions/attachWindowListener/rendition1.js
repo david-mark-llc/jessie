@@ -6,7 +6,7 @@ Relies on `window.addEventListener`. No frames.
 */
 
 /*
-Support:
+Degrades:
 IE8, Opera 7.6
 */
 

@@ -10,7 +10,7 @@ Note: No frames or other alternate windows
 */
 
 /*
-Support:
+Degrades:
 IE8
 */
 

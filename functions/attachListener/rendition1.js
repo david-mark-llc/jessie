@@ -5,7 +5,7 @@ Relies on W3C `el.addEventListener`
 */
 
 /*
-Support:
+Degrades:
 IE8, Opera 7.6
 */
 

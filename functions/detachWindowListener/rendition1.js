@@ -6,7 +6,7 @@ Relies on W3C `window.removeEventListener`
 */
 
 /*
-Support:
+Degrades:
 IE8, Opera 7.6
 */
 

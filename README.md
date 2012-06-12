@@ -70,28 +70,21 @@ There are two ways in which you can use the builder:
 
 Options:
 
-	-h, --help           output usage information
-	-V, --version        output the version number
-	-l, --list           Print a list of available functions
-	-o, --output [file]  The file to output to (outputs to stdout by default)
-	-u, --uglify         Minify the output using UglifyJS
-	--mangle             Mangle the generated output via UglifyJS
-	--beautify           Output beautified JS
-	--root [path]        the folder that jessie functions are located in
-	--exports <list>     A comma separated list of internal functions to export (default: [isHostMethod, isHostObjectProperty])
-	--header [path]      The header file
-	--footer [path]      The footer file
-	--namespace [name]   The name of the global variable to export
+    -h, --help           output usage information
+    -V, --version        output the version number
+    -o, --output [file]  The file to output to (outputs to stdout by default)
+    --minify             Minify the output using UglifyJS
+    --namespace [name]   The name of the global variable to export
 
 Example on Linux
 
-	cd bin
-	node jessie -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
+	cd builder
+	node command.js -o /path/to/jessie.js bind:1 attachListener:2 attachBoundListener:1 query:1 toArray:1
 
 Example on Windows:
 
-	cd bin
-	node jessie getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
+	cd builder
+	node command.js getEventTarget:1 attachListener:2 delegateTagNameListener:1 > /path/to/jessie.js
 
 ##### Web UI
 
@@ -277,7 +270,7 @@ David Mark has put many tips on CLJ so search for "David Mark Tip" and start to 
 
 * [Attaching and detaching event listeners](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/b94b12547ed572f8?hl=en&noredirect=true)
 * [The load problem and related matters](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/6d5575fd79d1169d?hl=en&noredirect=true)
-* [How to Create an XHR object](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/4323efb65cebb31e/a4f28c7fbe305bca?hl=en&lnk=gst&q=ow+to+Create+an+XHR+(Ajax)+O)
+* [How to Create an XHR object](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/4323efb65cebb31e/a4f28c7fbe305bca?hl=en&lnk=gst&q=ow+to+Create+an+XHR)
 * [Properties and attributes](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/838804e32224601f/502a23cab0057bcd?hl=en&lnk=gst&q=tip+of+the+day+david)
 * [Adding and removing host objects](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/d1f64857442e3b10/3d3d3d0174a46bcb?hl=en&lnk=gst&q=tip+of+the+day+david)
 * [How to measure element dimensions](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/24fd33cc9f206ea0/8c8397bebd0a0188?hl=en&lnk=gst&q=tip+of+the+day+david)

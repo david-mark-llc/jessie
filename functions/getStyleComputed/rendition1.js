@@ -2,9 +2,14 @@
 
 /*
 Description:
-Relies on `document.defaultView.getComputedStyle` which derades in IE8-
+Relies on `document.defaultView.getComputedStyle` which degrades in IE8-
 and compatibility modes. No float styles with this one and camel-case
 names.
+*/
+
+/*
+Degrades:
+IE8
 */
 
 var getStyleComputed;
