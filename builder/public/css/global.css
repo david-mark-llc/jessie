@@ -63,7 +63,13 @@ h1 {
 }
 
 #builder .options {
-	display: none;
+	width: 97%;
+	margin: 0 auto;
+}
+
+#builder .options h2 {
+	font-size: 15px;
+	margin-bottom: 10px;
 }
 
 #functions {
@@ -119,7 +125,7 @@ h1 {
 	width: 70px;
 }
 
-#builder table .support {
+#builder table .degrades {
 	width: 300px;
 }
 

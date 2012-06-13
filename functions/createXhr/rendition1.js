@@ -6,7 +6,7 @@ Relies on W3C `window.XMLHttpRequest`
 */
 
 /*
-Support:
+Degrades:
 IE7+, Chrome, Firefox, Safari
 */
 

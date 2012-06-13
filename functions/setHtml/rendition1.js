@@ -11,7 +11,7 @@ NOTE: Don't use this rendition with anything but DIV's
 */
 
 /*
-Support:
+Degrades:
 IE3
 */
 

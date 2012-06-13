@@ -1,13 +1,9 @@
-
 /*jslint node:true, strict:false*/
 
-// dependencies
-var fs = require('fs');
-var uglifyParser = require("uglify-js").parser;
-var pro = require("uglify-js").uglify;
-
-// jessie
-var jessie = {};
+var fs = require('fs'),
+	uglifyParser = require("uglify-js").parser,
+	pro = require("uglify-js").uglify,
+	jessie = {};
 
 /*
  * Responsible for building the contents for jessie.js
@@ -24,6 +20,8 @@ var jessie = {};
  * asdas
  */
 jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
+	this.defaultExports = ['isHostMethod', 'isHostObjectProperty'];
+
 	// function stuff
 	this.functionSet = functionSet;
 	this.functions = this.functionSet.getFunctions();
@@ -34,13 +32,20 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 	this.constructorFns = this.constructorFnSet.getConstructorFns();
 	this.requestedConstructorFns = requestedConstructorFns;
 
-	this.options = this.options || {};
-	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
-	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
+	this.setupOptions(options);
+
 	this.headerDeclarations = ['global'];
 	this.setupHeader();
 	this.setupFooter();
 	this.setupHeaderDeclarations();
+};
+
+jessie.Builder.prototype.setupOptions = function(options) {
+	this.options = options || {};
+	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
+	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
+	this.options.namespace = this.options.namespace || 'jessie';
+	this.options.minify = this.options.minify || false;
 };
 
 jessie.Builder.prototype.setupHeader = function() {
@@ -152,9 +157,19 @@ jessie.Builder.prototype.build = function() {
 
 		jsContents += this.footer;
 		builderResponse.output = jsContents;
+
+
+		if(this.options.minify) {
+			builderResponse.output = this.minify(builderResponse.output);
+		}
 	}
 
 	return builderResponse;
+};
+
+jessie.Builder.prototype.minify = function(output) {
+	var ast = uglifyParser.parse(output);
+	return pro.gen_code(ast);
 };
 
 jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
@@ -277,10 +292,12 @@ function topologicalSort(graph) {
 
 
 jessie.Builder.prototype.createExportDeclaration = function(order) {
-	var hasRequestedConstructors = (this.requestedConstructorFn && this.requestedConstructorFn.length > 0);
+	var hasRequestedConstructors = (this.requestedConstructorFns && this.requestedConstructorFns.length > 0);
 
+	var out = '\n\nglobal[\"' + this.options.namespace + '\"] = {\n';
 
-	var out = '\n\nglobal[\"' + 'jessie' + '\"] = {\n';
+	order = this.defaultExports.concat(order);
+
 	order.forEach(function(functionName, i){
 		out += '\t';
 		out += '"'+ functionName +'": ';

@@ -4,7 +4,7 @@ Relies on W3C and MS event model.
 */
 
 /*
-Support:
+Degrades:
 IE9+,Opera 8+,Chrome, FF, Safari
 */
 
