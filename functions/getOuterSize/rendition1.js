@@ -5,6 +5,11 @@ Description:
 Relies on `el.offsetWidth/Height`
 */
 
+/*
+Degrades:
+IE3
+*/
+
 var getOuterSize;
 
 if(html && typeof html.offsetWidth == 'number') {
