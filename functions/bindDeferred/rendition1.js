@@ -2,7 +2,8 @@
 
 /*
 Description:
-Relies on `Function.prototype.apply`
+Relies on `Function.prototype.apply`, `Array.prototype.slice`, 
+`Array,prototype.concat`, `window.setTimeOut` and `window.clearTimeout`
 */
 
 var bindDeferred;
