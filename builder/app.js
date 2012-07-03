@@ -8,6 +8,7 @@ var express = require('express'),
 	JessiePrototypeMethod = require('./libs/jessie/PrototypeMethod.js'),
 	JessieConstructorFnSet = require('./libs/jessie/ConstructorFnSet.js'),
 	JessieFunctionSet = require('./libs/jessie/FunctionSet.js'),
+	md = require("node-markdown").Markdown,
 	JessieBuilder = require('./libs/jessie/Builder.js'),
 	app = express.createServer(),
 	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
@@ -16,7 +17,7 @@ var express = require('express'),
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.set('view options', {layout:false, md: require("node-markdown").Markdown });
+app.set('view options', {layout:false });
 app.configure(function(){
 	app.use(express['static'](__dirname + '/public'));
     app.use(express.methodOverride());
@@ -79,7 +80,8 @@ app.get('/', function(req, res){
 				functions: functionSet.getFunctions(),
 				constructorFns: constructorFnSet.getConstructorFns(),
 				errors: errors,
-				query: query
+				query: query,
+				md: md
 			});
 		} else {
 			res.header('Content-Disposition', 'attachment; filename="'+fileName+'.js"');
@@ -96,7 +98,8 @@ app.get('/', function(req, res){
 			functions: functionSet.getFunctions(),
 			constructorFns: constructorFnSet.getConstructorFns(),
 			query: query,
-			errors: errors
+			errors: errors,
+			md: md
 		});
 	}
 });
