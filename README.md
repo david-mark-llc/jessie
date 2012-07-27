@@ -24,7 +24,7 @@ Each function has one or more renditions. Each rendition is based on feature det
 
 Let's take a look at an example function with particular renditions:
 
-`jessie.attachListener` is function to add event listeners to dom nodes. It (currently) has three renditions:
+`jessie.attachListener` is a function to add event listeners to dom nodes. It (currently) has three renditions:
 
 1. W3C compliant `el.addEventListener` 
 2. Microsofts implementation `el.attachEvent`
@@ -44,10 +44,12 @@ Most of the jessie functions are dynamic. This means the calling application sho
 		// write an application that relies on (and uses) attachListener and ajax
 	}
 
-A side effect of this design is that you have two choices of what to do when a particular function is not supported in a particular browser:
+A positive side effect of this design is that you have two choices of what to do when a particular function is not supported in a particular browser:
 
-1. Degrade gracefully 
-2. Simply create another rendition that allows that function to work in another set of browsers. There will be no change to the application code meaning Jessie can grow or shrink as your project requirements change. 
+1. Degrade gracefully
+2. Simply create another rendition that allows that function to work in another set of browsers. 
+
+There will be no change to the application code meaning Jessie can grow or shrink as your project requirements change. 
 
 Peter Michaux has an excellent article based on this concept found [here](http://peter.michaux.ca/articles/cross-browser-widgets).
 
