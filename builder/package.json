@@ -1,5 +1,6 @@
 {
-	"name": "Jessie Builder",
+	"name": "JessieBuilder",
+	"version": "0.0.1",
 	"description": "Jessie Builder",
 	"dependencies": {
 		"uglify-js": ">=1.2.6",
