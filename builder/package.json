@@ -1,0 +1,49 @@
+{
+    "name": "Jessie Builder",
+
+    "author": "asilver",
+    "description": "Jessie Builder",
+    "version": "0.0.1",
+    "repository": {
+	    "type": "git",
+	    "url": "git@github.com:rassie/jessie.git"
+	},
+    "dependencies": {
+        "uglify-js": ">=1.2.6",
+    	"simplesets": ">=1.2.0",
+    	"commander": ">=0.6.0",
+    	"cli-table": ">=0.0.1"
+        "express": "3.0.0beta5"
+    },
+    "node": ">=0.4"
+}
+
+/*
+{
+ 
+  "author": {
+    "name": "",
+    "email": ""
+  },
+  "main": "./jessie.js",
+  "bin": {
+    "uglifyjs": "./bin/jessie"
+  },
+  
+  "_id": "jessie@0.0.1",
+
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "_engineSupported": true,
+  "_npmVersion": "1.1.9",
+  "_nodeVersion": "v0.6.13",
+  "_defaultsLoaded": true,
+  "dist": {
+    "shasum": ""
+  },
+  "_from": "jessie"
+}
+*/
