@@ -197,6 +197,12 @@ Currently the documentation is very basic and the API could change for the bette
 		fail: function(xhr) {}
 	});
 
+### mixin
+
+	var target = { a: 1 };
+	var source = { b: 2 };
+	jessie.mixin(target, source); // target now has a property b with value 2
+
 ## Developer guides
 
 To begin working on Jessie there are a few simple things you have to be aware of.
