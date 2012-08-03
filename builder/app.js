@@ -23,7 +23,9 @@ app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.bodyParser());
 });
-app.listen(1337);
+app.listen(1337, function(){
+	console.log("App listening on port 1337");
+});
 
 
 functionSet.create();
