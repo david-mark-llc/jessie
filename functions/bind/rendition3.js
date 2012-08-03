@@ -10,6 +10,11 @@ Degrades:
 TBC but provides the greatest support
 */
 
+/*
+Degrades:
+IE8, Chrome 6, Firefox 3.6, Safari 5.1, Opera 11.5
+*/
+
 var bind;
 
 if(canCall && Function.prototype.bind){
