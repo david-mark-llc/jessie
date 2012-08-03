@@ -7,7 +7,7 @@ Both W3C and MS implementation therefore providing the greatest browser support
 
 /*
 Degrades:
-IE5, Firefox 3.6
+IE5
 */
 
 var bind;
