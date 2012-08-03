@@ -2,7 +2,7 @@
 
 /*
 Description:
-Both W3C and MS implementation therefore providing the greatest browser support
+ECMAScript5 implementation, degrading to ECMAScript3 providing wide browser support
 */
 
 /*
