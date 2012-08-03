@@ -107,8 +107,6 @@ app.get('/', function(req, res){
 	}
 });
 
-console.log('Listening on port 1337 so visit 127.0.0.1:1337 in your browser.');
-
 function getRequestedFunctions(query) {
 	var requestedFunctions = [],
 		key;
