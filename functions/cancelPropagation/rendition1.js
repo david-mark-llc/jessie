@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on W3C compliant `e.preventDefault()`
+Relies on W3C compliant `e.stopPropagation()`
 */
 
 /*
@@ -10,10 +10,10 @@ Degrades:
 IE8, Opera 7.6
 */
 
-var cancelDefault;
+var cancelPropagation;
 
 if(html && isHostMethod(html, 'addEventListener')) {
-	cancelDefault = function(e) {
-		e.preventDefault();
+	cancelPropagation = function(e) {
+		e.stopPropagation();
 	};
 }

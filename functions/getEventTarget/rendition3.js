@@ -6,8 +6,8 @@ Relies on MS `e.srcElement`
 */
 
 /*
-Support:
-IE4, NN4
+Degrades:
+IE9+, Chrome, FireFox
 */
 
 var getEventTarget;

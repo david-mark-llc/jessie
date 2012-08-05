@@ -20,8 +20,12 @@ jessie.Function = function(folder, JessieRendition) {
 	this.renditions = this.createRenditions();
 	
 	this.getDependencies = function(renditionId){
-		var dependencies = new Set();
-		dependencies = dependencies.union(this.renditions[renditionId-1].dependencies);
+		var dependencies = null;
+		if(this.renditions[renditionId-1]) {
+			dependencies = new Set();
+			dependencies = dependencies.union(this.renditions[renditionId-1].dependencies);
+		}
+		
 		return dependencies;
 	}.bind(this);
 

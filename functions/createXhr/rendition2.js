@@ -2,23 +2,35 @@
 
 /*
 Description:
-For IE6 users that have updated their msxml dll files
+Uses one of Internet Explorer's ActiveXObjects and gives support for IE5-IE6
 */
 
 /*
-Support:
-IE6
+Degrades:
+IE4, NN4, Chrome, FF, Safari, Opera
 */
 
-var createXhr;
+var createXhrFunctions = [
+		function() {
+          return new global.ActiveXObject("Microsoft.XMLHTTP");
+        },
+        // for fully patched Win2k SP4 and up
+        function() {
+          return new global.ActiveXObject("Msxml2.XMLHTTP.3.0");
+        },
+        // IE 6 users that have updated their msxml dll files.
+        function() {
+          return new global.ActiveXObject("Msxml2.XMLHTTP.6.0");
+        }
+	],
+	createXhr,
+	i;
 
-if(isHostMethod(global, 'ActiveXObject')) {
+for (i=createXhrFunctions.length; i--; ) {
 	try {
-		if(new global.ActiveXObject('Msxml2.XMLHTTP.6.0')) {
-			createXhr = function() {
-				return new global.ActiveXObject('Msxml2.XMLHTTP.6.0');
-			};
+		if (createXhrFunctions[i]()) {
+			createXhr = createXhrFunctions[i];
 		}
 	}
-	catch(e) {}
+	catch (e) {}
 }

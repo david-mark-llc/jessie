@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on MS event model `e.returnValue`
+Relies on MS event model `e.cancelBubble`
 */
 
 /*
@@ -10,10 +10,10 @@ Degrades:
 IE9+,Opera 8+,Chrome, FF, Safari
 */
 
-var cancelDefault;
+var cancelPropagation;
 
 if(html && isHostMethod(html, 'attachEvent')) {
-	cancelDefault = function(e) {
-		e.returnValue = false;
+	cancelPropagation = function(e) {
+		e.cancelBubble = true;
 	};
 }

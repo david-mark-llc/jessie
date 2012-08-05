@@ -4,6 +4,12 @@
 Description:
 Relies on `Function.prototype.apply` and `Array.prototype.slice`
 */
+
+/*
+Degrades:
+IE5
+*/
+
 var bind;
 
 if(canCall && Array.prototype.slice) {

@@ -9,8 +9,8 @@ If you will be using a forked rendition to support IE 8-
 */
 
 /*
-Support:
-IE9+,Opera 8+,Chrome, FF, Safari
+Degrades:
+Not sure
 */
 
 var getEventTarget;

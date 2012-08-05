@@ -6,7 +6,7 @@ Relies on MS `e.srcElement`, `e.fromElement` and `e.toElement` which works in IE
 */
 
 /*
-Support:
+Degrades:
 IE4, NN4
 */
 

@@ -2,23 +2,46 @@
 
 /*
 Description:
-For fully patched Win2k SP4 and up
+Both W3C and MS ActiveXObject implementations providing greatest support
 */
 
 /*
-Support:
-IE6
+Degrades:
+IE4, NN4
 */
 
-var createXhr;
+var createXhrFunctions = [
+		function() {
+          return new global.ActiveXObject("Microsoft.XMLHTTP");
+        },
+        // for fully patched Win2k SP4 and up
+        function() {
+          return new global.ActiveXObject("Msxml2.XMLHTTP.3.0");
+        },
+        // IE 6 users that have updated their msxml dll files.
+        function() {
+          return new global.ActiveXObject("Msxml2.XMLHTTP.6.0");
+        }
+	],
+	i,
+	createXhr;
 
-if(isHostMethod(global, 'ActiveXObject')) {
+if(isHostMethod(global, "XMLHttpRequest")) {
 	try {
-		if(new global.ActiveXObject('Msxml2.XMLHTTP.3.0')) {
+		if(new global.XMLHttpRequest()) {
 			createXhr = function() {
-				return new global.ActiveXObject('Msxml2.XMLHTTP.3.0');
+				return new XMLHttpRequest();
 			};
 		}
 	}
 	catch(e) {}
+} else if(isHostMethod(global, 'ActiveXObject')) {
+	for (i=createXhrFunctions.length; i--; ) {
+		try {
+			if (createXhrFunctions[i]()) {
+				createXhr = createXhrFunctions[i];
+			}
+		}
+		catch (e) {}
+	}
 }

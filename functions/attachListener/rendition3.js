@@ -6,7 +6,7 @@ Both W3C and MS implementation therefore providing the greatest browser support
 */
 
 /*
-Support:
+Degrades:
 IE4, NN4
 */
 

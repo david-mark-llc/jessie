@@ -2,12 +2,15 @@
 
 /*
 Description:
-Relies on W3C `window.XMLHttpRequest`
+Relies on W3C `window.XMLHttpRequest`.
+
+NOTE: IE7+ native version does not support overrideMimeType or local file
+requests
 */
 
 /*
-Support:
-IE7+, Chrome, Firefox, Safari
+Degrades:
+IE6
 */
 
 var createXhr;

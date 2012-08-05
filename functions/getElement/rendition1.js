@@ -15,6 +15,11 @@ screwy markup like this:
 <input id="test">
 */
 
+/*
+Degrades:
+IE4, NN4
+*/
+
 var getElement;
 
 if (isHostMethod(document, 'getElementById')) {
