@@ -23,7 +23,9 @@ app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.bodyParser());
 });
-app.listen(1337);
+app.listen(1337, function(){
+	console.log("App listening on port 1337");
+});
 
 
 functionSet.create();
@@ -104,8 +106,6 @@ app.get('/', function(req, res){
 		});
 	}
 });
-
-console.log('Listening on port 1337 so visit 127.0.0.1:1337 in your browser.');
 
 function getRequestedFunctions(query) {
 	var requestedFunctions = [],

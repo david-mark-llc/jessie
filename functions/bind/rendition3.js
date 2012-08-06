@@ -7,7 +7,7 @@ Relies on `Function.prototype.bind` and `Function.prototype.apply` and `Array.pr
 
 /*
 Degrades:
-TBC but provides the greatest support
+IE5
 */
 
 var bind;
