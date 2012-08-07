@@ -1,3 +1,5 @@
+/*global isOwnProperty*/
+
 var deepMixin;
 
 /*
@@ -9,10 +11,10 @@ Relies on `jessie.isOwnProperty`
 Degrades:
 */
 
-if(Object.prototype.hasOwnProperty) {
+if(isOwnProperty) {
 	deepMixin = function(target, source) {
 		for(var property in source) {
-			if(!jessie.isOwnProperty(target, property)) {
+			if(!isOwnProperty(target, property)) {
 				target[property] = source[property];
 			} else {
 				deepMixin(target[property], source[property]);
