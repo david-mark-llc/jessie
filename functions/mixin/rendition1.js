@@ -1,3 +1,5 @@
+/*global isOwnProperty */
+
 var mixin;
 
 /*
@@ -9,10 +11,10 @@ Relies on `jessie.isOwnProperty`
 Degrades:
 */
 
-if(jessie.isOwnProperty) {
+if(isOwnProperty) {
 	mixin = function(target, source) {
 		for(var property in source) {
-			if(jessie.isOwnProperty(source, property)) {
+			if(isOwnProperty(source, property)) {
 				target[property] = source[property];
 			}
 		}
