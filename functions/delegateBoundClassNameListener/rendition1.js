@@ -10,7 +10,7 @@ var delegateBoundClassNameListener;
 if(delegateBoundListener && hasClass && getDescendantsByClassName && isDescendant) {
 	delegateBoundClassNameListener = function(el, eventType, className, fn, thisObject) {
 
-		var fnDelegate = function(target) {
+		var fnDelegate = function(el, target) {
 
 			// we need to check that the target has the class name
 			// if not then we need to see if the target is a child of an element with that class name

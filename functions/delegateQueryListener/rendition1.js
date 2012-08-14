@@ -10,7 +10,7 @@ var delegateQueryListener;
 if(delegateListener && query && isInQuery && isDescendant) {
 	delegateQueryListener = function(el, eventType, selector, fn) {
 
-		var fnDelegate = function(target) {
+		var fnDelegate = function(el, target) {
 			if(isInQuery(target, selector)) {
 				return target;
 			}
