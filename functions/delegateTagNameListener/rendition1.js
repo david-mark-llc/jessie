@@ -10,7 +10,7 @@ var delegateTagNameListener;
 if(delegateListener && getElementTagName) {
 	delegateTagNameListener = function(el, eventType, tagName, fn) {
 		
-		var fnDelegate = function(target) {
+		var fnDelegate = function(el, target) {
 			var sourceNode;
 			if(getElementTagName(target) === tagName) {
 				sourceNode = target;
