@@ -103,6 +103,7 @@ h1 {
 
 }
 
+#builder table .thead th,
 #builder table thead th {
 	text-align: left;
 	font-size: 12px;
