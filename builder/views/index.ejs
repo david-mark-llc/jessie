@@ -9,9 +9,6 @@
 		<!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" /><![endif]-->	
 	</head>
 	<body>
-
-
-
 		<div id="container">
 			<div id="builder"> 
 				<form method="get" action="/">
@@ -43,32 +40,34 @@
 									<th>Value</th>	
 								</tr>
 							</thead>
-							<tr>
-								<td><label for="namespace">Namespace (defaults to 'jessie')</label></td>
-								<td>
-									<input 
-										id="namespace" 
-										name="namespace" 
-										type="text"
-										<% if(query && query.namespace) { %>
-											value="<%=query.namespace%>"
-										<% } %>
-									>
-								</td>
-							</tr>
-							<tr>
-								<td><label for="minify">Minify</label></td>
-								<td>
-									<input 
-										id="minify" 
-										name="minify" 
-										type="checkbox" 
-										<% if(query && query.minify == 'on') { %>
-											checked
-										<% } %>
-									>
-								</td>
-							</tr>
+							<tbody>
+								<tr>
+									<td><label for="namespace">Namespace (defaults to 'jessie')</label></td>
+									<td>
+										<input 
+											id="namespace" 
+											name="namespace" 
+											type="text"
+											<% if(query && query.namespace) { %>
+												value="<%=query.namespace%>"
+											<% } %>
+										>
+									</td>
+								</tr>
+								<tr>
+									<td><label for="minify">Minify</label></td>
+									<td>
+										<input 
+											id="minify" 
+											name="minify" 
+											type="checkbox" 
+											<% if(query && query.minify == 'on') { %>
+												checked
+											<% } %>
+										>
+									</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>				
 
@@ -76,15 +75,13 @@
 						<h2>Functions</h2>
 
 						<table>
-							<thead>
-								<tr>
-									<th class="function">Function</th>
-									<th class="rendition">Rendition</th>
-									<th class="selection">Selection</th>							
-									<th class="degrades">Degrades in</th>
-									<th class="description">Description</th>					
-								</tr>
-							</thead>
+							<tr class="thead">
+								<th class="function">Function</th>
+								<th class="rendition">Rendition</th>
+								<th class="selection">Selection</th>							
+								<th class="degrades">Degrades in</th>
+								<th class="description">Description</th>					
+							</tr>
 						</table>
 							
 						<% for(var i = 0; i < functions.length; i++) { %>

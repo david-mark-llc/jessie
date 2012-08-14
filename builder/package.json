@@ -7,6 +7,8 @@
 		"simplesets": ">=1.2.0",
 		"commander": ">=0.6.0",
 		"cli-table": ">=0.0.1",
-		"express": "3.0"
+		"express": "3.0",
+		"node-markdown": ">=0.1.1",
+		"ejs": ">=0.8.1"
 	}
 }
