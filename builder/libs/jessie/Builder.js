@@ -17,6 +17,7 @@ var fs = require('fs'),
  * @param options {Object} List of options for the builder
  * @param options.headerPath {String} Path to header file. Defaults to '../libraries/header1.inc'
  * @param options.footerPath {String} Path to footer file. Defaults to '../libraries/footer1.inc'
+ * @param options.licensePath {String} Path to license file. Defaults to '../LICENSE'
  * asdas
  */
 jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
@@ -35,6 +36,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 	this.setupOptions(options);
 
 	this.headerDeclarations = ['global'];
+	this.setupLicense();
 	this.setupHeader();
 	this.setupFooter();
 	this.setupHeaderDeclarations();
@@ -44,6 +46,7 @@ jessie.Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
+	this.options.licensePath = this.options.licensePath || '../LICENSE';
 	this.options.namespace = this.options.namespace || 'jessie';
 	this.options.minify = this.options.minify || false;
 };
@@ -54,6 +57,10 @@ jessie.Builder.prototype.setupHeader = function() {
 
 jessie.Builder.prototype.setupFooter = function() {
 	this.footer = fs.readFileSync(this.options.footerPath, "utf8");
+};
+
+jessie.Builder.prototype.setupLicense = function() {
+	this.license = '/*' + fs.readFileSync(this.options.licensePath, "utf8") + '*/\n\n';
 };
 
 jessie.Builder.prototype.setupHeaderDeclarations = function() {
@@ -162,6 +169,8 @@ jessie.Builder.prototype.build = function() {
 		if(this.options.minify) {
 			builderResponse.output = this.minify(builderResponse.output);
 		}
+
+		builderResponse.output = this.license + builderResponse.output;
 	}
 
 	return builderResponse;
