@@ -44,6 +44,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 
 jessie.Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
+	this.options.namespaceToken = 'jessieNamespace';
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
 	this.options.licensePath = this.options.licensePath || '../LICENSE';
@@ -171,9 +172,15 @@ jessie.Builder.prototype.build = function() {
 		}
 
 		builderResponse.output = this.license + builderResponse.output;
+		builderResponse.output = this.replaceNamespaceToken(builderResponse.output, this.options.namespace);
 	}
 
 	return builderResponse;
+};
+
+jessie.Builder.prototype.replaceNamespaceToken = function(output, namespace) {
+	var re = new RegExp(this.options.namespaceToken, 'g');
+	return output.replace(re, namespace);
 };
 
 jessie.Builder.prototype.minify = function(output) {
@@ -303,7 +310,7 @@ function topologicalSort(graph) {
 jessie.Builder.prototype.createExportDeclaration = function(order) {
 	var hasRequestedConstructors = (this.requestedConstructorFns && this.requestedConstructorFns.length > 0);
 
-	var out = '\n\nglobal[\"' + this.options.namespace + '\"] = {\n';
+	var out = '\n\n' + this.options.namespace + ' = {\n';
 
 	order = this.defaultExports.concat(order);
 
