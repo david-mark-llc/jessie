@@ -16,7 +16,7 @@ if(html && isHostMethod(html, 'attachEvent')) {
 
 		var listener = function() {
 			var e = window.event;
-			fn.call(e, e);
+			fn.call(el, e);
 		};
 
 		el.attachEvent('on'+eventType, listener);
