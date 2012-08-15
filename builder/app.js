@@ -59,7 +59,10 @@ app.get('/', function(req, res){
 		requestedFunctions = getRequestedFunctions(query);
 		requestedConstructorFns = getRequestedConstructors(query);
 		
-		namespace = query['namespace'].trim();
+		namespace = query['namespace'];
+		if(namespace) {
+			namespace = namespace.trim();
+		}
 		if(namespace && namespace.length > 0) {
 
 			// The user has typed a namespace

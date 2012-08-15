@@ -1,3 +1,6 @@
+
+var jessieNamespace;
+
 (function(global) {
 	
 	var globalDocument = global.document,
