@@ -2,12 +2,23 @@
 
 /*
 Description:
-Relies on `jessie.every` and `jessie.toArray`
+
 */
+
+/*
+Degrades:
+In browsers without a while loop
+*/
+
+
 var areFeatures;
 
-if(every && toArray) {
-	areFeatures = function() {
-		return every(toArray(arguments), function(v){ return v; });
-	};
-}
+areFeatures = function() {
+	var i = arguments.length;
+	while (i--) {
+		if (!arguments[i]) {
+			return false;
+		}
+	}
+	return true;
+};
