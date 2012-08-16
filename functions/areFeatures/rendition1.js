@@ -1,5 +1,3 @@
-/*global every,toArray */
-
 /*
 Description:
 
@@ -9,7 +7,6 @@ Description:
 Degrades:
 In browsers without a while loop
 */
-
 
 var areFeatures;
 
