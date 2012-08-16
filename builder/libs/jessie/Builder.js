@@ -310,29 +310,30 @@ function topologicalSort(graph) {
 jessie.Builder.prototype.createExportDeclaration = function(order) {
 	var hasRequestedConstructors = (this.requestedConstructorFns && this.requestedConstructorFns.length > 0);
 
-	var out = '\n\n' + this.options.namespace + ' = {\n';
+	var out = '';
 
 	order = this.defaultExports.concat(order);
 
 	order.forEach(function(functionName, i){
-		out += '\t';
-		out += '"'+ functionName +'": ';
+		out += '\n' + this.options.namespace;
+		out += '.' + functionName;
+		out += ' = ';
 		out += functionName;
-		out += ( (i === order.length-1 && !hasRequestedConstructors ) ? "" : ",");
-		out += '\n';
+		out += ';';
 	}.bind(this));
 
 	if(this.requestedConstructorFns) {
 		this.requestedConstructorFns.forEach(function(requestedConstructorFn, i) {
-			out += '\t';
-			out += '"'+ requestedConstructorFn.constructorName +'": ';
+			out += '\n' + this.options.namespace;
+			out += '.'+ requestedConstructorFn.constructorName;
+			out += ' = ';
 			out += requestedConstructorFn.constructorName;
-			out += (i === this.requestedConstructorFns.length-1 ? "" : ",");
-			out += '\n';
+			out += ';';
 		}.bind(this));
 	}
+
+	out += '\n';
 	
-	out += '};\n';
 	return out;
 };
 
