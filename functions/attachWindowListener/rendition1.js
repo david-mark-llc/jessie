@@ -20,7 +20,7 @@ if(global && isHostMethod(global, 'addEventListener')) {
 		}
 		
 		var listener = function(e) {
-			fn.call(e, e);
+			fn.call(global, e);
 		};
 
 		global.addEventListener(eventType, listener, false);
