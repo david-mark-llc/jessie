@@ -21,7 +21,7 @@ if(global && isHostMethod(global, 'attachEvent')) {
 		
 		var listener = function() {
 			var e = window.event;
-			fn.call(e, e);
+			fn.call(global, e);
 		};
 
 		global.attachEvent('on'+eventType, listener);
