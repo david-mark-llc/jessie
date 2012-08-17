@@ -1,4 +1,4 @@
-/*global global,isHostMethod */
+/*global window,isHostMethod */
 
 /*
 Description:
@@ -12,8 +12,8 @@ IE9+,Opera 8+,Chrome, FF, Safari
 
 var detachWindowListener;
 
-if(global && isHostMethod(global, 'detachEvent')) {
+if(window && isHostMethod(window, 'detachEvent')) {
 	detachWindowListener = function(eventType, fn) {
-		global.detachEvent('on'+eventType, fn);
+		return window.detachEvent('on'+eventType, fn);
 	};
 }
