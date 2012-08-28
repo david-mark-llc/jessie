@@ -1,4 +1,4 @@
-/*global global,isHostMethod */
+/*global window,isHostMethod */
 
 /*
 Description:
@@ -12,18 +12,18 @@ IE8, Opera 7.6
 
 var attachWindowListener;
 
-if(global && isHostMethod(global, 'addEventListener')) {
+if(window && isHostMethod(window, 'addEventListener')) {
 	attachWindowListener = function(eventType, fn) {
 		// Remove this line on deployment - for debugging only
-		if (!(/^(load|scroll|resize|orientationchange)$/.test(eventType))) {
+		if (!(/^(load|scroll|resize|orientationchange|unload|beforeunload)$/.test(eventType))) {
 			throw new Error('Use attachListener with an element.');
 		}
 		
 		var listener = function(e) {
-			fn.call(global, e);
+			fn.call(window, e);
 		};
 
-		global.addEventListener(eventType, listener, false);
+		window.addEventListener(eventType, listener, false);
 
 		return listener;
 	};

@@ -1,15 +1,15 @@
-/*global createXhr,xhrSend */
+/*global xhrCreate,xhrSend */
 
 /*
 Description:
-Relies on `jessie.createXhr` and `jessie.xhrSend`
+Relies on `jessie.xhrCreate` and `jessie.xhrSend`
 */
 
 var ajax;
 
-if(createXhr && xhrSend) {
+if(xhrCreate && xhrSend) {
 	ajax = function(url, options) {
-		var xhr = createXhr();
+		var xhr = xhrCreate();
 		xhrSend(xhr, url, options);
 		return xhr;
 	};
