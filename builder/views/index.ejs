@@ -87,10 +87,13 @@
 						<% for(var i = 0; i < functions.length; i++) { %>
 							<table>
 								<tbody>
-									<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
+									<%
+									  var anyChecked = false;
+									  for(var j = 0; j < functions[i].renditions.length; j++) {
+									%>
 										<tr>
 											<%if(j==0) {%>
-												<td class="function" rowspan="<%=functions[i].renditions.length%>"><%=functions[i].name%></td>
+												<td class="function" rowspan="<%=functions[i].renditions.length+1%>"><%=functions[i].name%></td>
 											<%}%>
 											<td class="rendition"><%=functions[i].renditions[j].id%></td>
 											<td class="selection">
@@ -100,15 +103,29 @@
 													name="<%=functions[i].name%>" 
 													value="<%=functions[i].renditions[j].id%>"
 
-													<%if(query[functions[i].name] == functions[i].renditions[j].id){%>
+													<%
+													  if (query[functions[i].name] == functions[i].renditions[j].id) {
+													    anyChecked = true;
+													%>
 														checked
-													<%}%>
+													<% } %>
 												>
 											</td>
 											<td class="degrades"><%- md(functions[i].renditions[j].degrades) -%></td>
 											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>						
 										</tr>
-									<% } %>		
+									<% } %>
+									<tr>
+                    <td>None</td>
+                    <td>
+                      <input type="radio" name="<%=functions[i].name%>" value="-1"
+                        <% if (!anyChecked)  { %>
+                          checked
+                        <% } %>
+                      >
+                    </td>
+                    <td colspan="2"></td>
+                  </tr>
 								</tbody>		
 							</table>
 						<% } %>
@@ -158,7 +175,6 @@
 							</tbody>
 						</table>
 					</div>
-
 				</form>
 			</div>
 		</div>

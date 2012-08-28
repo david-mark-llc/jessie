@@ -123,10 +123,16 @@ function getRequestedFunctions(query) {
 		if(key.indexOf("#") > -1) {
 			continue;
 		}
-
+		
+		var renditionId = parseInt(query[key], 10);
+		// if no rendition was wanted after all
+		if (renditionId==-1) {
+			continue;
+		}
+		
 		requestedFunctions.push({
 			functionName: key,
-			renditionId: parseInt(query[key], 10)
+			renditionId: renditionId
 		});
 	}
 
