@@ -24,12 +24,12 @@ var createXhrFunctions = [
         }
 	],
 	i,
-	createXhr;
+	xhrCreate;
 
 if(isHostMethod(global, "XMLHttpRequest")) {
 	try {
 		if(new global.XMLHttpRequest()) {
-			createXhr = function() {
+			xhrCreate = function() {
 				return new XMLHttpRequest();
 			};
 		}
@@ -39,7 +39,7 @@ if(isHostMethod(global, "XMLHttpRequest")) {
 	for (i=createXhrFunctions.length; i--; ) {
 		try {
 			if (createXhrFunctions[i]()) {
-				createXhr = createXhrFunctions[i];
+				xhrCreate = createXhrFunctions[i];
 			}
 		}
 		catch (e) {}
