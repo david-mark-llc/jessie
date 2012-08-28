@@ -46,5 +46,6 @@ if(xhrCreate) {
 		xhr.open('GET', url);
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(null);
+		return xhr;
 	};
 }
