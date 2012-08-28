@@ -13,12 +13,12 @@ Degrades:
 IE6
 */
 
-var createXhr;
+var xhrCreate;
 
 if(isHostMethod(global, "XMLHttpRequest")) {
 	try {
 		if(new global.XMLHttpRequest()) {
-			createXhr = function() {
+			xhrCreate = function() {
 				return new XMLHttpRequest();
 			};
 		}

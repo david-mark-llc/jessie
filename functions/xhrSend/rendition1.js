@@ -1,14 +1,14 @@
-/*global createXhr */
+/*global xhrCreate */
 
 /*
 Description:
-Relies on `jessie.createXhr`
+Relies on `jessie.xhrCreate`
 */
 
 var xhrSend;
 
 // if you can't create one then you certainly can't send one
-if(createXhr) {
+if(xhrCreate) {
 	
 	/*
 	*

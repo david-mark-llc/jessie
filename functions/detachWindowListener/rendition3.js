@@ -2,12 +2,12 @@
 
 /*
 Description:
-Relies on W3C `window.removeEventListener`
+Relies on W3C `window.removeEventListener` or `window.detachEvent`
 */
 
 /*
 Degrades:
-IE8, Opera 7.6
+NN4, IE4
 */
 
 var detachWindowListener;
@@ -15,5 +15,9 @@ var detachWindowListener;
 if(window && isHostMethod(window, 'removeEventListener')) {
 	detachWindowListener = function(eventType, fn) {
 		return window.removeEventListener(eventType, fn);
+	};
+} else if(window && isHostMethod(window, 'detachEvent')) {
+	detachWindowListener = function(eventType, fn) {
+		return window.detachEvent('on'+eventType, fn);
 	};
 }
