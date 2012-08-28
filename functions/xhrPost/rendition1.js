@@ -48,5 +48,6 @@ if(xhrCreate) {
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(data);
+		return xhr;
 	};
 }

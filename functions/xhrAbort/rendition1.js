@@ -11,4 +11,5 @@ In browsers without xhr support
 
 xhrAbort = function(xhr) {
 	xhr.abort();
+	return xhr;
 };
