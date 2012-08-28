@@ -31,7 +31,7 @@ if(xhrCreate) {
 			if(xhr.readyState === 4) {
 				if(isSuccessfulResponse(xhr)) {
 					if('function' == typeof options.success) {
-						options.success(xhr);
+						options.success(xhr.responseText, xhr);
 					}
 				}
 				else if('function' == typeof options.fail) {
