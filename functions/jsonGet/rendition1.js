@@ -16,7 +16,7 @@ if(ajaxGet && parseJson) {
 		options = options || {};
 		var	wrappedSuccessFn,
 			originalFunction = options.success;
-		if('function' == typeof originalFunction) {
+		if(originalFunction) {
 			wrappedSuccessFn = function(response, xhr) {
 				var json = parseJson(response);
 				originalFunction(json, xhr);
