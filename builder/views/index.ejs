@@ -13,10 +13,7 @@
 			<div id="builder"> 
 				<form method="get" action="/">
 					<div class="header">
-						<h1>Build your own jessie</h1>
-						<div class="actions">
-							<input type="submit" value="Download" name="download">
-						</div>
+						<h1>Build your own Jessie</h1>
 					</div>
 
 					<% if (errors.length > 0) { %>
@@ -24,7 +21,11 @@
 							<div class="errorsInner">
 								<h2>You have errors:</h2>
 								<% for(var i = 0; i < errors.length; i++) { %>
-									<p><%=errors[i]%></p>
+									<p><%=errors[i].message%>
+										<% if(errors[i].link) { %>
+											<a href="<%=errors[i].link%>">Go</a>
+										<% } %>
+									</p>
 								<% } %>
 							</div>
 						</div>
@@ -93,7 +94,7 @@
 									%>
 										<tr>
 											<%if(j==0) {%>
-												<td class="function" rowspan="<%=functions[i].renditions.length+1%>"><%=functions[i].name%></td>
+												<td id="<%=functions[i].name%>" class="function" rowspan="<%=functions[i].renditions.length+1%>"><%=functions[i].name%></td>
 											<%}%>
 											<td class="rendition"><%=functions[i].renditions[j].id%></td>
 											<td class="selection">
@@ -174,6 +175,14 @@
 								<% } %>
 							</tbody>
 						</table>
+					</div>
+					<div class="footer">
+						<% if (errors.length > 0) { %>
+							<p>Back to <a href="">errors</a></p>
+						<% } %> 
+						<div class="actions">
+							<input type="submit" value="Download" name="download">
+						</div>
 					</div>
 				</form>
 			</div>
