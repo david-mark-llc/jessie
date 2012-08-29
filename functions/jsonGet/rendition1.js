@@ -13,11 +13,13 @@ var jsonGet;
 
 if(ajaxGet && parseJson) {
 	jsonGet = function(url, options) {
-		var	wrappedSuccessFn;
-		if('function' == typeof options.success) {
+		options = options || {};
+		var	wrappedSuccessFn,
+			originalFunction = options.success;
+		if('function' == typeof originalFunction) {
 			wrappedSuccessFn = function(response, xhr) {
 				var json = parseJson(response);
-				options.success(json, xhr);
+				originalFunction(json, xhr);
 			};
 			options.success = wrappedSuccessFn;
 		}
