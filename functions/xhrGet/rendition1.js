@@ -1,4 +1,4 @@
-/*global xhrCreate */
+/*global xhrCreate,bind */
 
 /*
 Description:
@@ -8,12 +8,29 @@ Relies on `jessie.xhrCreate`
 var xhrGet;
 
 // if you can't create one then you certainly can't send one
-if(xhrCreate) {
+if(xhrCreate && bind) {
 	
 
 	xhrGet = function(xhr, url, options) {
 		
 		options = options || {};
+		options.thisObject = options.thisObject || xhr;
+		
+		var successFn,
+			failFn,
+			completeFn;
+
+		if(options.success) {
+			successFn = bind(options.success, options.thisObject);
+		}
+
+		if(options.fail) {
+			failFn = bind(options.fail, options.thisObject);
+		}
+
+		if(options.complete) {
+			completeFn = bind(options.complete, options.thisObject);
+		}
 
 		function isSuccessfulResponse(xhr) {
 			var success = false,
@@ -30,15 +47,15 @@ if(xhrCreate) {
 		function handleReadyStateChange() {
 			if(xhr.readyState === 4) {
 				if(isSuccessfulResponse(xhr)) {
-					if('function' == typeof options.success) {
-						options.success(xhr.responseText, xhr);
+					if(successFn) {
+						successFn(xhr.responseText, xhr);
 					}
 				}
-				else if('function' == typeof options.fail) {
-					options.fail(xhr);
+				else if(failFn) {
+					failFn(xhr);
 				}
-				if('function' == typeof options.complete) {
-					options.complete(xhr);
+				if(completeFn) {
+					completeFn(xhr);
 				}
 			}
 		}
