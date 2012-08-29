@@ -195,7 +195,6 @@ function getRequestedConstructors(query) {
 
 function getErrorsInViewFriendlyFormat(errors) {
 	var errorItem,
-		errorMessage,
 		errorMessages = [],
 		i = 0,
 		l = errors.length;
@@ -203,13 +202,14 @@ function getErrorsInViewFriendlyFormat(errors) {
 	for(; i < l; i++) {
 		errorItem = errors[i];
 		if(errorItem.itemName) {
-			errorMessage = (i+1) + '. ' + errorItem.itemName + ' depends on ' + errorItem.dependency;
+			errorItem.message = (i+1) + '. ' + errorItem.itemName + ' depends on ' + errorItem.dependency;
+			errorItem.link = '#' + errorItem.dependency;
 		}
 		else {
-			errorMessage = (i+1) + '. ' + errorItem;
+			errorItem = { message: (i+1) + '. ' + errorItem };
 		}
-		errorMessages.push(errorMessage);
+		
+		errorMessages.push(errorItem);
 	}
-
 	return errorMessages;
 }
