@@ -17,6 +17,7 @@ var fs = require('fs'),
  * @param options {Object} List of options for the builder
  * @param options.headerPath {String} Path to header file. Defaults to '../libraries/header1.inc'
  * @param options.footerPath {String} Path to footer file. Defaults to '../libraries/footer1.inc'
+ * @param options.licensePath {String} Path to license file. Defaults to '../LICENSE'
  * asdas
  */
 jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
@@ -35,6 +36,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 	this.setupOptions(options);
 
 	this.headerDeclarations = ['global'];
+	this.setupLicense();
 	this.setupHeader();
 	this.setupFooter();
 	this.setupHeaderDeclarations();
@@ -42,8 +44,10 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 
 jessie.Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
+	this.options.namespaceToken = 'jessieNamespace';
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
+	this.options.licensePath = this.options.licensePath || '../LICENSE';
 	this.options.namespace = this.options.namespace || 'jessie';
 	this.options.minify = this.options.minify || false;
 };
@@ -54,6 +58,10 @@ jessie.Builder.prototype.setupHeader = function() {
 
 jessie.Builder.prototype.setupFooter = function() {
 	this.footer = fs.readFileSync(this.options.footerPath, "utf8");
+};
+
+jessie.Builder.prototype.setupLicense = function() {
+	this.license = '/*' + fs.readFileSync(this.options.licensePath, "utf8") + '*/\n\n';
 };
 
 jessie.Builder.prototype.setupHeaderDeclarations = function() {
@@ -162,9 +170,17 @@ jessie.Builder.prototype.build = function() {
 		if(this.options.minify) {
 			builderResponse.output = this.minify(builderResponse.output);
 		}
+
+		builderResponse.output = this.license + builderResponse.output;
+		builderResponse.output = this.replaceNamespaceToken(builderResponse.output, this.options.namespace);
 	}
 
 	return builderResponse;
+};
+
+jessie.Builder.prototype.replaceNamespaceToken = function(output, namespace) {
+	var re = new RegExp(this.options.namespaceToken, 'g');
+	return output.replace(re, namespace);
 };
 
 jessie.Builder.prototype.minify = function(output) {
@@ -294,29 +310,30 @@ function topologicalSort(graph) {
 jessie.Builder.prototype.createExportDeclaration = function(order) {
 	var hasRequestedConstructors = (this.requestedConstructorFns && this.requestedConstructorFns.length > 0);
 
-	var out = '\n\nglobal[\"' + this.options.namespace + '\"] = {\n';
+	var out = '';
 
 	order = this.defaultExports.concat(order);
 
 	order.forEach(function(functionName, i){
-		out += '\t';
-		out += '"'+ functionName +'": ';
+		out += '\n' + this.options.namespace;
+		out += '.' + functionName;
+		out += ' = ';
 		out += functionName;
-		out += ( (i === order.length-1 && !hasRequestedConstructors ) ? "" : ",");
-		out += '\n';
+		out += ';';
 	}.bind(this));
 
 	if(this.requestedConstructorFns) {
 		this.requestedConstructorFns.forEach(function(requestedConstructorFn, i) {
-			out += '\t';
-			out += '"'+ requestedConstructorFn.constructorName +'": ';
+			out += '\n' + this.options.namespace;
+			out += '.'+ requestedConstructorFn.constructorName;
+			out += ' = ';
 			out += requestedConstructorFn.constructorName;
-			out += (i === this.requestedConstructorFns.length-1 ? "" : ",");
-			out += '\n';
+			out += ';';
 		}.bind(this));
 	}
+
+	out += '\n';
 	
-	out += '};\n';
 	return out;
 };
 

@@ -1,4 +1,4 @@
-/*global global,isHostMethod */
+/*global window,isHostMethod */
 
 /*
 Description:
@@ -12,8 +12,8 @@ IE8, Opera 7.6
 
 var detachWindowListener;
 
-if(global && isHostMethod(global, 'removeEventListener')) {
+if(window && isHostMethod(window, 'removeEventListener')) {
 	detachWindowListener = function(eventType, fn) {
-		global.removeEventListener(eventType, fn);
+		return window.removeEventListener(eventType, fn);
 	};
 }

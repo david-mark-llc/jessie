@@ -9,17 +9,11 @@
 		<!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" /><![endif]-->	
 	</head>
 	<body>
-
-
-
 		<div id="container">
 			<div id="builder"> 
 				<form method="get" action="/">
 					<div class="header">
-						<h1>Build your own jessie</h1>
-						<div class="actions">
-							<input type="submit" value="Download" name="download">
-						</div>
+						<h1>Build your own Jessie</h1>
 					</div>
 
 					<% if (errors.length > 0) { %>
@@ -27,7 +21,11 @@
 							<div class="errorsInner">
 								<h2>You have errors:</h2>
 								<% for(var i = 0; i < errors.length; i++) { %>
-									<p><%=errors[i]%></p>
+									<p><%=errors[i].message%>
+										<% if(errors[i].link) { %>
+											<a href="<%=errors[i].link%>">Go</a>
+										<% } %>
+									</p>
 								<% } %>
 							</div>
 						</div>
@@ -43,32 +41,34 @@
 									<th>Value</th>	
 								</tr>
 							</thead>
-							<tr>
-								<td><label for="namespace">Namespace (defaults to 'jessie')</label></td>
-								<td>
-									<input 
-										id="namespace" 
-										name="namespace" 
-										type="text"
-										<% if(query && query.namespace) { %>
-											value="<%=query.namespace%>"
-										<% } %>
-									>
-								</td>
-							</tr>
-							<tr>
-								<td><label for="minify">Minify</label></td>
-								<td>
-									<input 
-										id="minify" 
-										name="minify" 
-										type="checkbox" 
-										<% if(query && query.minify == 'on') { %>
-											checked
-										<% } %>
-									>
-								</td>
-							</tr>
+							<tbody>
+								<tr>
+									<td><label for="namespace">Namespace (defaults to 'jessie')</label></td>
+									<td>
+										<input 
+											id="namespace" 
+											name="namespace" 
+											type="text"
+											<% if(query && query.namespace) { %>
+												value="<%=query.namespace%>"
+											<% } %>
+										>
+									</td>
+								</tr>
+								<tr>
+									<td><label for="minify">Minify</label></td>
+									<td>
+										<input 
+											id="minify" 
+											name="minify" 
+											type="checkbox" 
+											<% if(query && query.minify == 'on') { %>
+												checked
+											<% } %>
+										>
+									</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>				
 
@@ -76,24 +76,25 @@
 						<h2>Functions</h2>
 
 						<table>
-							<thead>
-								<tr>
-									<th class="function">Function</th>
-									<th class="rendition">Rendition</th>
-									<th class="selection">Selection</th>							
-									<th class="degrades">Degrades in</th>
-									<th class="description">Description</th>					
-								</tr>
-							</thead>
+							<tr class="thead">
+								<th class="function">Function</th>
+								<th class="rendition">Rendition</th>
+								<th class="selection">Selection</th>							
+								<th class="degrades">Degrades in</th>
+								<th class="description">Description</th>					
+							</tr>
 						</table>
 							
 						<% for(var i = 0; i < functions.length; i++) { %>
 							<table>
 								<tbody>
-									<% for(var j = 0; j < functions[i].renditions.length; j++) { %>
+									<%
+									  var anyChecked = false;
+									  for(var j = 0; j < functions[i].renditions.length; j++) {
+									%>
 										<tr>
 											<%if(j==0) {%>
-												<td class="function" rowspan="<%=functions[i].renditions.length%>"><%=functions[i].name%></td>
+												<td id="<%=functions[i].name%>" class="function" rowspan="<%=functions[i].renditions.length+1%>"><%=functions[i].name%></td>
 											<%}%>
 											<td class="rendition"><%=functions[i].renditions[j].id%></td>
 											<td class="selection">
@@ -103,15 +104,29 @@
 													name="<%=functions[i].name%>" 
 													value="<%=functions[i].renditions[j].id%>"
 
-													<%if(query[functions[i].name] == functions[i].renditions[j].id){%>
+													<%
+													  if (query[functions[i].name] == functions[i].renditions[j].id) {
+													    anyChecked = true;
+													%>
 														checked
-													<%}%>
+													<% } %>
 												>
 											</td>
 											<td class="degrades"><%- md(functions[i].renditions[j].degrades) -%></td>
 											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>						
 										</tr>
-									<% } %>		
+									<% } %>
+									<tr>
+										<td>None</td>
+										<td>
+											<input type="radio" name="<%=functions[i].name%>" value="-1"
+												<% if (!anyChecked)  { %>
+													checked
+												<% } %>
+											>
+										</td>
+										<td colspan="2"></td>
+									</tr>
 								</tbody>		
 							</table>
 						<% } %>
@@ -161,7 +176,14 @@
 							</tbody>
 						</table>
 					</div>
-
+					<div class="footer">
+						<% if (errors.length > 0) { %>
+							<p>Back to <a href="">errors</a></p>
+						<% } %> 
+						<div class="actions">
+							<input type="submit" value="Download" name="download">
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>

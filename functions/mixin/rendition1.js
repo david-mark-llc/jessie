@@ -1,19 +1,23 @@
+/*global isOwnProperty */
+
 var mixin;
 
 /*
 Description:
-Relies on `Object.prototype.hasOwnProperty`
+Relies on `jessie.isOwnProperty`
 */
 
 /*
 Degrades:
-In browsers without `Object.prototype.hasOwnProperty`
 */
 
-if(Object.prototype.hasOwnProperty) {
+// TODO: Test the old iteration bug with shadowed built-in properties (e.g. toString)
+//       Need another iteration that handles that bug
+
+if(isOwnProperty) {
 	mixin = function(target, source) {
 		for(var property in source) {
-			if(source.hasOwnProperty(property)) {
+			if(isOwnProperty(source, property)) {
 				target[property] = source[property];
 			}
 		}

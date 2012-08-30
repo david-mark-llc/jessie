@@ -1,4 +1,4 @@
-/*global html,isHostMethod*/
+/*global jessieNamespace,html,isHostMethod*/
 
 /*
 Description:
@@ -16,7 +16,7 @@ if(html && isHostMethod(html, 'addEventListener')) {
 	attachListener = function(el, eventType, fn) {
 
 		var listener = function(e) {
-			fn.call(e, e);
+			fn.call(el, e);
 		};
 
 		el.addEventListener(eventType, listener, false);
@@ -25,11 +25,22 @@ if(html && isHostMethod(html, 'addEventListener')) {
 	};
 }
 else if(html && isHostMethod(html, 'attachEvent')) {
+	// The "theseObjects" variable must be global
+	// or a property of a global object (e.g. a "namespace" object).
+	// Stores references to objects used for - this - object in listeners
+	jessieNamespace.theseObjects = [];
+
+	var theseObjectsIndex = 0;
+
 	attachListener = function(el, eventType, fn) {
+		var thisObjectIndex = theseObjectsIndex++;
+
+		// Store reference to object used for - this - in listener
+		jessieNamespace.theseObjects[thisObjectIndex] = el;
 
 		var listener = function() {
 			var e = window.event;
-			fn.call(e, e);
+			fn.call(el, e);
 		};
 
 		el.attachEvent('on'+eventType, listener);

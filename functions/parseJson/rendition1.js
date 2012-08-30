@@ -1,4 +1,4 @@
-/*global global,isHostMethod */
+/*global global,isHostMethod,isHostObjectProperty */
 
 /*
 Description:
@@ -13,4 +13,4 @@ if(isHostObjectProperty(global, "JSON") && isHostMethod(JSON, "parse")) {
 	parseJson = function(str) {
 		return JSON.parse(str);
 	};
-};
+}

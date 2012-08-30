@@ -1,3 +1,6 @@
+
+var jessieNamespace;
+jessieNamespace = jessieNamespace || {};
 (function(global) {
 	
 	var globalDocument = global.document,

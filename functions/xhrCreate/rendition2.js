@@ -23,13 +23,13 @@ var createXhrFunctions = [
           return new global.ActiveXObject("Msxml2.XMLHTTP.6.0");
         }
 	],
-	createXhr,
+	xhrCreate,
 	i;
 
 for (i=createXhrFunctions.length; i--; ) {
 	try {
 		if (createXhrFunctions[i]()) {
-			createXhr = createXhrFunctions[i];
+			xhrCreate = createXhrFunctions[i];
 		}
 	}
 	catch (e) {}

@@ -1,4 +1,3 @@
-
 /*
 Description:
 Tests for 'el.classList.contains' and 'el.className'

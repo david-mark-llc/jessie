@@ -10,7 +10,7 @@ var express = require('express'),
 	JessieFunctionSet = require('./libs/jessie/FunctionSet.js'),
 	md = require("node-markdown").Markdown,
 	JessieBuilder = require('./libs/jessie/Builder.js'),
-	app = express.createServer(),
+	app = express(),
 	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
 	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
 	excludedQuerystringKeys = ['download', 'namespace', 'minify'];
@@ -59,7 +59,10 @@ app.get('/', function(req, res){
 		requestedFunctions = getRequestedFunctions(query);
 		requestedConstructorFns = getRequestedConstructors(query);
 		
-		namespace = query['namespace'].trim();
+		namespace = query['namespace'];
+		if(namespace) {
+			namespace = namespace.trim();
+		}
 		if(namespace && namespace.length > 0) {
 
 			// The user has typed a namespace
@@ -120,10 +123,16 @@ function getRequestedFunctions(query) {
 		if(key.indexOf("#") > -1) {
 			continue;
 		}
-
+		
+		var renditionId = parseInt(query[key], 10);
+		// if no rendition was wanted after all
+		if (renditionId==-1) {
+			continue;
+		}
+		
 		requestedFunctions.push({
 			functionName: key,
-			renditionId: parseInt(query[key], 10)
+			renditionId: renditionId
 		});
 	}
 
@@ -186,7 +195,6 @@ function getRequestedConstructors(query) {
 
 function getErrorsInViewFriendlyFormat(errors) {
 	var errorItem,
-		errorMessage,
 		errorMessages = [],
 		i = 0,
 		l = errors.length;
@@ -194,13 +202,14 @@ function getErrorsInViewFriendlyFormat(errors) {
 	for(; i < l; i++) {
 		errorItem = errors[i];
 		if(errorItem.itemName) {
-			errorMessage = (i+1) + '. ' + errorItem.itemName + ' depends on ' + errorItem.dependency;
+			errorItem.message = (i+1) + '. ' + errorItem.itemName + ' depends on ' + errorItem.dependency;
+			errorItem.link = '#' + errorItem.dependency;
 		}
 		else {
-			errorMessage = (i+1) + '. ' + errorItem;
+			errorItem = { message: (i+1) + '. ' + errorItem };
 		}
-		errorMessages.push(errorMessage);
+		
+		errorMessages.push(errorItem);
 	}
-
 	return errorMessages;
 }
