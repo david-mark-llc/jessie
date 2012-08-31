@@ -12,6 +12,6 @@ var map;
 
 if(Array.prototype.map){
     map = function(array, callback, thisObject) {
-        array.map(callback));
+        array.map(callback);
     };
 }
