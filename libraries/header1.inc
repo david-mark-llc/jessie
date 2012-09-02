@@ -12,6 +12,15 @@
 					type == 'object' && null !== objectMethod ||
 					type == 'unknown';
 		},
+		areFeatures = function() {
+			var i = arguments.length;
+			while (i--) {
+				if (!jessieNamespace[arguments[i]]) {
+				return false;
+				}
+			}
+			return true;
+		},
 		html = isHostObjectProperty(globalDocument, 'documentElement') && globalDocument.documentElement,
 		canCall = !!Function.prototype.call;
 
