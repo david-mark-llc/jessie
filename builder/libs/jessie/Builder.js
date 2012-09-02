@@ -21,7 +21,7 @@ var fs = require('fs'),
  * asdas
  */
 jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
-	this.defaultExports = ['isHostMethod', 'isHostObjectProperty'];
+	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'areFeatures'];
 
 	// function stuff
 	this.functionSet = functionSet;
@@ -76,6 +76,7 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 	}, function() {
         return w.walk(ast);
 	});
+	console.log(this.headerDeclarations);
 };
 
 
