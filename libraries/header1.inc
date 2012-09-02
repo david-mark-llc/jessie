@@ -1,17 +1,17 @@
-
-var jessieNamespace;
-jessieNamespace = jessieNamespace || {};
 (function(global) {
 	
 	var globalDocument = global.document,
 		isHostObjectProperty = function(object, property) {
-			return !!(typeof(object[property]) == 'object' && object[property]);
+			var objectProperty = object[property];
+			return typeof objectProperty == 'object' && objectProperty;
 		},
 		isHostMethod = function(object, method) {
-			var type = typeof object[method];
+			var objectMethod = object[method];
+			var type = typeof objectMethod;
 			return	type == 'function' ||
-					type == 'object' && !!object[method] ||
+					type == 'object' && null !== objectMethod ||
 					type == 'unknown';
 		},
-		html = isHostObjectProperty(globalDocument, 'documentElement') && globalDocument.documentElement,
+		html = isHostObjectProperty(globalDocument, 'documentElement'),
 		canCall = !!Function.prototype.call;
+
