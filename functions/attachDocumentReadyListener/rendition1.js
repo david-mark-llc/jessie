@@ -21,10 +21,12 @@ var readyListenerAttached;
 if(isHostMethod(global, "addEventListener")) {
 	attachDocumentReadyListener = function(fn) {
 		
-		// Remove this "scaffolding" on deployment
+		/*SCAFFOLDING:Start*/
 		if(readyListenerAttached) {
 			throw new Error("One too many ready listeners. Use a queue!");
 		}
+		/*SCAFFOLDING:End*/
+		
 		readyListenerAttached = true;
 		
 		// Production function starts (and ends) here
