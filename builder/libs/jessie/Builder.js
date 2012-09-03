@@ -212,17 +212,19 @@ jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
 function sortDependencies(functions, required, constructorFns, requestedConstructorFns) {
 	var graph = [], initialOrder = Object.keys(required);
 
-
 	var requiredFunctionNames = [];
 
 	for(var p = 0; p < required.length; p++) {
-		requiredFunctionNames.push(required[p].functionName);
+		if(requiredFunctionExists(required[p].functionName, functions)) {
+			requiredFunctionNames.push(required[p].functionName);
+		}
 	}
 
 	initialOrder = requiredFunctionNames;
 
 	var functionsAsHash = {};
 	for(var h = 0; h < functions.length; h++) {
+		//if(requiredFunctionExists())
 		functionsAsHash[functions[h].name] = functions[h];
 	}
 
@@ -235,7 +237,6 @@ function sortDependencies(functions, required, constructorFns, requestedConstruc
 	}
 
 	required = requiredHash;
-
 
 	initialOrder.forEach(function(f, i){
 		graph[i] = {
@@ -251,6 +252,17 @@ function sortDependencies(functions, required, constructorFns, requestedConstruc
 	return topologicalSort(graph).reverse().map(function(f) {
 		return initialOrder[f];
 	});
+}
+
+function requiredFunctionExists(requiredFnName, functions) {
+	var exists = false;
+	for(var i = 0; i < functions.length; i++) {
+		if(functions[i].name == requiredFnName) {
+			exists = true;
+			break;
+		}
+	}
+	return exists;
 }
 
 function topologicalSort(graph) {
