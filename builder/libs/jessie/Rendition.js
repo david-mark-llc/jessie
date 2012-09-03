@@ -46,6 +46,18 @@ jessie.Rendition = function(func, file) {
 			}
 		},
 
+		seeAlso: {
+			get: function() {
+				var support = "";
+				var re = /^\s*See:\s*([^*]+)\*\/$/gm;
+				var matches = re.exec(this.contents);
+				if(matches && matches.length > 1) {
+					support = matches[1].trim();
+				}
+				return support;
+			}
+		},
+
 		dependencies: {
 			get: function(){
 				if(!this._dependencies) {
