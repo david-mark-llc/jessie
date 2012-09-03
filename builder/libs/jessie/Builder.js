@@ -35,7 +35,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 
 	this.setupOptions(options);
 
-	this.headerDeclarations = ['window', 'global'];
+	this.headerDeclarations = ['window', 'global', 'jessieNamespace'];
 	this.setupLicense();
 	this.setupHeader();
 	this.setupFooter();
