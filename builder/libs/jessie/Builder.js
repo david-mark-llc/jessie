@@ -76,7 +76,6 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 	}, function() {
         return w.walk(ast);
 	});
-	console.log(this.headerDeclarations);
 };
 
 
