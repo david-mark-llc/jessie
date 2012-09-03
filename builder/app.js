@@ -13,7 +13,7 @@ var express = require('express'),
 	app = express(),
 	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
 	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
-	excludedQuerystringKeys = ['download', 'namespace', 'minify', 'test', 'scaffolding'];
+	excludedQuerystringKeys = [];
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
