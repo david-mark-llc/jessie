@@ -224,7 +224,6 @@ function sortDependencies(functions, required, constructorFns, requestedConstruc
 
 	var functionsAsHash = {};
 	for(var h = 0; h < functions.length; h++) {
-		//if(requiredFunctionExists())
 		functionsAsHash[functions[h].name] = functions[h];
 	}
 
