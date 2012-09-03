@@ -68,6 +68,19 @@
 										>
 									</td>
 								</tr>
+								<tr>
+									<td><label for="scaffolding">Scaffolding</label></td>
+									<td>
+										<input 
+											id="scaffolding" 
+											name="scaffolding" 
+											type="checkbox" 
+											<% if(query && query.scaffolding == 'on') { %>
+												checked
+											<% } %>
+										>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>				

@@ -14,10 +14,12 @@ var attachWindowListener;
 
 if(window && isHostMethod(window, 'addEventListener')) {
 	attachWindowListener = function(eventType, fn) {
-		// Remove this line on deployment - for debugging only
+		
+		/*SCAFFOLDING:Start*/
 		if (!(/^(load|scroll|resize|orientationchange|unload|beforeunload)$/.test(eventType))) {
 			throw new Error('Use attachListener with an element.');
 		}
+		/*SCAFFOLDING:End*/
 		
 		var listener = function(e) {
 			fn.call(window, e);

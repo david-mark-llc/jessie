@@ -35,7 +35,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 
 	this.setupOptions(options);
 
-	this.headerDeclarations = ['global'];
+	this.headerDeclarations = ['window', 'global'];
 	this.setupLicense();
 	this.setupHeader();
 	this.setupFooter();
@@ -45,6 +45,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 jessie.Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
 	this.options.namespaceToken = 'jessieNamespace';
+	this.options.scaffolding = options.scaffolding || false;
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
 	this.options.licensePath = this.options.licensePath || '../LICENSE';
@@ -166,6 +167,9 @@ jessie.Builder.prototype.build = function() {
 		jsContents += this.footer;
 		builderResponse.output = jsContents;
 
+		if(!this.options.scaffolding) {
+			builderResponse.output = this.removeScaffolding( builderResponse.output );
+		}
 
 		if(this.options.minify) {
 			builderResponse.output = this.minify(builderResponse.output);
@@ -181,6 +185,12 @@ jessie.Builder.prototype.build = function() {
 jessie.Builder.prototype.replaceNamespaceToken = function(output, namespace) {
 	var re = new RegExp(this.options.namespaceToken, 'g');
 	return output.replace(re, namespace);
+};
+
+jessie.Builder.prototype.removeScaffolding = function(output) {
+	var re = /(\s*\/\*SCAFFOLDING:Start\*\/(?:\s|.)*?\/\*SCAFFOLDING:End\*\/)/igm;
+	
+	return output.replace( re, '' );
 };
 
 jessie.Builder.prototype.minify = function(output) {

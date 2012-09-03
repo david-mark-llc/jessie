@@ -13,7 +13,7 @@ var express = require('express'),
 	app = express(),
 	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
 	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
-	excludedQuerystringKeys = ['download', 'namespace', 'minify'];
+	excludedQuerystringKeys = ['download', 'namespace', 'minify', 'test', 'scaffolding'];
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -48,6 +48,7 @@ app.get('/', function(req, res){
 		requestedConstructorFns,
 		namespace,
 		minify,
+		scaffolding = false,
 		fileName = 'jessie',
 		errors = [];
 
@@ -75,6 +76,13 @@ app.get('/', function(req, res){
 
 			// The user has asked for a minified version
 			builderOptions.minify = true;
+		}
+
+		scaffolding = query['scaffolding'];
+		if(scaffolding == 'on') {
+
+			// The user has asked for scaffolding to be included
+			builderOptions.scaffolding = true;
 		}
 
 		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, builderOptions);
