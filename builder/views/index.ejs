@@ -81,7 +81,8 @@
 								<th class="rendition">Rendition</th>
 								<th class="selection">Selection</th>							
 								<th class="degrades">Degrades in</th>
-								<th class="description">Description</th>					
+								<th class="description">Description</th>
+								<th class="seeAlso">See also</th>					
 							</tr>
 						</table>
 							
@@ -113,7 +114,8 @@
 												>
 											</td>
 											<td class="degrades"><%- md(functions[i].renditions[j].degrades) -%></td>
-											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>						
+											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>
+											<td class="seeAlso"><%- md(functions[i].renditions[j].seeAlso) -%></td>					
 										</tr>
 									<% } %>
 									<tr>
@@ -125,7 +127,7 @@
 												<% } %>
 											>
 										</td>
-										<td colspan="2"></td>
+										<td colspan="3"></td>
 									</tr>
 								</tbody>		
 							</table>
