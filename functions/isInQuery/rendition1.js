@@ -8,9 +8,9 @@ Relies on `jessie.query`
 var isInQuery;
 
 if(query) {
-	isInQuery = function(el, selector) {
+	isInQuery = function(el, selector, context) {
 		var isInQuery = false,
-			queryElements = query(selector),
+			queryElements = query(selector, context),
 			i;
 
 		// could use Array.prototype.indexOf in another rendition
