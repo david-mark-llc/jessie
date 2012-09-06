@@ -45,18 +45,20 @@ app.get('/', function(req, res){
 		builder = null,
 		buildResponse = null,
 		requestedFunctions,
+		functions,
 		requestedConstructorFns,
 		namespace,
 		minify,
 		scaffolding = false,
 		fileName = 'jessie',
+		action = query['action'],
 		errors = [];
 
 	/*
 	 * There is a download param in the querystring as the user
 	 * has submitted the form (but not necessarily)
 	 */
-	if(query['download']) {
+	if(action == 'Download') {
 		requestedFunctions = getRequestedFunctions(query);
 		requestedConstructorFns = getRequestedConstructors(query);
 		
@@ -108,6 +110,7 @@ app.get('/', function(req, res){
 	 * param, so we just show page
 	 */
 	} else {
+
 		res.render('index.ejs', {
 			functions: functionSet.getFunctions(),
 			constructorFns: constructorFnSet.getConstructorFns(),
