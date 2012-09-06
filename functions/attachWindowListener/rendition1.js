@@ -7,7 +7,7 @@ Relies on `window.addEventListener`. No frames.
 
 /*
 Degrades:
-IE8, Opera 7.6
+IE8, IE7, IE6, IE5.5, IE5, IE4, IE3, Opera 7.6
 */
 
 var attachWindowListener;

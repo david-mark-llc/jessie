@@ -5,11 +5,6 @@ Description:
 Relies on the `el.classList.contains` or `el.className` property providing the greatest browser support
 */
 
-/*
-Degrades:
-TBD
-*/
-
 var hasClass;
 
 if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "contains") ) {

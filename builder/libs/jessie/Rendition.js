@@ -88,9 +88,7 @@ jessie.Rendition = function(func, file) {
  * @return {Boolean} True when it degrades in the specified version, otherwise false
  */
 jessie.Rendition.prototype.degradesInIEVersion = function(version) {
-	// either this rendition degrades in the specified version or we can't find that it degrades
-	// in any IE version - both cases means we want to show it
-	return (this.degrades.indexOf(version) > -1 || this.degrades.indexOf("IE") == -1);
+	return (this.degrades.indexOf(version) === -1);
 };
 
 module.exports = jessie.Rendition;
