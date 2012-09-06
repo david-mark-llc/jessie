@@ -38,7 +38,8 @@ jessie.Function = function(folder, JessieRendition) {
 jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {
 	var renditions = [];
 	for(var i = 0; i < this.renditions.length; i++) {
-		if(this.renditions[i].degradesInIEVersion(version)) {
+		if(this.renditions[i].degradesInIEVersion(version) ||
+			this.renditions[i].degrades.length === 0) {
 			renditions.push(this.renditions[i]);
 		}
 	}
