@@ -84,13 +84,37 @@
 							</tbody>
 						</table>
 					</div>
-					<!-- 
+					
 					<div class="filters">
 						<h2>Filters</h2>
 						<div>
 							<label for="degradesIEFilter">IE degrades</label>
 							<select id="degradesIEFilter" name="degradesIEFilter">
 								<option value="">None</option>
+								<option 
+									value="IE4" 
+									<% if(query['degradesIEFilter'] == 'IE4') {%> 
+									selected 
+									<%}%>
+								>
+									IE4
+								</option>
+								<option 
+									value="IE5" 
+									<% if(query['degradesIEFilter'] == 'IE5') {%> 
+									selected 
+									<%}%>
+								>
+									IE5
+								</option>
+								<option 
+									value="IE5.5" 
+									<% if(query['degradesIEFilter'] == 'IE5.5') {%> 
+									selected 
+									<%}%>
+								>
+									IE5.5
+								</option>
 								<option 
 									value="IE6" 
 									<% if(query['degradesIEFilter'] == 'IE6') {%> 
@@ -126,7 +150,7 @@
 							</select>
 							<input type="submit" name="action" value="Filter">
 						</div>
-					</div>	 -->
+					</div>	
 
 					<div id="functions">
 						<h2>Functions</h2>
@@ -143,50 +167,63 @@
 						</table>
 							
 						<% for(var i = 0; i < functions.length; i++) { %>
-							<table>
-								<tbody>
-									<%
-									  var anyChecked = false;
-									  for(var j = 0; j < functions[i].renditions.length; j++) {
-									%>
-										<tr>
-											<%if(j==0) {%>
-												<td id="<%=functions[i].name%>" class="function" rowspan="<%=functions[i].renditions.length+1%>"><%=functions[i].name%></td>
-											<%}%>
-											<td class="rendition"><%=functions[i].renditions[j].id%></td>
-											<td class="selection">
-												<input 
-													id="<%=functions[i].name+functions[i].renditions[j].id%>" 
-													type="radio" 
-													name="<%=functions[i].name%>" 
-													value="<%=functions[i].renditions[j].id%>"
 
-													<%
-													  if (query[functions[i].name] == functions[i].renditions[j].id) {
-													    anyChecked = true;
-													%>
+							<% if(functions[i].renditions.length) {  %>
+								<table>
+									<tbody>
+										<%
+										  var anyChecked = false;
+										  for(var j = 0; j < functions[i].renditions.length; j++) {
+										%>
+											<tr>
+												<%if(j==0) {%>
+													<td id="<%=functions[i].name%>" class="function" rowspan="<%=functions[i].renditions.length+1%>">
+														<%=functions[i].name%>
+													</td>
+												<%}%>
+												<td class="rendition">
+													<%=functions[i].renditions[j].id%>
+												</td>
+												<td class="selection">
+													<input 
+														id="<%=functions[i].name+functions[i].renditions[j].id%>" 
+														type="radio" 
+														name="<%=functions[i].name%>" 
+														value="<%=functions[i].renditions[j].id%>"
+
+														<%
+														  if (query[functions[i].name] == functions[i].renditions[j].id) {
+														    anyChecked = true;
+														%>
+															checked
+														<% } %>
+													>
+												</td>
+												<td class="degrades">
+													<%- md(functions[i].renditions[j].degrades) -%>
+												</td>
+												<td class="description">
+													<%- md(functions[i].renditions[j].description) -%>
+												</td>
+												<td class="seeAlso">
+													<%- md(functions[i].renditions[j].seeAlso) -%>
+												</td>					
+											</tr>
+										<% } %>
+										<tr>
+											<td>None</td>
+											<td>
+												<input type="radio" name="<%=functions[i].name%>" value="-1"
+													<% if (!anyChecked)  { %>
 														checked
 													<% } %>
 												>
 											</td>
-											<td class="degrades"><%- md(functions[i].renditions[j].degrades) -%></td>
-											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>
-											<td class="seeAlso"><%- md(functions[i].renditions[j].seeAlso) -%></td>					
+											<td colspan="3"></td>
 										</tr>
-									<% } %>
-									<tr>
-										<td>None</td>
-										<td>
-											<input type="radio" name="<%=functions[i].name%>" value="-1"
-												<% if (!anyChecked)  { %>
-													checked
-												<% } %>
-											>
-										</td>
-										<td colspan="3"></td>
-									</tr>
-								</tbody>		
-							</table>
+									</tbody>		
+								</table>
+							<% } %>
 						<% } %>
 					</div>
 					<div id="constructors">

@@ -5,11 +5,6 @@ Description:
 Relies on the `el.classList.remove` or `el.className` property providing greatest browser support
 */
 
-/*
-Degrades:
-TBD
-*/
-
 var removeClass;
 
 if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "remove") ) {

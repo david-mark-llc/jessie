@@ -11,7 +11,7 @@ Note: No frames or other alternate windows
 
 /*
 Degrades:
-IE8
+IE8, IE7, IE6, IE5.5, IE5, IE4, IE3
 */
 
 var attachDocumentReadyListener;

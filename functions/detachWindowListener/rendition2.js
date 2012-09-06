@@ -7,7 +7,7 @@ Relies on MS `window.detachEvent`
 
 /*
 Degrades:
-IE9+,Opera 8+,Chrome, FF, Safari
+IE10, IE9, IE4, NN4, Opera 8+,Chrome, FF, Safari
 */
 
 var detachWindowListener;
