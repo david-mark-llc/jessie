@@ -88,7 +88,7 @@ jessie.Rendition = function(func, file) {
  * @return {Boolean} True when it degrades in the specified version
  */
 jessie.Rendition.prototype.degradesInIEVersion = function(version) {
-	return (this.degrades.length == 0 || this.degrades.indexOf(version) > -1);
+	return (this.degrades.indexOf(version) > -1);
 };
 
 module.exports = jessie.Rendition;
