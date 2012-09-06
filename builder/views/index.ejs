@@ -13,7 +13,7 @@
 			<div id="builder"> 
 				<form method="get" action="/">
 					<div class="header">
-						<h1>Build your own Jessie</h1>
+						<h1>Build your own Jessie <%query%></h1>
 					</div>
 
 					<% if (errors.length > 0) { %>
@@ -87,8 +87,14 @@
 					
 					<div class="filters">
 						<h2>Filters</h2>
+						
+						<% if(query && query['degradesIEFilter']) { %>
+							<p style="color: green">Filtered to show functions that degrade in:
+							<%=query['degradesIEFilter'] %></p>
+						<% } %>
+
 						<div>
-							<label for="degradesIEFilter">IE degrades</label>
+							<label for="degradesIEFilter">Degradation point</label>
 							<select id="degradesIEFilter" name="degradesIEFilter">
 								<option value="">None</option>
 								<option 

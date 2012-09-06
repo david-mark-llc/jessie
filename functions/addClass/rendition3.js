@@ -7,7 +7,7 @@ Relies on the `el.classList.add` or `el.className` property providing greatest b
 
 /*
 Degrades:
-Browsers that don't support DOM nodes with a className property
+IE4, IE3, NN4
 */
 
 var addClass;
