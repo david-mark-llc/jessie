@@ -7,7 +7,7 @@ Uses one of Internet Explorer's ActiveXObjects and gives support for IE5-IE6
 
 /*
 Degrades:
-IE4, NN4, Chrome, FF, Safari, Opera
+IE10, IE9, IE4, IE3, NN4, Chrome, FF, Safari, Opera
 */
 
 var createXhrFunctions = [

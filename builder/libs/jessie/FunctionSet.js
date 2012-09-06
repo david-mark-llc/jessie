@@ -17,6 +17,7 @@ jessie.FunctionSet = function(functionRoot, JessieFunction, JessieRendition) {
 	this.functions = [];
 };
 jessie.FunctionSet.prototype.create = function() {
+	this.functions = [];
 	// find fileNames based on directory inside root
 	var fileNames = fs.readdirSync(this.functionRoot).filter(function(fileName){
 		return fs.statSync(path.join(this.functionRoot, fileName)).isDirectory();
@@ -42,8 +43,23 @@ jessie.FunctionSet.prototype.sortByName = function(a, b) {
 	return 0;
 };
 jessie.FunctionSet.prototype.getFunctions = function() {
+	this.create();
 	return this.functions;
 };
+
+jessie.FunctionSet.prototype.getFunctionsFilteredByIEVersion = function(version) {
+	this.create();
+	var fns = [],
+		fn = null,
+		renditions;
+	for(var i = 0; i < this.functions.length; i++) {
+		fn = this.functions[i];
+		fn.renditions = fn.getRenditionsFilteredByIEVersion(version);
+		fns.push(fn);
+	}
+	return fns;
+};
+
 jessie.FunctionSet.prototype.getFunctionByName = function(name) {
 	var func = null;
 	for(var i = 0; i < this.functions.length; i++) {

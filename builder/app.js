@@ -111,8 +111,15 @@ app.get('/', function(req, res){
 	 */
 	} else {
 
+		if(query['degradesIEFilter'] != "") {
+			functions = functionSet.getFunctionsFilteredByIEVersion(query['degradesIEFilter']);
+		}
+		else {
+			functions = functionSet.getFunctions();
+		}
+
 		res.render('index.ejs', {
-			functions: functionSet.getFunctions(),
+			functions: functions,
 			constructorFns: constructorFnSet.getConstructorFns(),
 			query: query,
 			errors: errors,

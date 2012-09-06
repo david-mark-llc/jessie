@@ -17,7 +17,7 @@ screwy markup like this:
 
 /*
 Degrades:
-IE4, NN4
+IE4, IE3, NN4
 */
 
 var getElement;

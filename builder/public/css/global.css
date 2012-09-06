@@ -58,9 +58,7 @@ h1 {
 #builder .errors {
 	width: 97%;
 	margin: 0 auto 20px auto;
-	display: block;
-	
-	
+	display: block;	
 }
 
 #builder .errors .errorsInner {
@@ -83,6 +81,17 @@ h1 {
 
 #builder .errors p a {
 	color: #fff;
+}
+
+#builder .filters {
+	width: 97%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+}
+
+#builder .filters h2 {
+	font-size: 90%;
+	margin-bottom: 10px;
 }
 
 #builder .options {

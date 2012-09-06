@@ -7,7 +7,7 @@ Relies on both W3C compliant `e.stopPropagation()` and MS event model `e.cancelB
 
 /*
 Degrades:
-TBC
+IE4, IE3, NN4
 */
 
 var cancelPropagation;
