@@ -4,7 +4,7 @@ For both W3C `e.target` and MS `e.srcElement`
 */
 
 /*
-See: https://groups.google.com/forum/#!starred/comp.lang.javascript/uUsSVH7Vcvg
+See: <a href="https://groups.google.com/forum/#!starred/comp.lang.javascript/uUsSVH7Vcvg">Article</a>
 If you will be using a forked rendition to support IE 8-
 */
 
