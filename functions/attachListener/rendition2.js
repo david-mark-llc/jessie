@@ -6,7 +6,7 @@ Relies on Microsoft's `el.attachEvent`
 
 /*
 Degrades:
-IE9+,Opera 8+,Chrome, FF, Safari
+IE10, IE9, IE4, IE3, Opera 8+, Chrome, FF, Safari
 */
 
 var attachListener;

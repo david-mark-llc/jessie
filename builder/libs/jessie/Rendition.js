@@ -82,4 +82,13 @@ jessie.Rendition = function(func, file) {
 
 };
 
+/**
+ * Checks if this rendition degrades in a particular version of IE
+ * @param  {String} version Possible values IE10, IE9, IE8, IE7, IE6, IE5.5, IE5, IE4, IE3
+ * @return {Boolean} True when it degrades in the specified version
+ */
+jessie.Rendition.prototype.degradesInIEVersion = function(version) {
+	return (this.degrades.length == 0 || this.degrades.indexOf(version) > -1);
+};
+
 module.exports = jessie.Rendition;

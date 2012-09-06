@@ -10,7 +10,7 @@ If you will be using a forked rendition to support IE 8-
 
 /*
 Degrades:
-Not sure
+IE4, IE3, NN4
 */
 
 var getEventTarget;

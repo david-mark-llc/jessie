@@ -7,7 +7,7 @@ Relies on MS `e.srcElement`, `e.fromElement` and `e.toElement` which works in IE
 
 /*
 Degrades:
-IE4, NN4
+IE10, IE9, IE4, NN4
 */
 
 var getEventTargetRelated;
