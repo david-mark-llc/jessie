@@ -87,6 +87,8 @@ jessie.Builder.prototype.build = function() {
 
 	var errors = [];
 
+	this.requestedFunctions = this.filterNonExistentRequestedFunctions(this.requestedFunctions, this.functions);
+
 	if(this.requestedFunctions.length === 0) {
 		errors.push('Please choose at least one function');
 	}
@@ -198,6 +200,16 @@ jessie.Builder.prototype.minify = function(output) {
 	return pro.gen_code(ast);
 };
 
+jessie.Builder.prototype.filterNonExistentRequestedFunctions = function(requestedFns, fns) {
+	var filteredRequestedFns = [];
+	for(var i = 0; i < requestedFns.length; i++) {
+		if(requiredFunctionExists(requestedFns[i].functionName, fns)) {
+			filteredRequestedFns.push(requestedFns[i]);
+		}
+	}
+	return filteredRequestedFns;
+};
+
 jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
 	var requestedFunc;
 	for(var i = 0; i < this.requestedFunctions.length; i++) {
@@ -215,9 +227,7 @@ function sortDependencies(functions, required, constructorFns, requestedConstruc
 	var requiredFunctionNames = [];
 
 	for(var p = 0; p < required.length; p++) {
-		if(requiredFunctionExists(required[p].functionName, functions)) {
-			requiredFunctionNames.push(required[p].functionName);
-		}
+		requiredFunctionNames.push(required[p].functionName);
 	}
 
 	initialOrder = requiredFunctionNames;
