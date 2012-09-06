@@ -111,7 +111,7 @@ app.get('/', function(req, res){
 	 */
 	} else {
 
-		if(query['degradesIEFilter'] != "") {
+		if(query['degradesIEFilter']) {
 			functions = functionSet.getFunctionsFilteredByIEVersion(query['degradesIEFilter']);
 		}
 		else {
