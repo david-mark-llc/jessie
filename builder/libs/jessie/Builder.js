@@ -50,7 +50,8 @@ jessie.Builder.prototype.setupOptions = function(options) {
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
 	this.options.licensePath = this.options.licensePath || '../LICENSE';
 	this.options.namespace = this.options.namespace || 'jessie';
-	this.options.minify = this.options.minify || false;
+	this.options.minification = this.options.minification || false;
+;
 };
 
 jessie.Builder.prototype.setupHeader = function() {
@@ -173,7 +174,7 @@ jessie.Builder.prototype.build = function() {
 			builderResponse.output = this.removeScaffolding( builderResponse.output );
 		}
 
-		if(this.options.minify) {
+		if(this.options.minification) {
 			builderResponse.output = this.minify(builderResponse.output);
 		}
 
@@ -191,13 +192,30 @@ jessie.Builder.prototype.replaceNamespaceToken = function(output, namespace) {
 
 jessie.Builder.prototype.removeScaffolding = function(output) {
 	var re = /(\s*\/\*SCAFFOLDING:Start\*\/(?:\s|.)*?\/\*SCAFFOLDING:End\*\/)/igm;
-	
 	return output.replace( re, '' );
 };
 
 jessie.Builder.prototype.minify = function(output) {
 	var ast = uglifyParser.parse(output);
-	return pro.gen_code(ast);
+
+	var minificationLevel = this.options.minification;
+
+	switch(minificationLevel) {
+		case "level1":
+			output = pro.gen_code(ast, { beautify: true });
+			break;
+		case "level2":
+			output = pro.gen_code(ast);
+			break;
+		case "level3":
+			ast = pro.ast_mangle(ast);
+			output = pro.gen_code(ast);
+			break;
+		default:
+			// nothing
+	}
+
+	return output;
 };
 
 jessie.Builder.prototype.filterNonExistentRequestedFunctions = function(requestedFns, fns) {
