@@ -48,7 +48,7 @@ app.get('/', function(req, res){
 		functions,
 		requestedConstructorFns,
 		namespace,
-		minify,
+		minification,
 		scaffolding = false,
 		fileName = 'jessie',
 		action = query['action'],
@@ -73,11 +73,11 @@ app.get('/', function(req, res){
 			fileName = namespace;
 		}
 
-		minify = query['minify'];
-		if(minify == 'on') {
+		minification = query['minification'];
+		if(minification) {
 
 			// The user has asked for a minified version
-			builderOptions.minify = true;
+			builderOptions.minification = minification;
 		}
 
 		scaffolding = query['scaffolding'];
