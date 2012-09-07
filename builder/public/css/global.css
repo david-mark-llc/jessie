@@ -146,6 +146,19 @@ h1 {
 	color: #fff;
 }
 
+#builder table .code {
+	overflow: auto;
+}
+
+#builder table .code pre {
+	margin-right: 10px;
+}
+
+#builder table .code pre code {
+	overflow: auto;
+	width: 98%;
+}
+
 #builder table .function {
 	width: 200px;
 }

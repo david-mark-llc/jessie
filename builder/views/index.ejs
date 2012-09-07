@@ -69,7 +69,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td><label for="scaffolding">Scaffolding</label></td>
+									<td><label for="scaffolding">Debug</label></td>
 									<td>
 										<input 
 											id="scaffolding" 
@@ -184,7 +184,7 @@
 										%>
 											<tr>
 												<%if(j==0) {%>
-													<td id="<%=functions[i].name%>" class="function" rowspan="<%=functions[i].renditions.length+1%>">
+													<td id="<%=functions[i].name%>" class="function" rowspan="<%=(functions[i].renditions.length*2)+1%>">
 														<%=functions[i].name%>
 													</td>
 												<%}%>
@@ -215,6 +215,12 @@
 												<td class="seeAlso">
 													<%- md(functions[i].renditions[j].seeAlso) -%>
 												</td>					
+											</tr>
+											<tr>
+												<td class="code" colspan="5">
+													<pre><code><%=functions[i].renditions[j].contents%></code></pre>
+
+												</td>
 											</tr>
 										<% } %>
 										<tr>
