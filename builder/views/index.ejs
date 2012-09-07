@@ -56,16 +56,56 @@
 									</td>
 								</tr>
 								<tr>
-									<td><label for="minify">Minify</label></td>
+									<td>Minification settings</td>
 									<td>
-										<input 
-											id="minify" 
-											name="minify" 
-											type="checkbox" 
-											<% if(query && query.minify == 'on') { %>
-												checked
-											<% } %>
-										>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												id="minification_0"
+												value=""
+												<% if(!query.minification || query.minification == '') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_0">None</label>
+										</div>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												value="level1"
+												id="minification_1"
+												<% if(query && query.minification == 'level1') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_1">Level 1 - Remove comments</label>
+										</div>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												value="level2"
+												id="minification_2"
+												<% if(query && query.minification == 'level2') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_2">Level 2 - Remove comments, whitespace</label>
+										</div>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												value="level3"
+												id="minification_3"
+												<% if(query && query.minification == 'level3') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_3">Level 3 - Remove comments, whitspace and shorten variable names</label>
+										</div>
 									</td>
 								</tr>
 								<tr>
