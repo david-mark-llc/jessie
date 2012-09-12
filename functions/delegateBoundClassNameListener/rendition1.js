@@ -1,13 +1,13 @@
-/*global global,isHostMethod,delegateBoundListener,hasClass,getElementParent*/
+/*global global,isHostMethod,delegateBoundListener,hasClass,getElementParentElement*/
 
 /*
 Description:
-Relies on `jessie.delegateBoundListener`, `jessie.hasClass`, and `jessie.getElementParent`
+Relies on `jessie.delegateBoundListener`, `jessie.hasClass`, and `jessie.getElementParentElement`
 */
 
 var delegateBoundClassNameListener;
 
-if(delegateBoundListener && hasClass && getElementParent) {
+if(delegateBoundListener && hasClass && getElementParentElement) {
 	delegateBoundClassNameListener = function(el, eventType, className, fn, thisObject) {
 
 		var fnDelegate = function(el, target) {
@@ -20,7 +20,7 @@ if(delegateBoundListener && hasClass && getElementParent) {
 			// traverse up the tree until we find an element with the class or until we find the delegate/el
 			while(currentTarget && (currentTarget !== el) && !hasClass(currentTarget, className)) {
 				// if we clicked on the delegate/container/el then set to null
-				currentTarget = getElementParent(currentTarget);
+				currentTarget = getElementParentElement(currentTarget);
 				if(el === currentTarget) {
 					currentTarget = null;
 				}

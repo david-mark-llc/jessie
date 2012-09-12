@@ -1,17 +1,17 @@
-/*global html,getElementParent,hasClass */
+/*global html,getElementParentElement,hasClass */
 
 /*
 Description:
-Relies on `el.className` property, `jessie.getElementParent` and `jessie.hasClass`
+Relies on `el.className` property, `jessie.getElementParentElement` and `jessie.hasClass`
 */
 
 var getAncestorByClassName;
 
-if(html && 'string' == typeof html.className && getElementParent && hasClass) {
+if(html && 'string' == typeof html.className && getElementParentElement && hasClass) {
 	getAncestorByClassName = function(el, className) {
-		el = getElementParent(el);
+		el = getElementParentElement(el);
 		while (el && !hasClass(el, className)) {
-			el = getElementParent(el);
+			el = getElementParentElement(el);
 		}
 		return el;
 	};
