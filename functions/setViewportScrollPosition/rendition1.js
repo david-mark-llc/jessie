@@ -5,10 +5,10 @@ Description:
 Relies on `window.scrollTo`
 */
 
-var setScrollPosition;
+var setViewportScrollPosition;
 
 if(isHostMethod(global, "scrollTo")) {
-	setScrollPosition = function(x, y) {
+	setViewportScrollPosition = function(x, y) {
 		window.scrollTo(x, y);
 	};
 }
