@@ -1,4 +1,4 @@
-/*global getPositionRelativeToWindow,getViewportScrollPosition*/
+/*global getPositionRelativeToViewport,getViewportScrollPosition*/
 
 /*
 Description:
@@ -12,9 +12,9 @@ Degrades:
 
 var getPositionRelativeToDocument;
 
-if(getPositionRelativeToWindow && getViewportScrollPosition) {
+if(getPositionRelativeToViewport && getViewportScrollPosition) {
 	getPositionRelativeToDocument = function(el) {
-		var position = getPositionRelativeToWindow(el),
+		var position = getPositionRelativeToViewport(el),
 			scrollPosition = getViewportScrollPosition(),
 			x = position[0]+scrollPosition[0],
 			y = position[1]+scrollPosition[1];
