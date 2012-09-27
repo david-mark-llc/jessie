@@ -12,6 +12,11 @@ expects a delegate listener which was returned
 when it was attached
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var undelegateQueryListener;
 
 if(undelegateListener) {

@@ -15,6 +15,11 @@ See:
 This is the see also section
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var addClass;
 
 if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "add") ) {

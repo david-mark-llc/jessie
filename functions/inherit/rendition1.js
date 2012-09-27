@@ -5,6 +5,11 @@ Description:
 Needs documenting
 */
 
+/*
+Author:
+David Mark
+*/
+
 inherit = (function() {
 	var Fn = function() {};
 	return function(fnSub, fnSuper) {

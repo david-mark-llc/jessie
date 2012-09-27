@@ -5,6 +5,11 @@ Description:
 For browsers without `window.JSON.parse`
 */
 
+/*
+Author:
+David Mark
+*/
+
 var parseJson;
 
 parseJson = function(str) {

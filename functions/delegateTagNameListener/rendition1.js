@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.delegateListener` amd `jessie.getElementTagName`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var delegateTagNameListener;
 
 if(delegateListener && getElementTagName) {

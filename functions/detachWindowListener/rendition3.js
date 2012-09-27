@@ -10,6 +10,11 @@ Degrades:
 NN4, IE4, IE3
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var detachWindowListener;
 
 if(window && isHostMethod(window, 'removeEventListener')) {

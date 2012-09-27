@@ -6,6 +6,11 @@ Relies on `window.JSON.parse` or the `Function` constructor providing greatest
 browser support
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var parseJson;
 
 if(isHostObjectProperty(global, "JSON") && isHostMethod(JSON, "parse")) {

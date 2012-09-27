@@ -10,6 +10,11 @@ Degrades:
 IE4, IE3, NN4
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var cancelDefault;
 	
 if(html && isHostMethod(html, 'addEventListener')) {

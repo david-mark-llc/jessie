@@ -2,17 +2,17 @@
 
 /*
 Description:
-Relies on W3C `el.removeEventListener`
+Relies on `jessie.removeEventListener` or `el.detachEvent` providing widest support
 */
 
 /*
 Degrades:
-IE8, IE7, IE6, IE5.5, IE5, IE4, IE3, NN4, Opera 7.6
+
 */
 
 /*
 Author:
-David Mark
+Adam Silver
 */
 
 var detachListener;
@@ -20,5 +20,9 @@ var detachListener;
 if(html && isHostMethod(html, 'removeEventListener')) {
 	detachListener = function(el, eventType, fn) {
 		el.removeEventListener(eventType, fn, false);
+	};
+} else if(html && isHostMethod(html, 'detachEvent')) {
+	detachListener = function(el, eventType, fn) {
+		el.detachEvent('on'+eventType, fn);
 	};
 }

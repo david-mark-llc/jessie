@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.delegateListener`, `jessie.query` and `jessie.isDescendant`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var delegateQueryListener;
 
 if(delegateListener && query && isInQuery && isDescendant) {

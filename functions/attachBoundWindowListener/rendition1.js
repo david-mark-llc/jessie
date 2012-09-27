@@ -4,6 +4,12 @@
 Description:
 Relies on `jessie.bind` and `jessie.attachWindowListener`
 */
+
+/*
+Author:
+Adam Silver
+*/
+
 var attachBoundWindowListener;
 
 if(attachWindowListener && bind) {

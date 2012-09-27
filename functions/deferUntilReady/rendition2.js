@@ -18,9 +18,15 @@ Can use following to get IE8- to work when document is parsed:
 	</body>
 
 */
+
 /*
 Degrades:
 IE8, IE7, IE6, IE5.5, IE5, IE4, IE3, Opera 7.6
+*/
+
+/*
+Author:
+David Mark
 */
 
 var deferUntilReady;

@@ -5,6 +5,11 @@ Description:
 Relies on `document.createElement`
 */
 
+/*
+Author:
+David Mark
+*/
+
 var createElement;
 
 if(globalDocument && isHostMethod(globalDocument, "createElement")) {

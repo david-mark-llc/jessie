@@ -12,6 +12,11 @@ Degrades:
 IE3
 */
 
+/*
+Author:
+David Mark
+*/
+
 var getHtml;
 
 if(html && "string" == typeof html.innerHTML) {

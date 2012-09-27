@@ -11,6 +11,11 @@ Relies on `jessie.isOwnProperty`
 Degrades:
 */
 
+/*
+Author:
+Ian Crowther
+*/
+
 if(isOwnProperty) {
 	deepMixin = function(target, source) {
 		for(var property in source) {
