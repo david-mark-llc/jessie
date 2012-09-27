@@ -8,12 +8,12 @@ Relies on `window.attachEvent`
 Degrades:
 IE10, IE9, IE4, IE3, NN4, Opera 8+,Chrome, FF, Safari
 */
-var attachDocumentReadyListener;
+var deferUntilReady;
 
 var readyListenerAttached;
 
 if(isHostMethod(global, "attachEvent")) {
-	attachDocumentReadyListener = function(fn) {
+	deferUntilReady = function(fn) {
 		
 		/*SCAFFOLDING:Start*/
 		if(readyListenerAttached) {

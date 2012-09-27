@@ -23,14 +23,14 @@ Degrades:
 IE8, IE7, IE6, IE5.5, IE5, IE4, IE3, Opera 7.6
 */
 
-var attachDocumentReadyListener;
+var deferUntilReady;
 
 var readyListener,
 	readyListenerAttached,
 	documentIsReady;
 
 if (isHostMethod(global, "addEventListener") && globalDocument && isHostMethod(globalDocument, "addEventListener")) {
-	attachDocumentReadyListener = function(fn) {
+	deferUntilReady = function(fn) {
 
 		/*SCAFFOLDING:Start*/
 		if (readyListenerAttached) {
