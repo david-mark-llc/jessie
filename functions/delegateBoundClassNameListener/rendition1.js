@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.delegateBoundListener`, `jessie.hasClass`, and `jessie.getElementParentElement`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var delegateBoundClassNameListener;
 
 if(delegateBoundListener && hasClass && getElementParentElement) {

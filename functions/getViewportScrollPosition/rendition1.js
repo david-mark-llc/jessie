@@ -5,6 +5,11 @@ Description:
 Relies on `window.page(X/Y)Offset
 */
 
+/*
+Author:
+David Mark
+*/
+
 var getViewportScrollPosition;
 
 if('number' == typeof global.pageXOffset && 'number' == typeof global.pageYOffset ) {

@@ -10,6 +10,11 @@ Degrades:
 IE10, IE9, IE4, IE3, Opera 8+,Chrome, FF, Safari
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var cancelPropagation;
 
 if(html && isHostMethod(html, 'attachEvent')) {

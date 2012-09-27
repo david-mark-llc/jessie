@@ -205,8 +205,9 @@
 						<table>
 							<tr class="thead">
 								<th class="function">Function</th>
+								<th class="author">Author</th>				
 								<th class="rendition">Rendition</th>
-								<th class="selection">Selection</th>							
+								<th class="selection">Choose</th>		
 								<th class="degrades">Degrades in</th>
 								<th class="description">Description</th>
 								<th class="seeAlso">See also</th>					
@@ -223,11 +224,13 @@
 										  for(var j = 0; j < functions[i].renditions.length; j++) {
 										%>
 											<tr>
+
 												<%if(j==0) {%>
 													<td id="<%=functions[i].name%>" class="function" rowspan="<%=(functions[i].renditions.length*2)+1%>">
 														<%=functions[i].name%>
 													</td>
 												<%}%>
+												<td class="author"><%=functions[i].renditions[j].author%></td>
 												<td class="rendition">
 													<%=functions[i].renditions[j].id%>
 												</td>
@@ -257,7 +260,7 @@
 												</td>					
 											</tr>
 											<tr>
-												<td class="code" colspan="5">
+												<td class="code" colspan="6">
 													<pre><code><%=functions[i].renditions[j].contents%></code></pre>
 
 												</td>

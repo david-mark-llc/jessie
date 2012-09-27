@@ -10,6 +10,11 @@ Degrades:
 IE10, IE9, IE4, IE3, NN4, Chrome, FF, Safari, Opera
 */
 
+/*
+Author:
+David Mark
+*/
+
 var createXhrFunctions = [
 		function() {
           return new global.ActiveXObject("Microsoft.XMLHTTP");

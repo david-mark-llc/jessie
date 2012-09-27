@@ -1,5 +1,9 @@
 /*global html,isHostMethod */
 
+/*
+Author:
+Adam Silver
+*/
 
 var isDescendant;
 

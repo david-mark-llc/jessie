@@ -10,6 +10,11 @@ Degrades:
 IE4, IE3, NN4
 */
 
+/*
+Author:
+David Mark
+*/
+
 var attachListener;
 
 if(html && isHostMethod(html, 'addEventListener')) {

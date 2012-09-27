@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.detachListener`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var undelegateListener;
 
 if(detachListener) {

@@ -10,6 +10,11 @@ Degrades:
 IE5, IE4, IE3
 */
 
+/*
+Author:
+David Mark
+*/
+
 var bind;
 
 if(canCall && Array.prototype.slice) {
