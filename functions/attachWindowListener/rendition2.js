@@ -10,6 +10,11 @@ Degrades:
 IE10, IE9, IE4, IE3, Opera 8+,Chrome, FF, Safari
 */
 
+/*
+Author:
+David Mark
+*/
+
 var attachWindowListener;
 
 if(window && isHostMethod(window, 'attachEvent')) {

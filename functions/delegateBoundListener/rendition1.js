@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.attachListener`, `jessie.bind` and `jessie.getEventTarget` and `Function.prototype.call`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var delegateBoundListener;
 
 if(attachListener && bind && getEventTarget && canCall) {

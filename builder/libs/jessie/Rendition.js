@@ -36,25 +36,37 @@ jessie.Rendition = function(func, file) {
 
 		degrades: {
 			get: function() {
-				var support = "";
+				var degrades = "";
 				var re = /^\s*Degrades:\s*([^*]+)\*\/$/gm;
 				var matches = re.exec(this.contents);
 				if(matches && matches.length > 1) {
-					support = matches[1].trim();
+					degrades = matches[1].trim();
 				}
-				return support;
+				return degrades;
 			}
 		},
 
 		seeAlso: {
 			get: function() {
-				var support = "";
+				var seeAlso = "";
 				var re = /^\s*See:\s*([^*]+)\*\/$/gm;
 				var matches = re.exec(this.contents);
 				if(matches && matches.length > 1) {
-					support = matches[1].trim();
+					seeAlso = matches[1].trim();
 				}
-				return support;
+				return seeAlso;
+			}
+		},
+
+		author: {
+			get: function() {
+				var author = "";
+				var re = /^\s*Author:\s*([^*]+)\*\/$/gm;
+				var matches = re.exec(this.contents);
+				if(matches && matches.length > 1) {
+					author = matches[1].trim();
+				}
+				return author;
 			}
 		},
 

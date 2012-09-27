@@ -5,6 +5,11 @@ Description:
 Relies on the `el.className` property
 */
 
+/*
+Author:
+David Mark
+*/
+
 var removeClass;
 
 if(html && "string" == typeof html.className) {

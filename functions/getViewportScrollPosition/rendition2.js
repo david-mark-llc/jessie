@@ -5,6 +5,11 @@ Description:
 Needs documenting
 */
 
+/*
+Author:
+David Mark
+*/
+
 var getViewportScrollPosition;
 
 if( globalDocument &&

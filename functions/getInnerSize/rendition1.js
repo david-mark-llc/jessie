@@ -10,6 +10,11 @@ Degrades:
 IE3
 */
 
+/*
+Author:
+David Mark
+*/
+
 var getInnerSize;
 
 if(html && typeof html.clientWidth == 'number') {

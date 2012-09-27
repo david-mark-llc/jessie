@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.xhrCreate`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var xhrGet;
 
 // if you can't create one then you certainly can't send one

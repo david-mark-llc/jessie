@@ -10,6 +10,11 @@ Note: no borders on the HTML element as that can add cross-browser complications
 Degrades:
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var getPositionRelativeToDocument;
 
 if(getPositionRelativeToViewport && getViewportScrollPosition) {

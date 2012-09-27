@@ -9,6 +9,11 @@ Degrades:
 IE10, IE9, IE4, IE3, Opera 8+, Chrome, FF, Safari
 */
 
+/*
+Author:
+David Mark
+*/
+
 var attachListener;
 
 if(html && isHostMethod(html, 'attachEvent')) {

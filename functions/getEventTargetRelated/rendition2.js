@@ -8,6 +8,11 @@ Degrades:
 IE4, IE3, NN4,Opera 8+,Chrome, FF, Safari
 */
 
+/*
+Author:
+David Mark
+*/
+
 var getEventTargetRelated;
 
 getEventTargetRelated = function(e) {

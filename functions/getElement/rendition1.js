@@ -20,6 +20,11 @@ Degrades:
 IE4, IE3, NN4
 */
 
+/*
+Author:
+David Mark
+*/
+
 var getElement;
 
 if (isHostMethod(document, 'getElementById')) {

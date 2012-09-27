@@ -10,6 +10,11 @@ Degrades:
 IE4, NN4
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var attachWindowListener;
 
 if(window && isHostMethod(window, 'addEventListener')) {

@@ -10,6 +10,11 @@ Degrades:
 IE10, IE9, IE4, NN4
 */
 
+/*
+Author:
+David Mark
+*/
+
 var getEventTargetRelated;
 
 if(html && isHostMethod(html, 'attachEvent')) {
