@@ -66,6 +66,7 @@ if(xhrCreate && bind) {
 		}
 		
 		xhr.open('GET', url);
+		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(null);
 		return xhr;
