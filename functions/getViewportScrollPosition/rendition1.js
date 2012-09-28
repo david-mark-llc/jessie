@@ -12,8 +12,8 @@ David Mark
 
 var getViewportScrollPosition;
 
-if('number' == typeof global.pageXOffset && 'number' == typeof global.pageYOffset ) {
+if('number' == typeof window.pageXOffset && 'number' == typeof window.pageYOffset ) {
 	getViewportScrollPosition = function() {
-		return [global.pageXOffset, global.pageYOffset];
+		return [window.pageXOffset, window.pageYOffset];
 	};
 }
