@@ -7,7 +7,12 @@ Relies on MS event model `e.returnValue`
 
 /*
 Degrades:
-IE9+,Opera 8+,Chrome, FF, Safari
+IE9, IE10, IE4, IE3, Opera 8+,Chrome, FF, Safari
+*/
+
+/*
+Author:
+Adam Silver
 */
 
 var cancelDefault;

@@ -9,6 +9,11 @@ Relies on `jessie.ajaxGet` and `jessie.parseJson`
 Degrades:
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var jsonGet;
 
 if(ajaxGet && parseJson && bind) {

@@ -10,14 +10,21 @@ Degrades:
 IE4, NN4
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var attachWindowListener;
 
 if(window && isHostMethod(window, 'addEventListener')) {
 	attachWindowListener = function(eventType, fn) {
-		// Remove this line on deployment - for debugging only
+		
+		/*SCAFFOLDING:Start*/
 		if (!(/^(load|scroll|resize|orientationchange|unload|beforeunload)$/.test(eventType))) {
 			throw new Error('Use attachListener with an element.');
 		}
+		/*SCAFFOLDING:End*/
 		
 		var listener = function(e) {
 			fn.call(window, e);
@@ -29,10 +36,12 @@ if(window && isHostMethod(window, 'addEventListener')) {
 	};
 } else if(window && isHostMethod(window, 'attachEvent')) {
 	attachWindowListener = function(eventType, fn) {
-		// Remove this line on deployment -- for debugging only
+		
+		/*SCAFFOLDING:Start*/
 		if (!(/^(load|scroll|resize|orientationchange|unload|beforeunload)$/.test(eventType))) {
 			throw new Error('Use attachListener with an element.');
 		}
+		/*SCAFFOLDING:End*/
 		
 		var listener = function() {
 			var e = window.event;

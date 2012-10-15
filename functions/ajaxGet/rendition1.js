@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.xhrCreate` and `jessie.xhrGet`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var ajaxGet;
 
 if(xhrCreate && xhrGet) {

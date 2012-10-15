@@ -1,29 +1,37 @@
-/*global global,isHostMethod,delegateBoundListener,hasClass,getDescendantsByClassName,isDescendant*/
+/*global global,isHostMethod,delegateBoundListener,hasClass,getElementParentElement*/
 
 /*
 Description:
-Relies on `jessie.delegateBoundListener`, `jessie.hasClass`, `jessie.getDescendantsByClassName` and `jessie.isDescendant`
+Relies on `jessie.delegateBoundListener`, `jessie.hasClass`, and `jessie.getElementParentElement`
+*/
+
+/*
+Author:
+Adam Silver
 */
 
 var delegateBoundClassNameListener;
 
-if(delegateBoundListener && hasClass && getDescendantsByClassName && isDescendant) {
+if(delegateBoundListener && hasClass && getElementParentElement) {
 	delegateBoundClassNameListener = function(el, eventType, className, fn, thisObject) {
 
 		var fnDelegate = function(el, target) {
+			var currentTarget = target;
 
-			// we need to check that the target has the class name
-			// if not then we need to see if the target is a child of an element with that class name
-			if(hasClass(target, className)) {
-				return target;
+			if(el === currentTarget) {
+				currentTarget = null;
 			}
 
-			var elements = jessie.getDescendantsByClassName(document, className);
-			for(var i = 0; i < elements.length; i++) {
-				if( isDescendant(elements[i], target) ) {
-					return elements[i];
+			// traverse up the tree until we find an element with the class or until we find the delegate/el
+			while(currentTarget && (currentTarget !== el) && !hasClass(currentTarget, className)) {
+				// if we clicked on the delegate/container/el then set to null
+				currentTarget = getElementParentElement(currentTarget);
+				if(el === currentTarget) {
+					currentTarget = null;
 				}
 			}
+
+			return currentTarget;
 		};
 
 		return delegateBoundListener(el, eventType, fn, fnDelegate, thisObject);

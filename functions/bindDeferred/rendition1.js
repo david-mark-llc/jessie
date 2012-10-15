@@ -1,14 +1,19 @@
-/*global canCall,bind,global */
+/*global canCall,bind,global,isHostMethod */
 
 /*
 Description:
-Relies on `Function.prototype.apply`, `Array.prototype.slice`, 
+Relies on `Function.prototype.apply`, `Array.prototype.slice`,
 `Array,prototype.concat`, `window.setTimeOut` and `window.clearTimeout`
+*/
+
+/*
+Author:
+David Mark
 */
 
 var bindDeferred;
 
-if(canCall) {
+if(canCall && Array.prototype.slice && Array.prototype.concat && isHostMethod(global, 'setTimeout')) {
   bindDeferred = function(fn, context, delay) {
     var timeout;
     fn = bind.apply(this, [fn, context].concat(Array.prototype.slice.call(arguments, 3)));

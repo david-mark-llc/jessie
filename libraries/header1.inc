@@ -1,3 +1,5 @@
+var jessieNamespace;
+jessieNamespace = jessieNamespace || {};
 (function(global) {
 	
 	var globalDocument = global.document,
@@ -22,5 +24,6 @@
 			return true;
 		},
 		html = isHostObjectProperty(globalDocument, 'documentElement') && globalDocument.documentElement,
-		canCall = !!Function.prototype.call;
+		canCall = !!Function.prototype.call,
+		isStyleCapable = !!(html && isHostObjectProperty(html, 'style'));;
 

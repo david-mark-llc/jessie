@@ -7,7 +7,7 @@ Relies on MS `e.srcElement`
 
 /*
 Degrades:
-IE9+, Chrome, FireFox
+IE10, IE9, IE4, IE3, Chrome, FireFox
 */
 
 var getEventTarget;

@@ -1,29 +1,32 @@
-/*global globalDocument */
+/*global global, html, globalDocument */
 
 /*
 Description:
-Needs documenting
+No quirks mode, frames or other windows (just the one running the script)
+*/
+
+/*
+Author:
+David Mark
 */
 
 var getViewportScrollPosition;
 
-if( globalDocument &&
-	'number' == typeof globalDocument.scrollLeft &&
-	'number' == typeof globalDocument.scrollTop &&
-	'string' == typeof globalDocument.compatMode &&
-	globalDocument.compatMode.indexOf('css') != -1) {
-	
+if('number' == typeof window.pageXOffset) {
+
+	/*
+	Many "standards-based" browsers feature this non-standard property. No ambiguity about what this window property means
+	 */
 	getViewportScrollPosition = function() {
-		return [document.scrollLeft, document.scrollTop];
+		return [window.pageXOffset, window.pageYOffset];
 	};
 
-}
-else if( globalDocument &&
-	globalDocument.body &&
-	'number' == typeof globalDocument.body.scrollLeft &&
-	'number' == typeof globalDocument.body.scrollTop) {
-	
+} else if(html && 'number' == typeof html.scrollTop) {
+
+	/*
+	Proprietary IE properties, copied widely by others; often 0,0 in mobile browsers; ambiguous as many mobiles represent an un-scrolled document (i.e.scrollHeight == clientHeight), regardless of which portion of document is viewable
+	 */
 	getViewportScrollPosition = function() {
-		return [document.body.scrollLeft, document.body.scrollTop];
+		return [html.scrollLeft, html.scrollTop];
 	};
 }

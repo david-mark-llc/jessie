@@ -34,6 +34,18 @@ jessie.Function = function(folder, JessieRendition) {
 		return contents;
 	};
 };
+
+jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {
+	var renditions = [];
+	for(var i = 0; i < this.renditions.length; i++) {
+		if(this.renditions[i].degradesInIEVersion(version) ||
+			this.renditions[i].degrades.length === 0) {
+			renditions.push(this.renditions[i]);
+		}
+	}
+	return renditions;
+};
+
 jessie.Function.prototype.createRenditions = function() {
 	var functionInstance = this;
 	var files = fs.readdirSync(this.folder).sort();

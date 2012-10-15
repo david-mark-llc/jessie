@@ -7,7 +7,12 @@ Relies on the `el.className` property (class attribute)
 
 /*
 Degrades:
-Unknown
+IE4, IE3
+*/
+
+/*
+Author:
+David Mark
 */
 
 var addClass;

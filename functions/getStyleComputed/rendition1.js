@@ -9,7 +9,12 @@ names.
 
 /*
 Degrades:
-IE8
+IE8, IE7, IE6, IE5.5, IE5, IE4, IE3
+*/
+
+/*
+Author:
+David Mark
 */
 
 var getStyleComputed;
@@ -18,6 +23,7 @@ if (isHostObjectProperty(globalDocument, 'defaultView') &&
 	isHostMethod(globalDocument.defaultView, 'getComputedStyle')) {
 	getStyleComputed = function(el, style) {
 		
+		/*SCAFFOLDING:Start*/
 		if (style.indexOf('-') != -1) {
 			throw new Error('Camel-case style names, please.');
 		}
@@ -29,6 +35,7 @@ if (isHostObjectProperty(globalDocument, 'defaultView') &&
 		if (el.style.display == 'none') {
 			throw new Error('Element not in layout. Cannot compute styles.');
 		}
+		/*SCAFFOLDING:End*/
 		
 		return document.defaultView.getComputedStyle(el, null)[style];
 	};

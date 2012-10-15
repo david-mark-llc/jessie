@@ -5,6 +5,11 @@ Description:
 Relies on `jessie.xhrCreate`
 */
 
+/*
+Author:
+Adam Silver
+*/
+
 var xhrPost;
 
 // if you can't create one then you certainly can't send one
@@ -62,6 +67,7 @@ if(xhrCreate && bind) {
 				
 		xhr.open('POST', url);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(data);
 		return xhr;

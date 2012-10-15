@@ -13,7 +13,7 @@
 			<div id="builder"> 
 				<form method="get" action="/">
 					<div class="header">
-						<h1>Build your own Jessie</h1>
+						<h1>Build your own Jessie <%query%></h1>
 					</div>
 
 					<% if (errors.length > 0) { %>
@@ -56,20 +56,60 @@
 									</td>
 								</tr>
 								<tr>
-									<td><label for="minify">Minify</label></td>
+									<td>Minification settings</td>
 									<td>
-										<input 
-											id="minify" 
-											name="minify" 
-											type="checkbox" 
-											<% if(query && query.minify == 'on') { %>
-												checked
-											<% } %>
-										>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												id="minification_0"
+												value=""
+												<% if(!query.minification || query.minification == '') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_0">None</label>
+										</div>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												value="level1"
+												id="minification_1"
+												<% if(query && query.minification == 'level1') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_1">Level 1 - Remove comments</label>
+										</div>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												value="level2"
+												id="minification_2"
+												<% if(query && query.minification == 'level2') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_2">Level 2 - Remove comments, whitespace</label>
+										</div>
+										<div>
+											<input 
+												type="radio" 
+												name="minification"
+												value="level3"
+												id="minification_3"
+												<% if(query && query.minification == 'level3') { %>
+													checked
+												<% } %>
+											>
+											<label for="minification_3">Level 3 - Remove comments, whitspace and shorten variable names</label>
+										</div>
 									</td>
 								</tr>
 								<tr>
-									<td><label for="scaffolding">Scaffolding</label></td>
+									<td><label for="scaffolding">Debug</label></td>
 									<td>
 										<input 
 											id="scaffolding" 
@@ -83,7 +123,81 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>				
+					</div>
+					
+					<div class="filters">
+						<h2>Filters</h2>
+						<!--
+						<% if(query && query['degradesIEFilter']) { %>
+							<p style="color: green">Filtered to show functions that degrade in:
+							<%=query['degradesIEFilter'] %></p>
+						<% } %>
+					-->
+
+						<div>
+							<label for="degradesIEFilter">Supports:</label>
+							<select id="degradesIEFilter" name="degradesIEFilter">
+								<option value="">None</option>
+								<option 
+									value="IE4" 
+									<% if(query['degradesIEFilter'] == 'IE4') {%> 
+									selected 
+									<%}%>
+								>
+									IE4
+								</option>
+								<option 
+									value="IE5" 
+									<% if(query['degradesIEFilter'] == 'IE5') {%> 
+									selected 
+									<%}%>
+								>
+									IE5
+								</option>
+								<option 
+									value="IE5.5" 
+									<% if(query['degradesIEFilter'] == 'IE5.5') {%> 
+									selected 
+									<%}%>
+								>
+									IE5.5
+								</option>
+								<option 
+									value="IE6" 
+									<% if(query['degradesIEFilter'] == 'IE6') {%> 
+									selected 
+									<%}%>
+								>
+									IE6
+								</option>
+								<option 
+									value="IE7" 
+									<% if(query['degradesIEFilter'] == 'IE7') {%> 
+									selected 
+									<%}%>
+								>
+									IE7
+								</option>
+								<option 
+									value="IE8" 
+									<% if(query['degradesIEFilter'] == 'IE8') {%> 
+									selected 
+									<%}%>
+								>
+									IE8
+								</option>
+								<option 
+									value="IE9" 
+									<% if(query['degradesIEFilter'] == 'IE9') {%> 
+									selected 
+									<%}%>
+								>
+									IE9
+								</option>
+							</select>
+							<input type="submit" name="action" value="Filter">
+						</div>
+					</div>	
 
 					<div id="functions">
 						<h2>Functions</h2>
@@ -91,8 +205,9 @@
 						<table>
 							<tr class="thead">
 								<th class="function">Function</th>
+								<th class="author">Author</th>				
 								<th class="rendition">Rendition</th>
-								<th class="selection">Selection</th>							
+								<th class="selection">Choose</th>		
 								<th class="degrades">Degrades in</th>
 								<th class="description">Description</th>
 								<th class="seeAlso">See also</th>					
@@ -100,50 +215,71 @@
 						</table>
 							
 						<% for(var i = 0; i < functions.length; i++) { %>
-							<table>
-								<tbody>
-									<%
-									  var anyChecked = false;
-									  for(var j = 0; j < functions[i].renditions.length; j++) {
-									%>
-										<tr>
-											<%if(j==0) {%>
-												<td id="<%=functions[i].name%>" class="function" rowspan="<%=functions[i].renditions.length+1%>"><%=functions[i].name%></td>
-											<%}%>
-											<td class="rendition"><%=functions[i].renditions[j].id%></td>
-											<td class="selection">
-												<input 
-													id="<%=functions[i].name+functions[i].renditions[j].id%>" 
-													type="radio" 
-													name="<%=functions[i].name%>" 
-													value="<%=functions[i].renditions[j].id%>"
 
-													<%
-													  if (query[functions[i].name] == functions[i].renditions[j].id) {
-													    anyChecked = true;
-													%>
+							<% if(functions[i].renditions.length) {  %>
+								<table>
+									<tbody>
+										<%
+										  var anyChecked = false;
+										  for(var j = 0; j < functions[i].renditions.length; j++) {
+										%>
+											<tr>
+
+												<%if(j==0) {%>
+													<td id="<%=functions[i].name%>" class="function" rowspan="<%=(functions[i].renditions.length*2)+1%>">
+														<%=functions[i].name%>
+													</td>
+												<%}%>
+												<td class="author"><%=functions[i].renditions[j].author%></td>
+												<td class="rendition">
+													<%=functions[i].renditions[j].id%>
+												</td>
+												<td class="selection">
+													<input 
+														id="<%=functions[i].name+functions[i].renditions[j].id%>" 
+														type="radio" 
+														name="<%=functions[i].name%>" 
+														value="<%=functions[i].renditions[j].id%>"
+
+														<%
+														  if (query[functions[i].name] == functions[i].renditions[j].id) {
+														    anyChecked = true;
+														%>
+															checked
+														<% } %>
+													>
+												</td>
+												<td class="degrades">
+													<%- md(functions[i].renditions[j].degrades) -%>
+												</td>
+												<td class="description">
+													<%- md(functions[i].renditions[j].description) -%>
+												</td>
+												<td class="seeAlso">
+													<%- md(functions[i].renditions[j].seeAlso) -%>
+												</td>					
+											</tr>
+											<tr>
+												<td class="code" colspan="6">
+													<pre><code><%=functions[i].renditions[j].contents%></code></pre>
+
+												</td>
+											</tr>
+										<% } %>
+										<tr>
+											<td>None</td>
+											<td>
+												<input type="radio" name="<%=functions[i].name%>" value="-1"
+													<% if (!anyChecked)  { %>
 														checked
 													<% } %>
 												>
 											</td>
-											<td class="degrades"><%- md(functions[i].renditions[j].degrades) -%></td>
-											<td class="description"><%- md(functions[i].renditions[j].description) -%></td>
-											<td class="seeAlso"><%- md(functions[i].renditions[j].seeAlso) -%></td>					
+											<td colspan="4"></td>
 										</tr>
-									<% } %>
-									<tr>
-										<td>None</td>
-										<td>
-											<input type="radio" name="<%=functions[i].name%>" value="-1"
-												<% if (!anyChecked)  { %>
-													checked
-												<% } %>
-											>
-										</td>
-										<td colspan="3"></td>
-									</tr>
-								</tbody>		
-							</table>
+									</tbody>		
+								</table>
+							<% } %>
 						<% } %>
 					</div>
 					<div id="constructors">
@@ -196,7 +332,7 @@
 							<p>Back to <a href="">errors</a></p>
 						<% } %> 
 						<div class="actions">
-							<input type="submit" value="Download" name="download">
+							<input type="submit" value="Download" name="action">
 						</div>
 					</div>
 				</form>

@@ -7,7 +7,12 @@ Relies on W3C `window.removeEventListener` or `window.detachEvent`
 
 /*
 Degrades:
-NN4, IE4
+NN4, IE4, IE3
+*/
+
+/*
+Author:
+Adam Silver
 */
 
 var detachWindowListener;

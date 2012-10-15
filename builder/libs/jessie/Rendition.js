@@ -36,25 +36,37 @@ jessie.Rendition = function(func, file) {
 
 		degrades: {
 			get: function() {
-				var support = "";
+				var degrades = "";
 				var re = /^\s*Degrades:\s*([^*]+)\*\/$/gm;
 				var matches = re.exec(this.contents);
 				if(matches && matches.length > 1) {
-					support = matches[1].trim();
+					degrades = matches[1].trim();
 				}
-				return support;
+				return degrades;
 			}
 		},
 
 		seeAlso: {
 			get: function() {
-				var support = "";
+				var seeAlso = "";
 				var re = /^\s*See:\s*([^*]+)\*\/$/gm;
 				var matches = re.exec(this.contents);
 				if(matches && matches.length > 1) {
-					support = matches[1].trim();
+					seeAlso = matches[1].trim();
 				}
-				return support;
+				return seeAlso;
+			}
+		},
+
+		author: {
+			get: function() {
+				var author = "";
+				var re = /^\s*Author:\s*([^*]+)\*\/$/gm;
+				var matches = re.exec(this.contents);
+				if(matches && matches.length > 1) {
+					author = matches[1].trim();
+				}
+				return author;
 			}
 		},
 
@@ -80,6 +92,15 @@ jessie.Rendition = function(func, file) {
 		return contents.join("\n");
 	}.bind(this);
 
+};
+
+/**
+ * Checks if this rendition degrades in a particular version of IE
+ * @param  {String} version Possible values IE10, IE9, IE8, IE7, IE6, IE5.5, IE5, IE4, IE3
+ * @return {Boolean} True when it degrades in the specified version, otherwise false
+ */
+jessie.Rendition.prototype.degradesInIEVersion = function(version) {
+	return (this.degrades.indexOf(version) === -1);
 };
 
 module.exports = jessie.Rendition;

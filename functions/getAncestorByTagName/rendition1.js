@@ -1,17 +1,17 @@
-/*global getElementParent,getElementTagName */
+/*global getElementParentElement,getElementTagName */
 
 /*
 Description:
-Relies on `jessie.getElementParent` and `jessie.getElementTagName`
+Relies on `jessie.getElementParentElement` and `jessie.getElementTagName`
 */
 
 var getAncestorByTagName;
 
-if(getElementParent && getElementTagName){
+if(getElementParentElement && getElementTagName){
 	getAncestorByTagName = function(el, tagName) {
-		el = getElementParent(el);
+		el = getElementParentElement(el);
 		while (el && tagName && getElementTagName(el) != tagName) {
-			el = getElementParent(el);
+			el = getElementParentElement(el);
 		}
 		return el;
 	};

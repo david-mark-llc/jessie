@@ -9,6 +9,11 @@ Relies on `jessie.detachListener`
 // but this reinforces  that this function
 // expects a bound listener
 
+/*
+Author:
+David Mark
+*/
+
 var detachBoundListener;
 
 if(detachListener) {

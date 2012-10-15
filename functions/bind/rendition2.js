@@ -7,7 +7,12 @@ Relies on `Function.prototype.apply` and `Array.prototype.slice`
 
 /*
 Degrades:
-IE5
+IE5, IE4, IE3
+*/
+
+/*
+Author:
+David Mark
 */
 
 var bind;

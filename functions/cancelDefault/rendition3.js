@@ -7,7 +7,12 @@ Relies on MS event model `e.returnValue` and on W3C compliant `e.preventDefault(
 
 /*
 Degrades:
-TBC
+IE4, IE3, NN4
+*/
+
+/*
+Author:
+Adam Silver
 */
 
 var cancelDefault;

@@ -7,17 +7,24 @@ Relies on `window.attachEvent`
 
 /*
 Degrades:
-IE9+,Opera 8+,Chrome, FF, Safari
+IE10, IE9, IE4, IE3, Opera 8+,Chrome, FF, Safari
+*/
+
+/*
+Author:
+David Mark
 */
 
 var attachWindowListener;
 
 if(window && isHostMethod(window, 'attachEvent')) {
 	attachWindowListener = function(eventType, fn) {
-		// Remove this line on deployment -- for debugging only
+		
+		/*SCAFFOLDING:Start*/
 		if (!(/^(load|scroll|resize|orientationchange|unload|beforeunload)$/.test(eventType))) {
 			throw new Error('Use attachListener with an element.');
 		}
+		/*SCAFFOLDING:End*/
 		
 		var listener = function() {
 			var e = window.event;

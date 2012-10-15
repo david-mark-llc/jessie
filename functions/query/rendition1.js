@@ -5,6 +5,11 @@ Description:
 Relies on `document.querySelectorAll` and `jessie.toArray`
 */
 
+/*
+Author:
+David Mark
+*/
+
 var query;
 
 if(globalDocument && isHostMethod(globalDocument, 'querySelectorAll') && toArray) {

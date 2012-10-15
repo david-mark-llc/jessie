@@ -7,7 +7,7 @@ Relies on `Function.prototype.bind` and `Function.prototype.apply` and `Array.pr
 
 /*
 Degrades:
-IE5
+IE5, IE4, IE3
 */
 
 var bind;

@@ -18,24 +18,31 @@ Can use following to get IE8- to work when document is parsed:
 	</body>
 
 */
+
 /*
 Degrades:
-IE8, Opera 7.6
+IE8, IE7, IE6, IE5.5, IE5, IE4, IE3, Opera 7.6
 */
 
-var attachDocumentReadyListener;
+/*
+Author:
+David Mark
+*/
+
+var deferUntilReady;
 
 var readyListener,
 	readyListenerAttached,
 	documentIsReady;
 
 if (isHostMethod(global, "addEventListener") && globalDocument && isHostMethod(globalDocument, "addEventListener")) {
-	attachDocumentReadyListener = function(fn) {
+	deferUntilReady = function(fn) {
 
-		// Remove this "scaffolding" on deployment
+		/*SCAFFOLDING:Start*/
 		if (readyListenerAttached) {
 			throw new Error('One too many ready listeners. Use a queue!');
 		}
+		/*SCAFFOLDING:End*/
 
 		readyListenerAttached = true;
 

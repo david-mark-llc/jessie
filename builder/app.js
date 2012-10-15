@@ -13,7 +13,7 @@ var express = require('express'),
 	app = express(),
 	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
 	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
-	excludedQuerystringKeys = ['download', 'namespace', 'minify', 'test', 'scaffolding'];
+	excludedQuerystringKeys = [];
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -45,18 +45,20 @@ app.get('/', function(req, res){
 		builder = null,
 		buildResponse = null,
 		requestedFunctions,
+		functions,
 		requestedConstructorFns,
 		namespace,
-		minify,
+		minification,
 		scaffolding = false,
 		fileName = 'jessie',
+		action = query['action'],
 		errors = [];
 
 	/*
 	 * There is a download param in the querystring as the user
 	 * has submitted the form (but not necessarily)
 	 */
-	if(query['download']) {
+	if(action == 'Download') {
 		requestedFunctions = getRequestedFunctions(query);
 		requestedConstructorFns = getRequestedConstructors(query);
 		
@@ -71,11 +73,11 @@ app.get('/', function(req, res){
 			fileName = namespace;
 		}
 
-		minify = query['minify'];
-		if(minify == 'on') {
+		minification = query['minification'];
+		if(minification) {
 
 			// The user has asked for a minified version
-			builderOptions.minify = true;
+			builderOptions.minification = minification;
 		}
 
 		scaffolding = query['scaffolding'];
@@ -108,8 +110,16 @@ app.get('/', function(req, res){
 	 * param, so we just show page
 	 */
 	} else {
+
+		if(query['degradesIEFilter']) {
+			functions = functionSet.getFunctionsFilteredByIEVersion(query['degradesIEFilter']);
+		}
+		else {
+			functions = functionSet.getFunctions();
+		}
+
 		res.render('index.ejs', {
-			functions: functionSet.getFunctions(),
+			functions: functions,
 			constructorFns: constructorFnSet.getConstructorFns(),
 			query: query,
 			errors: errors,

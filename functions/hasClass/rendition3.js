@@ -1,12 +1,13 @@
+/*global html,isHostObjectProperty,isHostMethod */
+
 /*
 Description:
-Tests for 'el.classList.contains' and 'el.className'
-but falls back to 'el.className' in order to provide the greatest browser support
+Relies on the `el.classList.contains` or `el.className` property providing the greatest browser support
 */
 
 /*
-Degrades:
-IE5, Chrome 3, Firefox 2, Safari 3, Opera 10
+Author:
+Adam Silver
 */
 
 var hasClass;

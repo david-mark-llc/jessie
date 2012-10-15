@@ -6,7 +6,7 @@ Basic rendition which relies on valid markup i.e. forms with unique names and id
 */
 
 /*
-See: https://groups.google.com/forum/#!starred/comp.lang.javascript/fVp-DWAIGnc
+See: <a href="https://groups.google.com/forum/#!starred/comp.lang.javascript/fVp-DWAIGnc">Article</a>
 
 That's the most basic rendition: single document and no allowance for
 screwy markup like this:
@@ -17,7 +17,12 @@ screwy markup like this:
 
 /*
 Degrades:
-IE4, NN4
+IE4, IE3, NN4
+*/
+
+/*
+Author:
+David Mark
 */
 
 var getElement;

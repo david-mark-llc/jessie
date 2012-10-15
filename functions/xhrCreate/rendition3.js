@@ -7,7 +7,12 @@ Both W3C and MS ActiveXObject implementations providing greatest support
 
 /*
 Degrades:
-IE4, NN4
+IE4, IE3, NN4
+*/
+
+/*
+Author:
+David Mark
 */
 
 var createXhrFunctions = [

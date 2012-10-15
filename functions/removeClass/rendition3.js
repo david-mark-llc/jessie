@@ -6,8 +6,8 @@ Relies on the `el.classList.remove` or `el.className` property providing greates
 */
 
 /*
-Degrades:
-TBD
+Author:
+Adam Silver
 */
 
 var removeClass;

@@ -35,7 +35,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 
 	this.setupOptions(options);
 
-	this.headerDeclarations = ['window', 'global'];
+	this.headerDeclarations = ['window', 'global', 'jessieNamespace'];
 	this.setupLicense();
 	this.setupHeader();
 	this.setupFooter();
@@ -50,7 +50,8 @@ jessie.Builder.prototype.setupOptions = function(options) {
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
 	this.options.licensePath = this.options.licensePath || '../LICENSE';
 	this.options.namespace = this.options.namespace || 'jessie';
-	this.options.minify = this.options.minify || false;
+	this.options.minification = this.options.minification || false;
+;
 };
 
 jessie.Builder.prototype.setupHeader = function() {
@@ -86,6 +87,8 @@ jessie.Builder.prototype.build = function() {
 	};
 
 	var errors = [];
+
+	this.requestedFunctions = this.filterNonExistentRequestedFunctions(this.requestedFunctions, this.functions);
 
 	if(this.requestedFunctions.length === 0) {
 		errors.push('Please choose at least one function');
@@ -171,7 +174,7 @@ jessie.Builder.prototype.build = function() {
 			builderResponse.output = this.removeScaffolding( builderResponse.output );
 		}
 
-		if(this.options.minify) {
+		if(this.options.minification) {
 			builderResponse.output = this.minify(builderResponse.output);
 		}
 
@@ -189,13 +192,40 @@ jessie.Builder.prototype.replaceNamespaceToken = function(output, namespace) {
 
 jessie.Builder.prototype.removeScaffolding = function(output) {
 	var re = /(\s*\/\*SCAFFOLDING:Start\*\/(?:\s|.)*?\/\*SCAFFOLDING:End\*\/)/igm;
-	
 	return output.replace( re, '' );
 };
 
 jessie.Builder.prototype.minify = function(output) {
 	var ast = uglifyParser.parse(output);
-	return pro.gen_code(ast);
+
+	var minificationLevel = this.options.minification;
+
+	switch(minificationLevel) {
+		case "level1":
+			output = pro.gen_code(ast, { beautify: true });
+			break;
+		case "level2":
+			output = pro.gen_code(ast);
+			break;
+		case "level3":
+			ast = pro.ast_mangle(ast);
+			output = pro.gen_code(ast);
+			break;
+		default:
+			// nothing
+	}
+
+	return output;
+};
+
+jessie.Builder.prototype.filterNonExistentRequestedFunctions = function(requestedFns, fns) {
+	var filteredRequestedFns = [];
+	for(var i = 0; i < requestedFns.length; i++) {
+		if(requiredFunctionExists(requestedFns[i].functionName, fns)) {
+			filteredRequestedFns.push(requestedFns[i]);
+		}
+	}
+	return filteredRequestedFns;
 };
 
 jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
@@ -211,7 +241,6 @@ jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
 
 function sortDependencies(functions, required, constructorFns, requestedConstructorFns) {
 	var graph = [], initialOrder = Object.keys(required);
-
 
 	var requiredFunctionNames = [];
 
@@ -236,7 +265,6 @@ function sortDependencies(functions, required, constructorFns, requestedConstruc
 
 	required = requiredHash;
 
-
 	initialOrder.forEach(function(f, i){
 		graph[i] = {
 			edges: functions[f].getDependencies(required[f]).array().map(function(d){
@@ -251,6 +279,17 @@ function sortDependencies(functions, required, constructorFns, requestedConstruc
 	return topologicalSort(graph).reverse().map(function(f) {
 		return initialOrder[f];
 	});
+}
+
+function requiredFunctionExists(requiredFnName, functions) {
+	var exists = false;
+	for(var i = 0; i < functions.length; i++) {
+		if(functions[i].name == requiredFnName) {
+			exists = true;
+			break;
+		}
+	}
+	return exists;
 }
 
 function topologicalSort(graph) {

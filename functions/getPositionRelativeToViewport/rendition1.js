@@ -7,10 +7,15 @@ Relies on `el.getBoundingClientRect`
 
 //https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/cd625a14ce603084?hl=en&noredirect=true
 
-var getPositionRelativeToWindow;
+/*
+Author:
+David Mark
+*/
+
+var getPositionRelativeToViewport;
 
 if(html && isHostMethod(html, 'getBoundingClientRect')) {
-	getPositionRelativeToWindow = function(el) {
+	getPositionRelativeToViewport = function(el) {
 		var rect = el.getBoundingClientRect();
 		return [rect.left, rect.top];
 	};
