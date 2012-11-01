@@ -1,8 +1,8 @@
-/*global xhrCreate,bind */
+/*global xhrCreate,bind,mixin */
 
 /*
 Description:
-Relies on `jessie.xhrCreate`
+Relies on `jessie.xhrCreate` and 'jessie.mixin'
 */
 
 /*
@@ -13,7 +13,7 @@ Adam Silver
 var xhrPost;
 
 // if you can't create one then you certainly can't send one
-if(xhrCreate && bind) {
+if(xhrCreate && bind && mixin) {
 	
 
 	xhrPost = function(xhr, url, options) {
@@ -64,12 +64,24 @@ if(xhrCreate && bind) {
 				}
 			}
 		}
-				
+
 		xhr.open('POST', url);
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-		xhr.onreadystatechange = handleReadyStateChange;
+		
+		var headers = mixin(
+			{
+				'Content-Type' : 'application/x-www-form-urlencoded',
+				'X-Requested-With' : 'XMLHttpRequest'
+			},
+			options.headers || {}
+		);
+
+		for(var key in headers) {
+			xhr.setRequestHeader(key, headers[key]);
+		}
+
+		xhr.onreadystatechange = handleReadyStateChange;		
 		xhr.send(data);
+
 		return xhr;
 	};
 }
