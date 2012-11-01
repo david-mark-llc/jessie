@@ -67,8 +67,7 @@ if(xhrCreate && bind && mixin) {
 		
 		xhr.open('GET', url);
 
-		var headers = {
-			'Content-Type' : 'application/x-www-form-urlencoded',
+		var headers = {			
 			'X-Requested-With' : 'XMLHttpRequest'
 		};
 		
