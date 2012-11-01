@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on `jessie.xhrCreate`
+Relies on `jessie.xhrCreate` and 'jessie.mixin'
 */
 
 /*
