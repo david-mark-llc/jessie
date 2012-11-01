@@ -66,7 +66,23 @@ if(xhrCreate && bind) {
 		}
 		
 		xhr.open('GET', url);
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+		var headers = options.headers || {};
+
+		var defaultHeaders = {		
+			'X-Requested-With' : 'XMLHttpRequest'
+		};
+
+		for(var key in defaultHeaders) {
+			if(!headers.hasOwnProperty(key)) {
+				headers[key] = defaultHeaders[key];
+			}
+		}
+
+		for(var key in headers) {
+			xhr.setRequestHeader(key, headers[key]);
+		}
+
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(null);
 		return xhr;

@@ -64,12 +64,29 @@ if(xhrCreate && bind) {
 				}
 			}
 		}
-				
+
 		xhr.open('POST', url);
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-		xhr.onreadystatechange = handleReadyStateChange;
+		
+		var headers = options.headers || {};
+
+		var defaultHeaders = {
+			'Content-Type' : 'application/x-www-form-urlencoded',
+			'X-Requested-With' : 'XMLHttpRequest'
+		};
+
+		for(var key in defaultHeaders) {
+			if(!headers.hasOwnProperty(key)) {
+				headers[key] = defaultHeaders[key];
+			}
+		}
+
+		for(var key in headers) {
+			xhr.setRequestHeader(key, headers[key]);
+		}
+
+		xhr.onreadystatechange = handleReadyStateChange;		
 		xhr.send(data);
+
 		return xhr;
 	};
 }
