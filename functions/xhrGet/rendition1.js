@@ -1,4 +1,4 @@
-/*global xhrCreate,bind */
+/*global xhrCreate,bind,mixin */
 
 /*
 Description:
@@ -13,7 +13,7 @@ Adam Silver
 var xhrGet;
 
 // if you can't create one then you certainly can't send one
-if(xhrCreate && bind) {
+if(xhrCreate && bind && mixin) {
 	
 
 	xhrGet = function(xhr, url, options) {
@@ -67,17 +67,13 @@ if(xhrCreate && bind) {
 		
 		xhr.open('GET', url);
 
-		var headers = options.headers || {};
-
-		var defaultHeaders = {		
-			'X-Requested-With' : 'XMLHttpRequest'
-		};
-
-		for(var key in defaultHeaders) {
-			if(!headers.hasOwnProperty(key)) {
-				headers[key] = defaultHeaders[key];
-			}
-		}
+		var headers = mixin(
+			{
+				'Content-Type' : 'application/x-www-form-urlencoded',
+				'X-Requested-With' : 'XMLHttpRequest'
+			},
+			options.headers || {}
+		);
 
 		for(var key in headers) {
 			xhr.setRequestHeader(key, headers[key]);
