@@ -1,4 +1,4 @@
-/*global xhrCreate,bind,mixin */
+/*global xhrCreate,bind,mixin,isOwnProperty */
 
 /*
 Description:
@@ -13,17 +13,26 @@ Adam Silver
 var xhrPost;
 
 // if you can't create one then you certainly can't send one
-if(xhrCreate && bind && mixin) {
+if(xhrCreate && bind && mixin && isOwnProperty) {
 	
 
 	xhrPost = function(xhr, url, options) {
 		
 		options = options || {};
 		options.thisObject = options.thisObject || xhr;
+
 		var data = options.data || null,
 			successFn,
 			failFn,
-			completeFn;
+			completeFn,
+			headers = {
+				'Content-Type' : 'application/x-www-form-urlencoded',
+				'X-Requested-With' : 'XMLHttpRequest'
+			};
+
+		if(options.headers){
+			mixin(headers, options.headers);
+		}
 
 		if(options.success) {
 			successFn = bind(options.success, options.thisObject);
@@ -65,20 +74,14 @@ if(xhrCreate && bind && mixin) {
 			}
 		}
 
-		xhr.open('POST', url);
-
-		var headers = {
-			'Content-Type' : 'application/x-www-form-urlencoded',
-			'X-Requested-With' : 'XMLHttpRequest'
-		};
-		
-		mixin(headers, options.headers || {});
-
 		for(var key in headers) {
-			xhr.setRequestHeader(key, headers[key]);
+			if(isOwnProperty( headers, key )){
+				xhr.setRequestHeader(key, headers[key]);
+			}
 		}
 
-		xhr.onreadystatechange = handleReadyStateChange;		
+		xhr.open('POST', url);
+		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(data);
 
 		return xhr;
