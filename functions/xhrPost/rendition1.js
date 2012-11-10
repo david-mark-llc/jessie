@@ -74,13 +74,14 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 			}
 		}
 
+		xhr.open('POST', url);
+
 		for(var key in headers) {
 			if(isOwnProperty( headers, key )){
 				xhr.setRequestHeader(key, headers[key]);
 			}
 		}
-
-		xhr.open('POST', url);
+		
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(data);
 

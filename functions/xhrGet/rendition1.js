@@ -71,6 +71,8 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 				}
 			}
 		}
+		
+		xhr.open('GET', url);
 
 		for(var key in headers) {
 			if(isOwnProperty( headers, key )){
@@ -78,7 +80,6 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 			}
 		}
 		
-		xhr.open('GET', url);
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(null);
 
