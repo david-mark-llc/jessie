@@ -1,8 +1,8 @@
-/*global xhrCreate,bind */
+/*global xhrCreate,bind,mixin,isOwnProperty */
 
 /*
 Description:
-Relies on `jessie.xhrCreate`
+Relies on `jessie.xhrCreate` and 'jessie.mixin'
 */
 
 /*
@@ -13,7 +13,7 @@ Adam Silver
 var xhrGet;
 
 // if you can't create one then you certainly can't send one
-if(xhrCreate && bind) {
+if(xhrCreate && bind && mixin && isOwnProperty) {
 	
 
 	xhrGet = function(xhr, url, options) {
@@ -23,7 +23,14 @@ if(xhrCreate && bind) {
 		
 		var successFn,
 			failFn,
-			completeFn;
+			completeFn,
+			headers = {
+				'X-Requested-With' : 'XMLHttpRequest'
+			};
+		
+		if(options.headers) {
+			mixin(headers, options.headers);
+		}
 
 		if(options.success) {
 			successFn = bind(options.success, options.thisObject);
@@ -66,9 +73,16 @@ if(xhrCreate && bind) {
 		}
 		
 		xhr.open('GET', url);
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+		for(var key in headers) {
+			if(isOwnProperty( headers, key )){
+				xhr.setRequestHeader(key, headers[key]);
+			}
+		}
+		
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(null);
+
 		return xhr;
 	};
 }

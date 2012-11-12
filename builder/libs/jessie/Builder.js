@@ -82,6 +82,7 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 
 
 jessie.Builder.prototype.build = function() {
+
 	var builderResponse = {
 		success: false
 	};
@@ -108,8 +109,13 @@ jessie.Builder.prototype.build = function() {
 		var order = sortDependencies(this.functions, this.requestedFunctions);
 
 		var jsContents = '';
-		jsContents += this.header;
 
+		if(this.options.returnUri) {
+			jsContents += "\r\n/*\r\nReturn URI:\r\n" + this.options.returnUri + "\r\n*/\r\n\r\n";
+		}
+		
+		jsContents += this.header;
+		
 		/*
 
 		going to have think about this but thinking aloud:

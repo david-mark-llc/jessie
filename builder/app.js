@@ -87,6 +87,8 @@ app.get('/', function(req, res){
 			builderOptions.scaffolding = true;
 		}
 
+		builderOptions.returnUri = "http://" + req.headers.host + req.url.replace(/&action=Download/, "");
+
 		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, builderOptions);
 		buildResponse = builder.build();
 
