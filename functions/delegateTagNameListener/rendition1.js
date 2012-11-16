@@ -1,8 +1,8 @@
-/*global delegateListener,getElementTagName */
+/*global delegateListener,getElementTagName,getElementParentElement */
 
 /*
 Description:
-Relies on `jessie.delegateListener` amd `jessie.getElementTagName`
+Relies on `jessie.delegateListener` and `jessie.getElementTagName` and `jessie.getElementParentElement`
 */
 
 /*
@@ -13,28 +13,30 @@ Adam Silver
 var delegateTagNameListener;
 
 if(delegateListener && getElementTagName) {
-	delegateTagNameListener = function(el, eventType, tagName, fn) {
-		
-		var fnDelegate = function(el, target) {
-			var sourceNode,
+    delegateTagNameListener = function(el, eventType, tagName, fn) {
+
+        var fnDelegate = function(el, target) {
+            var sourceNode,
                 descendant;
 
-			if(getElementTagName(target) === tagName) {
-				sourceNode = target;
-			} else {
-                descendant = target.parentNode;
+            if(getElementTagName(target) === tagName) {
+                sourceNode = target;
+            } else {
+                descendant = getElementParentElement(target);
 
-                while (descendant !== el) {
-                    if (getElementTagName(descendant) === tagName) {
-                        sourceNode = descendant;
-                        break;
+                if (null !== descendant) {
+                    while (descendant !== el) {
+                        if (getElementTagName(descendant) === tagName) {
+                            sourceNode = descendant;
+                            break;
+                        }
+                        descendant = getElementParentElement(descendant);
                     }
-                    descendant = descendant.parentNode;
                 }
             }
-			return sourceNode;
-		};
+            return sourceNode;
+        };
 
-		return delegateListener(el, eventType, fn, fnDelegate);
-	};
+        return delegateListener(el, eventType, fn, fnDelegate);
+    };
 }
