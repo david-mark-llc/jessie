@@ -13,30 +13,30 @@ Adam Silver
 var delegateTagNameListener;
 
 if(delegateListener && getElementTagName) {
-    delegateTagNameListener = function(el, eventType, tagName, fn) {
+	delegateTagNameListener = function(el, eventType, tagName, fn) {
 
-        var fnDelegate = function(el, target) {
-            var sourceNode,
-                descendant;
+		var fnDelegate = function(el, target) {
+			var sourceNode,
+				descendant;
 
-            if(getElementTagName(target) === tagName) {
-                sourceNode = target;
-            } else {
-                descendant = getElementParentElement(target);
+			if(getElementTagName(target) === tagName) {
+				sourceNode = target;
+			} else {
+				descendant = getElementParentElement(target);
 
-                if (null !== descendant) {
-                    while (descendant !== el) {
-                        if (getElementTagName(descendant) === tagName) {
-                            sourceNode = descendant;
-                            break;
-                        }
-                        descendant = getElementParentElement(descendant);
-                    }
-                }
-            }
-            return sourceNode;
-        };
+				if (null !== descendant) {
+					while (descendant !== el) {
+						if (getElementTagName(descendant) === tagName) {
+							sourceNode = descendant;
+							break;
+						}
+						descendant = getElementParentElement(descendant);
+					}
+				}
+			}
+			return sourceNode;
+		};
 
-        return delegateListener(el, eventType, fn, fnDelegate);
-    };
+		return delegateListener(el, eventType, fn, fnDelegate);
+	};
 }
