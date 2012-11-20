@@ -22,14 +22,14 @@
 var appendHtml;
 
 if(createElement && setHtml) {
-    appendHtml = function appendHtml(el, html) {
-        var fragment = createElement('div'),
-            child;
+	appendHtml = function appendHtml(el, html) {
+		var fragment = createElement('div'),
+			child;
 
-        setHtml(fragment, html);
+		setHtml(fragment, html);
 
-        while (child = fragment.firstChild) {
-            el.appendChild(child);
-        }
-    };
+		while (child = fragment.firstChild) {
+			el.appendChild(child);
+		}
+	};
 }
