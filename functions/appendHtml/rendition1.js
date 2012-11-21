@@ -21,7 +21,7 @@
 
 var appendHtml;
 
-if(createElement && setHtml) {
+if (html && isHostObjectProperty(html, 'firstChild') && isHostMethod(html, 'appendChild') && createElement && setHtml) {
 	appendHtml = function appendHtml(el, html) {
 		var fragment = createElement('div'),
 			child;
