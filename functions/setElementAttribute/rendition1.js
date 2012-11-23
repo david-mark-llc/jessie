@@ -21,6 +21,6 @@ if( html && isHostMethod( html, "setAttribute" ) ){
 
 	setElementAttribute = function( el, attributeName, attributeValue ){
 
-		return el.setAttribute( attributeName, attributeValue );
+		el.setAttribute( attributeName, attributeValue );
 	};
 }
