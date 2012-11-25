@@ -1,17 +1,13 @@
-/*global createElement, setHtml*/
+/*global html*/
 
 /*
  Description:
- Relies on `el.innerHTML` which degrades in IE3
- and `el.appendChild`
- and `el.firstChild`
- and `createElement`
- and `setHtml`
+ Relies on `el.insertAdjacentHTML
  */
 
 /*
  Degrades:
- IE3
+ IE4
  */
 
 /*
@@ -21,15 +17,8 @@
 
 var appendHtml;
 
-if (html && isHostObjectProperty(html, 'firstChild') && isHostMethod(html, 'appendChild') && createElement && setHtml) {
-	appendHtml = function appendHtml(el, html) {
-		var fragment = createElement('div'),
-			child;
-
-		setHtml(fragment, html);
-
-		while (child = fragment.firstChild) {
-			el.appendChild(child);
-		}
+if (html && isHostMethod(html, 'insertAdjacentHTML')) {
+	appendHtml = function (el, html) {
+		el.insertAdjacentHTML('beforeEnd', html);
 	};
 }
