@@ -7,7 +7,7 @@
 
 /*
  Degrades:
- IE4
+ IE3, Firefox 7, Safari 3, Opera 7, IE6 `el.insertAdjacentHtml` does not work on table, tbody, thead, tr elements
  */
 
 /*
