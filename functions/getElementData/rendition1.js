@@ -21,6 +21,11 @@ if( html && isHostObjectProperty( html, "dataset" ) ){
 
 	getElementData = function( el, dataName ){
 
+		dataName = dataName.toLowerCase().replace( /-([a-z])/g, function( match, letter ){
+
+			return letter.toUpperCase();
+		} );
+
 		return el.dataset[ dataName ];
 	};
 }

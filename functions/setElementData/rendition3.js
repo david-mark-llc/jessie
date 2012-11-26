@@ -21,6 +21,11 @@ if( html && isHostObjectProperty( html, "dataset" ) ){
 
 	setElementData = function( el, dataName, dataValue ){
 
+		dataName = dataName.toLowerCase().replace( /-([a-z])/g, function( match, letter ){
+
+			return letter.toUpperCase();
+		} );
+
 		el.dataset[ dataName ] = dataValue;
 	};
 
@@ -28,8 +33,6 @@ if( html && isHostObjectProperty( html, "dataset" ) ){
 
 	setElementData = function( el, dataName, dataValue ){
 
-		dataName = dataName.replace( /([A-Z])/g, '-$1' ).toLowerCase();
-
-		el.setAttribute( dataName, dataValue );
+		el.setAttribute( 'data-' + dataName, dataValue );
 	};
 }
