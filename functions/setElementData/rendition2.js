@@ -15,11 +15,11 @@
  Graham Veal
  */
 
-var setElementDataAttribute;
+var setElementData;
 
 if( setElementAttribute ){
 
-	setElementDataAttribute = function( el, dataName, dataValue ){
+	setElementData = function( el, dataName, dataValue ){
 
 		dataName = dataName.replace( /([A-Z])/g, '-$1' ).toLowerCase();
 

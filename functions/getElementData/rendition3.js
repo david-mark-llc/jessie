@@ -15,18 +15,18 @@
  Graham Veal
  */
 
-var getElementDataAttribute;
+var getElementData;
 
 if( html && isHostObjectProperty( html, "dataset" ) ){
 
-	getElementDataAttribute = function( el, dataName ){
+	getElementData = function( el, dataName ){
 
 		return el.dataset[ dataName ];
 	};
 
 } else if( getElementAttribute ){
 
-	getElementDataAttribute = function( el, dataName ){
+	getElementData = function( el, dataName ){
 
 		dataName = dataName.replace( /([A-Z])/g, '-$1' ).toLowerCase();
 

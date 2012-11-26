@@ -15,12 +15,12 @@
  Graham Veal
  */
 
-var setElementDataAttribute;
+var getElementData;
 
 if( html && isHostObjectProperty( html, "dataset" ) ){
 
-	setElementDataAttribute = function( el, dataName, dataValue ){
+	getElementData = function( el, dataName ){
 
-		el.dataset[ dataName ] = dataValue;
+		return el.dataset[ dataName ];
 	};
 }
