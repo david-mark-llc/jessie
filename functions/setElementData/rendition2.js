@@ -21,8 +21,6 @@ if( html && isHostMethod( html, "setAttribute" ) ){
 
 	setElementData = function( el, dataName, dataValue ){
 
-		dataName = dataName.replace( /([A-Z])/g, '-$1' ).toLowerCase();
-
-		el.setAttribute( dataName, dataValue );
+		el.setAttribute( 'data-' + dataName, dataValue );
 	};
 }
