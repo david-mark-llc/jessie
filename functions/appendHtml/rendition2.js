@@ -28,7 +28,7 @@ if (html && isHostObjectProperty(html, 'firstChild') && isHostMethod(html, 'appe
 
 		setHtml(fragment, html);
 
-		while (child = fragment.firstChild) {
+		while ((child = fragment.firstChild)) {
 			el.appendChild(child);
 		}
 	};

@@ -28,7 +28,7 @@ if (html && isHostObjectProperty(html, 'firstChild') && isHostMethod(html, 'inse
 
         setHtml(fragment, html);
 
-        while (child = fragment.firstChild) {
+        while ((child = fragment.firstChild)) {
             el.insertBefore(child, el.firstChild);
         }
     };
