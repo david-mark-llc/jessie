@@ -1,4 +1,4 @@
-/*global getElementAttribute */
+/*global html,isHostMethod */
 
 /*
  Description:
@@ -17,12 +17,12 @@
 
 var getElementData;
 
-if( getElementAttribute ){
+if( html && isHostMethod( html, "getAttribute" ) ){
 
 	getElementData = function( el, dataName ){
 
 		dataName = dataName.replace( /([A-Z])/g, '-$1' ).toLowerCase();
 
-		return getElementAttribute( el, 'data-' + dataName );
+		return el.getAttribute( 'data-' + dataName );
 	};
 }

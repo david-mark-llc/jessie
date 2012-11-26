@@ -1,4 +1,4 @@
-/*global setElementAttribute */
+/*global html,isHostMethod */
 
 /*
  Description:
@@ -17,12 +17,12 @@
 
 var setElementData;
 
-if( setElementAttribute ){
+if( html && isHostMethod( html, "setAttribute" ) ){
 
 	setElementData = function( el, dataName, dataValue ){
 
 		dataName = dataName.replace( /([A-Z])/g, '-$1' ).toLowerCase();
 
-		setElementAttribute( el, dataName, dataValue );
+		el.setAttribute( dataName, dataValue );
 	};
 }

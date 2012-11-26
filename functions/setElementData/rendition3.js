@@ -1,4 +1,4 @@
-/*global html,isHostObjectProperty,setElementAttribute */
+/*global html,isHostObjectProperty,isHostMethod */
 
 /*
  Description:
@@ -24,12 +24,12 @@ if( html && isHostObjectProperty( html, "dataset" ) ){
 		el.dataset[ dataName ] = dataValue;
 	};
 
-} else if( setElementAttribute ){
+} else if( html && isHostMethod( html, "setAttribute" ) ){
 
 	setElementData = function( el, dataName, dataValue ){
 
 		dataName = dataName.replace( /([A-Z])/g, '-$1' ).toLowerCase();
 
-		setElementAttribute( el, dataName, dataValue );
+		el.setAttribute( dataName, dataValue );
 	};
 }
