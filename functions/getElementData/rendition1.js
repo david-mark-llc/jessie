@@ -19,15 +19,22 @@ var getElementData;
 
 if( html && isHostObjectProperty( html, "dataset" ) ){
 
-	getElementData = function( el, dataName ){
+	(function(){
 
-		//convert the dataName to lowercase
-		//then remove the dash and replace the character next to the dash with the upper case version
-		dataName = dataName.toLowerCase().replace( /-([a-z])/g, function( match, letter ){
+		var reGetDashAndLetter = /-([a-z])/g;
+
+		function convertDataName( match, letter ){
 
 			return letter.toUpperCase();
-		} );
+		}
 
-		return el.dataset[ dataName ];
-	};
+		getElementData = function( el, dataName ){
+
+			//convert the dataName to lowercase
+			//then remove the dash and replace the character next to the dash with the upper case version
+			dataName = dataName.toLowerCase().replace( reGetDashAndLetter, convertDataName );
+
+			return el.dataset[ dataName ];
+		};
+	}());
 }
