@@ -16,10 +16,10 @@
  Ben Chidgey
  */
 
-var appendHtml;
+var prependHtml;
 
 if (html && isHostMethod(html, 'insertAdjacentHTML')) {
-	appendHtml = function (el, html) {
-		el.insertAdjacentHTML('beforeEnd', html);
+	prependHtml = function (el, html) {
+		el.insertAdjacentHTML('afterBegin', html);
 	};
 }
