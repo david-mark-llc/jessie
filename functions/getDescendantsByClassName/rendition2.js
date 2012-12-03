@@ -9,7 +9,7 @@ var getDescendantsByClassName;
 
 if(getDescendantsByTagName && hasClass) {
 		getDescendantsByClassName = function(el, className) {
-			var elements = getDescendantsByTagName(document, '*'),
+			var elements = getDescendantsByTagName(el, '*'),
 				element,
 				i,
 				elementsWithClassName = [];
