@@ -1,3 +1,5 @@
 # Jessie
 
-Lean, beautiful and smart. Check out the Wiki on the master repo (rassie/jessie).
+Lean, beautiful and smart.
+
+To find out more [view the wiki](https://github.com/rassie/jessie/wiki).
