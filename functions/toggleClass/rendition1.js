@@ -13,8 +13,8 @@
 var toggleClass;
 
 if (hasClass && addClass && removeClass) {
-    toggleClass = function(el, className) {
-        var toggle = hasClass(el, className) ? 'remove' : 'add';
-        jessie[toggle + 'Class'](el, className);
-    };
+	toggleClass = function(el, className) {
+		var toggle = hasClass(el, className) ? 'remove' : 'add';
+		jessie[toggle + 'Class'](el, className);
+	};
 }
