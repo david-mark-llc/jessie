@@ -25,5 +25,5 @@ jessieNamespace = jessieNamespace || {};
 		},
 		html = isHostObjectProperty(globalDocument, 'documentElement') && globalDocument.documentElement,
 		canCall = !!Function.prototype.call,
-		isStyleCapable = !!(html && isHostObjectProperty(html, 'style'));;
+		isStyleCapable = !!(html && isHostObjectProperty(html, 'style'));
 
