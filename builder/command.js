@@ -57,6 +57,8 @@ if(program.namespace) {
 	buildOptions.namespace = program.namespace.trim();
 }
 
+buildOptions.returnUri = getReturnUri(requestedFunctions);
+
 builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, buildOptions);
 response = builder.build();
 
@@ -131,4 +133,17 @@ function setupRequestedFunctions() {
 			throw new Error("Could not find function: " + functionName);
 		}
 	});
+}
+
+function getReturnUri(requestedFunctions) {
+	var uri = 'http://127.0.0.1:1337/?';
+	for(var i = 0; i < requestedFunctions.length; i++) {
+		uri += requestedFunctions[i].functionName + '=' + requestedFunctions[i].renditionId;
+
+		// if not last function add ampersand delimiter for querystring
+		if(i != requestedFunctions.length-1) {
+			uri += "&";
+		}
+	}
+	return uri;
 }
