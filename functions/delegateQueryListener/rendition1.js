@@ -2,34 +2,44 @@
 
 /*
 Description:
-Relies on `jessie.delegateListener`, `jessie.query` and `jessie.isDescendant`
+Relies on `jessie.isNodeInNodeList`, `jessie.delegateListener`, `jessie.query` and `jessie.isDescendant`
 */
 
 /*
 Author:
-Adam Silver
+Adam Silver, Graham Veal
 */
 
 var delegateQueryListener;
 
-if(delegateListener && query && isInQuery && isDescendant) {
+f(isNodeInNodeList && delegateListener && query && isDescendant) {
+	
 	delegateQueryListener = function(el, eventType, selector, fn) {
 
-		var fnDelegate = function(el, target) {
-			if(isInQuery(target, selector)) {
+		function fnDelegate(target) {
+
+			var elements = query(selector),
+				i = 0,
+				l,
+				el;
+
+			if(isNodeInNodeList(target, elements)) {
 				return target;
 			}
-				
+
 			// its not in query so loop through by selector
 			// if the target is a child of the element then
 			// return that element
-			var elements = query(selector);
-			for(var i = 0; i < elements.length; i++) {
-				if( isDescendant(elements[i], target) ) {
-					return elements[i];
+
+			for( l = elements.length ; i < l; i++ ) {
+
+				el = elements[i];
+
+				if( isDescendant(el, target) ) {
+					return el;
 				}
 			}
-		};
+		}
 
 		return delegateListener(el, eventType, fn, fnDelegate);
 	};
