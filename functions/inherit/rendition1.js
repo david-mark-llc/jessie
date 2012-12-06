@@ -18,4 +18,4 @@ inherit = (function() {
 		fnSub.superConstructor = fnSuper;
 		fnSub.prototype.constructor = fnSub;
 	};
-})();
+}());
