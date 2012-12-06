@@ -8,5 +8,5 @@ if(html && isHostObjectProperty(html, "style")){
       if (x !== null) { el.style.left = x + px; }
       if (y !== null) { el.style.top = y + px; }
     };
-  })();
+  }());
 }

@@ -8,5 +8,5 @@ if(html && isHostObjectProperty(html, "style")){
       if (h !== null && h >= 0) { el.style.height = h + px; }
       if (w !== null && w >= 0) { el.style.width = w + px; }
     };
-  })();
+  }());
 }
