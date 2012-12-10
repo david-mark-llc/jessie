@@ -14,20 +14,21 @@ var xhrGet;
 
 // if you can't create one then you certainly can't send one
 if(xhrCreate && bind && mixin && isOwnProperty) {
-	
+
+	var xhr = xhrCreate();
 
 	xhrGet = function(xhr, url, options) {
-		
+
 		options = options || {};
 		options.thisObject = options.thisObject || xhr;
-		
+
 		var successFn,
 			failFn,
 			completeFn,
 			headers = {
 				'X-Requested-With' : 'XMLHttpRequest'
 			};
-		
+
 		if(options.headers) {
 			mixin(headers, options.headers);
 		}
@@ -49,13 +50,13 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 				status = xhr.status,
 				between200and300 = (status >= 200 && status < 300),
 				notModified = (status === 304);
-			
+
 			if(between200and300 || notModified || (status === 0 && xhr.responseText)) {
 				success = true;
 			}
 			return success;
 		}
-		
+
 		function handleReadyStateChange() {
 			if(xhr.readyState === 4) {
 				if(isSuccessfulResponse(xhr)) {
@@ -71,7 +72,7 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 				}
 			}
 		}
-		
+
 		xhr.open('GET', url);
 
 		for(var key in headers) {
@@ -79,7 +80,7 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 				xhr.setRequestHeader(key, headers[key]);
 			}
 		}
-		
+
 		xhr.onreadystatechange = handleReadyStateChange;
 		xhr.send(null);
 
