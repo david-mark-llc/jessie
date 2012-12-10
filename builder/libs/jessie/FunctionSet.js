@@ -42,6 +42,7 @@ jessie.FunctionSet.prototype.sortByName = function(a, b) {
 	}
 	return 0;
 };
+
 jessie.FunctionSet.prototype.getFunctions = function() {
 	this.create();
 	return this.functions;

@@ -16,7 +16,14 @@ jessie.Function = function(folder, JessieRendition) {
 	this.folder = folder;
 	this.JessieRendition = JessieRendition;
 	this.name = path.basename(folder);
-
+	this.metaFilePath = this.folder + '\\' + this.metaFileName;
+	this.metaFileExists = fs.existsSync(this.folder + '/' +'meta.js');
+	this.groupName = "Misc.";
+	if(this.metaFileExists) {
+		this.metaFileContents = fs.readFileSync(this.metaFilePath, 'utf8');
+		this.groupName = this.getGroupName(this.metaFileContents);
+	}
+	
 	this.renditions = this.createRenditions();
 	
 	this.getDependencies = function(renditionId){
@@ -33,6 +40,18 @@ jessie.Function = function(folder, JessieRendition) {
 		var contents = this.renditions[renditionId-1].getContents();
 		return contents;
 	};
+};
+
+jessie.Function.prototype.metaFileName = 'meta.js';
+
+jessie.Function.prototype.getGroupName = function(fileContents) {
+	var group = "";
+	var re = /^\s*Group:\s*([^*]+)\*\/$/gm;
+	var matches = re.exec(fileContents);
+	if(matches && matches.length > 1) {
+		group = matches[1].trim();
+	}
+	return group;
 };
 
 jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {

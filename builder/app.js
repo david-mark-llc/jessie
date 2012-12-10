@@ -36,6 +36,9 @@ constructorFnSet.getConstructorFns().forEach(function(constructorFn) {
 	excludedQuerystringKeys.push(constructorFn.name);
 });
 
+
+
+
 app.get('/', function(req, res){
 	var query = req.query,
 		builderOptions = {
@@ -122,13 +125,71 @@ app.get('/', function(req, res){
 
 		res.render('index.ejs', {
 			functions: functions,
+			groups: getFunctionsByGroup(functions),
 			constructorFns: constructorFnSet.getConstructorFns(),
 			query: query,
 			errors: errors,
 			md: md
 		});
+
 	}
 });
+
+/*[
+	{name: "getViewportSize", groupName: "viewport"},
+	{name: "addClass", groupName: "element"},
+	{name: "getViewportScroll", groupName: "viewport"}
+]*/
+/*
+array.sort( function( a, b ){
+
+var return = 0;
+
+if( a.group < b.group ){
+if( a.functionName < b.functionName ){
+return -1;
+} else {
+return 1;
+}
+} else {
+if( a.functionName < b.functionName ){
+return 1;
+} else {
+return -1;
+}
+}
+} );*/
+
+
+function getGroupIndexByGroupName(groups, groupName) {
+	var groupIndex = null;
+	for(var i = 0; i < groups.length; i++) {
+		if(groups[i].groupName === groupName) {
+			groupIndex = i;
+			break;
+		}
+	}
+	return groupIndex;
+}
+
+function getFunctionsByGroup(functions) {
+	var groups = [];
+
+	for(var i = 0; i < functions.length; i++ ) {
+		var groupName = functions[i].groupName;
+		var groupIndex = getGroupIndexByGroupName(groups, groupName);
+		if(typeof groupIndex === "number") {
+			groups[groupIndex].functions.push(functions[i]);
+		}
+		else {
+			groups.push({groupName: groupName, functions: [functions[i]]});
+		}
+	}
+
+	return groups;
+}
+
+var groups = getFunctionsByGroup(functionSet.getFunctions());
 
 function getRequestedFunctions(query) {
 	var requestedFunctions = [],

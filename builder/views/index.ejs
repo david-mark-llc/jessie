@@ -213,7 +213,17 @@
 								<th class="seeAlso">See also</th>					
 							</tr>
 						</table>
-							
+	
+
+						<% for(var k = 0; k < groups.length; k++) { %>
+
+							<h2>Group: <%=groups[k].groupName%></h2>
+
+							<%
+								var functions = groups[k].functions;
+							%>
+
+
 						<% for(var i = 0; i < functions.length; i++) { %>
 
 							<% if(functions[i].renditions.length) {  %>
@@ -280,6 +290,7 @@
 									</tbody>		
 								</table>
 							<% } %>
+						<% } %>
 						<% } %>
 					</div>
 					<div id="constructors">
