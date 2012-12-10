@@ -89,5 +89,5 @@ if(html && getElement && isHostObjectProperty(html, 'style') &&
 			return result;
 		};
 		
-	})();
+	}());
 }

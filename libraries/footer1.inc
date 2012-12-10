@@ -1,4 +1,4 @@
 
 	globalDocument = html = null;
 
-})(this);
+}(this));
