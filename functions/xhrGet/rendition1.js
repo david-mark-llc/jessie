@@ -15,9 +15,9 @@ var xhrGet;
 // if you can't create one then you certainly can't send one
 if(xhrCreate && bind && mixin && isOwnProperty) {
 
-	xhrGet = function(xhr, url, options) {
+	xhrGet = function( url, options ) {
 
-		xhr = xhr || xhrCreate();
+		var xhr = xhrCreate();
 
 		options = options || {};
 		options.thisObject = options.thisObject || xhr;

@@ -15,9 +15,9 @@ var xhrPost;
 // if you can't create one then you certainly can't send one
 if(xhrCreate && bind && mixin && isOwnProperty) {
 
-	xhrPost = function(xhr, url, options) {
+	xhrPost = function( url, options) {
 
-		xhr = xhr || xhrCreate();
+		var xhr = xhrCreate();
 
 		options = options || {};
 		options.thisObject = options.thisObject || xhr;
