@@ -18,7 +18,6 @@ var fs = require('fs'),
  * @param options.headerPath {String} Path to header file. Defaults to '../libraries/header1.inc'
  * @param options.footerPath {String} Path to footer file. Defaults to '../libraries/footer1.inc'
  * @param options.licensePath {String} Path to license file. Defaults to '../LICENSE'
- * asdas
  */
 jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
 	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'areFeatures'];
