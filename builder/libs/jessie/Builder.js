@@ -51,7 +51,6 @@ jessie.Builder.prototype.setupOptions = function(options) {
 	this.options.licensePath = this.options.licensePath || '../LICENSE';
 	this.options.namespace = this.options.namespace || 'jessie';
 	this.options.minification = this.options.minification || false;
-;
 };
 
 jessie.Builder.prototype.setupHeader = function() {
