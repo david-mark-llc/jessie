@@ -16,8 +16,8 @@ jessie.Function = function(folder, JessieRendition) {
 	this.folder = folder;
 	this.JessieRendition = JessieRendition;
 	this.name = path.basename(folder);
-	this.metaFilePath = this.folder + '\\' + this.metaFileName;
-	this.metaFileExists = fs.existsSync(this.folder + '/' +'meta.js');
+	this.metaFilePath = this.folder + '/' + this.metaFileName;
+	this.metaFileExists = fs.existsSync(this.metaFilePath);
 	this.groupName = "Misc.";
 	if(this.metaFileExists) {
 		this.metaFileContents = fs.readFileSync(this.metaFilePath, 'utf8');
