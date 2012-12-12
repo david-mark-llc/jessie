@@ -68,9 +68,11 @@ jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {
 jessie.Function.prototype.createRenditions = function() {
 	var functionInstance = this;
 	var files = fs.readdirSync(this.folder).sort();
-	// makes sure only reading .js files
+	// makes sure only reading .js files that are renditions
 	files = files.filter(function(file) {
-		return file.indexOf(".js") === file.length - 3;
+		var isJsFile = file.indexOf(".js") === file.length - 3;
+		var isMetaFile = file.indexOf("meta.js") > -1;
+		return isJsFile && !isMetaFile;
 	}.bind(this));
 	files = files.map(function(file) {
 		var filePath = path.join(this.folder, file);

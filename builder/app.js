@@ -36,131 +36,12 @@ constructorFnSet.getConstructorFns().forEach(function(constructorFn) {
 	excludedQuerystringKeys.push(constructorFn.name);
 });
 
-
-
-
-app.get('/', function(req, res){
-	var query = req.query,
-		builderOptions = {
-			headerPath: '../libraries/header1.inc',
-			footerPath: '../libraries/footer1.inc'
-		},
-		builder = null,
-		buildResponse = null,
-		requestedFunctions,
-		functions,
-		requestedConstructorFns,
-		namespace,
-		minification,
-		scaffolding = false,
-		fileName = 'jessie',
-		action = query['action'],
-		errors = [];
-
-	/*
-	 * There is a download param in the querystring as the user
-	 * has submitted the form (but not necessarily)
-	 */
-	if(action == 'Download') {
-		requestedFunctions = getRequestedFunctions(query);
-		requestedConstructorFns = getRequestedConstructors(query);
-		
-		namespace = query['namespace'];
-		if(namespace) {
-			namespace = namespace.trim();
-		}
-		if(namespace && namespace.length > 0) {
-
-			// The user has typed a namespace
-			builderOptions.namespace = namespace;
-			fileName = namespace;
-		}
-
-		minification = query['minification'];
-		if(minification) {
-
-			// The user has asked for a minified version
-			builderOptions.minification = minification;
-		}
-
-		scaffolding = query['scaffolding'];
-		if(scaffolding == 'on') {
-
-			// The user has asked for scaffolding to be included
-			builderOptions.scaffolding = true;
-		}
-
-		builderOptions.returnUri = "http://" + req.headers.host + req.url.replace(/&action=Download/, "");
-
-		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, builderOptions);
-		buildResponse = builder.build();
-
-		if(buildResponse.errors) {
-			errors = getErrorsInViewFriendlyFormat(buildResponse.errors);
-			res.render('index.ejs', {
-				functions: functionSet.getFunctions(),
-				constructorFns: constructorFnSet.getConstructorFns(),
-				errors: errors,
-				query: query,
-				md: md
-			});
-		} else {
-			res.header('Content-Disposition', 'attachment; filename="'+fileName+'.js"');
-			res.contentType('text/javascript');
-			res.send(buildResponse.output);
-		}
-	
-	/*
-	 * The user has requested the page without a download querystring
-	 * param, so we just show page
-	 */
-	} else {
-
-		if(query['degradesIEFilter']) {
-			functions = functionSet.getFunctionsFilteredByIEVersion(query['degradesIEFilter']);
-		}
-		else {
-			functions = functionSet.getFunctions();
-		}
-
-		res.render('index.ejs', {
-			functions: functions,
-			groups: getFunctionsByGroup(functions),
-			constructorFns: constructorFnSet.getConstructorFns(),
-			query: query,
-			errors: errors,
-			md: md
-		});
-
-	}
-});
-
-/*[
-	{name: "getViewportSize", groupName: "viewport"},
-	{name: "addClass", groupName: "element"},
-	{name: "getViewportScroll", groupName: "viewport"}
-]*/
-/*
-array.sort( function( a, b ){
-
-var return = 0;
-
-if( a.group < b.group ){
-if( a.functionName < b.functionName ){
-return -1;
-} else {
-return 1;
-}
-} else {
-if( a.functionName < b.functionName ){
-return 1;
-} else {
-return -1;
-}
-}
-} );*/
-
-
+/**
+ * Get array index of group by name
+ * @param  {Array} groups    Array of groups
+ * @param  {String} groupName The name of the group
+ * @return {null/Integer} The index number of the group in the array, otherwise null
+ */
 function getGroupIndexByGroupName(groups, groupName) {
 	var groupIndex = null;
 	for(var i = 0; i < groups.length; i++) {
@@ -172,6 +53,11 @@ function getGroupIndexByGroupName(groups, groupName) {
 	return groupIndex;
 }
 
+/**
+ * get functions arranged by group (just for the view)
+ * @param  {Array[{Jessie.Function}]} functions Array of Jessie.Function objects
+ * @return {Array} Array of Groups, each group having a functions property of type Array
+ */
 function getFunctionsByGroup(functions) {
 	var groups = [];
 
@@ -189,8 +75,11 @@ function getFunctionsByGroup(functions) {
 	return groups;
 }
 
-var groups = getFunctionsByGroup(functionSet.getFunctions());
-
+/**
+ * Convert requested functions in builder friendly format extracted from queryString
+ * @param  {String} query In query string format
+ * @return {Array} Array of functions containing objects e.g. {functionName: "name",renditionId: 1 }
+ */
 function getRequestedFunctions(query) {
 	var requestedFunctions = [],
 		key;
@@ -294,3 +183,103 @@ function getErrorsInViewFriendlyFormat(errors) {
 	}
 	return errorMessages;
 }
+
+// one url for the builder - the querystring tells the handle what to do
+app.get('/', function(req, res){
+	var query = req.query,
+		builderOptions = {
+			headerPath: '../libraries/header1.inc',
+			footerPath: '../libraries/footer1.inc'
+		},
+		builder = null,
+		buildResponse = null,
+		requestedFunctions,
+		functions,
+		requestedConstructorFns,
+		namespace,
+		minification,
+		scaffolding = false,
+		fileName = 'jessie',
+		action = query['action'],
+		errors = [];
+
+	/*
+	 * There is a download param in the querystring as the user
+	 * has submitted the form (but not necessarily)
+	 */
+	if(action == 'Download') {
+		requestedFunctions = getRequestedFunctions(query);
+		requestedConstructorFns = getRequestedConstructors(query);
+		
+		namespace = query['namespace'];
+		if(namespace) {
+			namespace = namespace.trim();
+		}
+		if(namespace && namespace.length > 0) {
+
+			// The user has typed a namespace
+			builderOptions.namespace = namespace;
+			fileName = namespace;
+		}
+
+		minification = query['minification'];
+		if(minification) {
+
+			// The user has asked for a minified version
+			builderOptions.minification = minification;
+		}
+
+		scaffolding = query['scaffolding'];
+		if(scaffolding == 'on') {
+
+			// The user has asked for scaffolding to be included
+			builderOptions.scaffolding = true;
+		}
+
+		builderOptions.returnUri = "http://" + req.headers.host + req.url.replace(/&action=Download/, "");
+
+		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, builderOptions);
+		buildResponse = builder.build();
+
+		if(buildResponse.errors) {
+			errors = getErrorsInViewFriendlyFormat(buildResponse.errors);
+			res.render('index.ejs', {
+				functions: functionSet.getFunctions(),
+				constructorFns: constructorFnSet.getConstructorFns(),
+				errors: errors,
+				query: query,
+				md: md
+			});
+		} else {
+			res.header('Content-Disposition', 'attachment; filename="'+fileName+'.js"');
+			res.contentType('text/javascript');
+			res.send(buildResponse.output);
+		}
+	
+	/*
+	 * The user has requested the page without a download querystring
+	 * param, so we just show page
+	 */
+	} else {
+
+		if(query['degradesIEFilter']) {
+			functions = functionSet.getFunctionsFilteredByIEVersion(query['degradesIEFilter']);
+		}
+		else {
+			functions = functionSet.getFunctions();
+		}
+
+		var groups = getFunctionsByGroup(functions);
+
+		res.render('index.ejs', {
+			functionCount: functions.length,
+			functions: functions,
+			groups: groups,
+			constructorFns: constructorFnSet.getConstructorFns(),
+			query: query,
+			errors: errors,
+			md: md
+		});
+
+	}
+});
