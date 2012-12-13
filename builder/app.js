@@ -203,6 +203,16 @@ app.get('/', function(req, res){
 		action = query['action'],
 		errors = [];
 
+
+	if(query['degradesIEFilter']) {
+		functions = functionSet.getFunctionsFilteredByIEVersion(query['degradesIEFilter']);
+	}
+	else {
+		functions = functionSet.getFunctions();
+	}
+
+	var groups = getFunctionsByGroup(functions);
+
 	/*
 	 * There is a download param in the querystring as the user
 	 * has submitted the form (but not necessarily)
@@ -244,7 +254,8 @@ app.get('/', function(req, res){
 		if(buildResponse.errors) {
 			errors = getErrorsInViewFriendlyFormat(buildResponse.errors);
 			res.render('index.ejs', {
-				functions: functionSet.getFunctions(),
+				groups: groups,
+				functionCount: functions.length,
 				constructorFns: constructorFnSet.getConstructorFns(),
 				errors: errors,
 				query: query,
@@ -262,18 +273,8 @@ app.get('/', function(req, res){
 	 */
 	} else {
 
-		if(query['degradesIEFilter']) {
-			functions = functionSet.getFunctionsFilteredByIEVersion(query['degradesIEFilter']);
-		}
-		else {
-			functions = functionSet.getFunctions();
-		}
-
-		var groups = getFunctionsByGroup(functions);
-
 		res.render('index.ejs', {
 			functionCount: functions.length,
-			functions: functions,
 			groups: groups,
 			constructorFns: constructorFnSet.getConstructorFns(),
 			query: query,

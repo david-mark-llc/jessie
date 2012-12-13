@@ -56,7 +56,10 @@ jessie.FunctionSet.prototype.getFunctionsFilteredByIEVersion = function(version)
 	for(var i = 0; i < this.functions.length; i++) {
 		fn = this.functions[i];
 		fn.renditions = fn.getRenditionsFilteredByIEVersion(version);
-		fns.push(fn);
+		// if the function has no renditions, don't include
+		if(fn.renditions.length > 0) {
+			fns.push(fn);
+		}
 	}
 	return fns;
 };
