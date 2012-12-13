@@ -78,6 +78,20 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 	});
 };
 
+jessie.Builder.prototype.getBuilderUriComment = function() {
+	var uri = 'http://127.0.0.1:1337/?',
+		requestedFunctions = this.requestedFunctions;
+
+	for(var i = 0; i < requestedFunctions.length; i++) {
+		uri += requestedFunctions[i].functionName + '=' + requestedFunctions[i].renditionId;
+		// if not last function add ampersand delimiter for querystring
+		if(i != requestedFunctions.length-1) {
+			uri += "&";
+		}
+	}
+
+	return ("\r\n/*\r\nReturn URI:\r\n" + uri + "\r\n*/\r\n\r\n");
+};
 
 jessie.Builder.prototype.build = function() {
 
@@ -108,9 +122,7 @@ jessie.Builder.prototype.build = function() {
 
 		var jsContents = '';
 
-		if(this.options.returnUri) {
-			jsContents += "\r\n/*\r\nReturn URI:\r\n" + this.options.returnUri + "\r\n*/\r\n\r\n";
-		}
+		jsContents += this.getBuilderUriComment();
 		
 		jsContents += this.header;
 		
