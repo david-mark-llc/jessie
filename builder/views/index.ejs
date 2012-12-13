@@ -217,7 +217,7 @@
 
 						<% for(var k = 0; k < groups.length; k++) { %>
 
-							<h2>Group: <%=groups[k].groupName%> (<%=groups[k].functions.length%>)</h2>
+							<h3>Group: <%=groups[k].groupName%> (<%=groups[k].functions.length%>)</h3>
 
 							<% var functions = groups[k].functions;	%>
 
@@ -336,6 +336,10 @@
 								<% } %>
 							</tbody>
 						</table>
+					</div>
+					<div id="widgets">
+						<h2>Widgets</h2>
+						<p>Coming soon...</p>
 					</div>
 					<div class="footer">
 						<% if (errors.length > 0) { %>

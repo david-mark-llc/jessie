@@ -105,7 +105,7 @@ h1 {
 }
 
 #functions {
-	width: 97%;
+	width: 98%;
 	margin: 0 auto;
 }
 
@@ -114,14 +114,29 @@ h1 {
 	margin-bottom: 10px;
 }
 
-#constructors {
-	width: 97%;
+#functions h3 {
+	font-size: 85%;
+	color: #0489E8;
+	border: 1px solid #0489E8;
+	border-bottom: none;
+	margin-bottom: 0;
+	padding: 5px;
+}
+
+#constructors,
+#widgets {
+	width: 98%;
 	margin: 0 auto;
 }
 
-#constructors h2 {
+#constructors h2,
+#widgets h2 {
 	font-size: 90%;
 	margin-bottom: 10px;
+}
+
+#widgets p {
+	font-size: 80%;
 }
 
 #builder table {
