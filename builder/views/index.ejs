@@ -17,7 +17,7 @@
 					</div>
 
 					<% if (errors.length > 0) { %>
-						<div class="errors">
+						<div id="errors">
 							<div class="errorsInner">
 								<h2>You have errors:</h2>
 								<% for(var i = 0; i < errors.length; i++) { %>
@@ -352,8 +352,9 @@
 					</div>
 					<div class="footer">
 						<% if (errors.length > 0) { %>
-							<p>Back to <a href="">errors</a></p>
+							<p><a href="#errors">Errors</a> (<%=errors.length%>)</p>
 						<% } %> 
+						<p><a href="#groupIndex">Groups</a></p>
 						<div class="actions">
 							<input type="submit" value="Download" name="action">
 						</div>
