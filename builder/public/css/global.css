@@ -34,6 +34,9 @@ h1 {
 #builder .footer p {
 	float: left;
 	font-size: 80%;
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right: 1px solid #ccc;
 }
 
 #builder .footer p a {
@@ -55,32 +58,32 @@ h1 {
 	float: left;
 }
 
-#builder .errors,
+#builder #errors,
 #builder #groupIndex {
 	width: 98%;
 	margin: 0 auto 20px auto;
 	display: block;	
 }
 
-#builder .errors .errorsInner {
+#builder #errors .errorsInner {
 	padding: 10px;
 	background-color: #e54444;
 	border: 1px solid #930000;
 }
 
-#builder .errors h2 {
+#builder #errors h2 {
 	font-size: 80%;
 	color: #fff;
 	margin-bottom: 5px;
 }
 
-#builder .errors p {
+#builder #errors p {
 	font-size: 80%;
 	color: #fff;
 	margin-bottom: 5px;
 }
 
-#builder .errors p a {
+#builder #errors p a {
 	color: #fff;
 }
 
@@ -104,6 +107,19 @@ h1 {
 #builder .options h2 {
 	font-size: 90%;
 	margin-bottom: 10px;
+}
+
+#builder #groupIndex {
+
+}
+
+#builder #groupIndex ul {
+	padding-left: 20px;
+}
+
+#builder #groupIndex ul li {
+	margin-bottom: 3px;
+	font-size: 80%;
 }
 
 #functions {
