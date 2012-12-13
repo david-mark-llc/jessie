@@ -16,7 +16,14 @@ jessie.Function = function(folder, JessieRendition) {
 	this.folder = folder;
 	this.JessieRendition = JessieRendition;
 	this.name = path.basename(folder);
-
+	this.metaFilePath = this.folder + '/' + this.metaFileName;
+	this.metaFileExists = fs.existsSync(this.metaFilePath);
+	this.groupName = "Misc.";
+	if(this.metaFileExists) {
+		this.metaFileContents = fs.readFileSync(this.metaFilePath, 'utf8');
+		this.groupName = this.getGroupName(this.metaFileContents);
+	}
+	
 	this.renditions = this.createRenditions();
 	
 	this.getDependencies = function(renditionId){
@@ -35,6 +42,18 @@ jessie.Function = function(folder, JessieRendition) {
 	};
 };
 
+jessie.Function.prototype.metaFileName = 'meta.js';
+
+jessie.Function.prototype.getGroupName = function(fileContents) {
+	var group = "";
+	var re = /^\s*Group:\s*([^*]+)\*\/$/gm;
+	var matches = re.exec(fileContents);
+	if(matches && matches.length > 1) {
+		group = matches[1].trim();
+	}
+	return group;
+};
+
 jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {
 	var renditions = [];
 	for(var i = 0; i < this.renditions.length; i++) {
@@ -49,9 +68,11 @@ jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {
 jessie.Function.prototype.createRenditions = function() {
 	var functionInstance = this;
 	var files = fs.readdirSync(this.folder).sort();
-	// makes sure only reading .js files
+	// makes sure only reading .js files that are renditions
 	files = files.filter(function(file) {
-		return file.indexOf(".js") === file.length - 3;
+		var isJsFile = file.indexOf(".js") === file.length - 3;
+		var isMetaFile = file.indexOf("meta.js") > -1;
+		return isJsFile && !isMetaFile;
 	}.bind(this));
 	files = files.map(function(file) {
 		var filePath = path.join(this.folder, file);
