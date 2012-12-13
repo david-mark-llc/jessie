@@ -17,7 +17,7 @@
 					</div>
 
 					<% if (errors.length > 0) { %>
-						<div class="errors">
+						<div id="errors">
 							<div class="errorsInner">
 								<h2>You have errors:</h2>
 								<% for(var i = 0; i < errors.length; i++) { %>
@@ -199,8 +199,17 @@
 						</div>
 					</div>	
 
+					<div id="groupIndex">
+						<h2>Group index</h2>
+						<ul>
+							<% for(var k = 0; k < groups.length; k++) { %>
+								<li><a href="#group_<%=k%>"><%=groups[k].groupName%></a></li>
+							<% } %>
+						</ul>
+					</div>
+
 					<div id="functions">
-						<h2>Functions</h2>
+						<h2>Functions (<%=functionCount%>)</h2>
 
 						<table>
 							<tr class="thead">
@@ -213,77 +222,87 @@
 								<th class="seeAlso">See also</th>					
 							</tr>
 						</table>
-							
-						<% for(var i = 0; i < functions.length; i++) { %>
+	
 
-							<% if(functions[i].renditions.length) {  %>
-								<table>
-									<tbody>
-										<%
-										  var anyChecked = false;
-										  for(var j = 0; j < functions[i].renditions.length; j++) {
-										%>
-											<tr>
+						<% for(var k = 0; k < groups.length; k++) { %>
 
-												<%if(j==0) {%>
-													<td id="<%=functions[i].name%>" class="function" rowspan="<%=(functions[i].renditions.length*2)+1%>">
-														<%=functions[i].name%>
+							<h3 id="group_<%=k%>">(<a href="#groupIndex">Index</a>) Group: <%=groups[k].groupName%> (<%=groups[k].functions.length%>)</h3>
+
+							<% var functions = groups[k].functions;	%>
+
+
+							<% for(var i = 0; i < functions.length; i++) { %>
+
+								<% if(functions[i].renditions.length) {  %>
+									<table>
+										<tbody>
+											<%
+											  var anyChecked = false;
+											  for(var j = 0; j < functions[i].renditions.length; j++) {
+											%>
+												<tr>
+
+													<%if(j==0) {%>
+														<td id="<%=functions[i].name%>" class="function" rowspan="<%=(functions[i].renditions.length*2)+1%>">
+															<%=functions[i].name%>
+															(<%=functions[i].renditions.length%>)
+														</td>
+													<%}%>
+													<td class="author"><%=functions[i].renditions[j].author%></td>
+													<td class="rendition">
+														<%=functions[i].renditions[j].id%>
 													</td>
-												<%}%>
-												<td class="author"><%=functions[i].renditions[j].author%></td>
-												<td class="rendition">
-													<%=functions[i].renditions[j].id%>
-												</td>
-												<td class="selection">
-													<input 
-														id="<%=functions[i].name+functions[i].renditions[j].id%>" 
-														type="radio" 
-														name="<%=functions[i].name%>" 
-														value="<%=functions[i].renditions[j].id%>"
+													<td class="selection">
+														<input 
+															id="<%=functions[i].name+functions[i].renditions[j].id%>" 
+															type="radio" 
+															name="<%=functions[i].name%>" 
+															value="<%=functions[i].renditions[j].id%>"
 
-														<%
-														  if (query[functions[i].name] == functions[i].renditions[j].id) {
-														    anyChecked = true;
-														%>
+															<%
+															  if (query[functions[i].name] == functions[i].renditions[j].id) {
+															    anyChecked = true;
+															%>
+																checked
+															<% } %>
+														>
+													</td>
+													<td class="degrades">
+														<%- md(functions[i].renditions[j].degrades) -%>
+													</td>
+													<td class="description">
+														<%- md(functions[i].renditions[j].description) -%>
+													</td>
+													<td class="seeAlso">
+														<%- md(functions[i].renditions[j].seeAlso) -%>
+													</td>					
+												</tr>
+												<tr>
+													<td class="code" colspan="6">
+														<pre><code><%=functions[i].renditions[j].contents%></code></pre>
+
+													</td>
+												</tr>
+											<% } %>
+											<tr>
+												<td>None</td>
+												<td>
+													<input type="radio" name="<%=functions[i].name%>" value="-1"
+														<% if (!anyChecked)  { %>
 															checked
 														<% } %>
 													>
 												</td>
-												<td class="degrades">
-													<%- md(functions[i].renditions[j].degrades) -%>
-												</td>
-												<td class="description">
-													<%- md(functions[i].renditions[j].description) -%>
-												</td>
-												<td class="seeAlso">
-													<%- md(functions[i].renditions[j].seeAlso) -%>
-												</td>					
+												<td colspan="4"></td>
 											</tr>
-											<tr>
-												<td class="code" colspan="6">
-													<pre><code><%=functions[i].renditions[j].contents%></code></pre>
-
-												</td>
-											</tr>
-										<% } %>
-										<tr>
-											<td>None</td>
-											<td>
-												<input type="radio" name="<%=functions[i].name%>" value="-1"
-													<% if (!anyChecked)  { %>
-														checked
-													<% } %>
-												>
-											</td>
-											<td colspan="4"></td>
-										</tr>
-									</tbody>		
-								</table>
+										</tbody>		
+									</table>
+								<% } %>
 							<% } %>
 						<% } %>
 					</div>
 					<div id="constructors">
-						<h2>Constructors</h2>
+						<h2>Constructors (<%=constructorFns.length%>)</h2>
 						<table>
 							<thead>
 								<tr>
@@ -327,10 +346,15 @@
 							</tbody>
 						</table>
 					</div>
+					<div id="widgets">
+						<h2>Widgets</h2>
+						<p>Coming soon...</p>
+					</div>
 					<div class="footer">
 						<% if (errors.length > 0) { %>
-							<p>Back to <a href="">errors</a></p>
+							<p><a href="#errors">Errors</a> (<%=errors.length%>)</p>
 						<% } %> 
+						<p><a href="#groupIndex">Groups</a></p>
 						<div class="actions">
 							<input type="submit" value="Download" name="action">
 						</div>
