@@ -199,6 +199,15 @@
 						</div>
 					</div>	
 
+					<div id="groupIndex">
+						<h2>Group index</h2>
+						<ul>
+							<% for(var k = 0; k < groups.length; k++) { %>
+								<li><a href="#group_<%=k%>"><%=groups[k].groupName%></a></li>
+							<% } %>
+						</ul>
+					</div>
+
 					<div id="functions">
 						<h2>Functions (<%=functionCount%>)</h2>
 
@@ -217,7 +226,7 @@
 
 						<% for(var k = 0; k < groups.length; k++) { %>
 
-							<h3>Group: <%=groups[k].groupName%> (<%=groups[k].functions.length%>)</h3>
+							<h3 id="group_<%=k%>">(<a href="#groupIndex">Index</a>) Group: <%=groups[k].groupName%> (<%=groups[k].functions.length%>)</h3>
 
 							<% var functions = groups[k].functions;	%>
 

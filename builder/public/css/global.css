@@ -55,8 +55,9 @@ h1 {
 	float: left;
 }
 
-#builder .errors {
-	width: 97%;
+#builder .errors,
+#builder #groupIndex {
+	width: 98%;
 	margin: 0 auto 20px auto;
 	display: block;	
 }
@@ -84,18 +85,19 @@ h1 {
 }
 
 #builder .filters {
-	width: 97%;
+	width: 98%;
 	margin: 0 auto;
 	margin-bottom: 10px;
 }
 
-#builder .filters h2 {
+#builder .filters h2,
+#builder #groupIndex h2 {
 	font-size: 90%;
 	margin-bottom: 10px;
 }
 
 #builder .options {
-	width: 97%;
+	width: 98%;
 	margin: 0 auto;
 }
 
