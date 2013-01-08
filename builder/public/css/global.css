@@ -189,7 +189,7 @@ h1 {
 }
 
 #builder table .function {
-	width: 10%;
+	width: 20%;
 }
 
 #builder table .rendition {
@@ -197,7 +197,7 @@ h1 {
 }
 
 #builder table .degrades {
-	width: 25%;
+	width: 15%;
 }
 
 #builder table .code {
