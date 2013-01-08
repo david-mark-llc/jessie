@@ -7,10 +7,6 @@ body {
 	font-family: arial;
 }
 
-#container {
-
-}
-
 h1 {
 	color: #444;
 	font-size: 120%;
@@ -58,32 +54,32 @@ h1 {
 	float: left;
 }
 
-#builder #errors,
-#builder #groupIndex {
+#errors,
+#groupIndex {
 	width: 98%;
 	margin: 0 auto 20px auto;
 	display: block;	
 }
 
-#builder #errors .errorsInner {
+#errors .errorsInner {
 	padding: 10px;
 	background-color: #e54444;
 	border: 1px solid #930000;
 }
 
-#builder #errors h2 {
+#errors h2 {
 	font-size: 80%;
 	color: #fff;
 	margin-bottom: 5px;
 }
 
-#builder #errors p {
+#errors p {
 	font-size: 80%;
 	color: #fff;
 	margin-bottom: 5px;
 }
 
-#builder #errors p a {
+#errors p a {
 	color: #fff;
 }
 
@@ -94,7 +90,7 @@ h1 {
 }
 
 #builder .filters h2,
-#builder #groupIndex h2 {
+#groupIndex h2 {
 	font-size: 90%;
 	margin-bottom: 10px;
 }
@@ -109,15 +105,15 @@ h1 {
 	margin-bottom: 10px;
 }
 
-#builder #groupIndex {
+#groupIndex {
 
 }
 
-#builder #groupIndex ul {
+#groupIndex ul {
 	padding-left: 20px;
 }
 
-#builder #groupIndex ul li {
+#groupIndex ul li {
 	margin-bottom: 3px;
 	font-size: 80%;
 }
@@ -135,10 +131,6 @@ h1 {
 #functions h3 {
 	font-size: 85%;
 	color: #0489E8;
-	border: 1px solid #0489E8;
-	border-bottom: none;
-	margin-bottom: 0;
-	padding: 5px;
 }
 
 #constructors,
@@ -168,7 +160,6 @@ h1 {
 
 }
 
-#builder table .thead th,
 #builder table thead th {
 	text-align: left;
 	font-size: 80%;
@@ -189,23 +180,28 @@ h1 {
 
 #builder table .code pre code {
 	overflow: auto;
+	height: 150px;
 	width: 98%;
 }
 
 #builder table .function {
-	width: 200px;
+	width: 20%;
 }
 
 #builder table .rendition {
-	width: 70px;
-}
-
-#builder table .selection {
-	width: 70px;
+	width: 15%;
 }
 
 #builder table .degrades {
-	width: 300px;
+	width: 15%;
+}
+
+#builder table .code {
+	width: 50%;
+}
+
+#builder table thead tr td {
+	background-color: #f5f5f5;
 }
 
 #builder table tbody {
@@ -220,7 +216,7 @@ h1 {
 	background-color: #d1ebff;
 }
 
-#builder table tbody tr td {
+#builder table tr td {
 	border: 1px solid #0489e8;
 	font-size: 80%;
 	padding: 7px;
