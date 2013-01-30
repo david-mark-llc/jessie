@@ -24,14 +24,12 @@ if(delegateListener && getElementTagName) {
 			} else {
 				descendant = getElementParentElement(target);
 
-				if (null !== descendant) {
-					while (null !== descendant && descendant !== el) {
-						if (getElementTagName(descendant) === tagName) {
-							sourceNode = descendant;
-							break;
-						}
-						descendant = getElementParentElement(descendant);
+				while (null !== descendant && descendant !== el) {
+					if (getElementTagName(descendant) === tagName) {
+						sourceNode = descendant;
+						break;
 					}
+					descendant = getElementParentElement(descendant);
 				}
 			}
 			return sourceNode;
