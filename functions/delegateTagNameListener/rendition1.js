@@ -25,7 +25,7 @@ if(delegateListener && getElementTagName) {
 				descendant = getElementParentElement(target);
 
 				if (null !== descendant) {
-					while (descendant !== el) {
+					while (null !== descendant && descendant !== el) {
 						if (getElementTagName(descendant) === tagName) {
 							sourceNode = descendant;
 							break;
