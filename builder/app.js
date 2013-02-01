@@ -96,7 +96,7 @@ function getRequestedFunctions(query) {
 		
 		var renditionId = parseInt(query[key], 10);
 		// if no rendition was wanted after all
-		if (renditionId==-1) {
+		if (renditionId==-1 || isNaN(renditionId)) {
 			continue;
 		}
 		
