@@ -282,12 +282,12 @@
 											<% } %>
 											<tr>
 												<td>
-													<input type="radio" name="<%=functions[i].name%>" value="-1"
+													<input type="radio" id="<%=functions[i].name%>_none" name="<%=functions[i].name%>" value=""
 														<% if (!anyChecked)  { %>
 															checked
 														<% } %>
 													>
-													<label>None</label>
+													<label for="<%=functions[i].name%>_none">None</label>
 												</td>
 												<td colspan="2"></td>
 											</tr>
