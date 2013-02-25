@@ -12,7 +12,7 @@ Adam Silver, Graham Veal
 
 var delegateQueryListener;
 
-f(isNodeInNodeList && delegateListener && query && isDescendant) {
+if(isNodeInNodeList && delegateListener && query && isDescendant) {
 	
 	delegateQueryListener = function(el, eventType, selector, fn) {
 
