@@ -240,3 +240,7 @@ h1 {
 	margin: 0 auto;
 	display: block;
 }
+
+.none {
+	color: #aaa;
+}
