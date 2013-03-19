@@ -233,7 +233,7 @@ app.get('/', function(req, res){
 		}
 
 		minificationLevel = query['minificationLevel'];
-		console.log(minificationLevel)
+
 		if(minificationLevel) {
 
 			// The user has asked for a minified version
