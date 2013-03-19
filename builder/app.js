@@ -197,7 +197,7 @@ app.get('/', function(req, res){
 		functions,
 		requestedConstructorFns,
 		namespace,
-		minification,
+		minificationLevel,
 		scaffolding = false,
 		fileName = 'jessie',
 		action = query['action'],
@@ -220,7 +220,7 @@ app.get('/', function(req, res){
 	if(action == 'Download') {
 		requestedFunctions = getRequestedFunctions(query);
 		requestedConstructorFns = getRequestedConstructors(query);
-		
+
 		namespace = query['namespace'];
 		if(namespace) {
 			namespace = namespace.trim();
@@ -232,11 +232,12 @@ app.get('/', function(req, res){
 			fileName = namespace;
 		}
 
-		minification = query['minification'];
-		if(minification) {
+		minificationLevel = query['minificationLevel'];
+		console.log(minificationLevel)
+		if(minificationLevel) {
 
 			// The user has asked for a minified version
-			builderOptions.minification = minification;
+			builderOptions.minificationLevel = minificationLevel;
 		}
 
 		scaffolding = query['scaffolding'];
