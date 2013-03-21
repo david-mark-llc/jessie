@@ -61,10 +61,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
+												name="minificationLevel"
 												id="minification_0"
 												value=""
-												<% if(!query.minification || query.minification == '') { %>
+												<% if(!query.minificationLevel || query.minificationLevel == '') { %>
 													checked
 												<% } %>
 											>
@@ -73,10 +73,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
-												value="level1"
+												name="minificationLevel"
+												value="1"
 												id="minification_1"
-												<% if(query && query.minification == 'level1') { %>
+												<% if(query && query.minificationLevel == '1') { %>
 													checked
 												<% } %>
 											>
@@ -85,10 +85,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
-												value="level2"
+												name="minificationLevel"
+												value="2"
 												id="minification_2"
-												<% if(query && query.minification == 'level2') { %>
+												<% if(query && query.minificationLevel == '2') { %>
 													checked
 												<% } %>
 											>
@@ -97,10 +97,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
-												value="level3"
+												name="minificationLevel"
+												value="3"
 												id="minification_3"
-												<% if(query && query.minification == 'level3') { %>
+												<% if(query && query.minificationLevel == '3') { %>
 													checked
 												<% } %>
 											>
