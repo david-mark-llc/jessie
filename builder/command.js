@@ -33,7 +33,7 @@ program
 	.version('0.0.1')
 	.usage('[options] <functions ...>')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
-	.option('--minify [number]', 'Minification level.')
+	.option('-m --minify [level]', 'Minification level.')
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
