@@ -61,10 +61,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
+												name="minificationLevel"
 												id="minification_0"
 												value=""
-												<% if(!query.minification || query.minification == '') { %>
+												<% if(!query.minificationLevel || query.minificationLevel == '') { %>
 													checked
 												<% } %>
 											>
@@ -73,10 +73,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
-												value="level1"
+												name="minificationLevel"
+												value="1"
 												id="minification_1"
-												<% if(query && query.minification == 'level1') { %>
+												<% if(query && query.minificationLevel == '1') { %>
 													checked
 												<% } %>
 											>
@@ -85,10 +85,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
-												value="level2"
+												name="minificationLevel"
+												value="2"
 												id="minification_2"
-												<% if(query && query.minification == 'level2') { %>
+												<% if(query && query.minificationLevel == '2') { %>
 													checked
 												<% } %>
 											>
@@ -97,10 +97,10 @@
 										<div>
 											<input 
 												type="radio" 
-												name="minification"
-												value="level3"
+												name="minificationLevel"
+												value="3"
 												id="minification_3"
-												<% if(query && query.minification == 'level3') { %>
+												<% if(query && query.minificationLevel == '3') { %>
 													checked
 												<% } %>
 											>
@@ -202,7 +202,7 @@
 					<div id="groupIndex">
 						<h2>Group index</h2>
 						<ul>
-							<% for(var k = 0; k < groups.length; k++) { %>
+							<% for(var k = 0, kl = groups.length; k < kl; k++) { %>
 								<li><a href="#group_<%=k%>"><%=groups[k].groupName%></a></li>
 							<% } %>
 						</ul>
@@ -223,71 +223,72 @@
 						
 	
 
-						<% for(var k = 0; k < groups.length; k++) { %>
+						<% for(var k = 0, kl = groups.length; k < kl; k++) { %>
+						<% var currentGroup = groups[k]; %>
+						<% var functions = currentGroup.functions;	%>
 
 							<thead>
 								<tr>
 									<td colspan="4">
-										<h3 id="group_<%=k%>">(<a href="#groupIndex">Index</a>) Group: <%=groups[k].groupName%> (<%=groups[k].functions.length%>)</h3>
+										<h3 id="group_<%=k%>">(<a href="#groupIndex">Index</a>) Group: <%=currentGroup.groupName%> (<%=currentGroup.functions.length%>)</h3>
 									</td>
 								</tr>
 							</thead>
 
-							<% var functions = groups[k].functions;	%>
+							<% for(var i = 0, l = functions.length; i < l; i++) { %>
+							<% var currentFunction = functions[ i ]; %>
 
-
-							<% for(var i = 0; i < functions.length; i++) { %>
-
-								<% if(functions[i].renditions.length) {  %>
+								<% if(currentFunction.renditions.length) {  %>
 									
 										<tbody>
 											<%
 											  var anyChecked = false;
-											  for(var j = 0; j < functions[i].renditions.length; j++) {
+											  for(var j = 0, jl = currentFunction.renditions.length; j < jl; j++) {
+											  	var currenntRendition = currentFunction.renditions[j];
 											%>
 												<tr>
 
 													<%if(j==0) {%>
-														<td id="<%=functions[i].name%>" class="function" rowspan="<%=(functions[i].renditions.length*2)+1%>">
-															<%=functions[i].name%>
-															(<%=functions[i].renditions.length%>)
+														<td id="<%=currentFunction.name%>" class="function" rowspan="<%=(currentFunction.renditions.length*2)+1%>">
+															<%=currentFunction.name%>
+															(<%=currentFunction.renditions.length%>)
 														</td>
 													<%}%>
 													<td class="rendition">
 														<input 
-															id="<%=functions[i].name+functions[i].renditions[j].id%>" 
+															id="<%=currentFunction.name+currenntRendition.id%>" 
 															type="radio" 
-															name="<%=functions[i].name%>" 
-															value="<%=functions[i].renditions[j].id%>"
+															name="<%=currentFunction.name%>" 
+															value="<%=currenntRendition.id%>"
 
 															<%
-															  if (query[functions[i].name] == functions[i].renditions[j].id) {
+															  if (query[currentFunction.name] == currenntRendition.id) {
 															    anyChecked = true;
 															%>
 																checked
 															<% } %>
 														>
-														<label for="<%=functions[i].name+functions[i].renditions[j].id%>" ><%=functions[i].renditions[j].id%> (Author: <%=functions[i].renditions[j].author%>)</label>
+														<label for="<%=currentFunction.name+currenntRendition.id%>" ><%=currenntRendition.id%> (Author: <%-currenntRendition.author || '<span class="none">none</span>' %>)</label>
 													
 													</td>
 													<td class="degrades">
-														<%- md(functions[i].renditions[j].degrades) -%>
+														<%- md(currenntRendition.degrades) -%>
 													</td>
 													<td class="code">
-														<p class="description"><%- md(functions[i].renditions[j].description) -%></p>
-														<pre><code><%=functions[i].renditions[j].contents%></code></pre>
-														<p class="seeAlso"><%- md(functions[i].renditions[j].seeAlso) -%></p>
+														<p class="description"><%- md(currenntRendition.description) -%></p>
+														<pre><code><%=currenntRendition.contents%></code></pre>
+														<p class="seeAlso"><%- md(currenntRendition.seeAlso) -%></p>
 													</td>			
 												</tr>
 											<% } %>
 											<tr>
 												<td>
-													<input type="radio" name="<%=functions[i].name%>" value="-1"
+													<input type="radio" id="<%=currentFunction.name%>_none" name="<%=currentFunction.name%>" value=""
 														<% if (!anyChecked)  { %>
 															checked
 														<% } %>
 													>
-													<label>None</label>
+													<label for="<%=currentFunction.name%>_none">None</label>
 												</td>
 												<td colspan="2"></td>
 											</tr>
@@ -308,32 +309,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% for(var i = 0; i < constructorFns.length; i++) { %>
+								<% for(var i = 0, l = constructorFns.length; i < l; i++) { %>
+								<% var currentConstructor = constructorFns[i]; %>
 									<tr>
 										<td>
 											<input 
 												type="checkbox" 
-												name="<%=constructorFns[i].name%>" 
+												name="<%=currentConstructor.name%>" 
 
-												<%if(query[constructorFns[i].name] == 'on'){%>
+												<%if(query[currentConstructor.name] == 'on'){%>
 													checked
 												<%}%>
 											/>
-											<label><%=constructorFns[i].name%></label>											
+											<label><%=currentConstructor.name%></label>											
 										</td>
 										<td>											
-											<% for(var j = 0; j < constructorFns[i].prototypeMethods.length; j++) { %>
+											<% for(var j = 0, jl = currentConstructor.prototypeMethods.length; j < jl; j++) { %>
+											<% var currentPrototype = currentConstructor.prototypeMethods[j]; %>
 												<div class="method">
 													<input 
 														type="checkbox" 
-														name="<%=constructorFns[i].name%>#<%=constructorFns[i].prototypeMethods[j].name%>" 
+														name="<%=currentConstructor.name%>#<%=currentPrototype.name%>" 
 
-														<%if(query[constructorFns[i].name+'#'+constructorFns[i].prototypeMethods[j].name] == 'on'){%>
+														<%if(query[currentConstructor.name+'#'+currentPrototype.name] == 'on'){%>
 															checked
 														<%}%>
 
 													/>
-													<label><%=constructorFns[i].prototypeMethods[j].name%></label>
+													<label><%=currentPrototype.name%></label>
 													
 												</div>
 											<% } %>

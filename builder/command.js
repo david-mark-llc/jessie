@@ -33,7 +33,7 @@ program
 	.version('0.0.1')
 	.usage('[options] <functions ...>')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
-	.option('-m, --minify [level]', 'Minify the output using UglifyJS')
+	.option('-m --minify [level]', 'Minification level.')
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
@@ -50,10 +50,7 @@ if(program.args.length === 0) {
 setupRequestedFunctions();
 
 if(program.minify) {
-	//default to level 3 if a parameter is not included
-	var minifyLevel = ('boolean' == typeof program.minify) ? 3 : program.minify;
-
-	buildOptions.minification = 'level' + minifyLevel;
+	buildOptions.minificationLevel = program.minify;
 }
 
 if(program.namespace) {
