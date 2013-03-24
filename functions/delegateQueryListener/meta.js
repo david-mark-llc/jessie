@@ -12,6 +12,6 @@ DOM Events
  * @param {String} selector The selector/query to look up
  * @param {Function} fn The listener
  * @example
- * jessie.delegateQueryListener(document.getElementById('whatever', 'click', '.yeah', function(e, currentTarget) {}))
+ * jessie.delegateQueryListener(document.getElementById('whatever'), 'click', '.yeah', function(e, currentTarget) {}));
  * @author Adam Silver
  */
