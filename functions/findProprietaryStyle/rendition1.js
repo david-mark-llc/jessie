@@ -1,4 +1,4 @@
-/*global html */
+/*global html,isHostObjectProperty */
 
 var findProprietaryStyle;
 
