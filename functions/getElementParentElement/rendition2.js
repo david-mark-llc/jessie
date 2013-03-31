@@ -12,7 +12,7 @@ Degrades:
 IE3
 */
 
-if(isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentElement')) {
+if(globalDocument && isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentElement')) {
 	getElementParentElement = function(el) {
 		return el.parentElement;
 	};

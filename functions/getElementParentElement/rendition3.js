@@ -12,13 +12,13 @@ Degrades:
 IE3
 */
 
-if( isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentElement')) {
+if(globalDocument && isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentElement')) {
 
 	getElementParentElement = function(el) {
 		return el.parentElement;
 	};
 
-} else if( isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentNode')) {
+} else if(globalDocument && isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentNode')) {
 
 	getElementParentElement = function(el) {
 		var parentNode = el.parentNode,
