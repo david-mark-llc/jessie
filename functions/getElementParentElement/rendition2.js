@@ -1,4 +1,4 @@
-/*global html, isHostObjectProperty*/
+/*global globalDocument, isHostObjectProperty*/
 
 var getElementParentElement;
 
@@ -12,7 +12,7 @@ Degrades:
 IE3
 */
 
-if(html && isHostObjectProperty(html, 'parentElement')) {
+if(globalDocument && isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentElement')) {
 	getElementParentElement = function(el) {
 		return el.parentElement;
 	};
