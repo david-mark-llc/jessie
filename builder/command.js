@@ -33,7 +33,7 @@ program
 	.version('0.0.1')
 	.usage('[options] <functions ...>')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
-	.option('--minify', 'Minify the output using UglifyJS')
+	.option('-m --minify [level]', 'Minification level.')
 	.option('--namespace [name]', 'The name of the global variable to export', "jessie")
 	.parse(process.argv);
 
@@ -50,7 +50,7 @@ if(program.args.length === 0) {
 setupRequestedFunctions();
 
 if(program.minify) {
-	buildOptions.minify = true;
+	buildOptions.minificationLevel = program.minify;
 }
 
 if(program.namespace) {

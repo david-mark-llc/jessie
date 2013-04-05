@@ -1,20 +1,30 @@
-/*global forEach */
-var some;
+/*global */
 
 /*
 Description:
-Relies on `jessie.forEach`
+Replicates Array.prototype.some
 */
 
-if(forEach) {
-	some = function(obj, iterator, context) {
-		var result = false;
+/*
+Author:
+Graham Veal
+*/
 
-		// TODO: this is slightly inefficient, as it doesn't break out of the
-		// loop when the first `truthy` value is encountered
-		forEach(obj, function(value, index, list) {
-			result = iterator.call(context, value, index, list);
-		});
-		return !!result;
-	};
-}
+var some;
+
+some = function(arr, iterator, context) {
+
+	var i = 0,
+		l = arr.length;
+
+	context = context || arr;
+	
+	for( ; i < l; i++ ){
+
+		if( iterator.call(context, arr[ i ], i, arr) ){
+			return true;
+		}
+	}
+
+	return false;
+};

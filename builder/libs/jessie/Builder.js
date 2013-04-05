@@ -18,7 +18,6 @@ var fs = require('fs'),
  * @param options.headerPath {String} Path to header file. Defaults to '../libraries/header1.inc'
  * @param options.footerPath {String} Path to footer file. Defaults to '../libraries/footer1.inc'
  * @param options.licensePath {String} Path to license file. Defaults to '../LICENSE'
- * asdas
  */
 jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
 	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'areFeatures'];
@@ -50,8 +49,7 @@ jessie.Builder.prototype.setupOptions = function(options) {
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
 	this.options.licensePath = this.options.licensePath || '../LICENSE';
 	this.options.namespace = this.options.namespace || 'jessie';
-	this.options.minification = this.options.minification || false;
-;
+	this.options.minificationLevel = this.options.minificationLevel || false;
 };
 
 jessie.Builder.prototype.setupHeader = function() {
@@ -80,6 +78,20 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 	});
 };
 
+jessie.Builder.prototype.getBuilderUriComment = function() {
+	var uri = 'http://127.0.0.1:1337/?',
+		requestedFunctions = this.requestedFunctions;
+
+	for(var i = 0; i < requestedFunctions.length; i++) {
+		uri += requestedFunctions[i].functionName + '=' + requestedFunctions[i].renditionId;
+		// if not last function add ampersand delimiter for querystring
+		if(i != requestedFunctions.length-1) {
+			uri += "&";
+		}
+	}
+
+	return ("\r\n/*\r\nReturn URI:\r\n" + uri + "\r\n*/\r\n\r\n");
+};
 
 jessie.Builder.prototype.build = function() {
 
@@ -110,9 +122,7 @@ jessie.Builder.prototype.build = function() {
 
 		var jsContents = '';
 
-		if(this.options.returnUri) {
-			jsContents += "\r\n/*\r\nReturn URI:\r\n" + this.options.returnUri + "\r\n*/\r\n\r\n";
-		}
+		jsContents += this.getBuilderUriComment();
 		
 		jsContents += this.header;
 		
@@ -180,7 +190,7 @@ jessie.Builder.prototype.build = function() {
 			builderResponse.output = this.removeScaffolding( builderResponse.output );
 		}
 
-		if(this.options.minification) {
+		if(this.options.minificationLevel) {
 			builderResponse.output = this.minify(builderResponse.output);
 		}
 
@@ -204,16 +214,14 @@ jessie.Builder.prototype.removeScaffolding = function(output) {
 jessie.Builder.prototype.minify = function(output) {
 	var ast = uglifyParser.parse(output);
 
-	var minificationLevel = this.options.minification;
-
-	switch(minificationLevel) {
-		case "level1":
+	switch(this.options.minificationLevel) {
+		case "1":
 			output = pro.gen_code(ast, { beautify: true });
 			break;
-		case "level2":
+		case "2":
 			output = pro.gen_code(ast);
 			break;
-		case "level3":
+		case "3":
 			ast = pro.ast_mangle(ast);
 			output = pro.gen_code(ast);
 			break;

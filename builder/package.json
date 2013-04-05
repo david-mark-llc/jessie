@@ -3,12 +3,12 @@
 	"version": "0.0.1",
 	"description": "Jessie Builder",
 	"dependencies": {
-		"uglify-js": ">=1.2.6",
-		"simplesets": ">=1.2.0",
-		"commander": ">=0.6.0",
-		"cli-table": ">=0.0.1",
-		"express": "3.0",
-		"node-markdown": ">=0.1.1",
-		"ejs": ">=0.8.1"
+		"uglify-js": "1.3.3",
+		"simplesets": "1.2.0",
+		"commander": "1.1.1",
+		"cli-table": "0.2.0",
+		"express": "3.0.3",
+		"node-markdown": "0.1.1",
+		"ejs": "0.8.3"
 	}
 }

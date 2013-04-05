@@ -18,7 +18,7 @@ if(attachListener && getEventTarget && canCall) {
 		var listener = function(e) {
 			var currentTarget = fnDelegate(el, getEventTarget(e));
 			if(currentTarget) {
-				fn.call(currentTarget, e, currentTarget);
+				fn.call(currentTarget, e, currentTarget, el);
 			}
 		};
 		

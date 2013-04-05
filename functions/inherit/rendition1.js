@@ -1,4 +1,5 @@
-var inherit;
+/*global cloneObject*/
+
 
 /*
 Description:
@@ -10,12 +11,19 @@ Author:
 David Mark
 */
 
-inherit = (function() {
-	var Fn = function() {};
-	return function(fnSub, fnSuper) {
-		Fn.prototype = fnSuper.prototype;
-		fnSub.prototype = new Fn();
-		fnSub.superConstructor = fnSuper;
-		fnSub.prototype.constructor = fnSub;
-	};
-})();
+var inherit;
+
+if(cloneObject) {
+	inherit = (function() {
+		return function(fnSub, fnSuper) {
+			// Set "sub" constructor prototype to a clone of the "super" constructor prototype
+			fnSub.prototype = cloneObject(fnSuper.prototype);
+
+			// Store this handy reference so methods can call on their super-predecessors
+			fnSub.superConstructor = fnSuper;
+
+			// Restore stepped on constructor property
+			fnSub.prototype.constructor = fnSub;
+		};
+	})();
+}

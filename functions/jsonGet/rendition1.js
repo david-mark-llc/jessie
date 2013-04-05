@@ -11,7 +11,7 @@ Degrades:
 
 /*
 Author:
-Adam Silver
+Adam Silver, Graham Veal
 */
 
 var jsonGet;
@@ -19,17 +19,28 @@ var jsonGet;
 if(ajaxGet && parseJson && bind) {
 	jsonGet = function(url, options) {
 		options = options || {};
-		var	wrappedSuccessFn,
-			originalFunction = options.success;
+		var	originalFunction = options.success;
 
 		if(originalFunction) {
-			wrappedSuccessFn = function(response, xhr) {
+
+			options.success = function(response, xhr) {
+
+				var json;
+
 				options.thisObject = options.thisObject || xhr;
 				originalFunction = bind(originalFunction, options.thisObject);
-				var json = parseJson(response);
+
+				try {
+
+					json = parseJson(response);
+
+				} catch( e ){
+
+					json = null;
+				}
+
 				originalFunction(json, xhr);
 			};
-			options.success = wrappedSuccessFn;
 		}
 
 		return ajaxGet(url, options);

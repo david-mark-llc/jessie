@@ -16,7 +16,7 @@ if(globalDocument && isHostMethod(globalDocument, 'addEventListener')) {
 	attachDocumentListener = function(eventType, fn) {
 		
 		var listener = function(e) {
-			fn.call(e, e);
+			fn.call(document, e);
 		};
 
 		document.addEventListener(eventType, listener, false);
