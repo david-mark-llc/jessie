@@ -13,9 +13,7 @@ Adam Silver
 var xhrGet;
 
 // if you can't create one then you certainly can't send one
-if(xhrCreate && bind && mixin && isOwnProperty) {
-	
-
+if (xhrCreate && bind && mixin && isOwnProperty) {
 	xhrGet = function(xhr, url, options) {
 		
 		options = options || {};
@@ -28,19 +26,19 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 				'X-Requested-With' : 'XMLHttpRequest'
 			};
 		
-		if(options.headers) {
+		if (options.headers) {
 			mixin(headers, options.headers);
 		}
 
-		if(options.success) {
+		if (options.success) {
 			successFn = bind(options.success, options.thisObject);
 		}
 
-		if(options.fail) {
+		if (options.fail) {
 			failFn = bind(options.fail, options.thisObject);
 		}
 
-		if(options.complete) {
+		if (options.complete) {
 			completeFn = bind(options.complete, options.thisObject);
 		}
 
@@ -50,23 +48,23 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 				between200and300 = (status >= 200 && status < 300),
 				notModified = (status === 304);
 			
-			if(between200and300 || notModified || (status === 0 && xhr.responseText)) {
+			if (between200and300 || notModified || (status === 0 && xhr.responseText)) {
 				success = true;
 			}
 			return success;
 		}
 		
 		function handleReadyStateChange() {
-			if(xhr.readyState === 4) {
-				if(isSuccessfulResponse(xhr)) {
-					if(successFn) {
+			if (xhr.readyState === 4) {
+				if (isSuccessfulResponse(xhr)) {
+					if (successFn) {
 						successFn(xhr.responseText, xhr);
 					}
 				}
-				else if(failFn) {
+				else if (failFn) {
 					failFn(xhr);
 				}
-				if(completeFn) {
+				if (completeFn) {
 					completeFn(xhr);
 				}
 			}
@@ -74,8 +72,8 @@ if(xhrCreate && bind && mixin && isOwnProperty) {
 		
 		xhr.open('GET', url);
 
-		for(var key in headers) {
-			if(isOwnProperty( headers, key )){
+		for (var key in headers) {
+			if (isOwnProperty( headers, key )){
 				xhr.setRequestHeader(key, headers[key]);
 			}
 		}
