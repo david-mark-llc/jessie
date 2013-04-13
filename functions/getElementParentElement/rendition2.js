@@ -4,8 +4,12 @@ var getElementParentElement;
 
 /*
 Description:
-Relies on 'el.parentElement'
-Relies on 'jessie.getDescendantsByTagName'
+Relies on 'el.parentElement' and 'jessie.getDescendantsByTagName'
+*/
+
+/*
+Degrades:
+IE3
 */
 
 if (getDescendantsByTagName && isHostObjectProperty(getDescendantsByTagName('head')[0], 'parentElement')) {
