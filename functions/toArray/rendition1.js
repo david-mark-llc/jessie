@@ -1,6 +1,5 @@
 /*
 Description:
-Relies on `for`
 */
 
 var toArray;
