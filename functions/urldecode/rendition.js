@@ -11,7 +11,9 @@ if (typeof decodeURIComponent != 'undefined' && String.prototype.replace) {
         // Create function to encode string
         
         var fn = function(s) {
-            // TODO
+            // TODO: Handle CR/LF issues (see urlEncode)
+            
+            return decodeURIComponent(s.replace(/\+/g, '%20'));
         };
         
         // If passes initial test...
