@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on `document.getElementsByTagName`
+Relies on 'document.getElementsByTagName'
 */
 
 var getDescendantsByTagName;
