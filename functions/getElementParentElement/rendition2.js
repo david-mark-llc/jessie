@@ -1,10 +1,10 @@
-/*global globalDocument, isHostObjectProperty*/
+/*global html, isHostObjectProperty, getDescendantsByTagName*/
 
 var getElementParentElement;
 
 /*
 Description:
-Relies on `el.parentElement`
+Relies on 'el.parentElement' and 'jessie.getDescendantsByTagName'
 */
 
 /*
@@ -12,7 +12,7 @@ Degrades:
 IE3
 */
 
-if(globalDocument && isHostObjectProperty( globalDocument, 'head' ) && isHostObjectProperty(globalDocument.head, 'parentElement')) {
+if (getDescendantsByTagName && isHostObjectProperty(getDescendantsByTagName('head')[0], 'parentElement')) {
 	getElementParentElement = function(el) {
 		return el.parentElement;
 	};
