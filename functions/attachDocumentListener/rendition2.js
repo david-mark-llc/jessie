@@ -2,17 +2,17 @@
 
 /*
 Description:
-Relies on `document.addEventListener`.
+Relies on `document.attachEvent`.
 */
 
 /*
 Degrades:
-IE8, IE7, IE6, IE5.5, IE5, IE4, IE3
+IE10, IE9, IE4, IE3, Opera 8+, Chrome, FF, Safari
 */
 
 var attachDocumentListener;
 
-if(globalDocument && isHostMethod(globalDocument, 'addEventListener') && attachListener) {
+if(globalDocument && isHostMethod(globalDocument, 'attachEvent') && attachListener) {
 	attachDocumentListener = function(eventType, fn) {
 
 		var listener = function(e) {
