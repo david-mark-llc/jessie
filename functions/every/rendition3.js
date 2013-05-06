@@ -2,12 +2,16 @@
 
 /*
 Description:
-Relies on `Function.prototype.call` and `jessie.forEach`
+Relies on `Array.prototype.every` or `Function.prototype.call` and `jessie.forEach` which provides the widest support
 */
 
 var every;
 
-if(canCall && forEach) {
+if(Array.prototype.every) {
+	every = function(arr, iterator, context) {
+		return arr.every(iterator, context);
+	};
+} else if(canCall && forEach) {
 	every = function(arr, iterator, context) {
 		var result = true;
 		// TODO: this is slightly inefficient, as it doesn't break out of the
