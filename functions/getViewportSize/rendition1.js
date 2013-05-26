@@ -1,30 +1,25 @@
-/*global globalDocument,global */
-// WIP
-var getRoot;
+/*global global */
 
 var getViewportSize;
-	
-if('string' == typeof globalDocument.compatMode) {
-	getRoot = function(win) {
-		var doc = win.document,
-			html = doc.documentElement,
-			compatMode = doc.compatMode;
-		
-		return (html && compatMode.toLowerCase().indexOf('css') != -1) ? html : doc.body;
-	};
-} else {
-	getRoot = function(win) {
-		var doc = win.document,
-			html = doc.documentElement;
-		
-		return (!html || html.clientWidth === 0) ? doc.body : html;
+
+/*
+
+Description:
+Will likely *include* space occupied by scroll bars
+
+*** Viewport META
+
+Relies on:
+Degrades: IE8
+*/
+
+
+/*
+Author: David Mark
+*/
+
+if (typeof global.innerWidth == 'number') {
+	getViewportSize = function(win /* window */) {
+		return [win.innerWidth, win.innerHeight]; // Array
 	};
 }
-
-getViewportSize = function(win) {
-	if (!win) {
-		win = global;
-	}
-	var root = getRoot(win);
-	return [root.clientWidth, root.clientHeight];
-};
