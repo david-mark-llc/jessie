@@ -17,7 +17,7 @@ Author: David Mark
 
 	if (typeof globalDocument.compatMode == 'string') {
 		getRoot = function(win /* window */) {
-			var doc = globalDocument,
+			var doc = win.document,
 				html = doc.documentElement,
 				compatMode = doc.compatMode;
 
@@ -25,7 +25,7 @@ Author: David Mark
 		};
 	} else if (typeof html.clientWidth == 'number') {
 		getRoot = function(win /* window */) {
-			var doc = globalDocument,
+			var doc = win.document,
 				html = doc.documentElement;
 
 			return html.clientWidth === 0 ? doc.body : html; // element
