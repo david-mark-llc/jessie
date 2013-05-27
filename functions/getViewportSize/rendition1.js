@@ -20,6 +20,9 @@ Author: David Mark
 
 if (typeof global.innerWidth == 'number') {
 	getViewportSize = function(win /* window */) {
+		if (!win) {
+			win = window;
+		}
 		return [win.innerWidth, win.innerHeight]; // Array
 	};
 }
