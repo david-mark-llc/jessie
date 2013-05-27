@@ -13,13 +13,16 @@ var getViewportSize;
 
 	if (typeof global.innerWidth == 'number') {
 		getViewportSize = function(win /* window */) {
+			if (!win) {
+				win = window;
+			}
 			return [win.innerWidth, win.innerHeight]; // Array
 		};
 	} else  {
 
 		if (typeof globalDocument.compatMode == 'string') {
 			getRoot = function(win /* window */) {
-				var doc = globalDocument,
+				var doc = win.document,
 					html = doc.documentElement,
 					compatMode = doc.compatMode;
 
@@ -27,7 +30,7 @@ var getViewportSize;
 			};
 		} else if (typeof html.clientWidth == 'number') {
 			getRoot = function(win /* window */) {
-				var doc = globalDocument,
+				var doc = win.document,
 					html = doc.documentElement;
 
 				return html.clientWidth === 0 ? doc.body : html; // element
