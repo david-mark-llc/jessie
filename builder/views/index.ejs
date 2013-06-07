@@ -220,8 +220,8 @@
 									<th class="code">Code</th>					
 								</tr>
 							</thead>
-						
-	
+
+
 
 						<% for(var k = 0, kl = groups.length; k < kl; k++) { %>
 						<% var currentGroup = groups[k]; %>
@@ -239,7 +239,7 @@
 							<% var currentFunction = functions[ i ]; %>
 
 								<% if(currentFunction.renditions.length) {  %>
-									
+
 										<tbody>
 											<%
 											  var anyChecked = false;
@@ -269,7 +269,7 @@
 															<% } %>
 														>
 														<label for="<%=currentFunction.name+currenntRendition.id%>" ><%=currenntRendition.id%> (Author: <%-currenntRendition.author || '<span class="none">none</span>' %>)</label>
-													
+
 													</td>
 													<td class="degrades">
 														<%- md(currenntRendition.degrades) -%>
@@ -295,7 +295,7 @@
 										</tbody>
 									<% } %>
 								<% } %>
-							
+
 							<% } %>
 						</table>
 					</div>
@@ -311,40 +311,63 @@
 							<tbody>
 								<% for(var i = 0, l = constructorFns.length; i < l; i++) { %>
 								<% var currentConstructor = constructorFns[i]; %>
+								<% var currentConstructorName = currentConstructor.name; %>
+								<% var currentConstructorCheckboxId = "constructor-"+currentConstructorName; %>
 									<tr>
 										<td>
 											<input 
 												type="checkbox" 
-												name="<%=currentConstructor.name%>" 
+												name="<%=currentConstructorName%>"
+												id="<%=currentConstructorCheckboxId%>"
 
-												<%if(query[currentConstructor.name] == 'on'){%>
+												<%if(query[currentConstructorName] == 'on'){%>
 													checked
 												<%}%>
+
 											/>
-											<label><%=currentConstructor.name%></label>											
+											<label
+												for="<%=currentConstructorCheckboxId%>"
+											><%=currentConstructorName%>
+											</label>
 										</td>
-										<td>											
+										<td>
+
+											<ul
+												class="methods"
+												id="methods-<%=currentConstructorName%>"
+											>
 											<% for(var j = 0, jl = currentConstructor.prototypeMethods.length; j < jl; j++) { %>
 											<% var currentPrototype = currentConstructor.prototypeMethods[j]; %>
-												<div class="method">
-													<input 
-														type="checkbox" 
-														name="<%=currentConstructor.name%>#<%=currentPrototype.name%>" 
+											<% var currentPrototypeCheckboxId = "currentprototype-"+currentConstructorName+"-"+currentPrototype.name.toLowerCase(); %>
+												<li>
+													<input
+														type="checkbox"
+														name="<%=currentConstructorName%>#<%=currentPrototype.name%>"
+														id="<%=currentPrototypeCheckboxId%>"
 
-														<%if(query[currentConstructor.name+'#'+currentPrototype.name] == 'on'){%>
+														<%if(query[currentConstructorName+'#'+currentPrototype.name] == 'on'){%>
 															checked
 														<%}%>
 
 													/>
-													<label><%=currentPrototype.name%></label>
-													
-												</div>
+													<label
+														for="<%=currentPrototypeCheckboxId%>"
+													><%=currentPrototype.name%></label>
+
+												</li>
 											<% } %>
+											</ul>
 										</td>
 									</tr>
 								<% } %>
 							</tbody>
 						</table>
+						<script type="text/javascript" src="js/ui-enhance.js"></script>
+						<script type="text/javascript">
+							<% for (var idx=0, len=constructorFns.length; idx<len; ++idx) { %>
+								uiEnhance.constructorMethodCheckboxes("<%=constructorFns[idx].name%>");
+							<% } %>
+						</script>
 					</div>
 					<div id="widgets">
 						<h2>Widgets</h2>

@@ -209,7 +209,7 @@ h1 {
 }
 
 #builder table tbody tr {
-	
+
 }
 
 #builder table tbody:nth-child(even) tr td {
@@ -243,4 +243,13 @@ h1 {
 
 .none {
 	color: #aaa;
+}
+
+#builder .methods {
+	list-style-type: none;
+	margin: .5em 0;
+}
+
+#builder input[type=checkbox][disabled] + label {
+	color: #5c5c5c;
 }
