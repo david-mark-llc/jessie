@@ -6,11 +6,6 @@ Relies on `el.previousSibling`
 */
 
 /*
- Degrades:
- IE11-, FF5-, Chrome 6-, Safari 5.0-, Opera 11.0-, iOS 4.3-, Android 2.3-
- */
-
-/*
  Author:
  Ben Chidgey
  */
