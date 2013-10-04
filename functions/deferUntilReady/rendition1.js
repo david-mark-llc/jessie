@@ -25,15 +25,15 @@ var readyListenerAttached;
 
 if(isHostMethod(global, "addEventListener")) {
 	deferUntilReady = function(fn) {
-		
+
 		/*SCAFFOLDING:Start*/
 		if(readyListenerAttached) {
 			throw new Error("One too many ready listeners. Use a queue!");
 		}
 		/*SCAFFOLDING:End*/
-		
+
 		readyListenerAttached = true;
-		
+
 		// Production function starts (and ends) here
 		window.addEventListener('load', fn, false);
 	};

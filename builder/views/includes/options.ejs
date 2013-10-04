@@ -1,0 +1,93 @@
+<div class="options">
+	<h2>Options</h2>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><label for="namespace">Namespace (defaults to 'jessie')</label></td>
+				<td>
+					<input
+						id="namespace"
+						name="namespace"
+						type="text"
+						<% if(query && query.namespace) { %>
+							value="<%=query.namespace%>"
+						<% } %>
+					>
+				</td>
+			</tr>
+			<tr>
+				<td>Minification settings</td>
+				<td>
+					<div>
+						<input
+							type="radio"
+							name="minificationLevel"
+							id="minification_0"
+							value=""
+							<% if(!query.minificationLevel || query.minificationLevel == '') { %>
+								checked
+							<% } %>
+						>
+						<label for="minification_0">None</label>
+					</div>
+					<div>
+						<input
+							type="radio"
+							name="minificationLevel"
+							value="1"
+							id="minification_1"
+							<% if(query && query.minificationLevel == '1') { %>
+								checked
+							<% } %>
+						>
+						<label for="minification_1">Level 1 - Remove comments</label>
+					</div>
+					<div>
+						<input
+							type="radio"
+							name="minificationLevel"
+							value="2"
+							id="minification_2"
+							<% if(query && query.minificationLevel == '2') { %>
+								checked
+							<% } %>
+						>
+						<label for="minification_2">Level 2 - Remove comments, whitespace</label>
+					</div>
+					<div>
+						<input
+							type="radio"
+							name="minificationLevel"
+							value="3"
+							id="minification_3"
+							<% if(query && query.minificationLevel == '3') { %>
+								checked
+							<% } %>
+						>
+						<label for="minification_3">Level 3 - Remove comments, whitspace and shorten variable names</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="scaffolding">Debug</label></td>
+				<td>
+					<input
+						id="scaffolding"
+						name="scaffolding"
+						type="checkbox"
+						<% if(query && query.scaffolding == 'on') { %>
+							checked
+						<% } %>
+					>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
