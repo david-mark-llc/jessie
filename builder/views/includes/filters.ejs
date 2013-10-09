@@ -1,0 +1,73 @@
+<div class="filters">
+	<h2>Filters</h2>
+	<!--
+	<% if(query && query['degradesIEFilter']) { %>
+		<p style="color: green">Filtered to show functions that degrade in:
+		<%=query['degradesIEFilter'] %></p>
+	<% } %>
+-->
+
+	<div>
+		<label for="degradesIEFilter">Supports:</label>
+		<select id="degradesIEFilter" name="degradesIEFilter">
+			<option value="">None</option>
+			<option
+				value="IE4"
+				<% if(query['degradesIEFilter'] == 'IE4') {%>
+				selected
+				<%}%>
+			>
+				IE4
+			</option>
+			<option
+				value="IE5"
+				<% if(query['degradesIEFilter'] == 'IE5') {%>
+				selected
+				<%}%>
+			>
+				IE5
+			</option>
+			<option
+				value="IE5.5"
+				<% if(query['degradesIEFilter'] == 'IE5.5') {%>
+				selected
+				<%}%>
+			>
+				IE5.5
+			</option>
+			<option
+				value="IE6"
+				<% if(query['degradesIEFilter'] == 'IE6') {%>
+				selected
+				<%}%>
+			>
+				IE6
+			</option>
+			<option
+				value="IE7"
+				<% if(query['degradesIEFilter'] == 'IE7') {%>
+				selected
+				<%}%>
+			>
+				IE7
+			</option>
+			<option
+				value="IE8"
+				<% if(query['degradesIEFilter'] == 'IE8') {%>
+				selected
+				<%}%>
+			>
+				IE8
+			</option>
+			<option
+				value="IE9"
+				<% if(query['degradesIEFilter'] == 'IE9') {%>
+				selected
+				<%}%>
+			>
+				IE9
+			</option>
+		</select>
+		<input type="submit" name="action" value="Filter">
+	</div>
+</div>

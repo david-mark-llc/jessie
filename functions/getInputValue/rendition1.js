@@ -10,6 +10,6 @@ getInputValue
 
 */
 
-getInputValue = function(elInput, default) {
-	return elInput[default ? 'defaultValue' : 'value'];
+getInputValue = function(elInput, defaultValue) {
+	return elInput[defaultValue ? 'defaultValue' : 'value'];
 };

@@ -1,0 +1,91 @@
+<div id="functions">
+	<h2>Functions (<%=functionCount%>)</h2>
+
+	<table>
+		<thead>
+			<tr>
+				<th class="function">Function</th>
+				<th class="rendition">Rendition</th>
+				<th class="degrades">Degrades in</th>
+				<th class="code">Code</th>
+			</tr>
+		</thead>
+
+
+
+	<% for(var k = 0, kl = groups.length; k < kl; k++) { %>
+	<% var currentGroup = groups[k]; %>
+	<% var functions = currentGroup.functions;	%>
+
+		<thead>
+			<tr>
+				<td colspan="4">
+					<h3 id="group_<%=k%>">(<a href="#groupIndex">Index</a>) Group: <%=currentGroup.groupName%> (<%=currentGroup.functions.length%>)</h3>
+				</td>
+			</tr>
+		</thead>
+
+		<% for(var i = 0, l = functions.length; i < l; i++) { %>
+		<% var currentFunction = functions[ i ]; %>
+
+			<% if(currentFunction.renditions.length) {  %>
+
+					<tbody>
+						<%
+						  var anyChecked = false;
+						  for(var j = 0, jl = currentFunction.renditions.length; j < jl; j++) {
+						  	var currenntRendition = currentFunction.renditions[j];
+						%>
+							<tr>
+
+								<%if(j==0) {%>
+									<td id="<%=currentFunction.name%>" class="function" rowspan="<%=(currentFunction.renditions.length*2)+1%>">
+										<%=currentFunction.name%>
+										(<%=currentFunction.renditions.length%>)
+									</td>
+								<%}%>
+								<td class="rendition">
+									<input
+										id="<%=currentFunction.name+currenntRendition.id%>"
+										type="radio"
+										name="<%=currentFunction.name%>"
+										value="<%=currenntRendition.id%>"
+
+										<%
+										  if (query[currentFunction.name] == currenntRendition.id) {
+										    anyChecked = true;
+										%>
+											checked
+										<% } %>
+									>
+									<label for="<%=currentFunction.name+currenntRendition.id%>" ><%=currenntRendition.id%> (Author: <%-currenntRendition.author || '<span class="none">none</span>' %>)</label>
+
+								</td>
+								<td class="degrades">
+									<%- md(currenntRendition.degrades) -%>
+								</td>
+								<td class="code">
+									<p class="description"><%- md(currenntRendition.description) -%></p>
+									<pre><code><%=currenntRendition.contents%></code></pre>
+									<p class="seeAlso"><%- md(currenntRendition.seeAlso) -%></p>
+								</td>
+							</tr>
+						<% } %>
+						<tr>
+							<td>
+								<input type="radio" id="<%=currentFunction.name%>_none" name="<%=currentFunction.name%>" value=""
+									<% if (!anyChecked)  { %>
+										checked
+									<% } %>
+								>
+								<label for="<%=currentFunction.name%>_none">None</label>
+							</td>
+							<td colspan="2"></td>
+						</tr>
+					</tbody>
+				<% } %>
+			<% } %>
+
+		<% } %>
+	</table>
+</div>
