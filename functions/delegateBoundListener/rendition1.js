@@ -1,8 +1,8 @@
-/*global bind,attachListener,getEventTarget,canCall */
+/*global attachListener,getEventTarget,canCall */
 
 /*
 Description:
-Relies on `jessie.attachListener`, `jessie.bind` and `jessie.getEventTarget` and `Function.prototype.call`
+Relies on `jessie.attachListener` and `jessie.getEventTarget` and `Function.prototype.call`
 */
 
 /*
@@ -12,16 +12,18 @@ Adam Silver
 
 var delegateBoundListener;
 
-if(attachListener && bind && getEventTarget && canCall) {
+if(attachListener && getEventTarget && canCall) {
 	delegateBoundListener = function(el, eventType, fn, fnDelegate, thisObject) {
-		
-		var listener = bind(function(e) {
+
+		var listener = function(e) {
+
 			var currentTarget = fnDelegate(el, getEventTarget(e));
+
 			if(currentTarget) {
 				fn.call(thisObject, e, currentTarget);
 			}
-		}, thisObject);
-		
+		};
+
 		return attachListener(el, eventType, listener);
 	};
 }
