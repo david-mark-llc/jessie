@@ -56,7 +56,7 @@ if (isHostMethod(global, "addEventListener") && globalDocument && isHostMethod(g
 			}
 		};
 
-		window.addEventListener('load', readyListener, false);
-		document.addEventListener('DOMContentLoaded', readyListener, false);
+		global.window.addEventListener('load', readyListener, false);
+		global.document.addEventListener('DOMContentLoaded', readyListener, false);
 	};
 }
