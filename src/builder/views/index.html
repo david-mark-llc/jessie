@@ -16,8 +16,20 @@
 					</div>
 
 					{% include "partials/errors.html" %}
+					{% include "partials/options.html" %}
+					{% include "partials/filters.html" %}
+					{% include "partials/groupIndex.html" %}
+					{% include "partials/functions.html" %}
+					{% include "partials/constructors.html" %}
+					{% include "partials/footer.html" %}
 				</form>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/ui-enhance.js"></script>
+		<script type="text/javascript">
+			{% for constructorFn in constructorFns %}
+				uiEnhance.constructorMethodCheckboxes("{{constructorFn.name}}");
+			{% endfor %}
+		</script>
 	</body>
 </html>

@@ -1,0 +1,10 @@
+<div id="groupIndex">
+	<h2>Group index</h2>
+	<ul>
+		{% for group in groups %}
+			<li><a href="#group_{{group.index}}">
+				{{group.groupName}}
+			</a></li>
+		{% endfor %}
+	</ul>
+</div>

@@ -1,4 +1,4 @@
-{% if errors %}
+{% if errors.length %}
 	<div id="errors">
 		<div class="errorsInner">
 			<h2>You have errors:</h2>
@@ -6,7 +6,7 @@
 				<p>
 					{{ error.message }}
 					{% if error.link %}
-						<a href="<%=errors[i].link%>">Go</a>
+						<a href="{{error.link}}">Go</a>
 					{% endif %}
 				</p>
 			{% endfor %}
