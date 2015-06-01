@@ -11,8 +11,7 @@
 			</tr>
 		</thead>
 
-		{%for currentGroup in groups %}
-
+		{% for currentGroup in groups %}
 			{% set functions = currentGroup.functions %}
 
 			<thead>
@@ -31,38 +30,38 @@
 						{% set anyChecked = false %}
 
 						{% for currentRendition in currentFunction.renditions %}
+
 							<tr>
 								{% if loop.first %}
-									<td id="{{currentFunction.name}}" class="function" rowspan="{{(currentFunction.renditions.length*2)+1}}">
+									<td
+										id="{{currentFunction.name}}"
+										class="function"
+										rowspan="{{(currentFunction.renditions.length*2)+1}}">
 										{{currentFunction.name}}
 										({{currentFunction.renditions.length}})
 									</td>
 								{% endif %}
 								<td class="rendition">
 									<input
-										id="{{currentFunction.name+currentRendition.id}}"
+										id="{{currentFunction.name+currenntRendition.id}}"
 										type="radio"
 										name="{{currentFunction.name}}"
 										value="{{currentRendition.id}}"
 
-										{% if (query[currentFunction.name] == currenntRendition.id) %}
+										{% if (query[currentFunction.name] == currentRendition.id) %}
 											{% set anyChecked = true %}
 											checked
 										{% endif %}
 									>
-									<label for="{{currentFunction.name+currentRendition.id}}" >
-										Rendition #{{currentRendition.id}}
-										{% if currentRendition.author %}
-											by {{currentRendition.author}}
-										{% endif %}
-									</label>
+									<label for="{{currentFunction.name+currentRendition.id}}" >{{currentRendition.id}} (Author: {{currentRendition.author }})</label>
 								</td>
 								<td class="degrades">
+									{{currentRendition.degrades}}
 								</td>
 								<td class="code">
-									<p class="description"></p>
-									<pre><code>{{currentRendition.contents}}</code></pre>
-									<p class="seeAlso">{{currentRendition.seeAlso}}</p>
+									<p class="description">{{currenntRendition.description}}</p>
+									<pre><code>{{md(currenntRendition.contents)}}</code></pre>
+									<p class="seeAlso">{{currenntRendition.seeAlso}}</p>
 								</td>
 							</tr>
 						{% endfor %}
@@ -80,6 +79,7 @@
 					</tbody>
 				{% endif %}
 			{% endfor %}
+
 		{% endfor %}
 	</table>
 </div>

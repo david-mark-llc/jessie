@@ -1,0 +1,64 @@
+<div id="constructors">
+	<h2>Constructors ({{constructorFns.length}})</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Methods</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for currentConstructor in constructorFns %}
+
+			{% set currentConstructorName = currentConstructor.name %}
+			{% set currentConstructorCheckboxId = "constructor-"+currentConstructorName %}
+				<tr>
+					<td>
+						<input
+							type="checkbox"
+							name="{{currentConstructorName}}"
+							id="{{currentConstructorCheckboxId}}"
+
+							{% if (query[currentConstructorName] == 'on') %}
+								checked
+							{% endif %}
+
+						/>
+						<label
+							for="{{currentConstructorCheckboxId}}"
+						>{{currentConstructorName}}
+						</label>
+					</td>
+					<td>
+
+						<ul
+							class="methods"
+							id="methods-{{currentConstructorName}}"
+						>
+
+						{% for currentPrototype in currentConstructor.prototypeMethods %}
+
+							{% set currentPrototypeCheckboxId = "currentprototype-"+currentConstructorName+"-"+currentPrototype.name.toLowerCase() %}
+							<li>
+								<input
+									type="checkbox"
+									name="{{currentConstructorName}}#{{currentPrototype.name}}"
+									id="{{currentPrototypeCheckboxId}}"
+
+									{% if (query[currentConstructorName+'#'+currentPrototype.name] == 'on') %}
+										checked
+									{% endif %}
+
+								/>
+								<label
+									for="{{currentPrototypeCheckboxId}}"
+								>{{currentPrototype.name}}</label>
+							</li>
+						{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>

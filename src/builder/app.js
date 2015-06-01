@@ -1,15 +1,16 @@
 /*jslint node:true, strict:false*/
 
 var express = require('express');
-var querystring = require('querystring');
+
 var JessieFunction = require('./libs/jessie/Function.js');
 var JessieRendition = require('./libs/jessie/Rendition.js');
 var JessieConstructorFn = require('./libs/jessie/ConstructorFn.js');
 var JessiePrototypeMethod = require('./libs/jessie/PrototypeMethod.js');
 var JessieConstructorFnSet = require('./libs/jessie/ConstructorFnSet.js');
 var JessieFunctionSet = require('./libs/jessie/FunctionSet.js');
-var md = require("node-markdown").Markdown,
-JessieBuilder = require('./libs/jessie/Builder.js');
+var JessieBuilder = require('./libs/jessie/Builder.js');
+
+
 var functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition);
 var constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod);
 var excludedQuerystringKeys = [];
@@ -266,13 +267,12 @@ app.get('/', function(req, res){
 
 		if(buildResponse.errors) {
 			errors = getErrorsInViewFriendlyFormat(buildResponse.errors);
-			res.render('index.ejs', {
+			res.render('index', {
 				groups: groups,
 				functionCount: functions.length,
 				constructorFns: constructorFnSet.getConstructorFns(),
 				errors: errors,
-				query: query,
-				md: md
+				query: query
 			});
 		} else {
 			res.header('Content-Disposition', 'attachment; filename="'+fileName+'.js"');
@@ -286,13 +286,12 @@ app.get('/', function(req, res){
 	 */
 	} else {
 
-		res.render('index.ejs', {
+		res.render('index', {
 			functionCount: functions.length,
 			groups: groups,
 			constructorFns: constructorFnSet.getConstructorFns(),
 			query: query,
-			errors: errors,
-			md: md
+			errors: errors
 		});
 
 	}
