@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var swig = require('swig');
 var swigExtras = require('swig-extras');
 var port = 1337;
+var path = require('path');
+
+app.set('views', path.resolve(__dirname, 'views'));
 
 // swig
 swig.setDefaults({ cache: false });
@@ -13,12 +16,13 @@ swigExtras.useFilter(swig, 'markdown');
 swigExtras.useTag(swig, 'markdown');
 
 app.engine('html', swig.renderFile);
-app.set('views', __dirname + '/views');
+
+app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'html');
 app.set('view cache', false);
 app.set('view options', { layout: false });
 
-app.use(express['static'](__dirname + '/public'));
+app.use(express['static'](path.resolve(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', require('./controllers/builderController.js'));
