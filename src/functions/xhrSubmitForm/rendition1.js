@@ -1,8 +1,8 @@
-/*global createXhr */
+/*global xhrCreate */
 
 /*
 Description:
-Relies on `jessie.createXhr`
+Relies on `jessie.xhrCreate`
 */
 
 var xhrSubmitForm;

@@ -1,0 +1,66 @@
+<div class="filters">
+	<h2>Filters</h2>
+	<div>
+		<label for="degradesIEFilter">Supports:</label>
+		<select id="degradesIEFilter" name="degradesIEFilter">
+			<option value="">None</option>
+			<option
+				value="IE4"
+				{% if (query['degradesIEFilter'] == 'IE4') %}
+				selected
+				{% endif %}
+			>
+				IE4
+			</option>
+			<option
+				value="IE5"
+				{% if (query['degradesIEFilter'] == 'IE5') %}
+				selected
+				{% endif %}
+			>
+				IE5
+			</option>
+			<option
+				value="IE5.5"
+				{% if (query['degradesIEFilter'] == 'IE5.5') %}
+				selected
+				{% endif %}
+			>
+				IE5.5
+			</option>
+			<option
+				value="IE6"
+				{% if (query['degradesIEFilter'] == 'IE6') %}
+				selected
+				{% endif %}
+			>
+				IE6
+			</option>
+			<option
+				value="IE7"
+				{% if (query['degradesIEFilter'] == 'IE7') %}
+				selected
+				{% endif %}
+			>
+				IE7
+			</option>
+			<option
+				value="IE8"
+				{% if (query['degradesIEFilter'] == 'IE8') %}
+				selected
+				{% endif %}
+			>
+				IE8
+			</option>
+			<option
+				value="IE9"
+				{% if (query['degradesIEFilter'] == 'IE9') %}
+				selected
+				{% endif %}
+			>
+				IE9
+			</option>
+		</select>
+		<input type="submit" name="action" value="Filter">
+	</div>
+</div>
