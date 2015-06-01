@@ -59,9 +59,11 @@
 									{{currentRendition.degrades}}
 								</td>
 								<td class="code">
-									<p class="description">{{currenntRendition.description}}</p>
-									<pre><code>{{md(currenntRendition.contents)}}</code></pre>
-									<p class="seeAlso">{{currenntRendition.seeAlso}}</p>
+									<p class="description">
+										{{currentRendition.description|markdown}}
+									</p>
+									<pre><code>{{currentRendition.contents}}</code></pre>
+									<p class="seeAlso">{{currentRendition.seeAlso}}</p>
 								</td>
 							</tr>
 						{% endfor %}

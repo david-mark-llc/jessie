@@ -17,6 +17,10 @@ var excludedQuerystringKeys = [];
 var app = express();
 var bodyParser = require('body-parser');
 var swig = require('swig');
+var swigExtras = require('swig-extras');
+
+swigExtras.useFilter(swig, 'markdown');
+swigExtras.useTag(swig, 'markdown');
 
 app.set('views', __dirname + '/views');
 app.engine('html', swig.renderFile);
