@@ -3,16 +3,14 @@
 var path = require('path');
 var fs = require('fs');
 
-var jessie = {};
-
-jessie.ConstructorFnSet = function(constructorRoot, JessieConstructorFn, JessiePrototypeMethod) {
+function ConstructorFnSet(constructorRoot, JessieConstructorFn, JessiePrototypeMethod) {
 	this.constructorRoot = constructorRoot;
 	this.JessieConstructorFn = JessieConstructorFn;
 	this.JessiePrototypeMethod = JessiePrototypeMethod;
 	this.constructorFns = [];
 };
 
-jessie.ConstructorFnSet.prototype.create = function() {
+ConstructorFnSet.prototype.create = function() {
 	var fileNames = fs.readdirSync(this.constructorRoot).filter(function(fileName){
 		return fs.statSync(path.join(this.constructorRoot, fileName)).isDirectory();
 	}.bind(this));
@@ -23,7 +21,7 @@ jessie.ConstructorFnSet.prototype.create = function() {
 	}.bind(this));
 };
 
-jessie.ConstructorFnSet.prototype.getConstructorFnByName = function(name) {
+ConstructorFnSet.prototype.getConstructorFnByName = function(name) {
 	var constructorFn;
 	for(var i = 0; i < this.constructorFns.length; i++) {
 		if(this.constructorFns[i].name === name) {
@@ -34,8 +32,8 @@ jessie.ConstructorFnSet.prototype.getConstructorFnByName = function(name) {
 	return constructorFn;
 };
 
-jessie.ConstructorFnSet.prototype.getConstructorFns = function() {
+ConstructorFnSet.prototype.getConstructorFns = function() {
 	return this.constructorFns;
 };
 
-module.exports = jessie.ConstructorFnSet;
+module.exports = ConstructorFnSet;

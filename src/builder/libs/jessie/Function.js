@@ -10,9 +10,7 @@ var fs = require('fs');
 * @JessieRendition {Function} Jessie Rendition Constructor reference
 */
 
-var jessie = {};
-
-jessie.Function = function(folder, JessieRendition) {
+function JFunction(folder, JessieRendition) {
 	this.folder = folder;
 	this.JessieRendition = JessieRendition;
 	this.name = path.basename(folder);
@@ -23,16 +21,16 @@ jessie.Function = function(folder, JessieRendition) {
 		this.metaFileContents = fs.readFileSync(this.metaFilePath, 'utf8');
 		this.groupName = this.getGroupName(this.metaFileContents);
 	}
-	
+
 	this.renditions = this.createRenditions();
-	
+
 	this.getDependencies = function(renditionId){
 		var dependencies = null;
 		if(this.renditions[renditionId-1]) {
 			dependencies = new Set();
 			dependencies = dependencies.union(this.renditions[renditionId-1].dependencies);
 		}
-		
+
 		return dependencies;
 	}.bind(this);
 
@@ -42,9 +40,9 @@ jessie.Function = function(folder, JessieRendition) {
 	};
 };
 
-jessie.Function.prototype.metaFileName = 'meta.js';
+JFunction.prototype.metaFileName = 'meta.js';
 
-jessie.Function.prototype.getGroupName = function(fileContents) {
+JFunction.prototype.getGroupName = function(fileContents) {
 	var group = "";
 	var re = /^\s*Group:\s*([^*]+)\*\/$/gm;
 	var matches = re.exec(fileContents);
@@ -54,7 +52,7 @@ jessie.Function.prototype.getGroupName = function(fileContents) {
 	return group;
 };
 
-jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {
+JFunction.prototype.getRenditionsFilteredByIEVersion = function(version) {
 	var renditions = [];
 	for(var i = 0; i < this.renditions.length; i++) {
 		if(this.renditions[i].degradesInIEVersion(version) ||
@@ -65,7 +63,7 @@ jessie.Function.prototype.getRenditionsFilteredByIEVersion = function(version) {
 	return renditions;
 };
 
-jessie.Function.prototype.createRenditions = function() {
+JFunction.prototype.createRenditions = function() {
 	var functionInstance = this;
 	var files = fs.readdirSync(this.folder).sort();
 	// makes sure only reading .js files that are renditions
@@ -81,4 +79,4 @@ jessie.Function.prototype.createRenditions = function() {
 	return files;
 };
 
-module.exports = jessie.Function;
+module.exports = JFunction;

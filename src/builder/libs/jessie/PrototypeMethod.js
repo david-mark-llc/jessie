@@ -4,9 +4,7 @@ var path = require('path');
 var Set = require('simplesets').Set;
 var fs = require('fs');
 
-var jessie = {};
-
-jessie.PrototypeMethod = function(constructorFn, file) {
+function PrototypeMethod(constructorFn, file) {
 	this.constructorFn = constructorFn;
 	this.file = file;
 	this.name = path.basename(file);
@@ -38,13 +36,13 @@ jessie.PrototypeMethod = function(constructorFn, file) {
 	});
 };
 
-jessie.PrototypeMethod.prototype.getDependencies = function() {
+PrototypeMethod.prototype.getDependencies = function() {
 	return this.dependencies;
 };
 
-jessie.PrototypeMethod.prototype.getContents = function() {
+PrototypeMethod.prototype.getContents = function() {
 	var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
 	return contents.join("\n");
 };
 
-module.exports = jessie.PrototypeMethod;
+module.exports = PrototypeMethod;

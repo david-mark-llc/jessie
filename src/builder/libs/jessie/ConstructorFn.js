@@ -3,12 +3,11 @@
 var path = require('path');
 var fs = require('fs');
 
-var jessie = {};
-
-// a constructor takes a path to the folder root and a ref to jessie.PrototypeMethod
+// a constructor takes a path to the folder root and a ref to PrototypeMethod
 // it grabs it's own content from the constructor.js file
 // it creates a list of all instances of PrototypeMethod objects
-jessie.ConstructorFn = function(folder, PrototypeMethod) {
+
+function ConstructorFn(folder, PrototypeMethod) {
 	this.folder = folder;
 	this.PrototypeMethod = PrototypeMethod;
 	this.prototypeFolderRoot = folder + '/prototype';
@@ -30,11 +29,11 @@ jessie.ConstructorFn = function(folder, PrototypeMethod) {
 	});
 };
 
-jessie.ConstructorFn.prototype.getDependencies = function() {
+ConstructorFn.prototype.getDependencies = function() {
 	return [];
 };
 
-jessie.ConstructorFn.prototype.createPrototypeMethods = function() {
+ConstructorFn.prototype.createPrototypeMethods = function() {
 	var fileNames = fs.readdirSync(this.prototypeFolderRoot);
 	fileNames.forEach(function(fileName) {
 		var file = path.join(this.prototypeFolderRoot, fileName);
@@ -45,17 +44,17 @@ jessie.ConstructorFn.prototype.createPrototypeMethods = function() {
 	}.bind(this));
 };
 
-jessie.ConstructorFn.prototype.getPrototypeMethods = function() {
+ConstructorFn.prototype.getPrototypeMethods = function() {
 	return this.prototypeMethods;
 };
 
-jessie.ConstructorFn.prototype.getContents = function() {
+ConstructorFn.prototype.getContents = function() {
 	// remove the /*global / declarations
 	var contents = [this.contents.replace(/\/\*global\s(\S*)\s*\*\/\n*/g, "")];
 	return contents.join("\n");
 };
 
-jessie.ConstructorFn.prototype.getPrototypeMethodByName = function(methodName) {
+ConstructorFn.prototype.getPrototypeMethodByName = function(methodName) {
 	var prototypeMethod;
 	for(var i = 0; i < this.prototypeMethods.length; i++) {
 		if(this.prototypeMethods[i].name == methodName) {
@@ -66,4 +65,4 @@ jessie.ConstructorFn.prototype.getPrototypeMethodByName = function(methodName) {
 	return prototypeMethod;
 };
 
-module.exports = jessie.ConstructorFn;
+module.exports = ConstructorFn;

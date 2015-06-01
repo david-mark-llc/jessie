@@ -29,7 +29,6 @@ app.listen(1337, function(){
 	console.log("App listening on port 1337");
 });
 
-
 functionSet.create();
 constructorFnSet.create();
 

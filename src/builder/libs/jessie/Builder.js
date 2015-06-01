@@ -2,14 +2,13 @@
 
 var fs = require('fs'),
 	uglifyParser = require("uglify-js").parser,
-	pro = require("uglify-js").uglify,
-	jessie = {};
+	pro = require("uglify-js").uglify;
 
 /*
  * Responsible for building the contents for jessie.js
  * @constructor
- * @param functionSet {Object} Instance of jessie.FunctionSet
- * @param constructorFnSet {Object} Instance of jessie.ConstructorFnSet
+ * @param functionSet {Object} Instance of FunctionSet
+ * @param constructorFnSet {Object} Instance of ConstructorFnSet
  * @param requestedFunctions {Array} List of requested function objects in
  * format { functionName: 'addClass', renditionId: 2 }
  * @param requestedConstructorFns {Array} List of requested constructor
@@ -19,7 +18,7 @@ var fs = require('fs'),
  * @param options.footerPath {String} Path to footer file. Defaults to '../libraries/footer1.inc'
  * @param options.licensePath {String} Path to license file. Defaults to '../LICENSE'
  */
-jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
+function Builder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
 	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'areFeatures'];
 
 	// function stuff
@@ -41,7 +40,7 @@ jessie.Builder = function(functionSet, constructorFnSet, requestedFunctions, req
 	this.setupHeaderDeclarations();
 };
 
-jessie.Builder.prototype.setupOptions = function(options) {
+Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
 	this.options.namespaceToken = 'jessieNamespace';
 	this.options.scaffolding = options.scaffolding || false;
@@ -52,19 +51,19 @@ jessie.Builder.prototype.setupOptions = function(options) {
 	this.options.minificationLevel = this.options.minificationLevel || false;
 };
 
-jessie.Builder.prototype.setupHeader = function() {
+Builder.prototype.setupHeader = function() {
 	this.header = fs.readFileSync(this.options.headerPath, "utf8");
 };
 
-jessie.Builder.prototype.setupFooter = function() {
+Builder.prototype.setupFooter = function() {
 	this.footer = fs.readFileSync(this.options.footerPath, "utf8");
 };
 
-jessie.Builder.prototype.setupLicense = function() {
+Builder.prototype.setupLicense = function() {
 	this.license = '/*' + fs.readFileSync(this.options.licensePath, "utf8") + '*/\n\n';
 };
 
-jessie.Builder.prototype.setupHeaderDeclarations = function() {
+Builder.prototype.setupHeaderDeclarations = function() {
 	var ast = uglifyParser.parse(this.header + this.footer);
 	var w = pro.ast_walker();
 	ast = w.with_walkers({
@@ -78,7 +77,7 @@ jessie.Builder.prototype.setupHeaderDeclarations = function() {
 	});
 };
 
-jessie.Builder.prototype.getBuilderUriComment = function() {
+Builder.prototype.getBuilderUriComment = function() {
 	var uri = 'http://127.0.0.1:1337/?',
 		requestedFunctions = this.requestedFunctions;
 
@@ -93,7 +92,7 @@ jessie.Builder.prototype.getBuilderUriComment = function() {
 	return ("\r\n/*\r\nReturn URI:\r\n" + uri + "\r\n*/\r\n\r\n");
 };
 
-jessie.Builder.prototype.build = function() {
+Builder.prototype.build = function() {
 
 	var builderResponse = {
 		success: false
@@ -201,17 +200,17 @@ jessie.Builder.prototype.build = function() {
 	return builderResponse;
 };
 
-jessie.Builder.prototype.replaceNamespaceToken = function(output, namespace) {
+Builder.prototype.replaceNamespaceToken = function(output, namespace) {
 	var re = new RegExp(this.options.namespaceToken, 'g');
 	return output.replace(re, namespace);
 };
 
-jessie.Builder.prototype.removeScaffolding = function(output) {
+Builder.prototype.removeScaffolding = function(output) {
 	var re = /(\s*\/\*SCAFFOLDING:Start\*\/(?:\s|.)*?\/\*SCAFFOLDING:End\*\/)/igm;
 	return output.replace( re, '' );
 };
 
-jessie.Builder.prototype.minify = function(output) {
+Builder.prototype.minify = function(output) {
 	var ast = uglifyParser.parse(output);
 
 	switch(this.options.minificationLevel) {
@@ -232,7 +231,7 @@ jessie.Builder.prototype.minify = function(output) {
 	return output;
 };
 
-jessie.Builder.prototype.filterNonExistentRequestedFunctions = function(requestedFns, fns) {
+Builder.prototype.filterNonExistentRequestedFunctions = function(requestedFns, fns) {
 	var filteredRequestedFns = [];
 	for(var i = 0; i < requestedFns.length; i++) {
 		if(requiredFunctionExists(requestedFns[i].functionName, fns)) {
@@ -242,7 +241,7 @@ jessie.Builder.prototype.filterNonExistentRequestedFunctions = function(requeste
 	return filteredRequestedFns;
 };
 
-jessie.Builder.prototype.getRequestedFunctionByName = function(functionName) {
+Builder.prototype.getRequestedFunctionByName = function(functionName) {
 	var requestedFunc;
 	for(var i = 0; i < this.requestedFunctions.length; i++) {
 		if(this.requestedFunctions[i].functionName === functionName) {
@@ -370,7 +369,7 @@ function topologicalSort(graph) {
 }
 
 
-jessie.Builder.prototype.createExportDeclaration = function(order) {
+Builder.prototype.createExportDeclaration = function(order) {
 	var hasRequestedConstructors = (this.requestedConstructorFns && this.requestedConstructorFns.length > 0);
 
 	var out = '';
@@ -403,7 +402,7 @@ jessie.Builder.prototype.createExportDeclaration = function(order) {
 // this function needs a look
 // all it should do is return any errors around dependencies that
 // havent been specified rather than throwing etc
-jessie.Builder.prototype.getMissingFunctionDependencies = function() {
+Builder.prototype.getMissingFunctionDependencies = function() {
 	var errors = [];
 
 	var func;
@@ -430,7 +429,7 @@ jessie.Builder.prototype.getMissingFunctionDependencies = function() {
 	return errors;
 };
 
-jessie.Builder.prototype.getMissingConstructorDependencies = function() {
+Builder.prototype.getMissingConstructorDependencies = function() {
 	var missing = [],
 		constructorFn,
 		requestedConstructor,
@@ -496,7 +495,7 @@ jessie.Builder.prototype.getMissingConstructorDependencies = function() {
 	return missing;
 };
 
-jessie.Builder.prototype.requestedFunctionsContainDependency = function(dependency) {
+Builder.prototype.requestedFunctionsContainDependency = function(dependency) {
 	var containsDependency = false;
 	for(var i = 0; i < this.requestedFunctions.length; i++) {
 		if(dependency == this.requestedFunctions[i].functionName) {
@@ -507,11 +506,11 @@ jessie.Builder.prototype.requestedFunctionsContainDependency = function(dependen
 	return containsDependency;
 };
 
-jessie.Builder.prototype.headerContainsDependency = function(dependency) {
+Builder.prototype.headerContainsDependency = function(dependency) {
 	return this.headerDeclarations.indexOf(dependency) >= 0;
 };
 
-jessie.Builder.prototype.getContents = function() {
+Builder.prototype.getContents = function() {
 	var output = '';
 	this.requestedFunctions.forEach(function(func) {
 		var rendition = this.getRendition(func.functionName, func.renditionId);
@@ -520,7 +519,7 @@ jessie.Builder.prototype.getContents = function() {
 	return output;
 };
 
-jessie.Builder.prototype.getRendition = function(functionName, renditionId) {
+Builder.prototype.getRendition = function(functionName, renditionId) {
 	var rendition;
 	this.functionSet.getFunctions().forEach(function(func) {
 		if(func.name === functionName) {
@@ -530,4 +529,4 @@ jessie.Builder.prototype.getRendition = function(functionName, renditionId) {
 	return rendition;
 };
 
-module.exports = jessie.Builder;
+module.exports = Builder;
