@@ -1,24 +1,31 @@
 /*jslint node:true, strict:false*/
 
-var express = require('express'),
-	querystring = require('querystring'),
-	JessieFunction = require('./libs/jessie/Function.js'),
-	JessieRendition = require('./libs/jessie/Rendition.js'),
-	JessieConstructorFn = require('./libs/jessie/ConstructorFn.js'),
-	JessiePrototypeMethod = require('./libs/jessie/PrototypeMethod.js'),
-	JessieConstructorFnSet = require('./libs/jessie/ConstructorFnSet.js'),
-	JessieFunctionSet = require('./libs/jessie/FunctionSet.js'),
-	md = require("node-markdown").Markdown,
-	JessieBuilder = require('./libs/jessie/Builder.js'),
-	app = express(),
-	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
-	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
-	excludedQuerystringKeys = [];
-
+var express = require('express');
+var querystring = require('querystring');
+var JessieFunction = require('./libs/jessie/Function.js');
+var JessieRendition = require('./libs/jessie/Rendition.js');
+var JessieConstructorFn = require('./libs/jessie/ConstructorFn.js');
+var JessiePrototypeMethod = require('./libs/jessie/PrototypeMethod.js');
+var JessieConstructorFnSet = require('./libs/jessie/ConstructorFnSet.js');
+var JessieFunctionSet = require('./libs/jessie/FunctionSet.js');
+var md = require("node-markdown").Markdown,
+JessieBuilder = require('./libs/jessie/Builder.js');
+var functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition);
+var constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod);
+var excludedQuerystringKeys = [];
+var app = express();
 var bodyParser = require('body-parser');
+var swig = require('swig');
 
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
+// Swig will cache templates for you, but you can disable
+// that and use Express's caching instead, if you like:
+app.set('view cache', false);
+// To disable Swig's cache, do the following:
+swig.setDefaults({ cache: false });
+
 app.set('view options', {layout:false });
 
 // middleware
@@ -184,6 +191,10 @@ function getErrorsInViewFriendlyFormat(errors) {
 	}
 	return errorMessages;
 }
+
+app.get('/test/', function(req, res) {
+	res.render('index', {});
+});
 
 // one url for the builder - the querystring tells the handle what to do
 app.get('/', function(req, res){
