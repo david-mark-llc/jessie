@@ -15,14 +15,16 @@ var express = require('express'),
 	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
 	excludedQuerystringKeys = [];
 
+var bodyParser = require('body-parser');
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('view options', {layout:false });
-app.configure(function(){
-	app.use(express['static'](__dirname + '/public'));
-    app.use(express.methodOverride());
-    app.use(express.bodyParser());
-});
+
+// middleware
+app.use(express['static'](__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }))
+
 app.listen(1337, function(){
 	console.log("App listening on port 1337");
 });
@@ -93,13 +95,13 @@ function getRequestedFunctions(query) {
 		if(key.indexOf("#") > -1) {
 			continue;
 		}
-		
+
 		var renditionId = parseInt(query[key], 10);
 		// if no rendition was wanted after all
 		if (renditionId==-1 || isNaN(renditionId)) {
 			continue;
 		}
-		
+
 		requestedFunctions.push({
 			functionName: key,
 			renditionId: renditionId
@@ -178,7 +180,7 @@ function getErrorsInViewFriendlyFormat(errors) {
 		else {
 			errorItem = { message: (i+1) + '. ' + errorItem };
 		}
-		
+
 		errorMessages.push(errorItem);
 	}
 	return errorMessages;
@@ -267,7 +269,7 @@ app.get('/', function(req, res){
 			res.contentType('text/javascript');
 			res.send(buildResponse.output);
 		}
-	
+
 	/*
 	 * The user has requested the page without a download querystring
 	 * param, so we just show page
