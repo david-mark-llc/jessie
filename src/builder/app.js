@@ -5,7 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var swig = require('swig');
 var swigExtras = require('swig-extras');
-var port = 1337;
+var port = process.env.PORT || 1337;
 var path = require('path');
 
 app.set('views', path.resolve(__dirname, 'views'));
