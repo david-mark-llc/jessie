@@ -33,7 +33,7 @@ if(html && isHostMethod(html, 'attachEvent')) {
 
 		var listener = function() {
 			var e = window.event;
-			fn.call(el, e);
+			fn.call(jessieNamespace.theseObjects[thisObjectIndex], e);
 		};
 
 		el.attachEvent('on'+eventType, listener);
