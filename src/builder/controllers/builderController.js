@@ -199,6 +199,7 @@ module.exports = function(req, res) {
 	 * There is a download param in the querystring as the user
 	 * has submitted the form (but not necessarily)
 	 */
+
 	if(action == 'Download') {
 		requestedFunctions = getRequestedFunctions(query);
 		requestedConstructorFns = getRequestedConstructors(query);
@@ -229,14 +230,16 @@ module.exports = function(req, res) {
 			builderOptions.scaffolding = true;
 		}
 
-		builderOptions.returnUri = "http://" + req.headers.host + req.url.replace(/&action=Download/, "");
+		builderOptions.returnUri = "http://" + req.headers.host + req.url.replace(/&action=download/, "");
 
 		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, builderOptions);
 		buildResponse = builder.build();
 
+		console.log(buildResponse.errors);
+
 		if(buildResponse.errors) {
 			errors = getErrorsInViewFriendlyFormat(buildResponse.errors);
-			res.render('index', {
+			res.render('builder', {
 				groups: groups,
 				functionCount: functions.length,
 				constructorFns: constructorFnSet.getConstructorFns(),
@@ -255,7 +258,7 @@ module.exports = function(req, res) {
 	 */
 	} else {
 
-		res.render('index', {
+		res.render('builder', {
 			functionCount: functions.length,
 			groups: groups,
 			constructorFns: constructorFnSet.getConstructorFns(),

@@ -25,7 +25,8 @@ app.set('view options', { layout: false });
 app.use(express['static'](path.resolve(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', require('./controllers/builderController.js'));
+app.get('/', require('./controllers/homeController.js'));
+app.get('/builder/', require('./controllers/builderController.js'));
 
 app.listen(port, function(){
 	console.log("Jessie listening on port: "+ port);
