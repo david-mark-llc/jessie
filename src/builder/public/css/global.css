@@ -58,7 +58,7 @@ h1 {
 #groupIndex {
 	width: 98%;
 	margin: 0 auto 20px auto;
-	display: block;	
+	display: block;
 }
 
 #errors .errorsInner {
@@ -252,4 +252,35 @@ h1 {
 
 #builder input[type=checkbox][disabled] + label {
 	color: #5c5c5c;
+}
+
+/***********************************
+* Home
+***********************************/
+
+#home h1 {
+	margin: 100px 20px 20px;
+	text-align: center;
+	font-size: 3em;
+}
+
+#home .get a {
+	display: block;
+	font-size: 2em;
+	padding: 20px 40px;
+	background-color: orange;
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	border-radius: 10px;
+	margin: 0 auto;
+	width: 280px;
+}
+
+#home .because {
+	font-size: 2em;
+	margin: 20px 2em;
+	color: #888;
+	text-align: center;
+	font-style: italic;
 }

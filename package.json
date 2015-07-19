@@ -2,6 +2,10 @@
   "name": "Jessie",
   "version": "0.0.1",
   "description": "Jessie Builder",
+  "scripts": {
+  	"start": "cd src/builder && node app.js",
+  	"runlocal": "cd src/builder && nodemon app.js"
+  },
   "dependencies": {
     "body-parser": "^1.12.4",
     "cli-table": "0.2.0",

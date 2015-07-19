@@ -5,7 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var swig = require('swig');
 var swigExtras = require('swig-extras');
-var port = 1337;
+var port = process.env.PORT || 1337;
 var path = require('path');
 
 app.set('views', path.resolve(__dirname, 'views'));
@@ -25,7 +25,8 @@ app.set('view options', { layout: false });
 app.use(express['static'](path.resolve(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', require('./controllers/builderController.js'));
+app.get('/', require('./controllers/homeController.js'));
+app.get('/builder/', require('./controllers/builderController.js'));
 
 app.listen(port, function(){
 	console.log("Jessie listening on port: "+ port);
