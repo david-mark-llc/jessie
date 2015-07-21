@@ -1,6 +1,6 @@
 {
   "name": "Jessie",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "body-parser": {
       "version": "1.13.2",
@@ -377,6 +377,10 @@
           }
         }
       }
+    },
+    "uglify-js": {
+      "version": "1.3.3",
+      "from": "uglify-js@1.3.3"
     }
   }
 }
