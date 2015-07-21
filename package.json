@@ -4,7 +4,7 @@
   "repository": "https://github.com/david-mark/jessie.git",
   "description": "Jessie Builder",
   "scripts": {
-    "start": "cd builder && node app.js",
+    "start": "cd src/builder && node app.js",
     "dist": "npm shrinkwrap && grunt",
     "runDist": "npm run dist && cd dist && npm install --production && cd builder && node app.js",
     "build": "npm run dist && grunt compress",
