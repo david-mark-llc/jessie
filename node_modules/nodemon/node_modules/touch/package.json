@@ -1,0 +1,53 @@
+{
+  "author": {
+    "name": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "url": "http://blog.izs.me/"
+  },
+  "name": "touch",
+  "description": "like touch(1) in node",
+  "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/isaacs/node-touch.git"
+  },
+  "main": "touch.js",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "bin": {
+    "touch": "./bin/touch.js"
+  },
+  "dependencies": {
+    "nopt": "~1.0.10"
+  },
+  "license": "ISC",
+  "gitHead": "adedd503eff5859a8e775fd2bdb311e8ac183172",
+  "bugs": {
+    "url": "https://github.com/isaacs/node-touch/issues"
+  },
+  "homepage": "https://github.com/isaacs/node-touch#readme",
+  "_id": "touch@0.0.4",
+  "scripts": {},
+  "_shasum": "fc1a7103cbe0ecee713d1384d775e2f9e21caae2",
+  "_from": "touch@>=0.0.3 <0.1.0",
+  "_npmVersion": "3.1.0",
+  "_nodeVersion": "2.2.1",
+  "_npmUser": {
+    "name": "isaacs",
+    "email": "isaacs@npmjs.com"
+  },
+  "dist": {
+    "shasum": "fc1a7103cbe0ecee713d1384d775e2f9e21caae2",
+    "tarball": "http://registry.npmjs.org/touch/-/touch-0.0.4.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "isaacs",
+      "email": "i@izs.me"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/touch/-/touch-0.0.4.tgz",
+  "readme": "ERROR: No README data found!"
+}
