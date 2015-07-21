@@ -22,7 +22,7 @@ app.set('view engine', 'html');
 app.set('view cache', false);
 app.set('view options', { layout: false });
 
-app.use(express['static'](path.resolve(__dirname, 'public')));
+app.use( '/public', express['static'](path.resolve(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', require('./controllers/homeController.js'));

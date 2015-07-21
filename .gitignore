@@ -3,3 +3,6 @@
 *.sublime-project
 *.sublime-workspace
 *.log
+.tmp
+dist
+node_modules
