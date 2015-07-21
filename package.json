@@ -5,7 +5,9 @@
   "description": "Jessie Builder",
   "scripts": {
     "start": "cd builder && node app.js",
-    "dist": "grunt && cd dist && npm install --production && cd builder && node app.js",
+    "dist": "npm shrinkwrap && grunt",
+    "runDist": "npm run dist && cd dist && npm install --production && cd builder && node app.js",
+    "build": "npm run dist && grunt compress",
     "devStart": "cd src/builder && node app.js",
     "runlocal": "cd src/builder && ../../node_modules/nodemon/bin/nodemon.js app.js"
   },

@@ -90,8 +90,6 @@ module.exports = function( grunt ){
 
 	require( 'load-grunt-tasks' )( grunt );
 
-	grunt.registerTask( 'build', 'Run default build and compress', [ 'default', 'compress' ] );
-
 	grunt.registerTask( 'default', 'Default prod build with optional config',[
 		'clean',
 		'copy',
