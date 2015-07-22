@@ -1,1 +1,1 @@
-web: cd builder && node app.js
+web: node builder/app.js

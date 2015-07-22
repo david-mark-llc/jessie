@@ -1,16 +1,16 @@
 {
   "name": "Jessie",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "repository": "https://github.com/david-mark/jessie.git",
   "description": "Jessie Builder",
   "scripts": {
-    "start": "cd src/builder && node app.js",
+    "start": "node builder/app.js",
+    "local": "node_modules/nodemon/bin/nodemon.js src/builder/app.js",
     "dist": "npm shrinkwrap && grunt",
     "deploy": "cd dist && npm install --production; haikro build deploy --app jessie --heroku-token `heroku auth:token`",
-    "runDist": "npm run dist && cd dist && npm install --production && cd builder && node app.js",
+    "runDist": "npm run dist && cd dist && npm install --production && node builder/app.js",
     "build": "npm run dist && grunt compress",
-    "devStart": "cd src/builder && node app.js",
-    "runlocal": "cd src/builder && ../../node_modules/nodemon/bin/nodemon.js app.js"
+    "clean": "grunt clean"
   },
   "dependencies": {
     "body-parser": "^1.12.4",
