@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cd src/builder && node app.js",
     "dist": "npm shrinkwrap && grunt",
-    "deploy": "cd dist && npm install --production; haikro build deploy --app jessie-dev --heroku-token `heroku auth:token`",
+    "deploy": "cd dist && npm install --production; haikro build deploy --app jessie --heroku-token `heroku auth:token`",
     "runDist": "npm run dist && cd dist && npm install --production && cd builder && node app.js",
     "build": "npm run dist && grunt compress",
     "devStart": "cd src/builder && node app.js",
