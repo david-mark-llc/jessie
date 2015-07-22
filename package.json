@@ -7,7 +7,7 @@
     "start": "cd src/builder && node app.js",
     "dist": "npm shrinkwrap && grunt",
     "deploy": "cd dist && npm install --production; haikro build deploy --app jessie --heroku-token `heroku auth:token`",
-    "runDist": "npm run dist && cd dist && npm install --production && cd builder && node app.js",
+    "runDist": "npm run dist && cd dist && npm install --production && node builder/app.js",
     "build": "npm run dist && grunt compress",
     "devStart": "cd src/builder && node app.js",
     "runlocal": "cd src/builder && ../../node_modules/nodemon/bin/nodemon.js app.js"
