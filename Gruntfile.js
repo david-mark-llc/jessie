@@ -13,7 +13,9 @@ module.exports = function( grunt ){
 		},
 
 		clean: {
-			dist: [ 'dist' ]
+			dist: [ 'dist' ],
+			nodeModules: [ 'node_modules' ],
+			temporary: [ '.tmp' ]
 		},
 
 		copy: {
