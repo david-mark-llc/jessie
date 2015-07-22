@@ -5,9 +5,10 @@ var JessiePrototypeMethod = require('../libs/jessie/PrototypeMethod.js');
 var JessieConstructorFnSet = require('../libs/jessie/ConstructorFnSet.js');
 var JessieFunctionSet = require('../libs/jessie/FunctionSet.js');
 var JessieBuilder = require('../libs/jessie/Builder.js');
+var path = require('path');
 
-var functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition);
-var constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod);
+var functionSet = new JessieFunctionSet(path.resolve(__dirname, '../../functions/'), JessieFunction, JessieRendition);
+var constructorFnSet = new JessieConstructorFnSet(path.resolve(__dirname, '../../constructors/'), JessieConstructorFn, JessiePrototypeMethod);
 
 functionSet.create();
 constructorFnSet.create();
@@ -171,8 +172,8 @@ function getErrorsInViewFriendlyFormat(errors) {
 module.exports = function(req, res) {
 	var query = req.query;
 	var builderOptions = {
-			headerPath: '../libraries/header1.inc',
-			footerPath: '../libraries/footer1.inc'
+			headerPath: path.resolve(__dirname, '../../libraries/header1.inc'),
+			footerPath: path.resolve(__dirname, '../../libraries/footer1.inc')
 		};
 	var builder = null;
 	var buildResponse = null;

@@ -1,8 +1,9 @@
 /*jslint node:true, strict:false*/
 
-var fs = require('fs'),
-	uglifyParser = require("uglify-js").parser,
-	pro = require("uglify-js").uglify;
+var fs = require('fs');
+var uglifyParser = require("uglify-js").parser;
+var pro = require("uglify-js").uglify;
+var path = require('path');
 
 /*
  * Responsible for building the contents for jessie.js
@@ -46,7 +47,7 @@ Builder.prototype.setupOptions = function(options) {
 	this.options.scaffolding = options.scaffolding || false;
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
-	this.options.licensePath = this.options.licensePath || '../../LICENSE';
+	this.options.licensePath = this.options.licensePath || path.resolve(__dirname, '../../../../LICENSE');
 	this.options.namespace = this.options.namespace || 'jessie';
 	this.options.minificationLevel = this.options.minificationLevel || false;
 };
