@@ -49,7 +49,7 @@ module.exports = function( grunt ){
 			options: {
 				dest: 'dist/builder'
 			},
-			html: 'dist/builder/views/*.html'
+			html: 'dist/builder/views/**/*.html'
 		},
 
 		usemin: {
