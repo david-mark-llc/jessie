@@ -50,7 +50,6 @@
 	color: #000;
 }
 
-#errors,
 #groupIndex {
 	width: 98%;
 	margin: 0 auto 20px auto;
@@ -62,26 +61,28 @@
 	display: none;
 }
 
-#errors .errorsInner {
-	padding: 10px;
-	background-color: #e54444;
-	border: 1px solid #930000;
+#errors {
+	padding: 20px;
+	background-color: #ED9F9F;
+	margin-bottom: 20px;
 }
 
 #errors h2 {
-	font-size: 80%;
-	color: #fff;
-	margin-bottom: 5px;
+    font-size: 0.9em;
+    margin: 5px 0 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #A32121;
 }
 
 #errors p {
-	font-size: 80%;
-	color: #fff;
-	margin-bottom: 5px;
+	font-size: 0.9em;
+    margin: 5px 0;
+    color: #A32121;
 }
 
 #errors p a {
-	color: #fff;
+	color: #A32121;
 }
 
 #namespace {
