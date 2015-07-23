@@ -1,66 +1,68 @@
 <div class="options">
 	<div class="standardControl">
 		<div class="indicator">
-			<label for="namespace">Namespace</label>
+			<label for="namespace">Name of library</label>
 		</div>
 		<div class="control">
 			<input class="text" placeholder="e.g. superlib" id="namespace" name="namespace" type="text" {% if (query && query.namespace) %} value="{{query.namespace}}" {% endif %} >
 		</div>
 	</div>
 	<div class="groupControl">
-		<fieldset>
-			<legend>Minification settings</legend>
-			<div cl>
-				<input
-					type="radio"
-					name="minificationLevel"
-					id="minification_0"
-					value=""
-					{% if (query.minificationLevel || query.minificationLevel == '') %}
-						checked
-					{% endif %}
-				>
-				<label for="minification_0">No minification</label>
-			</div>
-			<div>
-				<input
-					type="radio"
-					name="minificationLevel"
-					value="1"
-					id="minification_1"
-					{% if (query && query.minificationLevel == '1') %}
-						checked
-					{% endif %}
-				>
-				<label for="minification_1">Remove comments</label>
-			</div>
-			<div>
-				<input
-					type="radio"
-					name="minificationLevel"
-					value="2"
-					id="minification_2"
-					{% if (query && query.minificationLevel == '2') %}
-						checked
-					{% endif %}
-				>
-				<label for="minification_2">Remove comments AND whitespace</label>
-			</div>
-			<div>
-				<input
-					type="radio"
-					name="minificationLevel"
-					value="3"
-					id="minification_3"
-					{% if (query && query.minificationLevel == '3') %}
-						checked
-					{% endif %}
-				>
-				<label for="minification_3">Remove comments AND whitspace AND shorten variable names</label>
-			</div>
-		</fieldset>
+		<p class="label">Minification settings</p>
+		<div class="control">
+			<input
+				type="radio"
+				name="minificationLevel"
+				id="minification_0"
+				value=""
+				{% if (query.minificationLevel || query.minificationLevel == '') %}
+					checked
+				{% endif %}
+			>
+			<label for="minification_0">No minification</label>
+		</div>
+		<div class="control">
+			<input
+				type="radio"
+				name="minificationLevel"
+				value="1"
+				id="minification_1"
+				{% if (query && query.minificationLevel == '1') %}
+					checked
+				{% endif %}
+			>
+			<label for="minification_1">No comments</label>
+		</div>
+		<div class="control">
+			<input
+				type="radio"
+				name="minificationLevel"
+				value="2"
+				id="minification_2"
+				{% if (query && query.minificationLevel == '2') %}
+					checked
+				{% endif %}
+			>
+			<label for="minification_2">No comments, no whitespace</label>
+		</div>
+		<div class="control">
+			<input
+				type="radio"
+				name="minificationLevel"
+				value="3"
+				id="minification_3"
+				{% if (query && query.minificationLevel == '3') %}
+					checked
+				{% endif %}
+			>
+			<label for="minification_3">No comments, no whitspace, variable names shortened</label>
+		</div>
 	</div>
-	<div class="checkboxControl">
-		<input id="scaffolding" name="scaffolding" type="checkbox" {% if (query && query.scaffolding == 'on') %} checked {% endif %}>
-		<label for="scaffolding">Throw errors when incorrectly used</label>
+	<div class="groupControl">
+		<p class="label">Development options</p>
+		<div class="control">
+			<input id="scaffolding" name="scaffolding" type="checkbox" {% if (query && query.scaffolding == 'on') %} checked {% endif %}>
+			<label for="scaffolding">Warn when using function incorrectly (good for development)</label>
+		</div>
 	</div>
+</div>

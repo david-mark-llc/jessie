@@ -2,7 +2,31 @@
 #builder {
 	position: relative;
 	padding-bottom: 65px;
+	margin: 0 20px;
 }
+
+@media (min-width: 720px) {
+	#builder {
+		width: 700px;
+		padding-left: 10px;
+		padding-right: 10px;
+		margin: 0 auto;
+	}
+}
+
+#builder h1 {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+#builder .options {
+	background-color: #f5f5f5;
+	border: 1px solid #eee;
+	padding: 20px 20px 0;
+	margin-bottom: 20px;
+}
+
+
 
 #builder .footer {
 	position: fixed;
@@ -26,26 +50,16 @@
 	color: #000;
 }
 
-#builder .header {
-	margin-bottom: 20px;
-	top: 0;
-	left: 0;
-	right: 0;
-	overflow: hidden;
-	background-color: #f5f5f5;
-	border-bottom: 1px solid #ccc;
-	padding: 10px;
-}
-
-#builder .header h1 {
-	text-align: center;
-}
-
 #errors,
 #groupIndex {
 	width: 98%;
 	margin: 0 auto 20px auto;
 	display: block;
+}
+
+#groupIndex,
+.filters {
+	display: none;
 }
 
 #errors .errorsInner {
@@ -72,15 +86,6 @@
 
 #namespace {
 	width: 270px;
-}
-
-@media (min-width: 720px) {
-
-	#builder .options {
-		width: 720px;
-		margin: 0 auto;
-	}
-
 }
 
 #degradesIEFilter {

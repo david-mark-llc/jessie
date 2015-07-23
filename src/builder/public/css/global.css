@@ -8,13 +8,16 @@ body {
 }
 
 .standardControl {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 .standardControl .indicator label {
 	display: block;
-    font-size: 1em;
+    font-size: 0.9em;
     margin: 5px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #333;
 }
 
 .standardControl .control .text {
@@ -32,13 +35,21 @@ body {
 }
 
 .groupControl {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
+}
+
+.groupControl .label {
+	font-size: 0.9em;
+    margin: 5px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #333;
+}
+
+.groupControl .control {
+	margin-bottom: 7px;
 }
 
 .groupControl fieldset {
 	border: 1px solid #ccc;
-}
-
-.checkboxControl {
-	margin-bottom: 20px;
 }
