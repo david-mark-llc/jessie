@@ -55,7 +55,6 @@ function getFunctionsByGroup(functions) {
 			groups.push({groupName: groupName, functions: [functions[i]]});
 		}
 	}
-
 	return groups;
 }
 

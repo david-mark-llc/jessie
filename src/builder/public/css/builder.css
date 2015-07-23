@@ -38,7 +38,7 @@
 }
 
 #builder .header h1 {
-	float: left;
+	text-align: center;
 }
 
 #errors,
@@ -70,26 +70,21 @@
 	color: #fff;
 }
 
-#builder .filters {
-	width: 98%;
-	margin: 0 auto;
-	margin-bottom: 10px;
+#namespace {
+	width: 270px;
 }
 
-#builder .filters h2,
-#groupIndex h2 {
-	font-size: 90%;
-	margin-bottom: 10px;
+@media (min-width: 720px) {
+
+	#builder .options {
+		width: 720px;
+		margin: 0 auto;
+	}
+
 }
 
-#builder .options {
-	width: 98%;
-	margin: 0 auto;
-}
-
-#builder .options h2 {
-	font-size: 90%;
-	margin-bottom: 10px;
+#degradesIEFilter {
+	width: 270px;
 }
 
 #groupIndex ul {

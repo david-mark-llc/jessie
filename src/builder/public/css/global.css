@@ -7,7 +7,38 @@ body {
 	font-family: arial;
 }
 
-h1 {
-	color: #444;
-	font-size: 120%;
+.standardControl {
+	margin-bottom: 20px;
+}
+
+.standardControl .indicator label {
+	display: block;
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+.standardControl .control .text {
+	display: block;
+    box-sizing: content-box;
+    padding: 8px;
+    font-size: 1em;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: none;
+    -webkit-appearance: none;
+    font-family: arial;
+}
+
+.groupControl {
+	margin-bottom: 20px;
+}
+
+.groupControl fieldset {
+	border: 1px solid #ccc;
+}
+
+.checkboxControl {
+	margin-bottom: 20px;
 }
