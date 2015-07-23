@@ -4,14 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="Content-Language" content="en-gb">
 		<title>Jessie - Build your own Jessie</title>
-		<!-- build:css(src/builder) /public/css/jessie.min.css -->
-		<link rel="stylesheet" type="text/css" href="/public/css/global.css">
-		<link rel="stylesheet" type="text/css" href="/public/css/home.css">
-		<link rel="stylesheet" type="text/css" href="/public/css/builder.css">
-		<!-- endbuild -->
-		<!-- build:css(src/builder) /public/css/ie6.min.css -->
-		<!--[if IE 6]><link rel="stylesheet" href="/public/css/ie6.css" type="text/css" /><![endif]-->
-		<!-- endbuild -->
+		{% include "partials/css.html" %}
 	</head>
 	<body>
 		<div id="container">
@@ -22,8 +15,8 @@
 						<h1>Build your own Jessie</h1>
 					</div>
 
-					{% include "partials/errors.html" %}
 					{% include "partials/options.html" %}
+					{% include "partials/errors.html" %}
 					{% include "partials/filters.html" %}
 					{% include "partials/groupIndex.html" %}
 					{% include "partials/functions.html" %}
@@ -32,7 +25,7 @@
 				</form>
 			</div>
 		</div>
-		<!-- build:js(src/builder) /public/js/jessie.min.js -->
+		<!-- build:js(src/builder) /public/js/builder.min.js -->
 		<script type="text/javascript" src="/public/js/ui-enhance.js"></script>
 		<!-- endbuild -->
 		<script type="text/javascript">
