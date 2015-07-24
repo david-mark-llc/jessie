@@ -6,6 +6,12 @@ For browsers that support focusout event. i.e. not firefox
 
 */
 
+/*
+Description:
+Focus out support
+*/
+
+
 var delegateBlurListener;
 
 if(delegateListener && isEventSupported('focusout')) {

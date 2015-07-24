@@ -1,10 +1,10 @@
 /*global html,isHostMethod,getEventTarget,delegateListener,isEventSupported */
 
 /*
-
-
-
+Description:
+Wide support
 */
+
 
 var delegateBlurListener;
 

@@ -5,9 +5,50 @@ body, h1, h2, p {
 
 body {
 	font-family: arial;
+	background: #FAFAFA;
+	color: #212121;
 }
 
-h1 {
-	color: #444;
-	font-size: 120%;
+.standardControl {
+	margin-bottom: 30px;
+}
+
+.standardControl .indicator label {
+	display: block;
+    font-size: 1em;
+    margin: 5px 0;
+    color: #212121;
+}
+
+.standardControl .control .text {
+	display: block;
+    box-sizing: content-box;
+    padding: 8px;
+    font-size: 1em;
+    color: #212121;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: none;
+    -webkit-appearance: none;
+    font-family: arial;
+}
+
+.groupControl {
+	margin-bottom: 30px;
+}
+
+.groupControl .label {
+	font-size: 1em;
+    margin: 5px 0;
+    color: #212121;
+}
+
+.groupControl .control {
+	margin-bottom: 7px;
+}
+
+.groupControl .control label {
+	color: #727272;
+	margin-left: 5px;
 }

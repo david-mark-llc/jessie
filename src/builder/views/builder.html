@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="Content-Language" content="en-gb">
-		<title>Jessie - Build your own Jessie</title>
+		<title>Builder | Jessie</title>
 		{% include "partials/css.html" %}
 	</head>
 	<body>
@@ -12,15 +12,15 @@
 				<form method="get" action="/builder/">
 					<input style="position: absolute; left:-999em;" type="submit" name="action" value="Download">
 					<div class="header">
-						<h1>Build your own Jessie</h1>
+						<div class="headerInner">
+							<h1>Builder</h1>
+							<p>Create your own Jessie</p>
+						</div>
 					</div>
 
-					{% include "partials/options.html" %}
 					{% include "partials/errors.html" %}
-					{% include "partials/filters.html" %}
-					{% include "partials/groupIndex.html" %}
+					{% include "partials/options.html" %}
 					{% include "partials/functions.html" %}
-					{% include "partials/constructors.html" %}
 					{% include "partials/footer.html" %}
 				</form>
 			</div>

@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on the `el.className` property (class attribute)
+Wide support, no cutting edge
 */
 
 /*
