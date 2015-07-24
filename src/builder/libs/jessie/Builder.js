@@ -34,7 +34,7 @@ function Builder(functionSet, constructorFnSet, requestedFunctions, requestedCon
 
 	this.setupOptions(options);
 
-	this.headerDeclarations = ['window', 'global', 'jessieNamespace'];
+	this.headerDeclarations = ['window', 'global', 'jessie'];
 	this.setupLicense();
 	this.setupHeader();
 	this.setupFooter();
@@ -371,7 +371,7 @@ Builder.prototype.createExportDeclaration = function(order) {
 	order = this.defaultExports.concat(order);
 
 	order.forEach(function(functionName, i){
-		out += '\n' + this.options.namespace;
+		out += '\n' + 'jessie';
 		out += '.' + functionName;
 		out += ' = ';
 		out += functionName;
