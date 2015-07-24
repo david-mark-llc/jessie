@@ -173,6 +173,16 @@
 	font-size: 1.5em;
 }
 
+.function .info {
+	font-weight: bold;
+	font-size: 0.9em;
+	display: inline-block;
+	margin-bottom: 30px;
+	padding: 2px 4px;
+	border-radius: 2px;
+	background-color: #FFE0B2;
+}
+
 .rendition {
 	padding-bottom: 20px;
 }
@@ -205,6 +215,16 @@
 
 .none {
 	padding-bottom: 20px;
+}
+
+.none label {
+	color: #eee;
+	font-style: italic;
+	background-color: #727272;
+	display: inline-block;
+	border-radius: 2px;
+	font-size: 0.8em;
+	padding: 2px 4px;
 }
 
 .rendition .seeAlso {

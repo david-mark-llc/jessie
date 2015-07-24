@@ -1,5 +1,11 @@
 /*
 Description:
+Wide support, no cutting edge
+*/
+
+/*
+Author:
+David Mark
 */
 
 var toArray;

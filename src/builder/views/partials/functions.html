@@ -13,6 +13,9 @@
 
 			<div class="function" id="{{currentFunction.name}}">
 				<h2 class="name">{{currentFunction.name}}</h2>
+				{% if (currentFunction.renditions.length > 1) %}
+					<p class="info">Choose the most suitable rendition for your project.</p>
+				{% endif %}
 
 				{% if (currentFunction.renditions.length) %}
 
@@ -34,9 +37,13 @@
 									{% endif %}
 								>
 								<label for="{{currentFunction.name+currentRendition.id}}" >
-									#{{currentRendition.id}} &mdash; {{currentRendition.description}}
-									{% if (currentRendition.degrades) %}
-										<span class="degrades"> &mdash; Degrades in {{currentRendition.degrades}}</span>
+									{% if (currentFunction.renditions.length == 1) %}
+										I want this
+									{% else %}
+										{{currentRendition.description}}
+										{% if (currentRendition.degrades) %}
+											<span class="degrades"> &mdash; Degrades in {{currentRendition.degrades}}</span>
+										{% endif %}
 									{% endif %}
  								</label>
 							</div>
@@ -61,7 +68,7 @@
 									checked
 								{% endif %}
 							>
-							<label for="{{currentFunction.name}}_none">I don't want this function</label>
+							<label for="{{currentFunction.name}}_none">Don't need this for my project</label>
 						</div>
 					</div>
 				{% endif %}
