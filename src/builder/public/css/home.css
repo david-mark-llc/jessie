@@ -1,20 +1,21 @@
 #home h1 {
-	margin: 100px 20px 20px;
+	margin: 80px 20px 20px;
 	text-align: center;
 	font-size: 3em;
+	font-weight: normal;
 }
 
 #home .get a {
 	display: block;
-	font-size: 2em;
-	padding: 20px 40px;
-	background-color: orange;
+	font-size: 1.6em;
+	padding: 20px 20px;
+	background-color: #FF5722;
 	color: white;
 	text-decoration: none;
 	text-align: center;
-	border-radius: 10px;
+	border-radius: 3px;
 	margin: 0 auto;
-	width: 280px;
+	width: 260px;
 }
 
 #home .because {
