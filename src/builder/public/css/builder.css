@@ -9,6 +9,7 @@
 	right: 0;
 	overflow: hidden;
 	padding: 10px;
+	background-color: #eee;
 }
 
 /*********************************************
@@ -17,10 +18,7 @@
 
 .errorJumper {
 	padding: 10px 20px;
-	display: block;
-	bottom: 10px;
-	left: 10px;
-	z-index: 1;
+	float: left;
 	background-color: #F44336;
 	color: #fff;
 	text-decoration: none;
@@ -30,7 +28,8 @@
 	font-size: 1em;
 	font-family: arial;
 	text-transform: uppercase;
-	float: left;
+	text-align: center;
+	margin-right: 10px;
 }
 
 .errorJumper:hover {
@@ -42,12 +41,7 @@
 *********************************************/
 
 .download {
-	float: right;
 	padding: 10px 20px;
-	display: block;
-	bottom: 10px;
-	right: 10px;
-	z-index: 1;
 	background-color: #FF5722;
 	color: #fff;
 	text-decoration: none;
@@ -57,6 +51,7 @@
 	font-size: 1em;
 	font-family: arial;
 	text-transform: uppercase;
+	float: left;
 }
 
 .download:hover {
@@ -184,10 +179,20 @@
 }
 
 .rendition {
-	padding-bottom: 20px;
+	padding: 20px 10px;
+	margin-bottom: 10px;
+	background-color: #f1f1f1;
+	border-radius: 3px;
 }
 
 .rendition .control {
+	overflow: hidden;
+}
+
+.rendition .control input {
+}
+
+.rendition .control label {
 }
 
 .rendition .description {
@@ -214,7 +219,10 @@
 }
 
 .none {
-	padding-bottom: 20px;
+	padding: 20px 10px;
+	margin-bottom: 10px;
+	background-color: #f1f1f1;
+	border-radius: 3px;
 }
 
 .none label {
@@ -236,7 +244,16 @@
 *********************************************/
 
 .actions {
+	background-color: #FF9800;
+	position: relative;
+}
 
+@media (min-width: 860px) {
+	.actionsInner {
+		margin-left: auto;
+		margin-right: auto;
+		width: 820px;
+	}
 }
 
 /*********************************************
