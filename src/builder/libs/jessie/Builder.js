@@ -48,7 +48,6 @@ Builder.prototype.setupOptions = function(options) {
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
 	this.options.licensePath = this.options.licensePath || path.resolve(__dirname, '../../../../LICENSE');
-	this.options.namespace = this.options.namespace || 'jessie';
 	this.options.minificationLevel = this.options.minificationLevel || false;
 };
 
@@ -195,15 +194,9 @@ Builder.prototype.build = function() {
 		}
 
 		builderResponse.output = this.license + builderResponse.output;
-		builderResponse.output = this.replaceNamespaceToken(builderResponse.output, this.options.namespace);
 	}
 
 	return builderResponse;
-};
-
-Builder.prototype.replaceNamespaceToken = function(output, namespace) {
-	var re = new RegExp(this.options.namespaceToken, 'g');
-	return output.replace(re, namespace);
 };
 
 Builder.prototype.removeScaffolding = function(output) {

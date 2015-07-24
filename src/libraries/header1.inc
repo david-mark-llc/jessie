@@ -1,7 +1,7 @@
-var jessieNamespace;
-jessieNamespace = jessieNamespace || {};
+var jessie;
+jessie = jessie || {};
 (function(global) {
-	
+
 	var globalDocument = global.document,
 		isHostObjectProperty = function(object, property) {
 			var objectProperty = object[property];
@@ -17,7 +17,7 @@ jessieNamespace = jessieNamespace || {};
 		areFeatures = function() {
 			var i = arguments.length;
 			while (i--) {
-				if (!jessieNamespace[arguments[i]]) {
+				if (!jessie[arguments[i]]) {
 				return false;
 				}
 			}
