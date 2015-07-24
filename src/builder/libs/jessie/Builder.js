@@ -379,7 +379,7 @@ Builder.prototype.createExportDeclaration = function(order) {
 
 	if(this.requestedConstructorFns) {
 		this.requestedConstructorFns.forEach(function(requestedConstructorFn, i) {
-			out += '\n' + this.options.namespace;
+			out += '\n' + 'jessie';
 			out += '.'+ requestedConstructorFn.constructorName;
 			out += ' = ';
 			out += requestedConstructorFn.constructorName;
