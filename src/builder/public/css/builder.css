@@ -5,9 +5,9 @@
 	margin: 0 20px;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 820px) {
 	#builder {
-		width: 700px;
+		width: 800px;
 		padding-left: 10px;
 		padding-right: 10px;
 		margin: 0 auto;
@@ -26,6 +26,12 @@
 	margin-bottom: 20px;
 }
 
+#builder .function {
+	background-color: #f5f5f5;
+	border: 1px solid #eee;
+	padding: 20px 20px 0;
+	margin-bottom: 20px;
+}
 
 
 #builder .footer {
@@ -102,36 +108,53 @@
 	font-size: 80%;
 }
 
-#functions {
-	width: 98%;
-	margin: 0 auto;
-}
-
 #functions h2 {
-	font-size: 90%;
+	margin-bottom: 20px;
+}
+
+.function .name {
+	font-size: 1.2em;
+	margin: 0 0 20px;
+}
+
+.rendition {
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+.rendition .control {
+	margin-bottom: 20px;
+}
+
+.rendition .description {
 	margin-bottom: 10px;
+	display: none;
 }
 
-#functions h3 {
-	font-size: 85%;
-	color: #0489E8;
+.rendition .degrades {
+	margin-bottom: 20px;
 }
 
-#constructors,
-#widgets {
-	width: 98%;
-	margin: 0 auto;
+.rendition .degrades h4 {
+	text-transform: uppercase;
+	font-size: 0.9em;
+	margin-bottom: 3px;
 }
 
-#constructors h2,
-#widgets h2 {
-	font-size: 90%;
-	margin-bottom: 10px;
+.rendition .degrades p {
+	font-size: 0.8em;
 }
 
-#widgets p {
-	font-size: 80%;
+.none {
+	padding-bottom: 20px;
 }
+
+.rendition .seeAlso {
+	display: none;
+}
+
+
 
 #builder table {
 	table-layout: fixed;
@@ -150,35 +173,14 @@
 	color: #fff;
 }
 
-#builder table .code {
+#builder .code {
 	overflow: auto;
+	background-color: #fff;
+	height: 80px;
+	margin-bottom: 10px;
+	width: 60%;
 }
 
-#builder table .code pre {
-	margin-right: 10px;
-}
-
-#builder table .code pre code {
-	overflow: auto;
-	height: 150px;
-	width: 98%;
-}
-
-#builder table .function {
-	width: 20%;
-}
-
-#builder table .rendition {
-	width: 15%;
-}
-
-#builder table .degrades {
-	width: 15%;
-}
-
-#builder table .code {
-	width: 50%;
-}
 
 #builder table thead tr td {
 	background-color: #f5f5f5;
@@ -211,10 +213,6 @@
 #builder .actions input {
 	margin: 0 auto;
 	display: block;
-}
-
-.none {
-	color: #aaa;
 }
 
 #builder .methods {

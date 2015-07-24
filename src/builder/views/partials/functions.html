@@ -1,87 +1,73 @@
 <div id="functions">
 	<h2>Functions ({{functionCount}})</h2>
 
-	<table>
-		<thead>
-			<tr>
-				<th class="function">Function</th>
-				<th class="rendition">Rendition</th>
-				<th class="degrades">Degrades in</th>
-				<th class="code">Code</th>
-			</tr>
-		</thead>
+	{% for currentGroup in groups %}
+		{% set functions = currentGroup.functions %}
 
-		{% for currentGroup in groups %}
-			{% set functions = currentGroup.functions %}
+		<!-- <div class="groupHeading">
+			<h3 id="group_{{loop.index}}">
+				(<a href="#groupIndex">Index</a>)
+				Group: {{currentGroup.groupName}} ({{currentGroup.functions.length}})
+			</h3>
+		</div> -->
 
-			<thead>
-				<tr>
-					<td colspan="4">
-						<h3 id="group_{{loop.index}}">(<a href="#groupIndex">Index</a>) Group: {{currentGroup.groupName}} ({{currentGroup.functions.length}})</h3>
-					</td>
-				</tr>
-			</thead>
+		{% for currentFunction in functions %}
 
-			{% for currentFunction in functions %}
+			<div class="function" id="{{currentFunction.name}}">
+				<h3 class="name">{{currentFunction.name}}</h3>
 
 				{% if (currentFunction.renditions.length) %}
 
-					<tbody>
-						{% set anyChecked = false %}
+					{% set anyChecked = false %}
 
-						{% for currentRendition in currentFunction.renditions %}
+					{% for currentRendition in currentFunction.renditions %}
 
-							<tr>
-								{% if loop.first %}
-									<td
-										id="{{currentFunction.name}}"
-										class="function"
-										rowspan="{{(currentFunction.renditions.length*2)+1}}">
-										{{currentFunction.name}}
-										({{currentFunction.renditions.length}})
-									</td>
-								{% endif %}
-								<td class="rendition">
-									<input
-										id="{{currentFunction.name+currentRendition.id}}"
-										type="radio"
-										name="{{currentFunction.name}}"
-										value="{{currentRendition.id}}"
+						<div class="rendition">
+							<div class="control">
+								<input
+									id="{{currentFunction.name+currentRendition.id}}"
+									type="radio"
+									name="{{currentFunction.name}}"
+									value="{{currentRendition.id}}"
 
-										{% if (query[currentFunction.name] == currentRendition.id) %}
-											{% set anyChecked = true %}
-											checked
-										{% endif %}
-									>
-									<label for="{{currentFunction.name+currentRendition.id}}" >{{currentRendition.id}} (Author: {{currentRendition.author }})</label>
-								</td>
-								<td class="degrades">
-									{{currentRendition.degrades}}
-								</td>
-								<td class="code">
-									<p class="description">
-										{{currentRendition.description|markdown}}
-									</p>
-									<pre><code>{{currentRendition.contents}}</code></pre>
-									<p class="seeAlso">{{currentRendition.seeAlso}}</p>
-								</td>
-							</tr>
-						{% endfor %}
-						<tr>
-							<td>
-								<input type="radio" id="{{currentFunction.name}}_none" name="{{currentFunction.name}}" value=""
-									{% if (!anyChecked) %}
+									{% if (query[currentFunction.name] == currentRendition.id) %}
+										{% set anyChecked = true %}
 										checked
 									{% endif %}
 								>
-								<label for="{{currentFunction.name}}_none">None</label>
-							</td>
-							<td colspan="2"></td>
-						</tr>
-					</tbody>
-				{% endif %}
-			{% endfor %}
+								<label for="{{currentFunction.name+currentRendition.id}}" >Rendition {{currentRendition.id}}</label>
+							</div>
 
+							{% if (currentRendition.degrades) %}
+
+								<div class="degrades">
+									<h4>Core experience only browsers</h4>
+									<p>{{currentRendition.degrades}}</p>
+								</div>
+							{% endif %}
+							<div class="description">{{currentRendition.description|markdown}}</div>
+							<div class="code">
+								<pre><code>{{currentRendition.contents}}</code></pre>
+							</div>
+							<p class="seeAlso">{{currentRendition.seeAlso}}</p>
+						</div>
+					{% endfor %}
+					<div class="none">
+						<div class="control">
+							<input
+								type="radio"
+								id="{{currentFunction.name}}_none"
+								name="{{currentFunction.name}}"
+								value=""
+								{% if (!anyChecked) %}
+									checked
+								{% endif %}
+							>
+							<label for="{{currentFunction.name}}_none">I don't want this function</label>
+						</div>
+					</div>
+				{% endif %}
+			</div>
 		{% endfor %}
-	</table>
+	{% endfor %}
 </div>
