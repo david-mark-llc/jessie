@@ -1,27 +1,31 @@
+#home {
+	padding-top: 30px;
+}
+
 #home h1 {
-	margin: 80px 20px 20px;
+	margin: 0px 20px 20px;
 	text-align: center;
-	font-size: 3em;
+	font-size: 1.8em;
 	font-weight: normal;
 }
 
 #home .get a {
 	display: block;
-	font-size: 1.6em;
-	padding: 20px 20px;
-	background-color: #FF5722;
+	font-size: 1em;
+	background-color: #FF9800;
 	color: white;
 	text-decoration: none;
 	text-align: center;
 	border-radius: 3px;
 	margin: 0 auto;
-	width: 260px;
+	width: 230px;
+	padding: 10px 20px;
+
 }
 
 #home .because {
-	font-size: 2em;
+	font-size: 1em;
 	margin: 20px 2em;
-	color: #888;
+	color: #727272;
 	text-align: center;
-	font-style: italic;
 }
