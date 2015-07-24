@@ -43,7 +43,6 @@ function Builder(functionSet, constructorFnSet, requestedFunctions, requestedCon
 
 Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
-	this.options.namespaceToken = 'jessieNamespace';
 	this.options.scaffolding = options.scaffolding || false;
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
