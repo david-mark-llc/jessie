@@ -34,7 +34,7 @@ function Builder(functionSet, constructorFnSet, requestedFunctions, requestedCon
 
 	this.setupOptions(options);
 
-	this.headerDeclarations = ['window', 'global', 'jessieNamespace'];
+	this.headerDeclarations = ['window', 'global', 'jessie'];
 	this.setupLicense();
 	this.setupHeader();
 	this.setupFooter();
@@ -43,12 +43,10 @@ function Builder(functionSet, constructorFnSet, requestedFunctions, requestedCon
 
 Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
-	this.options.namespaceToken = 'jessieNamespace';
 	this.options.scaffolding = options.scaffolding || false;
 	this.options.headerPath = this.options.headerPath || '../libraries/header1.inc';
 	this.options.footerPath = this.options.footerPath || '../libraries/footer1.inc';
-	this.options.licensePath = this.options.licensePath || path.resolve(__dirname, '../../../../LICENSE');
-	this.options.namespace = this.options.namespace || 'jessie';
+	this.options.licensePath = this.options.licensePath || path.resolve(__dirname, '../../../LICENSE');
 	this.options.minificationLevel = this.options.minificationLevel || false;
 };
 
@@ -195,15 +193,9 @@ Builder.prototype.build = function() {
 		}
 
 		builderResponse.output = this.license + builderResponse.output;
-		builderResponse.output = this.replaceNamespaceToken(builderResponse.output, this.options.namespace);
 	}
 
 	return builderResponse;
-};
-
-Builder.prototype.replaceNamespaceToken = function(output, namespace) {
-	var re = new RegExp(this.options.namespaceToken, 'g');
-	return output.replace(re, namespace);
 };
 
 Builder.prototype.removeScaffolding = function(output) {
@@ -378,7 +370,7 @@ Builder.prototype.createExportDeclaration = function(order) {
 	order = this.defaultExports.concat(order);
 
 	order.forEach(function(functionName, i){
-		out += '\n' + this.options.namespace;
+		out += '\n' + 'jessie';
 		out += '.' + functionName;
 		out += ' = ';
 		out += functionName;
@@ -387,7 +379,7 @@ Builder.prototype.createExportDeclaration = function(order) {
 
 	if(this.requestedConstructorFns) {
 		this.requestedConstructorFns.forEach(function(requestedConstructorFn, i) {
-			out += '\n' + this.options.namespace;
+			out += '\n' + 'jessie';
 			out += '.'+ requestedConstructorFn.constructorName;
 			out += ' = ';
 			out += requestedConstructorFn.constructorName;
