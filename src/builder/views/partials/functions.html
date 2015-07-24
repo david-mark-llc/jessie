@@ -1,6 +1,4 @@
 <div id="functions">
-	<h2>Functions ({{functionCount}})</h2>
-
 	{% for currentGroup in groups %}
 		{% set functions = currentGroup.functions %}
 
@@ -14,7 +12,7 @@
 		{% for currentFunction in functions %}
 
 			<div class="function" id="{{currentFunction.name}}">
-				<h3 class="name">{{currentFunction.name}}</h3>
+				<h2 class="name">{{currentFunction.name}}</h2>
 
 				{% if (currentFunction.renditions.length) %}
 
@@ -35,17 +33,17 @@
 										checked
 									{% endif %}
 								>
-								<label for="{{currentFunction.name+currentRendition.id}}" >Rendition {{currentRendition.id}}</label>
+								<label for="{{currentFunction.name+currentRendition.id}}" >
+									#{{currentRendition.id}} &mdash; {{currentRendition.description}}
+									{% if (currentRendition.degrades) %}
+										<span class="degrades"> &mdash; Degrades in {{currentRendition.degrades}}</span>
+									{% endif %}
+ 								</label>
 							</div>
 
-							{% if (currentRendition.degrades) %}
-
-								<div class="degrades">
-									<h4>Core experience only browsers</h4>
-									<p>{{currentRendition.degrades}}</p>
-								</div>
-							{% endif %}
-							<div class="description">{{currentRendition.description|markdown}}</div>
+							<div class="description">
+								{{currentRendition.description|markdown}}
+							</div>
 							<div class="code">
 								<pre><code>{{currentRendition.contents}}</code></pre>
 							</div>

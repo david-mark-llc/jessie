@@ -1,10 +1,10 @@
 /*global html,isHostMethod,getEventTarget */
 
 /*
-
+Description:
 For browsers that can capture
+*/
 
- */
 
 var delegateBlurListener;
 

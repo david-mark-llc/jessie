@@ -5,6 +5,7 @@ body, h1, h2, p {
 
 body {
 	font-family: arial;
+	background: #FAFAFA;
 }
 
 .standardControl {
@@ -13,11 +14,9 @@ body {
 
 .standardControl .indicator label {
 	display: block;
-    font-size: 0.9em;
+    font-size: 1em;
     margin: 5px 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #333;
+    color: #212121;
 }
 
 .standardControl .control .text {
@@ -25,7 +24,7 @@ body {
     box-sizing: content-box;
     padding: 8px;
     font-size: 1em;
-    color: #555;
+    color: #212121;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -39,17 +38,16 @@ body {
 }
 
 .groupControl .label {
-	font-size: 0.9em;
+	font-size: 1em;
     margin: 5px 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #333;
+    color: #212121;
 }
 
 .groupControl .control {
 	margin-bottom: 7px;
 }
 
-.groupControl fieldset {
-	border: 1px solid #ccc;
+.groupControl .control label {
+	color: #727272;
+	margin-left: 5px;
 }

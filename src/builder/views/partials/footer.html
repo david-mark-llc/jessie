@@ -1,10 +1,6 @@
-<div class="footer">
-	{% if (errors.length > 0)%}
-		<p><a href="#errors">Errors</a> ({{errors.length}})</p>
+<div id="actions">
+	<input class="download" type="submit" name="action" value="Download">
+	{% if errors.length %}
+		<a class="errorJumper" href="#errors">Errors</a>
 	{% endif %}
-	<p><a href="#groupIndex">Groups</a></p>
-	<p><a href="#constructors">Constructors</a></p>
-	<div class="actions">
-		<input type="submit" name="action" value="Download">
-	</div>
 </div>

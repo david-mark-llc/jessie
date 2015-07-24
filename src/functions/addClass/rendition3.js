@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on the `el.classList.add` or `el.className` property providing greatest browser support
+Cutting edge and wide support
 */
 
 /*

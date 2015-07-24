@@ -1,13 +1,15 @@
 {% if errors.length %}
 	<div id="errors">
-		<h2>Sorry but we found some issues with the build</h2>
-		{% for error in errors %}
-			<p>
-				{{ error.message }}
-				{% if error.link %}
-					<a href="{{error.link}}">Go</a>
-				{% endif %}
-			</p>
-		{% endfor %}
+		<div class="errorsInner">
+			<h2>Sorry but we need your help.</h2>
+			{% for error in errors %}
+				<p>
+					{{ error.message }}
+					{% if error.link %}
+						<a href="{{error.link}}">Go</a>
+					{% endif %}
+				</p>
+			{% endfor %}
+		</div>
 	</div>
 {% endif %}

@@ -12,15 +12,15 @@
 				<form method="get" action="/builder/">
 					<input style="position: absolute; left:-999em;" type="submit" name="action" value="Download">
 					<div class="header">
-						<h1>Builder</h1>
+						<div class="headerInner">
+							<h1>Builder</h1>
+							<p>Create your own Jessie</p>
+						</div>
 					</div>
 
 					{% include "partials/errors.html" %}
 					{% include "partials/options.html" %}
-					{% include "partials/filters.html" %}
-					{% include "partials/groupIndex.html" %}
 					{% include "partials/functions.html" %}
-					{% include "partials/constructors.html" %}
 					{% include "partials/footer.html" %}
 				</form>
 			</div>
