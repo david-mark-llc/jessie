@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on `Array.prototype.slice`
+Cutting edge where possible, wide support
 */
 
 /*

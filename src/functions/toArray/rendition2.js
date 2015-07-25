@@ -2,7 +2,12 @@
 
 /*
 Description:
-Relies on `Array.prototype.slice`
+Cutting edge, relies on `Array.prototype.slice`
+*/
+
+/*
+Author:
+David Mark
 */
 
 var toArray;

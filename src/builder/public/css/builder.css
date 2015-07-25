@@ -9,6 +9,7 @@
 	right: 0;
 	overflow: hidden;
 	padding: 10px;
+	background-color: #eee;
 }
 
 /*********************************************
@@ -17,10 +18,7 @@
 
 .errorJumper {
 	padding: 10px 20px;
-	display: block;
-	bottom: 10px;
-	left: 10px;
-	z-index: 1;
+	float: left;
 	background-color: #F44336;
 	color: #fff;
 	text-decoration: none;
@@ -30,7 +28,8 @@
 	font-size: 1em;
 	font-family: arial;
 	text-transform: uppercase;
-	float: left;
+	text-align: center;
+	margin-right: 10px;
 }
 
 .errorJumper:hover {
@@ -42,12 +41,7 @@
 *********************************************/
 
 .download {
-	float: right;
 	padding: 10px 20px;
-	display: block;
-	bottom: 10px;
-	right: 10px;
-	z-index: 1;
 	background-color: #FF5722;
 	color: #fff;
 	text-decoration: none;
@@ -57,6 +51,7 @@
 	font-size: 1em;
 	font-family: arial;
 	text-transform: uppercase;
+	float: left;
 }
 
 .download:hover {
@@ -173,11 +168,31 @@
 	font-size: 1.5em;
 }
 
+.function .info {
+	font-weight: bold;
+	font-size: 0.9em;
+	display: inline-block;
+	margin-bottom: 30px;
+	padding: 2px 4px;
+	border-radius: 2px;
+	background-color: #FFE0B2;
+}
+
 .rendition {
-	padding-bottom: 20px;
+	padding: 20px 10px;
+	margin-bottom: 10px;
+	background-color: #f1f1f1;
+	border-radius: 3px;
 }
 
 .rendition .control {
+	overflow: hidden;
+}
+
+.rendition .control input {
+}
+
+.rendition .control label {
 }
 
 .rendition .description {
@@ -204,7 +219,20 @@
 }
 
 .none {
-	padding-bottom: 20px;
+	padding: 20px 10px;
+	margin-bottom: 10px;
+	background-color: #f1f1f1;
+	border-radius: 3px;
+}
+
+.none label {
+	color: #eee;
+	font-style: italic;
+	background-color: #727272;
+	display: inline-block;
+	border-radius: 2px;
+	font-size: 0.8em;
+	padding: 2px 4px;
 }
 
 .rendition .seeAlso {
@@ -216,7 +244,16 @@
 *********************************************/
 
 .actions {
+	background-color: #FF9800;
+	position: relative;
+}
 
+@media (min-width: 860px) {
+	.actionsInner {
+		margin-left: auto;
+		margin-right: auto;
+		width: 820px;
+	}
 }
 
 /*********************************************
