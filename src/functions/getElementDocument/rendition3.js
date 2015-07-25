@@ -1,19 +1,14 @@
-/* */
-
 var getElementDocument;
 
-/* 
- * 
- * getElementDocument
- * 
- * Description: Fork of #1 and #2
- * 
- */
+/*
+Description:
+Wide support. Cutting edge where possible.
+*/
 
 if (isHostObjectProperty(html, 'ownerDocument')) {
     getElementDocument = function(el) {
         return el.ownerDocument;
-    }; 
+    };
 } else {
     getElementDocument = function(el) {
         if (el.parentNode) {
@@ -24,7 +19,7 @@ if (isHostObjectProperty(html, 'ownerDocument')) {
                 return el;
             }
         }
-        
+
         return null;
     }
 }

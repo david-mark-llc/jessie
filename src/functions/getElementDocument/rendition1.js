@@ -1,14 +1,9 @@
-/* */
+var getElementDocument;
 
-var getElementDocument
-
-/* 
- * 
- * getElementDocument
- * 
- * Description:
- * 
- */
+/*
+Description:
+Relies on document.documentElement.ownerDocument
+*/
 
 if (isHostObjectProperty(html, 'ownerDocument')) {
     getElementDocument = function(el) {
