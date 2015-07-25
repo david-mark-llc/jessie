@@ -1,6 +1,11 @@
 var isOwnProperty;
 
 /*
+Description:
+Wide support.
+*/
+
+/*
 Author:
 David Mark
 */

@@ -4,8 +4,12 @@ var trimString;
 
 /*
 Description:
-Relies on 'String.prototype.trim'
-Degrades in IE8
+Cutting edge. Relies on 'String.prototype.trim'
+*/
+
+/*
+Degrades:
+IE8
 */
 
 if (String.prototype.trim) {

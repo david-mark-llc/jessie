@@ -1,6 +1,11 @@
 var isOwnProperty;
 
 /*
+Description:
+Cutting edge. Relises on `Object.prototype.hasOwnProperty`
+*/
+
+/*
 Author:
 David Mark
 */

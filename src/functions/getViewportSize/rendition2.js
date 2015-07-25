@@ -4,12 +4,17 @@ var getViewportSize;
 
 /*
 Description:
-*Excludes* any space occupied by scroll bars
-Degrades: IE3
+Excludes any space occupied by scroll bars.
 */
 
 /*
-Author: David Mark
+Degrades:
+IE3
+*/
+
+/*
+Author:
+David Mark
 */
 
 (function() {

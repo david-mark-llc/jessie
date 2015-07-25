@@ -1,6 +1,11 @@
 /*global global, globalDocument, html*/
 
 /*
+Description:
+Widest support AFAIK
+*/
+
+/*
 Degrades:
 IE3
 */
