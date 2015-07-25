@@ -149,7 +149,7 @@
 *********************************************/
 
 .function {
-	padding: 30px 20px 10px;
+	padding: 30px 20px;
 	border-bottom: 1px solid #DADADA;
 }
 
@@ -163,6 +163,7 @@
 
 .function .name {
 	margin-bottom: 20px;
+	padding-bottom: 10px;
 	color: #F57C00;
 	font-weight: normal;
 	font-size: 1.5em;
@@ -172,7 +173,7 @@
 	font-weight: bold;
 	font-size: 0.9em;
 	display: inline-block;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	padding: 2px 4px;
 	border-radius: 2px;
 	background-color: #FFE0B2;
@@ -180,9 +181,10 @@
 
 .rendition {
 	padding: 20px 10px;
-	margin-bottom: 10px;
+	margin-bottom: 1px;
 	background-color: #f1f1f1;
 	border-radius: 3px;
+	border-bottom: 1px solid #DADADA;
 }
 
 .rendition .control {

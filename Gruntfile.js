@@ -22,12 +22,14 @@ module.exports = function( grunt ){
 				files: [
 					{
 						expand: true,
-						src: [ 'Procfile', 'package.json', 'npm-shrinkwrap.json', 'LICENSE' ],
+						src: [ 'Procfile', 'package.json', 'npm-shrinkwrap.json' ],
 						dest: 'dist/'
 					},{
 						expand: true,
 						cwd: 'src/',
-						src: [ '{constructors,functions,libraries}/**/*' ],
+						src: [ '{constructors,functions,libraries}/**/*', 'LICENSE'
+
+						 ],
 						dest: 'dist/'
 					}
 				]
