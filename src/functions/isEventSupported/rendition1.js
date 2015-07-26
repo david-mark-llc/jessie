@@ -1,6 +1,9 @@
 /*global createElement,isHostMethod */
 
-
+/*
+Description:
+Wide support
+*/
 
 var isEventSupported;
 var supportedEvents = {};

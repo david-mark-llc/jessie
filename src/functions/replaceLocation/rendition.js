@@ -1,11 +1,7 @@
-/* */
- 
-/* replaceLocation
- * 
- * 
- * 
- * 
- */
+/*
+Description:
+Wide support
+*/
 
 var replaceLocation;
 

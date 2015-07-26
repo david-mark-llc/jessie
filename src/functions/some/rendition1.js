@@ -1,6 +1,16 @@
 /*
 Description:
-Relies on `Array.prototype.some` for newer browsers
+Cutting edge. Relies on `Array.prototype.some`.
+*/
+
+/*
+Degrades:
+IE8
+*/
+
+/*
+Author:
+Graham Veal
 */
 
 var some;

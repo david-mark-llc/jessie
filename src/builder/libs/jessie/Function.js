@@ -38,7 +38,8 @@ function JFunction(folder, JessieRendition) {
 		var contents = this.renditions[renditionId-1].getContents();
 		return contents;
 	};
-};
+
+}
 
 JFunction.prototype.metaFileName = 'meta.js';
 

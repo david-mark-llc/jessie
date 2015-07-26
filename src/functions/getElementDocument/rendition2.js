@@ -1,14 +1,9 @@
-/* */
-
 var getElementDocument;
 
-/* 
- * 
- * getElementDocument
- * 
- * Description:
- * 
- */
+/*
+Description:
+Wide support.
+*/
 
 getElementDocument = function(el) {
     if (el.parentNode) {
@@ -19,6 +14,6 @@ getElementDocument = function(el) {
             return el;
         }
     }
-    
+
     return null;
 }

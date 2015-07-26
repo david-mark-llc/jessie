@@ -1,15 +1,15 @@
 /*global inherit, mixin */
 
-var inherit_and_mixin;
+var inheritAndMixin;
 
 /*
 Description:
-Needs documenting
+Wide support
 */
 
 if (inherit && mixin) {
-	inherit_and_mixin = function(sub, super, mixin) {
+	inheritAndMixin = function(sub, super, mixin) {
 		inherit(sub, super);
-		mixin(sub.prototype, mixin);	
+		mixin(sub.prototype, mixin);
 	};
 }

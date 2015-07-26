@@ -1,5 +1,10 @@
 /*global html,isHostObjectProperty */
 
+/*
+Description:
+Wide support
+*/
+
 var findProprietaryStyle;
 
 if(html && isHostObjectProperty(html, "style")){

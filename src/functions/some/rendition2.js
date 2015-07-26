@@ -2,7 +2,7 @@
 
 /*
 Description:
-Replicates Array.prototype.some
+Wide support.
 */
 
 /*
@@ -18,7 +18,7 @@ some = function(arr, iterator, context) {
 		l = arr.length;
 
 	context = context || arr;
-	
+
 	for( ; i < l; i++ ){
 
 		if( iterator.call(context, arr[ i ], i, arr) ){

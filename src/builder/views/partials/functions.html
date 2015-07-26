@@ -37,13 +37,9 @@
 									{% endif %}
 								>
 								<label for="{{currentFunction.name+currentRendition.id}}" >
-									{% if (currentFunction.renditions.length == 1) %}
-										I want this
-									{% else %}
-										{{currentRendition.description}}
-										{% if (currentRendition.degrades) %}
-											<span class="degrades"> &mdash; Degrades in {{currentRendition.degrades}}</span>
-										{% endif %}
+									{{currentRendition.description}}
+									{% if (currentRendition.degrades) %}
+										<span class="degrades"> &mdash; Degrades in {{currentRendition.degrades}}</span>
 									{% endif %}
  								</label>
 							</div>

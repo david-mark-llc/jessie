@@ -1,15 +1,14 @@
-/* */
-
 var getDocumentWindow;
 
 /*
- * getDocumentWindow
- * 
- * Description:
- * 
- * Degrades in: IE8
- * 
- */
+Description:
+Cutting edge. Relies on `document.defaultView`
+*/
+
+/*
+Degrades:
+IE8
+*/
 
 getDocumentWindow = (function() {
     if (isHostObjectProperty(document, 'defaultView') && document.defaultView === this) {
