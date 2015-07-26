@@ -1,6 +1,12 @@
 /*global html,isHostObjectProperty */
 
 var setSize;
+
+/*
+Description:
+Wide support
+*/
+
 if(html && isHostObjectProperty(html, "style")){
   setSize = (function() {
     var px = (typeof html.style.top == 'number') ? 0 : 'px';
