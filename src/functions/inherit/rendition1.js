@@ -1,9 +1,8 @@
 /*global cloneObject*/
 
-
 /*
 Description:
-Needs documenting
+Wide support
 */
 
 /*

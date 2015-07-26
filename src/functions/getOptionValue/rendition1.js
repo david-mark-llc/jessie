@@ -1,4 +1,7 @@
-/* */
+/*
+Description:
+Wide support
+*/
 
 var getOptionValue;
 

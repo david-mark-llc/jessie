@@ -1,15 +1,15 @@
 /*global inherit, fillin */
 
-var inherit_and_fillin;
+var inheritAndFillin;
 
 /*
 Description:
-Needs documenting
+Wide support
 */
 
 if (inherit && fillin) {
-	inherit_and_fillin = function(sub, super, fillin) {
+	inheritAndFillin = function(sub, super, fillin) {
 		inherit(sub, super);
-		fillin(sub.prototype, fillin);	
+		fillin(sub.prototype, fillin);
 	};
 }

@@ -4,7 +4,7 @@ var setInputValue;
 
 /*
 Description:
-setInputValue
+Wide support
 */
 
 setInputValue = function(elInput, value) {
