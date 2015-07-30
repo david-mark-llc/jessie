@@ -1,4 +1,4 @@
-/*global jessieNamespace,html,isHostMethod */
+/*global html,isHostMethod */
 /*
 Description:
 Relies on Microsoft's `el.attachEvent`
@@ -21,7 +21,7 @@ if(html && isHostMethod(html, 'attachEvent')) {
 	// The "theseObjects" variable must be global
 	// or a property of a global object (e.g. a "namespace" object).
 	// Stores references to objects used for - this - object in listeners
-	jessieNamespace.theseObjects = [];
+	jessie.theseObjects = [];
 
 	var theseObjectsIndex = 0;
 
@@ -29,11 +29,11 @@ if(html && isHostMethod(html, 'attachEvent')) {
 		var thisObjectIndex = theseObjectsIndex++;
 
 		// Store reference to object used for - this - in listener
-		jessieNamespace.theseObjects[thisObjectIndex] = el;
+		jessie.theseObjects[thisObjectIndex] = el;
 
 		var listener = function() {
 			var e = window.event;
-			fn.call(jessieNamespace.theseObjects[thisObjectIndex], e);
+			fn.call(jessie.theseObjects[thisObjectIndex], e);
 		};
 
 		el.attachEvent('on'+eventType, listener);
