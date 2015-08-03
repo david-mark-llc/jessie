@@ -30,3 +30,5 @@ if('number' == typeof window.pageXOffset) {
 		return [html.scrollLeft, html.scrollTop];
 	};
 }
+
+// check compatMode and do the getRoot like getViewportSize

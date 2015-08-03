@@ -25,3 +25,5 @@ if (typeof global.innerWidth == 'number') {
 		return [win.innerWidth, win.innerHeight]; // Array
 	};
 }
+
+/* center a dialog e.g */
