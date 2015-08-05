@@ -1,4 +1,4 @@
-/*global html,isHostMethod*/
+/*global html,isHostMethod,canCall*/
 
 /*
 Description:
@@ -7,7 +7,7 @@ Widest support down to IE5.
 
 /*
 Degrades:
-IE4, IE3, NN4
+IE5, NN4
 */
 
 /*
@@ -19,17 +19,11 @@ var attachListener;
 
 if(html && isHostMethod(html, 'addEventListener')) {
 	attachListener = function(el, eventType, fn) {
-
-		var listener = function(e) {
-			fn.call(el, e);
-		};
-
-		el.addEventListener(eventType, listener, false);
-
-		return listener;
+		el.addEventListener(eventType, fn, false);
+		return fn;
 	};
 }
-else if(html && isHostMethod(html, 'attachEvent')) {
+else if(html && isHostMethod(html, 'attachEvent') && canCall) {
 	// The "theseObjects" variable must be global
 	// or a property of a global object (e.g. a "namespace" object).
 	// Stores references to objects used for - this - object in listeners
