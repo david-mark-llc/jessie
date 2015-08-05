@@ -1,4 +1,4 @@
-/*jslint node:true, strict:false*/
+/* jslint node:true, strict:false */
 
 var fs = require('fs');
 var uglifyParser = require("uglify-js").parser;
@@ -20,7 +20,7 @@ var path = require('path');
  * @param options.licensePath {String} Path to license file. Defaults to '../LICENSE'
  */
 function Builder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
-	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'areFeatures'];
+	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'hasFeatures'];
 
 	// function stuff
 	this.functionSet = functionSet;
@@ -39,7 +39,7 @@ function Builder(functionSet, constructorFnSet, requestedFunctions, requestedCon
 	this.setupHeader();
 	this.setupFooter();
 	this.setupHeaderDeclarations();
-};
+}
 
 Builder.prototype.setupOptions = function(options) {
 	this.options = options || {};
