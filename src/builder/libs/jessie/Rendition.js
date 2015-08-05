@@ -90,7 +90,7 @@ function Rendition(func, file) {
 		return contents.join("\n");
 	}.bind(this);
 
-};
+}
 
 /**
  * Checks if this rendition degrades in a particular version of IE
