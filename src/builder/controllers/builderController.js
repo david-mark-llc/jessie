@@ -224,8 +224,6 @@ module.exports = function(req, res) {
 		builder = new JessieBuilder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, builderOptions);
 		buildResponse = builder.build();
 
-		console.log(buildResponse.errors);
-
 		if(buildResponse.errors) {
 			errors = getErrorsInViewFriendlyFormat(buildResponse.errors);
 			res.render('builder', {
