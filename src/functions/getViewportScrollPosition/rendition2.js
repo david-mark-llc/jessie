@@ -2,7 +2,12 @@
 
 /*
 Description:
-No quirks mode, frames or other windows (just the one running the script)
+Widest support
+*/
+
+/*
+Degrades:
+IE5.5
 */
 
 /*
@@ -12,21 +17,41 @@ David Mark
 
 var getViewportScrollPosition;
 
-if('number' == typeof window.pageXOffset) {
+(function() {
 
-	/*
-	Many "standards-based" browsers feature this non-standard property. No ambiguity about what this window property means
-	 */
-	getViewportScrollPosition = function() {
-		return [window.pageXOffset, window.pageYOffset];
-	};
+	var getRoot;
 
-} else if(html && 'number' == typeof html.scrollTop) {
+	if('number' == typeof window.pageXOffset) {
+		/*
+		Many "standards-based" browsers feature this non-standard property. No ambiguity about what this window property means
+		 */
+		getViewportScrollPosition = function(win) {
+			if (!win) {
+				win = window;
+			}
+			return [win.pageXOffset, win.pageYOffset];
+		};
 
-	/*
-	Proprietary IE properties, copied widely by others; often 0,0 in mobile browsers; ambiguous as many mobiles represent an un-scrolled document (i.e.scrollHeight == clientHeight), regardless of which portion of document is viewable
-	 */
-	getViewportScrollPosition = function() {
-		return [html.scrollLeft, html.scrollTop];
-	};
-}
+	} else if(html && 'number' == typeof html.scrollTop) {
+
+		if (typeof globalDocument.compatMode == 'string') {
+			getRoot = function(win /* window */) {
+				var doc = win.document,
+					html = doc.documentElement,
+					compatMode = doc.compatMode;
+
+				return compatMode.toLowerCase().indexOf('css') == -1 ? doc.body : html;
+			};
+		}
+
+		if (getRoot) {
+			getViewportScrollPosition = function(win /* window */) {
+				if (!win) {
+					win = window;
+				}
+				var root = getRoot(win);
+				return [root.scrollLeft, root.scrollTop];
+			};
+		}
+	}
+})();

@@ -1,49 +1,57 @@
-/*global globalDocument,html */
-
-var getViewportSize;
+/*global global, globalDocument, html*/
 
 /*
 Description:
-Excludes any space occupied by scroll bars.
+Widest support. May include space occupid by scrol bar. So don't use to attempt to cover the viewport, which is ill-advised.
 */
 
 /*
 Degrades:
-IE3
+IE5.5
 */
 
-/*
-Author:
-David Mark
-*/
+var getViewportSize;
 
 (function() {
+
 	var getRoot;
 
-	if (typeof globalDocument.compatMode == 'string') {
-		getRoot = function(win /* window */) {
-			var doc = win.document,
-				html = doc.documentElement,
-				compatMode = doc.compatMode;
-
-			return compatMode.toLowerCase().indexOf('css') == -1 ? doc.body : html; // element
-		};
-	} else if (typeof html.clientWidth == 'number') {
-		getRoot = function(win /* window */) {
-			var doc = win.document,
-				html = doc.documentElement;
-
-			return html.clientWidth === 0 ? doc.body : html; // element
-		};
-	}
-
-	if (getRoot) {
+	if (typeof global.innerWidth == 'number') {
 		getViewportSize = function(win /* window */) {
 			if (!win) {
 				win = window;
 			}
-			var root = getRoot(win);
-			return [root.clientWidth, root.clientHeight]; // Array
+			return [win.innerWidth, win.innerHeight];
 		};
+	} else  {
+		if (typeof globalDocument.compatMode == 'string') {
+			getRoot = function(win /* window */) {
+				var doc = win.document,
+					html = doc.documentElement,
+					compatMode = doc.compatMode;
+
+				return compatMode.toLowerCase().indexOf('css') == -1 ? doc.body : html;
+			};
+
+		// The following fork must be deferred which is not yet implemented in jessie. This fork is for a rendition that works in ie5 and under so isn't particularly necessary anyway
+		} else if (typeof html.clientWidth == 'number') {
+			getRoot = function(win /* window */) {
+				var doc = win.document,
+					html = doc.documentElement;
+
+				return html.clientWidth === 0 ? doc.body : html;
+			};
+		}
+
+		if (getRoot) {
+			getViewportSize = function(win /* window */) {
+				if (!win) {
+					win = window;
+				}
+				var root = getRoot(win);
+				return [root.clientWidth, root.clientHeight];
+			};
+		}
 	}
+
 })();
