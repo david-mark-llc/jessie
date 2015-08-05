@@ -21,27 +21,25 @@ var getViewportSize;
 			if (!win) {
 				win = window;
 			}
-			return [win.innerWidth, win.innerHeight]; // Array
+			return [win.innerWidth, win.innerHeight];
 		};
 	} else  {
-
 		if (typeof globalDocument.compatMode == 'string') {
 			getRoot = function(win /* window */) {
 				var doc = win.document,
 					html = doc.documentElement,
 					compatMode = doc.compatMode;
 
-				return compatMode.toLowerCase().indexOf('css') == -1 ? doc.body : html; // element
+				return compatMode.toLowerCase().indexOf('css') == -1 ? doc.body : html;
 			};
 
-		// either get rid of fork or do deferred
-		// only for rendition that would work in ie5 and under
+		// The following fork must be deferred which is not yet implemented in jessie. This fork is for a rendition that works in ie5 and under so isn't particularly necessary anyway
 		} else if (typeof html.clientWidth == 'number') {
 			getRoot = function(win /* window */) {
 				var doc = win.document,
 					html = doc.documentElement;
 
-				return html.clientWidth === 0 ? doc.body : html; // element
+				return html.clientWidth === 0 ? doc.body : html;
 			};
 		}
 
@@ -51,22 +49,9 @@ var getViewportSize;
 					win = window;
 				}
 				var root = getRoot(win);
-				return [root.clientWidth, root.clientHeight]; // Array
+				return [root.clientWidth, root.clientHeight];
 			};
 		}
 	}
 
 })();
-
-// if(innerWidth) {
-
-// } else if(compatMode) {
-// 	if(document.documentElement.clientWidth) {
-
-// 	}
-// }
-
-// innerWidth
-// else
-// 	document.documentELement.clientWidth
-
