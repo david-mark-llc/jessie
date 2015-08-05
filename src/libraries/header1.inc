@@ -14,11 +14,11 @@ jessie = jessie || {};
 					type == 'object' && null !== objectMethod ||
 					type == 'unknown';
 		},
-		areFeatures = function() {
+		hasFeatures = function() {
 			var i = arguments.length;
 			while (i--) {
 				if (!jessie[arguments[i]]) {
-				return false;
+					return false;
 				}
 			}
 			return true;
