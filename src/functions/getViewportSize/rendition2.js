@@ -2,7 +2,7 @@
 
 /*
 Description:
-Widest support AFAIK
+Widest support
 */
 
 /*

@@ -2,7 +2,7 @@
 
 /*
 Description:
-Will likely include space occupied by scroll bars. Viewport `meta` tag required. Realises on `window.innerWidth`.
+Cutting edge, will include space occupied by scroll bars. Fine for working out how to center a dialog for example.
 */
 
 /*
@@ -22,8 +22,6 @@ if (typeof global.innerWidth == 'number') {
 		if (!win) {
 			win = window;
 		}
-		return [win.innerWidth, win.innerHeight]; // Array
+		return [win.innerWidth, win.innerHeight];
 	};
 }
-
-/* center a dialog e.g */
