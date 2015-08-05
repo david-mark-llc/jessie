@@ -2,7 +2,7 @@
 
 /*
 Description:
-Both W3C and MS implementation therefore providing the greatest browser support
+Widest support down to IE5.
 */
 
 /*

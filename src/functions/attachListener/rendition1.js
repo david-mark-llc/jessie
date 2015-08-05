@@ -1,7 +1,7 @@
 /*global html,isHostMethod */
 /*
 Description:
-Relies on W3C `el.addEventListener`
+Cutting edge.
 */
 
 /*
