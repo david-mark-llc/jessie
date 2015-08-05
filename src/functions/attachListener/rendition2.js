@@ -1,12 +1,13 @@
-/*global html,isHostMethod */
+/*global html,isHostMethod*/
+
 /*
 Description:
-Relies on Microsoft's `el.attachEvent`
+Both W3C and MS implementation therefore providing the greatest browser support
 */
 
 /*
 Degrades:
-IE10, IE9, IE4, IE3, Opera 8+, Chrome, FF, Safari
+IE4, IE3, NN4
 */
 
 /*
@@ -16,8 +17,19 @@ David Mark
 
 var attachListener;
 
-if(html && isHostMethod(html, 'attachEvent')) {
+if(html && isHostMethod(html, 'addEventListener')) {
+	attachListener = function(el, eventType, fn) {
 
+		var listener = function(e) {
+			fn.call(el, e);
+		};
+
+		el.addEventListener(eventType, listener, false);
+
+		return listener;
+	};
+}
+else if(html && isHostMethod(html, 'attachEvent')) {
 	// The "theseObjects" variable must be global
 	// or a property of a global object (e.g. a "namespace" object).
 	// Stores references to objects used for - this - object in listeners
