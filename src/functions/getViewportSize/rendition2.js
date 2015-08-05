@@ -2,7 +2,7 @@
 
 /*
 Description:
-Widest support
+Widest support. May include space occupid by scrol bar. So don't use to attempt to cover the viewport, which is ill-advised.
 */
 
 /*
