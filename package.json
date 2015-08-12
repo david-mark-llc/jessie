@@ -10,7 +10,8 @@
     "deploy": "cd dist && npm install --production; haikro build deploy --app jessie --heroku-token `heroku auth:token`",
     "runDist": "npm run dist && cd dist && npm install --production && node builder/app.js",
     "build": "npm run dist && grunt compress",
-    "clean": "grunt clean"
+    "clean": "grunt clean",
+    "app": "node src/builder/app.js"
   },
   "dependencies": {
     "body-parser": "^1.12.4",

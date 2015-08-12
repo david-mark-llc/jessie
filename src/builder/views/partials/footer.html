@@ -1,7 +1,7 @@
 <div id="actions">
 	<div class="actionsInner">
 		{% if errors.length %}
-			<a class="errorJumper" href="#errors"> {{errors.length}} Errors</a>
+			<a class="errorJumper" href="#errors"> {{errors.length}} Error{% if errors.length > 1 %}s{% endif %}</a>
 		{% endif %}
 		<input class="download" type="submit" name="action" value="Download">
 	</div>
