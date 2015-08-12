@@ -5,7 +5,7 @@
   "description": "Jessie Builder",
   "scripts": {
     "start": "node builder/app.js",
-    "local": "nodemon src/builder/app.js",
+    "local": "nodemon src/builder/app.js --watch src/builder",
     "dist": "npm shrinkwrap && grunt",
     "deploy": "cd dist && npm install --production; haikro build deploy --app jessie --heroku-token `heroku auth:token`",
     "runDist": "npm run dist && cd dist && npm install --production && node builder/app.js",

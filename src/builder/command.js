@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/*jslint node:true, strict:false */
+/*jshint node:true, strict:false */
 
 var program = require('commander');
 var fs = require('fs');

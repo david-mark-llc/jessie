@@ -1,4 +1,4 @@
-/*jslint node:true, strict:false*/
+/*jshint node:true, strict:false*/
 
 var path = require('path');
 var Set = require('simplesets').Set;

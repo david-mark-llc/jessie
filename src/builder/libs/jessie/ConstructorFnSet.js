@@ -1,4 +1,4 @@
-/*jslint node:true, strict:false*/
+/*jshint node:true, strict:false*/
 
 var path = require('path');
 var fs = require('fs');
@@ -8,7 +8,7 @@ function ConstructorFnSet(constructorRoot, JessieConstructorFn, JessiePrototypeM
 	this.JessieConstructorFn = JessieConstructorFn;
 	this.JessiePrototypeMethod = JessiePrototypeMethod;
 	this.constructorFns = [];
-};
+}
 
 ConstructorFnSet.prototype.create = function() {
 	var fileNames = fs.readdirSync(this.constructorRoot).filter(function(fileName){

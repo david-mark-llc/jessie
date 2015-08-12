@@ -1,4 +1,4 @@
-/*jslint node:true, strict:false*/
+/*jshint node:true, strict:false*/
 
 var fs = require('fs');
 var path = require('path');
@@ -13,7 +13,7 @@ function FunctionSet(functionRoot, JessieFunction, JessieRendition) {
 	this.JessieRendition = JessieRendition;
 	this.functionRoot = functionRoot;
 	this.functions = [];
-};
+}
 FunctionSet.prototype.create = function() {
 	this.functions = [];
 	// find fileNames based on directory inside root
@@ -49,8 +49,8 @@ FunctionSet.prototype.getFunctions = function() {
 FunctionSet.prototype.getFunctionsFilteredByIEVersion = function(version) {
 	this.create();
 	var fns = [],
-		fn = null,
-		renditions;
+		fn = null;
+
 	for(var i = 0; i < this.functions.length; i++) {
 		fn = this.functions[i];
 		fn.renditions = fn.getRenditionsFilteredByIEVersion(version);
