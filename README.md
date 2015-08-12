@@ -1,3 +1,3 @@
 # Jessie
 
-To find out more [view the wiki](https://github.com/rassie/jessie/wiki).
+To find out more [view the wiki](https://github.com/cinsoft/jessie/wiki).
