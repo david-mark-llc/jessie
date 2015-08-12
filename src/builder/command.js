@@ -3,6 +3,7 @@
 
 var program = require('commander');
 var fs = require('fs');
+var pkg = require( '../../package.json' );
 
 var JessieFunction = require('../builder/libs/jessie/Function.js');
 var JessieRendition = require('../builder/libs/jessie/Rendition.js');
@@ -27,7 +28,7 @@ var firstError;
 var message;
 
 program
-	.version('0.0.1')
+	.version( pkg.version )
 	.usage('[options] <functions ...>')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
 	.option('-m --minify [level]', 'Minification level.')
