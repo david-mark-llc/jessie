@@ -20,7 +20,7 @@ var path = require('path');
  * @param options.licensePath {String} Path to license file. Defaults to '../LICENSE'
  */
 function Builder(functionSet, constructorFnSet, requestedFunctions, requestedConstructorFns, options) {
-	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'hasFeatures'];
+	this.defaultExports = ['isHostMethod', 'isHostObjectProperty', 'hasFeatures', 'isRealObjectProperty'];
 
 	// function stuff
 	this.functionSet = functionSet;
