@@ -1,3 +1,7 @@
+/*jshint node:true, strict: false */
+
+var path = require('path');
+
 var JessieFunction = require('../libs/jessie/Function.js');
 var JessieRendition = require('../libs/jessie/Rendition.js');
 var JessieConstructorFn = require('../libs/jessie/ConstructorFn.js');
@@ -5,15 +9,14 @@ var JessiePrototypeMethod = require('../libs/jessie/PrototypeMethod.js');
 var JessieConstructorFnSet = require('../libs/jessie/ConstructorFnSet.js');
 var JessieFunctionSet = require('../libs/jessie/FunctionSet.js');
 var JessieBuilder = require('../libs/jessie/Builder.js');
-var path = require('path');
+
+var excludedQuerystringKeys = [];
 
 var functionSet = new JessieFunctionSet(path.resolve(__dirname, '../../functions/'), JessieFunction, JessieRendition);
 var constructorFnSet = new JessieConstructorFnSet(path.resolve(__dirname, '../../constructors/'), JessieConstructorFn, JessiePrototypeMethod);
 
 functionSet.create();
 constructorFnSet.create();
-
-var excludedQuerystringKeys = [];
 
 // add constructor names to exluded keys for building up functions
 constructorFnSet.getConstructorFns().forEach(function(constructorFn) {
@@ -179,7 +182,6 @@ module.exports = function(req, res) {
 	var requestedFunctions;
 	var functions;
 	var requestedConstructorFns;
-	var namespace;
 	var minificationLevel;
 	var scaffolding = false;
 	var fileName = 'jessie';

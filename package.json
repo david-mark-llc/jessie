@@ -5,7 +5,7 @@
   "description": "Jessie Builder",
   "scripts": {
     "start": "node builder/app.js",
-    "local": "node_modules/nodemon/bin/nodemon.js src/builder/app.js",
+    "local": "nodemon src/builder/app.js --watch src/builder",
     "dist": "npm shrinkwrap && grunt",
     "deploy": "cd dist && npm install --production; haikro build deploy --app jessie --heroku-token `heroku auth:token`",
     "runDist": "npm run dist && cd dist && npm install --production && node builder/app.js",
@@ -22,7 +22,6 @@
     "uglify-js": "1.3.3"
   },
   "devDependencies": {
-    "cli-table": "0.2.0",
     "commander": "1.1.1",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",

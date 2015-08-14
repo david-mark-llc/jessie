@@ -1,12 +1,13 @@
-/*jslint node:true, strict:false*/
+/*jshint node:true, strict:false*/
 
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var swig = require('swig');
 var swigExtras = require('swig-extras');
-var port = process.env.PORT || 1337;
 var path = require('path');
+
+var port = process.env.PORT || 1337;
+var app = express();
 
 app.set('views', path.resolve(__dirname, 'views'));
 

@@ -1,36 +1,34 @@
 #!/usr/bin/env node
-/*jslint node:true, strict:false */
+/*jshint node:true, strict:false */
 
-var program = require('commander'),
-	Table = require('cli-table'),
-	Set = require('simplesets').Set,
-	fs = require('fs'),
-	path = require('path'),
-	jsp = require("uglify-js").parser,
-	pro = require("uglify-js").uglify,
-	JessieFunction = require('../builder/libs/jessie/Function.js'),
-	JessieRendition = require('../builder/libs/jessie/Rendition.js'),
-	JessieConstructorFn = require('../builder/libs/jessie/ConstructorFn.js'),
-	JessiePrototypeMethod = require('../builder/libs/jessie/PrototypeMethod.js'),
-	JessieFunctionSet = require('../builder/libs/jessie/FunctionSet.js'),
-	JessieConstructorFnSet = require('../builder/libs/jessie/ConstructorFnSet.js'),
-	JessieBuilder = require('../builder/libs/jessie/Builder.js'),
-	functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition),
-	constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod),
-	requestedFunctions = [],
-	requestedConstructorFns = [],
-	buildOptions = {
+var program = require('commander');
+var fs = require('fs');
+var pkg = require( '../../package.json' );
+
+var JessieFunction = require('../builder/libs/jessie/Function.js');
+var JessieRendition = require('../builder/libs/jessie/Rendition.js');
+var JessieConstructorFn = require('../builder/libs/jessie/ConstructorFn.js');
+var JessiePrototypeMethod = require('../builder/libs/jessie/PrototypeMethod.js');
+var JessieFunctionSet = require('../builder/libs/jessie/FunctionSet.js');
+var JessieConstructorFnSet = require('../builder/libs/jessie/ConstructorFnSet.js');
+var JessieBuilder = require('../builder/libs/jessie/Builder.js');
+
+var functionSet = new JessieFunctionSet('../functions/', JessieFunction, JessieRendition);
+var constructorFnSet = new JessieConstructorFnSet('../constructors/', JessieConstructorFn, JessiePrototypeMethod);
+var buildOptions = {
 		headerPath: '../libraries/header1.inc',
 		footerPath: '../libraries/footer1.inc'
-	},
-	builder = null,
-	response = null,
-	output = null,
-	firstError,
-	message;
+	};
+var requestedFunctions = [];
+var requestedConstructorFns = [];
+var builder = null;
+var response = null;
+var output = null;
+var firstError;
+var message;
 
 program
-	.version('0.0.1')
+	.version( pkg.version )
 	.usage('[options] <functions ...>')
 	.option('-o, --output [file]', 'The file to output to (outputs to stdout by default)')
 	.option('-m --minify [level]', 'Minification level.')

@@ -1,4 +1,4 @@
-/*jslint node:true, strict:false*/
+/*jshint node:true, strict:false*/
 
 var path = require('path');
 var fs = require('fs');
@@ -27,7 +27,7 @@ function ConstructorFn(folder, PrototypeMethod) {
 			}.bind(this)
 		}
 	});
-};
+}
 
 ConstructorFn.prototype.getDependencies = function() {
 	return [];
