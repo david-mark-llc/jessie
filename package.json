@@ -1,12 +1,12 @@
 {
   "name": "Jessie",
-  "version": "0.0.19",
+  "version": "0.0.17",
   "repository": "https://github.com/david-mark/jessie.git",
   "description": "Jessie Builder",
   "scripts": {
     "start": "node builder/app.js",
     "runDev": "nodemon src/builder/app.js --watch src/builder",
-    "runDist": "npm run predeploy && node builder/app.js",
+    "runDist": "npm run predeploy && node dist/builder/app.js",
     "clean-modules": "rm -rf node_modules/ && npm install && npm shrinkwrap",
     "bump-patch": "npm version patch -m 'Release %s' && npm run release",
     "bump-minor": "npm version minor -m 'Release %s' && npm run release",
