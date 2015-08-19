@@ -5,13 +5,17 @@
   "description": "Jessie Builder",
   "scripts": {
     "start": "node builder/app.js",
-    "local": "nodemon src/builder/app.js --watch src/builder",
-    "dist": "npm shrinkwrap && grunt",
-    "deploy": "cd dist && npm install --production; haikro build deploy --app jessie --heroku-token `heroku auth:token`",
-    "runDist": "npm run dist && cd dist && npm install --production && node builder/app.js",
-    "build": "npm run dist && grunt compress",
-    "clean": "grunt clean",
-    "app": "node src/builder/app.js"
+    "runDev": "nodemon src/builder/app.js --watch src/builder",
+    "runDist": "npm run predeploy && node builder/app.js",
+    "clean-modules": "rm -rf node_modules/ && npm install && npm shrinkwrap",
+    "bump-patch": "npm version patch && npm run release",
+    "bump-minor": "npm version minor && npm run release",
+    "bump-major": "npm version major && npm run release",
+    "release": "git add package.json npm-shrinkwrap.json && git commit -m 'Release ${npm_package_version}' && git push && git push --tags",
+    "build": "npm shrinkwrap && grunt",
+    "predeploy": "npm run build && cd dist && npm install --production",
+    "deploy": "haikro build deploy --app jessie --heroku-token `heroku auth:token`",
+    "clean": "grunt clean"
   },
   "dependencies": {
     "body-parser": "^1.12.4",
