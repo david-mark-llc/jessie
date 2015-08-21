@@ -96,3 +96,20 @@ This part varies - sometimes it's one line for detection and sometimes it's more
 ### Scaffolding tokens
 
 The scaffolding is only required for development as hints for developers using the function in the wrong way. See attachWindowListener for an example. The builder has an option to remove scaffolding and you must use the above delimiters `/*SCAFFOLDING:End*/` and `/*SCAFFOLDING:End*/` when defining any scaffolding in the implementation.
+
+## Progressive Enhancement Javascript articles
+
+* [Attaching and detaching event listeners](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/b94b12547ed572f8?hl=en&noredirect=true)
+* [The load problem and related matters](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/6d5575fd79d1169d?hl=en&noredirect=true)
+* [Creating XHR objects](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/4323efb65cebb31e/a4f28c7fbe305bca?hl=en&lnk=gst&q=ow+to+Create+an+XHR)
+* [Properties and attributes](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/838804e32224601f/502a23cab0057bcd?hl=en&lnk=gst&q=tip+of+the+day+david)
+* [Adding and removing host objects](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/d1f64857442e3b10/3d3d3d0174a46bcb?hl=en&lnk=gst&q=tip+of+the+day+david)
+* [Measuring element dimensions](https://groups.google.com/group/comp.lang.javascript/msg/8178b2d490d34b0e?hl=en)
+* [Computing styles](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/fb7af3e938d90588?hl=en&noredirect=true)
+* [Getting and setting html](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/410f4294e4fa8a04?hl=en&noredirect=true)
+* [Querying elements](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/f80345226219d424?hl=en&noredirect=true)
+* [Querying single elements](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/7d5a7e0d60081a77?hl=en&noredirect=true)
+* [Determining element position](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/cd625a14ce603084?hl=en&noredirect=true)
+* [Measuring the viewport](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/c611a7fecdb75edb/d4cce070c87c270b)
+
+You can also use[My Library](http://www.cinsoft.net) code for reference and for porting over.
