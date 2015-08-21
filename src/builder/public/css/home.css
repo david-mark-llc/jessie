@@ -7,8 +7,9 @@
 #home h1 {
 	margin: 0px 20px 20px;
 	text-align: center;
-	font-size: 2em;
+	font-size: 3em;
 	font-weight: normal;
+	text-transform: uppercase;
 }
 
 #home .get a {
@@ -18,18 +19,25 @@
 	color: white;
 	text-decoration: none;
 	text-align: center;
-	border-radius: 3px;
+	border-radius: 10px;
 	margin: 0 auto;
-	width: 230px;
-	padding: 10px 20px;
+	width: 220px;
+	padding: 20px 30px;
+	text-transform: uppercase;
+	box-shadow: 1px 1px 5px #ccc;
+}
 
+#home .get a:hover {
+	box-shadow: none;
+	background-color: #FF5722;
 }
 
 #home .because {
-	font-size: 1em;
+	font-size: 1.3em;
 	margin: 20px 2em;
 	color: #727272;
 	text-align: center;
+	font-style: italic;
 }
 
 #home h2 {
