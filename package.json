@@ -14,7 +14,7 @@
     "release": "git push && git push --tags",
     "build": "npm shrinkwrap && grunt",
     "predeploy": "npm run build && cd dist && npm install --production",
-    "deploy": "haikro build deploy --app jessie --heroku-token `heroku auth:token`",
+    "deploy": "cd dist && haikro build deploy --app jessie --heroku-token `heroku auth:token`",
     "clean": "grunt clean"
   },
   "dependencies": {
