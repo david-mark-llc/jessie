@@ -11,7 +11,7 @@ npm install
 Now, start the app:
 
 ```bash
-npm run local
+npm run runDev
 ```
 
 ## Further docs

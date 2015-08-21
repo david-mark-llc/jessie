@@ -10,13 +10,41 @@
 	<body>
 		<div id="container">
 			<div id="home">
-				<h1>Jessie</h1>
+				<div class="main">
+					<h1>Jessie</h1>
 
-				<!-- <h2>Build your own Jessie to your exact project requirements</h2> -->
+					<p class="get"><a href="/builder/">Create your own Jessie</a></p>
 
-				<p class="get"><a href="/builder/">Create your own Jessie</a></p>
+					<p class="because">Be cutting edge responsibly</p>
+				</div>
 
-				<p class="because">Because you're only as good as your lowest level function.</p>
+				<div class="more">
+
+					<h2>What is Jessie?</h2>
+
+					<p>It's not a JS library. It is a repository of cross-browser JS functions, primarily focused on the DOM (an area touched on by virtually every JS library). It includes a Node and Web-based builder that creates custom JS libraries.</p>
+
+					<h2>Why Jessie?</h2>
+
+					<p>Jessie creates custom context-sensitive and cross-browser DOM libraries. This replaces the typical mishmash of redundant, general-purpose DOM layers found in JS libraries and frameworks. Some such layers are audacious enough to create bogus host objects (often referred to as "polyfills"). It should be obvious that combining multiple DOM layers, polyfills, etc. obfuscates the context in which scripts can be expected to work, which eliminates any possibility of a cross-browser application.</p>
+
+					<p>These cross-browser libraries can be expected to work in environments that provide all required host objects in working order and to do nothing in other environments. These other environments may be old browsers, may be new browsers, may be "current" browsers in a new configuration or may not be browsers in the current sense at all; it's a catch-all, "none of the above" categorization. You just don't know.</p>
+
+					<p>The only safe and expedient solution in the face of the unknown or unexpected is to do nothing and allow the content to be presented as if scripting was disabled by the user or admin, a firewall ate the script, some other plug-in or proxy ate it, the user is actually a search engine spider, etc. This case must always be considered rather than dismissed in speculation about the availability and popularity of JS. Turns out this practice isn't just for search engines; it greatly simplifies the design and implementation of enhanced Web applications.</p>
+
+					<h2>Why you?</h2>
+
+					<p>Why not? Who wants to remember all of those browsers, versions, omissions, additions, bugs, etc. With cross-browser scripting and Jessie, you don't have to. By the same token, who wants to keep track of jQuery versions, plug-in versions, etc. and who would want to send a lot of redundant DOM gibberish (e.g. jQuery and the like) to battery-powered mobile devices anyway? Much of the bulk is to provide alternatives for old versions of Internet Explorer. You can bet your iPhone and Android users don't want all of that junk, particularly those that get charged for data overages.</p>
+
+					<p>With Jessie you can create libraries that take full advantage of all the latest advancements in browsers (e.g. HTML5 and CSS3, which are often marketed as one magic feature) and make it trivial for calling apps to bail out if one or more needed features is missing or broken.</p>
+
+					<p>This is how cross-browser scripting is done and you can't do it with monolithic, context-less, perpetually "maintained" scripts like jQuery. Those are multi-browser (at best) by definition. They can only be expected to work in environments where they have been demonstrated to work (which excludes all future browsers or browser-like things). Next year jQuery (for example) is removing all "support" for Internet Explorer 8- (not a typo) and presumably for compatibility modes as well. Applications that are "upgraded" will then blow up in these browsers (or modes) in ways likely unforeseen by their authors. This sort of perpetual futility is quite common in the industry making it easy to displace competitors that operate strictly on blind faith.</p>
+
+					<p>Over the course of roughly the last fifteen years, the multi-browser, get-it-done-now, show-me-where-it-fails, "pragmatic" approach has worked about as well as can be expected. The results are similar to most other time (or money) saving strategies involving fortune telling.</p>
+
+					<p>So again, why not? Try something different. It's the universal solution for things that don't work.</p>
+				</div>
+
 			</div>
 		</div>
 
