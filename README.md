@@ -14,16 +14,10 @@ Now, start the app:
 npm run local
 ```
 
-## Releasing
+## More
 
-Whenever `origin master` changes...
+[How to release a new version](docs/Deploy.md)
 
-1. `npm run bump-patch/bump-minor/bump-major`
+[How to deploy to Heroku](docs/Deploy.md)
 
-2. (Optional) Release on Github with a title and description of the change log.
-
-## Deploying to Heroku
-
-1. `npm run deploy`
-
-2. `heroku open`
+[How to author a new function](docs/Authoring.md)
