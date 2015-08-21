@@ -1,7 +1,5 @@
 # Jessie
 
-To find out more [view the wiki](https://github.com/cinsoft/jessie/wiki).
-
 ## Getting started
 
 First install the dependencies:
@@ -10,16 +8,22 @@ First install the dependencies:
 npm install
 ```
 
-Now you should be able to start the app:
-
-```bash
-npm run app
-```
-
-When working on the node part of the project, it's easier to have the app restart when changes to the source are made:
+Now, start the app:
 
 ```bash
 npm run local
 ```
 
-Now when you make changes to the node source files, node will restart automatically.
+## Releasing
+
+Whenever `origin master` changes...
+
+1. npm run bump-patch/bump-minor/bump-major
+
+2. (Optional) Release on Github with a title and description of the change log.
+
+## Deploying to Heroku
+
+1. `npm run deploy`
+
+2. `heroku open`
