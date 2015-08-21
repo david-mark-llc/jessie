@@ -16,7 +16,7 @@ npm run local
 
 ## More
 
-[How to release a new version](docs/Deploy.md)
+[How to release a new version](docs/Release.md)
 
 [How to deploy to Heroku](docs/Deploy.md)
 
