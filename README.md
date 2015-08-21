@@ -14,10 +14,12 @@ Now, start the app:
 npm run local
 ```
 
-## More
+## Further docs
 
 [How to release a new version](docs/Release.md)
 
 [How to deploy to Heroku](docs/Deploy.md)
 
 [How to author a new function](docs/Authoring.md)
+
+[How to use the CLI builder](docs/CLI-Builder.md)
