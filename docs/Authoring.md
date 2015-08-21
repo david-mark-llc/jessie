@@ -97,6 +97,10 @@ This part varies - sometimes it's one line for detection and sometimes it's more
 
 The scaffolding is only required for development as hints for developers using the function in the wrong way. See attachWindowListener for an example. The builder has an option to remove scaffolding and you must use the above delimiters `/*SCAFFOLDING:End*/` and `/*SCAFFOLDING:End*/` when defining any scaffolding in the implementation.
 
+## Code conventions
+
+	(function() {}())
+
 ## Progressive Enhancement Javascript articles
 
 * [Attaching and detaching event listeners](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/b94b12547ed572f8?hl=en&noredirect=true)
