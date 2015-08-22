@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on the `el.classList.remove`
+Cutting edge only
 */
 
 /*
