@@ -2,12 +2,12 @@
 
 /*
 Description:
-Relies on MS `window.detachEvent`
+Cutting edge (W3 compliant), and handles Microsoft event model
 */
 
 /*
 Degrades:
-IE10, IE9, IE4, NN4, Opera 8+,Chrome, FF, Safari
+NN4, IE4, IE3
 */
 
 /*
@@ -17,7 +17,11 @@ Adam Silver
 
 var detachWindowListener;
 
-if(window && isHostMethod(window, 'detachEvent')) {
+if(window && isHostMethod(window, 'removeEventListener')) {
+	detachWindowListener = function(eventType, fn) {
+		return window.removeEventListener(eventType, fn);
+	};
+} else if(window && isHostMethod(window, 'detachEvent')) {
 	detachWindowListener = function(eventType, fn) {
 		return window.detachEvent('on'+eventType, fn);
 	};
