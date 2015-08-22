@@ -1,6 +1,6 @@
 {
   "name": "Jessie",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "dependencies": {
     "body-parser": {
       "version": "1.13.2",
