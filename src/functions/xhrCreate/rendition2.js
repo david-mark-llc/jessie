@@ -2,12 +2,12 @@
 
 /*
 Description:
-Uses one of Internet Explorer's ActiveXObjects and gives support for IE5-IE6
+Cutting edge (W3 compliant) where possible, falling back to Microsoft implementations (ActiveXObject) providing wide support.
 */
 
 /*
 Degrades:
-IE10, IE9, IE4, IE3, NN4, Chrome, FF, Safari, Opera
+IE4, IE3, NN4
 */
 
 /*
@@ -28,14 +28,25 @@ var createXhrFunctions = [
           return new global.ActiveXObject("Msxml2.XMLHTTP.6.0");
         }
 	],
-	xhrCreate,
-	i;
+	i,
+	xhrCreate;
 
-for (i=createXhrFunctions.length; i--; ) {
+if(isHostMethod(global, "XMLHttpRequest")) {
 	try {
-		if (createXhrFunctions[i]()) {
-			xhrCreate = createXhrFunctions[i];
+		if(new global.XMLHttpRequest()) {
+			xhrCreate = function() {
+				return new XMLHttpRequest();
+			};
 		}
 	}
-	catch (e) {}
+	catch(e) {}
+} else if(isHostMethod(global, 'ActiveXObject')) {
+	for (i=createXhrFunctions.length; i--; ) {
+		try {
+			if (createXhrFunctions[i]()) {
+				xhrCreate = createXhrFunctions[i];
+			}
+		}
+		catch (e) {}
+	}
 }
