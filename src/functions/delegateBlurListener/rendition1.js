@@ -1,16 +1,14 @@
 /*global delegateListener,isEventSupported*/
 
 /*
-
-For browsers that support focusout event. i.e. not firefox
-
+Description:
+For browsers that support focusout i.e. not Firefox
 */
 
 /*
-Description:
-Focus out support
+Author:
+Adam Silver
 */
-
 
 var delegateBlurListener;
 

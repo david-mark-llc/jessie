@@ -2,7 +2,7 @@
 
 /*
 Description:
-Wide support
+For browsers that support focusout i.e. not Firefox, or browsers that can capture (W3 compliant). Wide support.
 */
 
 
