@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on the `el.classList.contains`
+Cutting edge
 */
 
 /*
