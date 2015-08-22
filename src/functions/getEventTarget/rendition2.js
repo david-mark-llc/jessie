@@ -1,6 +1,6 @@
 /*
 Description:
-For both W3C `e.target` and MS `e.srcElement`
+Cutting edge (W3 compliant) where possible, also handles Microsoft event model. Widest support.
 */
 
 /*
@@ -15,16 +15,18 @@ IE4, IE3, NN4
 
 var getEventTarget;
 
-getEventTarget = function(e) {
-	var target = e.target;
-	if (target) {
+if(html && isHostMethod(html, 'addEventListener')) {
+	getEventTarget = function(e) {
+		var target = e.target;
 		// Check if not an element (e.g. a text node)
 		if (1 != target.nodeType) {
 			// Set reference to parent node (which must be an element)
 			target = target.parentNode;
 		}
-	} else {
-		target = e.srcElement;
-	}
-	return target;
-};
+		return target;
+	};
+} else if(html && isHostMethod(html, 'attachEvent')) {
+	getEventTarget = function(e) {
+		return e.srcElement;
+	};
+}

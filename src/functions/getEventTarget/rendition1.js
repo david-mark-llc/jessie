@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on W3C `e.target`
+Cutting edge (W3 compliant)
 */
 
 /*
