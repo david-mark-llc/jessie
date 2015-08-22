@@ -2,22 +2,26 @@
 
 /*
 Description:
-Relies on MS `el.detachEvent`
+Cutting egde (W3 compliant) and Microsoft event model handled.
 */
 
 /*
 Degrades:
-IE10, IE9, IE4, IE3, NN4, Opera 8+,Chrome, FF, Safari
+IE5, NN4
 */
 
 /*
 Author:
-David Mark
+Adam Silver
 */
 
 var detachListener;
 
-if(html && isHostMethod(html, 'detachEvent')) {
+if(html && isHostMethod(html, 'removeEventListener')) {
+	detachListener = function(el, eventType, fn) {
+		el.removeEventListener(eventType, fn, false);
+	};
+} else if(html && isHostMethod(html, 'detachEvent')) {
 	detachListener = function(el, eventType, fn) {
 		el.detachEvent('on'+eventType, fn);
 	};

@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on W3C `el.removeEventListener`
+Cutting edge (W3 compliant)
 */
 
 /*
