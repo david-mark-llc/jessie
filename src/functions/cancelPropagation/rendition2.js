@@ -1,13 +1,13 @@
-/*global isHostMethod,html */
+/*global html,isHostMethod */
 
 /*
 Description:
-Relies on MS event model `e.cancelBubble`
+Cutting edge (W3 compliant) and Microsoft event model providing the widest support.
 */
 
 /*
 Degrades:
-IE10, IE9, IE4, IE3, Opera 8+,Chrome, FF, Safari
+IE4, IE3, NN4
 */
 
 /*
@@ -17,7 +17,12 @@ Adam Silver
 
 var cancelPropagation;
 
-if(html && isHostMethod(html, 'attachEvent')) {
+if(html && isHostMethod(html, 'addEventListener')) {
+	cancelPropagation = function(e) {
+		e.stopPropagation();
+	};
+}
+else if(html && isHostMethod(html, 'attachEvent')) {
 	cancelPropagation = function(e) {
 		e.cancelBubble = true;
 	};

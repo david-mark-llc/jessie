@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on W3C compliant `e.stopPropagation()`
+Cutting edge (W3 compliant)
 */
 
 /*
