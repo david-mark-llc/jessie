@@ -1,7 +1,7 @@
 /*global global,isHostMethod */
 /*
 Description:
-Relies on `window.attachEvent`
+Handles Microsoft event model
 */
 
 /*
@@ -20,14 +20,14 @@ var readyListenerAttached;
 
 if(isHostMethod(global, "attachEvent")) {
 	deferUntilReady = function(fn) {
-		
+
 		/*SCAFFOLDING:Start*/
 		if(readyListenerAttached) {
 			throw new Error("One too many ready listeners. Use a queue!");
 		}
 		/*SCAFFOLDING:End*/
 		readyListenerAttached = true;
-		
+
 		// Production function starts (and ends) here
 		window.attachEvent('load', fn, false);
 	};

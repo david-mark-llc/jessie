@@ -2,11 +2,7 @@
 
 /*
 Description:
-Relies on `window.addEventListener`
-
-Best used with asset-light documents.
-
-Note: No frames or other alternate windows
+Cutting edge (W3 compliant). Best used with asset-light documents. No frames or other alternate windows
 */
 
 /*

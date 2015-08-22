@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on `document.addEventListener`.
+Cutting edge (W3 compliant)
 */
 
 /*
