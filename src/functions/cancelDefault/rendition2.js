@@ -2,12 +2,12 @@
 
 /*
 Description:
-Relies on MS event model `e.returnValue`
+Cutting edge (W3 compliant) and handles Microsoft event model providing wide support.
 */
 
 /*
 Degrades:
-IE9, IE10, IE4, IE3, Opera 8+,Chrome, FF, Safari
+IE4, IE3, NN4
 */
 
 /*
@@ -17,7 +17,12 @@ Adam Silver
 
 var cancelDefault;
 
-if(html && isHostMethod(html, 'attachEvent')) {
+if(html && isHostMethod(html, 'addEventListener')) {
+	cancelDefault = function(e) {
+		e.preventDefault();
+	};
+}
+else if(html && isHostMethod(html, 'attachEvent')) {
 	cancelDefault = function(e) {
 		e.returnValue = false;
 	};

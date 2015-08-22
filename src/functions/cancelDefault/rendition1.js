@@ -2,7 +2,7 @@
 
 /*
 Description:
-Relies on W3C compliant `e.preventDefault()`
+Cutting edge only
 */
 
 /*
