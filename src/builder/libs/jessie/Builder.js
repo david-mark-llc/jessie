@@ -135,7 +135,6 @@ Builder.prototype.build = function() {
 				[
 					'bind',
 					'attachListener',
-					'attachBoundListener',
 					'addClass', // this is a function name
 					'Element',
 					'addClass' // this one is a protoype method name
