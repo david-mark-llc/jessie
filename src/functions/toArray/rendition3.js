@@ -25,7 +25,9 @@ if (canCall && Array.prototype.slice) {
 
 	} catch(e) {}
 
-} else if( !toArray ) {
+}
+
+if (!toArray) {
 
 	toArray = function(a) {
 
