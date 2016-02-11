@@ -16,7 +16,7 @@ if (canCall && Array.prototype.slice) {
 
 	try {
 
-		Array.prototype.slice.call(document.childNodes, 0);
+		Array.prototype.slice.call(arguments, 0);
 
 		toArray = function(a) {
 			return Array.prototype.slice.call(a, 0);
