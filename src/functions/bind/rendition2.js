@@ -23,11 +23,11 @@ else if (canCall && Array.prototype.slice) {
 
 		if (prependArgs.length) {
 			return function() {
-				fn.apply(context, Array.prototype.concat.apply(prependArgs, arguments));
+				return fn.apply(context, Array.prototype.concat.apply(prependArgs, arguments));
 			};
 		}
 		return function() {
-			fn.apply(context, arguments);
+			return fn.apply(context, arguments);
 		};
 	};
 
