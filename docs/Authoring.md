@@ -116,4 +116,4 @@ The scaffolding is only required for development as hints for developers using t
 * [Determining element position](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/cd625a14ce603084?hl=en&noredirect=true)
 * [Measuring the viewport](https://groups.google.com/group/comp.lang.javascript/browse_thread/thread/c611a7fecdb75edb/d4cce070c87c270b)
 
-You can also use[My Library](http://www.cinsoft.net) code for reference and for porting over.
+You can also use [My Library](http://www.cinsoft.net) code for reference and for porting over.
