@@ -5,7 +5,7 @@ jessie = jessie || {};
 	var globalDocument = global.document,
 		isHostObjectProperty = function(object, property) {
 			var objectProperty = object[property];
-			return typeof objectProperty == 'object' && null !== objectProperty;
+			return typeof objectProperty == 'object' || typeof objectProperty == 'function' && null !== objectProperty;
 		},
 		isHostMethod = function(object, method) {
 			var objectMethod = object[method];
