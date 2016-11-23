@@ -14,7 +14,7 @@ var removeClass;
 
 if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "remove") ) {
     removeClass = function(el, className) {
-		return el.classList.remove(className);
+        el.classList.remove(className);
     };
 } else if(html && "string" == typeof html.className) {
 	removeClass = function(el, className) {
