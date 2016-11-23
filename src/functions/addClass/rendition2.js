@@ -19,7 +19,7 @@ var addClass;
 
 if (html && isHostObjectProperty(html, "classList") && isHostMethod(html.classList, "add") ) {
 	addClass = function(el, className) {
-		return el.classList.add(className);
+		el.classList.add(className);
 	};
 } else if (html && "string" === typeof html.className ) {
     addClass = function(el, className) {
