@@ -16,6 +16,6 @@ if(canCall && forEach) {
 			result = result && iterator.call(context, value, index, list);
 		});
 
-		return !!result;
+		return result;
 	};
 }
