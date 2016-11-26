@@ -20,6 +20,6 @@ if(Array.prototype.every) {
 			result = result && iterator.call(context, value, index, list);
 		});
 
-		return !!result;
+		return result;
 	};
 }
