@@ -8,13 +8,13 @@ Relies on `Array.forEach` or `Function.prototype.call` providing greatest browse
 var forEach;
 
 if (Array.prototype.forEach) {
-	forEach = function(elements, callback, thisObject) {
-		elements.forEach(callback, thisObject);
-	};
-}else if (canCall) {
-	forEach = function(elements, callback, thisObject) {
-		for (var i = 0, l = elements.length; i < l; i++) {
-			callback.call(thisObject, elements[i], i, elements);
-		}
-	};
+        forEach = function(elements, callback, thisObject) {
+                elements.forEach(callback, thisObject);
+        };
+} else if (canCall) {
+        forEach = function(elements, callback, thisObject) {
+                for (var i = 0, l = elements.length; i < l; i++) {
+                        callback.call(thisObject, elements[i], i, elements);
+                }
+        };
 }
