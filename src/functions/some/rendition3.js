@@ -10,25 +10,22 @@ Adam Silver
 
 var some;
 
-if(Array.prototype.some) {
-	some = function(arr, iterator, context) {
-		return arr.some(iterator, context);
-	};
+if (Array.prototype.some) {
+        some = function(arr, iterator, context) {
+                return arr.some(iterator, context);
+        };
 } else {
-	some = function(arr, iterator, context) {
+        some = function(arr, iterator, context) {
+                var i = 0, l = arr.length;
 
-		var i = 0,
-			l = arr.length;
+                context = context || arr;
 
-		context = context || arr;
+                for( ; i < l; i++ ) {
+                        if (iterator.call(context, arr[ i ], i, arr)) {
+                                return true;
+                        }
+                }
 
-		for( ; i < l; i++ ){
-
-			if( iterator.call(context, arr[ i ], i, arr) ){
-				return true;
-			}
-		}
-
-		return false;
-	};
+                return false;
+        };
 }
