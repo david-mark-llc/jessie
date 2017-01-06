@@ -14,10 +14,10 @@ var toArray;
 
 if (canCall && Array.prototype.slice) {
         try {
-                Array.prototype.slice.call(arguments, 0);
+                Array.prototype.slice.call(document.childNodes);
 
                 toArray = function(a) {
-                        return Array.prototype.slice.call(a, 0);
+                        return Array.prototype.slice.call(a);
                 };
         } catch(e) {}
 }
